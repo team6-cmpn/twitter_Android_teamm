@@ -12,7 +12,7 @@ class Background extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     // ignore: sized_box_for_whitespace
     return SingleChildScrollView(
-      child: Container(
+      child: SizedBox(
         height: size.height,
         width: double.infinity,
         child: Stack(

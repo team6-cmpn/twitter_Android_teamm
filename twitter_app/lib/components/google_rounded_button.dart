@@ -7,7 +7,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 class GoogleRoundedButton extends StatelessWidget {
   final String passedText;
   final Function pressed;
-  final Color colorPassed, textColor, highlightPassedColor;
+  final Color colorPassed, textColor, highlightPassedColor, roundedPassedColor;
   final double marginValue;
 
   const GoogleRoundedButton({
@@ -16,6 +16,7 @@ class GoogleRoundedButton extends StatelessWidget {
     this.pressed,
     this.colorPassed,
     this.textColor,
+    this.roundedPassedColor,
     this.marginValue,
     this.highlightPassedColor,
   }) : super(key: key);
@@ -28,11 +29,18 @@ class GoogleRoundedButton extends StatelessWidget {
       //Icon('assests/icons/mockingay1.ico'),
       margin: EdgeInsets.symmetric(vertical: marginValue),
       //width: size.width ,
+
       child: ClipRRect(
         borderRadius: BorderRadius.circular(77),
         child: FlatButton(
           minWidth: 355, //327
-          height: 45, //41
+          height: 45, //
+          shape: RoundedRectangleBorder(
+            side: BorderSide(
+              color: roundedPassedColor,
+            ),
+            borderRadius: BorderRadius.circular(40),
+          ),
 
           padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 100),
           color: colorPassed,
@@ -45,7 +53,7 @@ class GoogleRoundedButton extends StatelessWidget {
 
           onPressed: pressed,
           child: SizedBox(
-            width: size.width * 0.378,
+            width: size.width * 0.377,
             height: size.height * 0.03,
             child: Row(
               children: [

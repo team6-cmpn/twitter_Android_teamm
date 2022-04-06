@@ -7,7 +7,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 class RoundedButton extends StatelessWidget {
   final String passedText;
   final Function pressed;
-  final Color colorPassed, textColor, highlightPassedColor;
+  final Color colorPassed, textColor, highlightPassedColor, roundedpassedcolor;
   final double marginValue;
 
   const RoundedButton({
@@ -16,6 +16,7 @@ class RoundedButton extends StatelessWidget {
     this.pressed,
     this.colorPassed,
     this.textColor,
+    this.roundedpassedcolor,
     this.marginValue,
     this.highlightPassedColor,
   }) : super(key: key);
@@ -29,9 +30,15 @@ class RoundedButton extends StatelessWidget {
       margin: EdgeInsets.symmetric(vertical: marginValue),
       //width: size.width ,
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(77),
+        //borderRadius: BorderRadius.circular(77),
         child: FlatButton(
-          minWidth: 352, //327
+          shape: RoundedRectangleBorder(
+            side: BorderSide(
+              color: roundedpassedcolor,
+            ),
+            borderRadius: BorderRadius.circular(990),
+          ),
+          minWidth: 355, //327
           height: 45, //41
 
           padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 100),

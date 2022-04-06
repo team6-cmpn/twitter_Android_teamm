@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:twitter_app/screens/Login/background_for_login_screen.dart';
 import 'package:twitter_app/screens/text_field_container.dart';
 
+import '../../components/rounded_button.dart';
+
 class BodyForSignUpScreen extends StatelessWidget {
   const BodyForSignUpScreen({
     Key key,
@@ -79,7 +81,26 @@ class BodyForSignUpScreen extends StatelessWidget {
           TextFieldContainer(
             size: size,
             titleText: '  Date of birth',
-            passedOnChanged: (value) {},
+            passedOnChanged: (value) {
+              showDatePicker(
+                context: context,
+                initialDate: DateTime.now(),
+                firstDate: DateTime(2022),
+                lastDate: DateTime.now(),
+              );
+            },
+          ),
+          SizedBox(
+            height: size.height * 0.07,
+          ),
+          RoundedButton(
+            passedText: 'Next',
+            textColor: Colors.white,
+            pressed: () {},
+            colorPassed: Colors.grey[700],
+            marginValue: 3,
+            roundedpassedcolor: Colors.grey,
+            highlightPassedColor: Colors.grey,
           ),
         ],
       ),

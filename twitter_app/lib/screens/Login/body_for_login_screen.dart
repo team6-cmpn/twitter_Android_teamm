@@ -1,10 +1,13 @@
 // ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors, deprecated_member_use
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:twitter_app/components/google_sign_in.dart';
 //import 'package:flutter_svg/svg.dart';
 import '../../components/google_rounded_button.dart';
 import '../../components/or_divider_line.dart';
 
 import '../../components/rounded_button.dart';
+import '../forgot_password/FogotPassword.dart';
 import '../text_field_container.dart';
 import '../welcome/welcome_screen.dart';
 import 'background_for_login_screen.dart';
@@ -34,16 +37,25 @@ class BodyForLoginScreen extends StatelessWidget {
           GoogleRoundedButton(
             passedText: 'Sign in with Google',
             textColor: Colors.black,
-            pressed: () {},
-            colorPassed: Colors.grey,
+            pressed: () {
+              //final provider = Provider.of<GoogleSignInProvider>(context, listen: false);
+              final provider =
+                  Provider.of<GoogleSignInProvider>(context, listen: false);
+              provider.googleLogin();
+            },
+            //colorPassed: Colors.white,
             marginValue: 7,
+            roundedPassedColor: Colors.grey,
+            //highlightPassedColor: Colors.grey,
           ),
           RoundedButton(
             passedText: 'Sign in with Apple',
             textColor: Colors.black,
             pressed: () {},
-            colorPassed: Colors.grey,
+            colorPassed: Colors.white,
             marginValue: 3,
+            roundedpassedcolor: Colors.grey[700],
+            highlightPassedColor: Colors.grey,
           ),
           /* Container( //Or_divider_container_me
             padding: EdgeInsets.all(5),
@@ -93,17 +105,31 @@ class BodyForLoginScreen extends StatelessWidget {
             colorPassed: Colors.black,
             marginValue: 14,
             highlightPassedColor: Colors.white24,
+            roundedpassedcolor: Colors.white24,
           ),
           RoundedButton(
             passedText: 'Forgot password?',
             textColor: Colors.black,
-            pressed: () {},
-            colorPassed: Colors.grey,
+            pressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) {
+                    return ForgotPasswordScreen();
+                  },
+                ),
+              );
+            },
+            colorPassed: Colors.white,
             marginValue: 3,
+            roundedpassedcolor: Colors.grey,
+            highlightPassedColor: Colors.grey,
           ),
           SizedBox(
             height: size.height * 0.05,
           ),
+
+          // ignore: avoid_unnecessary_containers
           SizedBox(
             width: size.width * 0.8,
             child: Row(
@@ -137,6 +163,7 @@ class BodyForLoginScreen extends StatelessWidget {
               ],
             ),
           ),
+
           /* Image.asset(
             'assests/icons/googlesvg.png',
             height: 50,

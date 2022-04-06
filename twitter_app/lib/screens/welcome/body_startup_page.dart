@@ -1,12 +1,17 @@
 // ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors, deprecated_member_use
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:twitter_app/screens/login/login.dart';
 
 import '../../components/google_rounded_button.dart';
+import '../../components/google_sign_in.dart';
 import '../sign_up/sign_up.dart';
 import 'background.dart';
 import '../../components/rounded_button.dart';
+
+//import 'package:sign_button/sign_button.dart';
+//import 'package:twitter_app/API/google_signIn_api.dart';
 
 class BodyStartUpPage extends StatelessWidget {
   @override
@@ -41,10 +46,19 @@ class BodyStartUpPage extends StatelessWidget {
           ),
           GoogleRoundedButton(
             passedText: 'Sign up with Google',
+            roundedPassedColor: Colors.grey,
             textColor: Colors.black,
-            pressed: () {},
-            colorPassed: Colors.grey,
+            pressed: () {
+              final provider =
+                  Provider.of<GoogleSignInProvider>(context, listen: false);
+              provider.googleLogin();
+            },
+            //colorPassed: Colors.grey,
             marginValue: 5,
+          ),
+          /* SignInButton.mini(
+            buttonType: ButtonType.google,
+            //onPressed: signIn, //() => {},
           ),
           RoundedButton(
             passedText: 'Sign up with Apple',
@@ -52,14 +66,39 @@ class BodyStartUpPage extends StatelessWidget {
             pressed: () {},
             colorPassed: Colors.grey,
             marginValue: 3,
-          ),
+          ), */
+
+          /* MaterialButton(
+            minWidth: size.width * 0.86,
+            height: 45,
+            onPressed: () {
+              // Navigator.push(
+              //     context,
+              //     MaterialPageRoute(
+              //         builder: (context) =>  LoginPage(),
+              //         ),
+              //         );
+            },
+            //defining the Shape
+            shape: RoundedRectangleBorder(
+                side: const BorderSide(
+                  color: Color.fromARGB(255, 0, 0, 0),
+                ),
+                borderRadius: BorderRadius.circular(40)),
+
+            child: const Text(
+              "Login",
+              style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
+            ),
+          ), */
+
           Container(
             padding: EdgeInsets.all(5),
-            width: size.width * 0.8,
+            width: size.width * 0.86,
             child: Row(
               children: const [
                 Text(
-                  '------------------------- ',
+                  '----------------------------- ',
                   style: TextStyle(
                     fontSize: 20,
                     //fontWeight: FontWeight.w100,
@@ -103,6 +142,7 @@ class BodyStartUpPage extends StatelessWidget {
               );
             },
             colorPassed: Colors.lightBlue,
+            roundedpassedcolor: Colors.lightBlue,
             marginValue: 3,
           ),
           /* Text(
@@ -140,7 +180,8 @@ class BodyStartUpPage extends StatelessWidget {
                 ),
               );
             },
-            colorPassed: Colors.deepOrange,
+            colorPassed: Colors.white,
+            roundedpassedcolor: Colors.grey,
           ),
         ],
       ),
