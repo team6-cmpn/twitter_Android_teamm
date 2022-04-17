@@ -23,7 +23,7 @@ class Background extends StatelessWidget {
               left: 0,
               child: Image.asset(
                 "assests/images/mockingay2.png",
-                width: size.width * 0.1,
+                width: size.width * 0.2,
               ),
             ),
             /* Positioned(
