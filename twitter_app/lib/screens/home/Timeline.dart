@@ -2,10 +2,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import '../../lxrd/pages/notificationspage.dart';
+import 'twitter_drawer.dart';
 
 import '../../model/tweetBoxWidget.dart';
 import '../../model/tweet_model.dart';
-import 'twitter_drawer.dart';
 import '../../state/drawer_for_icon.dart';
 /* import 'package:whisper/models/tweet_model.dart';
 import 'package:../modules/tweetBoxWidget.dart'; */
@@ -137,7 +138,13 @@ class TimelinePage extends StatelessWidget {
                         scaffoldKey.currentState.openDrawer();
                       } */
                       // myKey.currentState.openDrawer();
-                      Scaffold.of(context).openDrawer();
+                      //Scaffold.of(context).openDrawer();
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => NotificationsPage(),
+                        ),
+                      );
                     },
                   ),
                   IconButton(

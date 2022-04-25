@@ -3,11 +3,12 @@
 import 'package:flutter/material.dart';
 
 import 'package:firebase_core/firebase_core.dart';
-//import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:twitter_app/unused/constants.dart';
-import 'package:twitter_app/components/google_sign_in.dart';
-import 'package:twitter_app/screens/welcome/welcome_screen.dart';
+//import 'package:flutter/services.dart';
+
+import './unused/constants.dart';
+import './components/google_sign_in.dart';
+import './screens/welcome/welcome_screen.dart';
 
 //import 'package:firebase_core/firebase_core.dart';
 

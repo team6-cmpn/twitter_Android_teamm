@@ -51,6 +51,8 @@ dependencies:
   # hive database
   hive: ^2.0.3
   hive_flutter: ^1.0.0
+  sizer: ^2.0.15
+  salomon_bottom_bar: ^3.3.0
 
 
  
