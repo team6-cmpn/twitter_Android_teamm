@@ -128,6 +128,14 @@ class BodyStartUpPage extends StatelessWidget {
             ),
           ),
           SizedBox(),
+          /* Container(
+            height: 70,
+            width: 290,
+            child: Card(
+              color: Colors.amber,
+              child: Text('3ez is ..........'),
+            ),
+          ), */
           RoundedButton(
             passedText: 'Sign Up with Email',
             textColor: Colors.white,
