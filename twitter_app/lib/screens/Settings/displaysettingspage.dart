@@ -69,7 +69,7 @@ class _DisplaySettingsPageState extends State<DisplaySettingsPage> {
                   SizedBox(
                     width: 180,
                   ),
-                  ChangeThemeButtonWidget(),
+                  //ChangeThemeButtonWidget(),
                 ],
               ),
               Row()
