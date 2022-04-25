@@ -1,28 +1,29 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
-import 'package:twitter_app/screens/Login/background_for_login_screen.dart';
 import 'package:twitter_app/components/text_field_container.dart';
 
-import '../../components/rounded_button.dart';
+import '../components/rounded_button.dart';
 
-class BodyForSignUpScreen extends StatelessWidget {
-  const BodyForSignUpScreen({
+import 'background_for_home_page.dart';
+
+class BodyForHomePageScreen extends StatelessWidget {
+  const BodyForHomePageScreen({
     Key key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return BackGroundForLoginScreen(
+    return BackGroundForHomePageScreen(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Create your account',
+            'Home page',
             style: TextStyle(
-              fontSize: 28,
+              fontSize: 36,
               fontWeight: FontWeight.bold,
               height: 5.5,
             ),

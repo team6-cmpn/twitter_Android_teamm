@@ -1,17 +1,26 @@
 // ignore_for_file: use_key_in_widget_constructors
 
 import 'package:flutter/material.dart';
+
+import 'package:firebase_core/firebase_core.dart';
+//import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:twitter_app/components/constants.dart';
+import 'package:twitter_app/unused/constants.dart';
 import 'package:twitter_app/components/google_sign_in.dart';
 import 'package:twitter_app/screens/welcome/welcome_screen.dart';
 
-import 'package:firebase_core/firebase_core.dart';
+//import 'package:firebase_core/firebase_core.dart';
 
-void main() async {
+Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // ignore: await_only_futures
-  await Firebase.initializeApp;
+  await Firebase.initializeApp();
+
+  // await Hive.initFlutter();
+
+  // Hive.registerAdapter(TransactionAdapter());
+  // await Hive.openBox<Transaction>('transactions');
+
   runApp(MyApp());
 }
 

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../../components/rounded_button.dart';
 import '../Login/background_for_login_screen.dart';
-import '../text_field_container.dart';
+import '../../components/text_field_container.dart';
 
 // ignore: use_key_in_widget_constructors
 class BodyForForgotPassword extends StatelessWidget {

@@ -2,13 +2,17 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:twitter_app/components/google_sign_in.dart';
+import 'package:twitter_app/screens/home/Timeline.dart';
+import 'package:twitter_app/unused/body_for_home_page_screen.dart';
+import 'package:twitter_app/unused/logged_in_widget.dart';
 //import 'package:flutter_svg/svg.dart';
 import '../../components/google_rounded_button.dart';
 import '../../components/or_divider_line.dart';
 
 import '../../components/rounded_button.dart';
 import '../forgot_password/FogotPassword.dart';
-import '../text_field_container.dart';
+import '../../components/text_field_container.dart';
+import '../home/twitter_home_page.dart';
 import '../welcome/welcome_screen.dart';
 import 'background_for_login_screen.dart';
 
@@ -42,6 +46,14 @@ class BodyForLoginScreen extends StatelessWidget {
               final provider =
                   Provider.of<GoogleSignInProvider>(context, listen: false);
               provider.googleLogin();
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) {
+                    return TwitterHomePage();
+                  },
+                ),
+              );
             },
             //colorPassed: Colors.white,
             marginValue: 7,
@@ -51,7 +63,16 @@ class BodyForLoginScreen extends StatelessWidget {
           RoundedButton(
             passedText: 'Sign in with Apple',
             textColor: Colors.black,
-            pressed: () {},
+            pressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) {
+                    return TwitterHomePage();
+                  },
+                ),
+              );
+            },
             colorPassed: Colors.white,
             marginValue: 3,
             roundedpassedcolor: Colors.grey[700],
@@ -101,7 +122,16 @@ class BodyForLoginScreen extends StatelessWidget {
           RoundedButton(
             passedText: 'Next',
             textColor: Colors.white,
-            pressed: () {},
+            pressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) {
+                    return TimelinePage();
+                  },
+                ),
+              );
+            },
             colorPassed: Colors.black,
             marginValue: 14,
             highlightPassedColor: Colors.white24,
