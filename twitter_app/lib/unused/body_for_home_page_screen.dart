@@ -1,10 +1,10 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
-import 'package:twitter_app/components/text_field_container.dart';
 
 import '../components/rounded_button.dart';
 
+import '../components/text_field_container.dart';
 import 'background_for_home_page.dart';
 
 class BodyForHomePageScreen extends StatelessWidget {

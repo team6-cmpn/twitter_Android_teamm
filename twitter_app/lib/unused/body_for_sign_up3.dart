@@ -2,12 +2,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
-import 'package:twitter_app/screens/Login/background_for_login_screen.dart';
-import 'package:twitter_app/components/text_field_container.dart';
-import 'package:twitter_app/unused/transaction.dart';
+
+import '../components/text_field_container.dart';
+import '../unused/transaction.dart';
 
 import '../components/rounded_button.dart';
-
+import '../screens/Login/background_for_login_screen.dart';
 import 'boxes.dart';
 
 class BodyForSignUpScreen3 extends StatefulWidget {
