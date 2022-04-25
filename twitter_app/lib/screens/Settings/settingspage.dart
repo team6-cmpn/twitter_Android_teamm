@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import '../pages/displaysettingspage.dart';
-import '../pages/dummyhome.dart';
-import '../pages/searchsettingspage.dart';
+
 import 'package:sizer/sizer.dart';
-import '../pages/testpage.dart';
-import '../pages/notificationsettings.dart';
+
+import '../home/Timeline.dart';
+import 'displaysettingspage.dart';
+import 'notificationsettings.dart';
+import 'searchsettingspage.dart';
+import 'testpage.dart';
 
 class SettingsPage extends StatefulWidget {
   @override
@@ -19,8 +21,8 @@ class _SettingsPageState extends State<SettingsPage> {
         appBar: AppBar(
           leading: IconButton(
             icon: Icon(Icons.arrow_back, color: Colors.black),
-            onPressed: () => Navigator.push(
-                context, MaterialPageRoute(builder: (context) => MyHomePage())),
+            onPressed: () => Navigator.push(context,
+                MaterialPageRoute(builder: (context) => TimelinePage())),
           ),
           backgroundColor: Colors.white,
           elevation: 3,

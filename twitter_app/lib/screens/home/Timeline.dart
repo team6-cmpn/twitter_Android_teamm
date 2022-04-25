@@ -2,7 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import '../../lxrd/pages/notificationspage.dart';
+
+import '../../components/widgets/sidemenu.dart';
+import '../Settings/notificationspage.dart';
 import 'twitter_drawer.dart';
 
 import '../../model/tweetBoxWidget.dart';
@@ -78,7 +80,7 @@ class TimelinePage extends StatelessWidget {
                 
               ]), */
         ),
-        drawer: TwitterDrawer(),
+        drawer: SideMenu(),
         bottomNavigationBar: BottomNavigationBar(
           //backgroundColor: Colors.indigo,
           fixedColor: Colors.black,

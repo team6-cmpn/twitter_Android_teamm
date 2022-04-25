@@ -1,7 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 import 'package:flutter/material.dart';
-import '../widgets/change_theme_button_widget.dart';
-import '../widgets/navigationbar.dart';
+
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
 class DisplaySettingsPage extends StatefulWidget {

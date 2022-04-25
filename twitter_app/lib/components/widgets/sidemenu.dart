@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../pages/settingspage.dart';
+import '../../screens/Settings/settingspage.dart';
 
 class SideMenu extends StatefulWidget {
   const SideMenu({Key key}) : super(key: key);
