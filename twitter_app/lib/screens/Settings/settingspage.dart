@@ -7,6 +7,7 @@ import 'displaysettingspage.dart';
 import 'notificationsettings.dart';
 import 'searchsettingspage.dart';
 import 'testpage.dart';
+import 'youraccountpage.dart';
 
 class SettingsPage extends StatefulWidget {
   @override
@@ -90,7 +91,10 @@ class _SettingsPageState extends State<SettingsPage> {
                     ),
                     title: Text('Your account'),
                     subtitle: Text('See information about your account'),
-                    onTap: () => {Navigator.of(context).pop()},
+                    onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => YourAccountePage())),
                   ),
                   ListTile(
                     leading: Icon(

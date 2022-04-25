@@ -21,6 +21,8 @@ class _NotificationsPageState extends State<NotificationsPage> {
         key: scaffoldkey,
         drawer: SideMenu(),
         appBar: AppBar(
+          toolbarHeight: 50,
+          elevation: 1,
           actions: <Widget>[
             IconButton(
               icon: Icon(Icons.settings, color: Colors.black),
