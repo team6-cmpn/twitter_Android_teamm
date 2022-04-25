@@ -7,105 +7,14 @@ import 'twitter_drawer.dart';
 
 import '../../model/tweetBoxWidget.dart';
 import '../../model/tweet_model.dart';
+// ignore: unused_import
 import '../../state/drawer_for_icon.dart';
-/* import 'package:whisper/models/tweet_model.dart';
-import 'package:../modules/tweetBoxWidget.dart'; */
 
 class TimelinePage extends StatelessWidget {
   TimelinePage({Key key}) : super(key: key);
   final scrollController = ScrollController();
+  var scaffoldkey = GlobalKey<ScaffoldState>();
 
-  final List<TweetModel> Tweets = [
-    TweetModel(
-      username: " Ammar",
-      tweetmessg: "my name is ammar",
-      twitterHandle: "@Ammar1",
-      time: "7h",
-      //date: DateTime(),
-      comments: 23,
-      isCommented: true,
-      isLiked: true,
-      isReTweet: true,
-      loves: 77,
-      retweets: 99,
-    ),
-    /* TweetModel(
-      username: "Ahmed",
-      tweetmessg: "Hello world",
-      time: "3m",
-      twitterHandle: "@Ahmed28",
-      comments: 23,
-      isCommented: true,
-      isLiked: true,
-      isReTweet: true,
-      loves: 77,
-      retweets: 99,
-    ), */
-
-    /* TweetModel(
-      username: " Kareem",
-      tweet: "Lorem ipsum dolor sit amet",
-      time: "7h",
-      twitterHandle: "@Kareem1",
-    ),
-    TweetModel(
-        username: "Ahmed",
-        tweet: "Lorem ipsum dolor sit amet",
-        time: "3m",
-        twitterHandle: "@Ahmed28"),
-    TweetModel(
-        username: "Hassan",
-        tweet: "Lorem ipsum dolor sit amet",
-        time: "3m",
-        twitterHandle: "@Hassan212"),
-    TweetModel(
-        username: "Ahmed",
-        tweet: "Lorem ipsum dolor sit amet",
-        time: "3m",
-        twitterHandle: "@Ahmed28"),
-    TweetModel(
-        username: "Hassan",
-        tweet: "Lorem ipsum dolor sit amet",
-        time: "3m",
-        twitterHandle: "@Hassan212"),
-    TweetModel(
-      username: " Kareem",
-      tweet: "Lorem ipsum dolor sit amet",
-      time: "7h",
-      twitterHandle: "@Kareem1",
-    ),
-    TweetModel(
-        username: "Ahmed",
-        tweet: "Lorem ipsum dolor sit amet",
-        time: "3m",
-        twitterHandle: "@Ahmed28"),
-    TweetModel(
-      username: " Kareem",
-      tweet: "Lorem ipsum dolor sit amet",
-      time: "7h",
-      twitterHandle: "@Kareem1",
-    ),
-    TweetModel(
-        username: "Ahmed",
-        tweet: "Lorem ipsum dolor sit amet",
-        time: "3m",
-        twitterHandle: "@Ahmed28"),
-    TweetModel(
-        username: "Hassan",
-        tweet: "Lorem ipsum dolor sit amet",
-        time: "3m",
-        twitterHandle: "@Hassan212"),
-    TweetModel(
-        username: "Ahmed",
-        tweet: "Lorem ipsum dolor sit amet",
-        time: "3m",
-        twitterHandle: "@Ahmed28"),
-    TweetModel(
-        username: "Hassan",
-        tweet: "Lorem ipsum dolor sit amet",
-        time: "3m",
-        twitterHandle: "@Hassan212"), */
-  ];
   bool scaffoldKey = false;
   @override
   Widget build(BuildContext context) {
@@ -113,62 +22,61 @@ class TimelinePage extends StatelessWidget {
       //debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          toolbarHeight: 0,
-        ),
-        body: SingleChildScrollView(
-          controller: scrollController,
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  InkWell(
-                    child: Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: CircleAvatar(
-                        backgroundImage: NetworkImage(
-                            'https://previews.123rf.com/images/koblizeek/koblizeek2001/koblizeek200100050/138262629-usuario-miembro-de-perfil-de-icono-de-hombre-vector-de-s%C3%ADmbolo-perconal-sobre-fondo-blanco-aislado-.jpg'),
-                        radius: 16,
-                      ),
-                    ),
-                    onTap: () {
-                      /* if (scaffoldKey.currentState.isDrawerOpen) {
-                        scaffoldKey.currentState.openEndDrawer();
-                      } else {
-                        scaffoldKey.currentState.openDrawer();
-                      } */
-                      // myKey.currentState.openDrawer();
-                      //Scaffold.of(context).openDrawer();
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => NotificationsPage(),
-                        ),
-                      );
-                    },
-                  ),
-                  IconButton(
-                    onPressed: () {
-                      scrollUp();
-                    },
-                    icon: FaIcon(FontAwesomeIcons.twitter),
-                    iconSize: 20.0,
-                    color: Colors.blue,
-                  ),
-                  IconButton(
-                    onPressed: () {
-                      return Center(
-                        child: Text('starred page'),
-                      );
-                    },
-                    icon: FaIcon(FontAwesomeIcons.star),
-                    iconSize: 20.0,
-                  ),
-                ],
+          toolbarHeight: 50,
+          backgroundColor: Colors.amber,
+          // scaffoldkey.currentState?.openDrawer();
+          leading: InkWell(
+            child: Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: CircleAvatar(
+                backgroundImage: NetworkImage(
+                    'https://previews.123rf.com/images/koblizeek/koblizeek2001/koblizeek200100050/138262629-usuario-miembro-de-perfil-de-icono-de-hombre-vector-de-s%C3%ADmbolo-perconal-sobre-fondo-blanco-aislado-.jpg'),
+                radius: 16,
               ),
-              tweetBoxWidget(Tweets, false, () {}, 30)
+            ),
+            onTap: () {
+              scaffoldkey.currentState?.openDrawer();
+            },
+          ),
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              SizedBox(),
+              IconButton(
+                onPressed: () {
+                  scrollUp();
+                },
+                icon: FaIcon(FontAwesomeIcons.twitter),
+                iconSize: 20.0,
+                color: Colors.blue,
+              ),
+              IconButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => NotificationsPage(),
+                    ),
+                  );
+                },
+                icon: FaIcon(FontAwesomeIcons.star),
+                iconSize: 20.0,
+              ),
             ],
           ),
+        ),
+        key: scaffoldkey,
+        body: SingleChildScrollView(
+          controller: scrollController,
+          child:
+              TweetBoxWidgety(), /* Column(
+              children: /* Tweets.map((tweetaya) {
+              return tweetBoxWidget(Tweets, true, () {}, 30);
+            }).toList(),*/
+
+                  [
+                
+              ]), */
         ),
         drawer: TwitterDrawer(),
         bottomNavigationBar: BottomNavigationBar(

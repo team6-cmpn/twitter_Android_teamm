@@ -16,16 +16,17 @@ class TweetModel {
   DateTime date;
 
   TweetModel({
-    this.username,
-    this.tweetmessg,
+    @required this.username,
+    @required this.tweetmessg,
     this.time,
-    this.twitterHandle,
-    this.isCommented,
-    this.isLiked,
-    this.isReTweet,
-    this.comments,
-    this.retweets,
-    this.loves,
+    @required this.date,
+    @required this.twitterHandle,
+    @required this.isCommented,
+    @required this.isLiked,
+    @required this.isReTweet,
+    @required this.comments,
+    @required this.retweets,
+    @required this.loves,
   });
 
   void setLike(val) {
