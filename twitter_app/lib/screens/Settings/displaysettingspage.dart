@@ -22,7 +22,7 @@ class _DisplaySettingsPageState extends State<DisplaySettingsPage> {
             onPressed: () => Navigator.of(context).pop(),
           ),
           backgroundColor: Colors.white,
-          elevation: 0,
+          elevation: 1,
           centerTitle: false,
           title: Column(
             mainAxisAlignment: MainAxisAlignment.center,

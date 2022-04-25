@@ -23,8 +23,7 @@ class _SettingsPageState extends State<YourAccountePage> {
         child: AppBar(
           leading: IconButton(
             icon: Icon(Icons.arrow_back, color: Colors.black),
-            onPressed: () => Navigator.push(context,
-                MaterialPageRoute(builder: (context) => TimelinePage())),
+            onPressed: () => {Navigator.of(context).pop()},
           ),
           backgroundColor: Colors.white,
           elevation: 1,
