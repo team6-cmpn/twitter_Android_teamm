@@ -13,7 +13,7 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     // ignore: prefer_const_constructors
     return Scaffold(
-      body: const BodyForLoginScreen(),
+      body: BodyForLoginScreen(),
     );
   }
 }

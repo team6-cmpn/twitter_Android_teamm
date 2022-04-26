@@ -5,19 +5,22 @@ import 'package:flutter/material.dart';
 class TextFieldContainer extends StatelessWidget {
   final String titleText;
   final double sizePassed;
+  var validator;
   final nameController = TextEditingController();
   //final passwordController = TextEditingController();
   final ValueChanged<String> passedOnChanged;
   final Function TapeddFunction;
-  TextFieldContainer({
-    Key key,
-    this.titleText,
-    this.passedOnChanged,
-    this.TapeddFunction,
-    this.sizePassed,
-    this.size,
-    //this.emailController
-  }) : super(key: key);
+  TextFieldContainer(
+      {Key key,
+      this.titleText,
+      this.passedOnChanged,
+      this.TapeddFunction,
+      this.sizePassed,
+      this.size,
+      this.validator
+      //this.emailController
+      })
+      : super(key: key);
 
   final Size size;
 
@@ -32,12 +35,16 @@ class TextFieldContainer extends StatelessWidget {
             //width: size.width * 0.1,
           ),
         ),
-        child: TextField(
+        child: TextFormField(
+          validator: validator,
           onTap: () => TapeddFunction,
+
           controller: nameController,
           onChanged: passedOnChanged,
           decoration: InputDecoration(
-            labelText: titleText //'  Phone, email, or username',
+            labelText: titleText
+
+            //'  Phone, email, or username',
             ,
             /* icon: Icon(
                 Icons.person,

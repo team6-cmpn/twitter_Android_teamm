@@ -75,7 +75,8 @@ dev_dependencies:
   # hive database generators
   build_runner: ^1.12.2
   hive_generator: ^1.0.1
-
+  
+  test: ^1.19.5
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
