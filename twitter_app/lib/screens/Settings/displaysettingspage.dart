@@ -64,16 +64,9 @@ class _DisplaySettingsPageState extends State<DisplaySettingsPage> {
                   )
                 ],
               ),
-
-              //        SizedBox(
-              //          width: 180,
-              //        ),
-              //
-              //
-              //    ),
-              // Row()
             ),
-            changetheme("Dark Theme"),
+
+            // changetheme("Dark Theme"),
             //Switch(value: null, onChanged: null),
             //Container(height: 50, width: 50, child: ChangeThemeButtonWidget()),
           ],

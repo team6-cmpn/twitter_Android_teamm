@@ -100,27 +100,6 @@ class _SettingsPageState extends State<SettingsPage> {
                   ),
                   ListTile(
                     leading: Icon(
-                      Icons.lock,
-                      size: 30,
-                    ),
-                    title: Text('Security and account acess'),
-                    subtitle: Text('Manage your account"s security'),
-                    onTap: () => {},
-                  ),
-                  ListTile(
-                    minVerticalPadding: 20,
-                    leading: Icon(
-                      Icons.shield,
-                      size: 30,
-                    ),
-                    title: Text('Privacy and safety'),
-                    subtitle: Text(
-                        'Manage what information you see and share on twitter'),
-                    onTap: () => Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => TestPage())),
-                  ),
-                  ListTile(
-                    leading: Icon(
                       Icons.notifications,
                       size: 30,
                     ),

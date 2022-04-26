@@ -8,6 +8,7 @@ import '../notificationsettings.dart';
 import '../searchsettingspage.dart';
 import '../testpage.dart';
 import 'accountinfopage.dart';
+import 'changepasspage.dart';
 
 class YourAccountPage extends StatefulWidget {
   @override
@@ -87,7 +88,12 @@ class _YourAccountPageState extends State<YourAccountPage> {
                     ),
                     title: Text('Change your password'),
                     subtitle: Text('Change your password at anytime'),
-                    onTap: () => {},
+                    onTap: () => {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ResetPasswordPage())),
+                    },
                   ),
                   ListTile(
                     minVerticalPadding: 20,

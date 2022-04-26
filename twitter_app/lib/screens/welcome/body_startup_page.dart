@@ -178,7 +178,7 @@ class BodyStartUpPage extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => LogInScreen2(),
+                    builder: (context) => LoginScreen(),
                   ),
                 ),
               },
