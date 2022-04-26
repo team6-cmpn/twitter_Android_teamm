@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 import './unused/constants.dart';
 import './components/google_sign_in.dart';
 import './screens/welcome/welcome_screen.dart';
+import 'components/widgets/DarkMode/themeclass.dart';
 
 //import 'package:firebase_core/firebase_core.dart';
 
@@ -29,19 +30,17 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return
-        // ChangeNotifierProvider(
-        //   create: (context) => GoogleSignInProvider(),
-        //   child:
-        MaterialApp(
-      debugShowCheckedModeBanner: false, //see what does this make
-      title: 'twitter_app',
-      theme: ThemeData(
-        primaryColor: kPrimaryColor,
-        scaffoldBackgroundColor: Colors.white,
-      ),
+    return MaterialApp(
+      title: 'Twitter_app',
+      debugShowCheckedModeBanner: false,
+      themeMode: ThemeMode.system,
+      theme: ThemeClass.lightTheme,
+      darkTheme: ThemeClass.darkTheme,
       home: WelcomeScreen(),
     );
+    // ChangeNotifierProvider(
+    //   create: (context) => GoogleSignInProvider(),
+    //   child:
     // ChangeNotifierProvider(
     //     create: (context) => ThemeProvider(),
     //     builder: (context, _) {

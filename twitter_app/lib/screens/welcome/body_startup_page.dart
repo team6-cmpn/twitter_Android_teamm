@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:twitter_app/screens/Login/Login2.dart';
 import 'package:twitter_app/screens/Login/login.dart';
 
 import '../../components/google_rounded_button.dart';
@@ -30,25 +31,21 @@ class BodyStartUpPage extends StatelessWidget {
         children: [
           Text(
             'Happening now',
-            style: TextStyle(
-                fontSize: 50,
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
-                height: 4),
+            style:
+                TextStyle(fontSize: 50, fontWeight: FontWeight.bold, height: 4),
           ),
           Text(
             'Join Twitter today.',
             style: TextStyle(
               fontSize: 25,
               fontWeight: FontWeight.bold,
-              color: Colors.black,
               height: 1,
             ),
           ),
           GoogleRoundedButton(
             passedText: 'Sign up with Google',
             roundedPassedColor: Colors.grey,
-            textColor: Colors.black,
+
             pressed: () {
               final provider =
                   Provider.of<GoogleSignInProvider>(context, listen: false);
@@ -103,7 +100,7 @@ class BodyStartUpPage extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 20,
                     //fontWeight: FontWeight.w100,
-                    color: Colors.grey,
+
                     height: 1,
                   ),
                 ),
@@ -112,7 +109,7 @@ class BodyStartUpPage extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 15,
                     //fontWeight: FontWeight.w100,
-                    color: Colors.black,
+
                     //height: 1,
                   ),
                 ),
@@ -121,7 +118,7 @@ class BodyStartUpPage extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 20,
                     //fontWeight: FontWeight.w100,
-                    color: Colors.grey,
+
                     height: 1,
                   ),
                 ),
@@ -169,7 +166,6 @@ class BodyStartUpPage extends StatelessWidget {
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
-              color: Colors.black,
               height: 3,
             ),
           ),
@@ -181,7 +177,7 @@ class BodyStartUpPage extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => LoginScreen(),
+                  builder: (context) => LogInScreen2(),
                 ),
               ),
             },

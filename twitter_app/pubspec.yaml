@@ -94,6 +94,7 @@ flutter:
     - assests/icons/
     - assests/images/main_bottom.png
     - assests\images\applogov2.png
+    - assests\images\FinalLogo.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
