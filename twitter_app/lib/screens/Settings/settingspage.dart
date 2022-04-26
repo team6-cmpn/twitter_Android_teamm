@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
-import '../pages/displaysettingspage.dart';
-import '../pages/dummyhome.dart';
-import '../pages/searchsettingspage.dart';
+
 import 'package:sizer/sizer.dart';
-import '../pages/testpage.dart';
-import '../pages/notificationsettings.dart';
+import 'package:twitter_app/components/widgets/SearchBar/SearchBar.dart';
+
+import '../home/Timeline.dart';
+import 'displaysettingspage.dart';
+import 'notificationsettings.dart';
+import 'searchsettingspage.dart';
+import 'testpage.dart';
+import 'YourAccountSettings/youraccountpage.dart';
 
 class SettingsPage extends StatefulWidget {
   @override
@@ -17,10 +21,11 @@ class _SettingsPageState extends State<SettingsPage> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
+          toolbarHeight: 50,
           leading: IconButton(
             icon: Icon(Icons.arrow_back, color: Colors.black),
-            onPressed: () => Navigator.push(
-                context, MaterialPageRoute(builder: (context) => MyHomePage())),
+            onPressed: () => Navigator.push(context,
+                MaterialPageRoute(builder: (context) => TimelinePage())),
           ),
           backgroundColor: Colors.white,
           elevation: 3,
@@ -62,7 +67,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => SearchSettingsPage(),
+                          builder: (context) => SearchBar(),
                         ),
                       ),
                     },
@@ -88,7 +93,10 @@ class _SettingsPageState extends State<SettingsPage> {
                     ),
                     title: Text('Your account'),
                     subtitle: Text('See information about your account'),
-                    onTap: () => {Navigator.of(context).pop()},
+                    onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => YourAccountPage())),
                   ),
                   ListTile(
                     leading: Icon(

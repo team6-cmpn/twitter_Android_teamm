@@ -13,12 +13,13 @@ class _NotificationSettingsPageState extends State<NotificationSettingsPage> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
+          toolbarHeight: 50,
           leading: IconButton(
             icon: Icon(Icons.arrow_back, color: Colors.black),
             onPressed: () => Navigator.of(context).pop(),
           ),
           backgroundColor: Colors.white,
-          elevation: 3,
+          elevation: 1,
           centerTitle: false,
           title: Column(
             mainAxisAlignment: MainAxisAlignment.center,
