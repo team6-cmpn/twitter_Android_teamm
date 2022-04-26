@@ -122,15 +122,13 @@ class BodyForLoginScreen extends StatelessWidget {
           RoundedButton(
             passedText: 'Next',
             textColor: Colors.white,
-            pressed: () {
+            pressed: () => {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) {
-                    return TimelinePage();
-                  },
+                  builder: (context) => TimelinePage(),
                 ),
-              );
+              ),
             },
             colorPassed: Colors.black,
             marginValue: 14,

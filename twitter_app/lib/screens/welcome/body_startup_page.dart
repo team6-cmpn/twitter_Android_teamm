@@ -2,10 +2,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:twitter_app/screens/login/login.dart';
+import 'package:twitter_app/screens/Login/login.dart';
 
 import '../../components/google_rounded_button.dart';
 import '../../components/google_sign_in.dart';
+import '../Settings/displaysettingspage.dart';
 import '../sign_up/sign_up.dart';
 import 'background.dart';
 import '../../components/rounded_button.dart';
@@ -139,15 +140,13 @@ class BodyStartUpPage extends StatelessWidget {
           RoundedButton(
             passedText: 'Sign Up with Email',
             textColor: Colors.white,
-            pressed: () {
+            pressed: () => {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) {
-                    return SignUpScreen();
-                  },
+                  builder: (context) => SignUpScreen(),
                 ),
-              );
+              ),
             },
             colorPassed: Colors.lightBlue,
             roundedpassedcolor: Colors.lightBlue,
@@ -178,15 +177,13 @@ class BodyStartUpPage extends StatelessWidget {
             passedText: 'Sign in',
             textColor: Colors.lightBlue,
             marginValue: 3,
-            pressed: () {
+            pressed: () => {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) {
-                    return LoginScreen();
-                  },
+                  builder: (context) => LoginScreen(),
                 ),
-              );
+              ),
             },
             colorPassed: Colors.white,
             roundedpassedcolor: Colors.grey,
