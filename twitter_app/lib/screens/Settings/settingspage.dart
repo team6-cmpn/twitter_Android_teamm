@@ -27,7 +27,7 @@ class _SettingsPageState extends State<SettingsPage> {
             onPressed: () => Navigator.push(context,
                 MaterialPageRoute(builder: (context) => TimelinePage())),
           ),
-          backgroundColor: Colors.white,
+          backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
           elevation: 3,
           centerTitle: false,
           title: Column(

@@ -12,7 +12,7 @@ class ResetPasswordPage extends StatelessWidget {
               icon: Icon(Icons.arrow_back, color: Colors.black),
               onPressed: () => {Navigator.of(context).pop()},
             ),
-            backgroundColor: Colors.white,
+            backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
             elevation: 1,
             centerTitle: false,
             title: Column(

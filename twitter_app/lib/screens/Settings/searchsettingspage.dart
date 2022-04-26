@@ -30,7 +30,7 @@ class _SearchSettingsPageState extends State<SearchSettingsPage> {
             onPressed: () => Navigator.of(context).pop(),
           ),
           centerTitle: true,
-          backgroundColor: Colors.white,
+          backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
           title: TextFormField(
             decoration: const InputDecoration(
               border: UnderlineInputBorder(),
@@ -38,7 +38,7 @@ class _SearchSettingsPageState extends State<SearchSettingsPage> {
             ),
           ),
         ),
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
       ),
     );
   }

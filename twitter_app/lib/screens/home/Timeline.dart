@@ -23,9 +23,9 @@ class TimelinePage extends StatelessWidget {
     return (SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          toolbarHeight: 50,
+          toolbarHeight: 45,
           elevation: 1,
-          backgroundColor: Colors.white,
+          backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
           // scaffoldkey.currentState?.openDrawer();
           leading: InkWell(
             child: Padding(
@@ -40,6 +40,7 @@ class TimelinePage extends StatelessWidget {
               scaffoldkey.currentState?.openDrawer();
             },
           ),
+          centerTitle: true,
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -48,9 +49,10 @@ class TimelinePage extends StatelessWidget {
                 onPressed: () {
                   scrollUp();
                 },
-                icon: FaIcon(FontAwesomeIcons.twitter),
-                iconSize: 20.0,
-                color: Colors.blue,
+                icon: Image.asset(
+                  "assests/images/FInalLogowhite.png",
+                ),
+                iconSize: 70.0,
               ),
               IconButton(
                 onPressed: () {

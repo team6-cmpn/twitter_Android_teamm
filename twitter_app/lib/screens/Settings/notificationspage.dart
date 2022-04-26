@@ -40,7 +40,7 @@ class _NotificationsPageState extends State<NotificationsPage> {
                 scaffoldkey.currentState?.openDrawer();
               },
               icon: Icon(Icons.person, color: Colors.black)),
-          backgroundColor: Colors.white,
+          backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
         ),
       ),
     );

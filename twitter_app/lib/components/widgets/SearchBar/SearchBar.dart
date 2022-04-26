@@ -12,7 +12,7 @@ class SearchBar extends StatelessWidget {
         appBar: AppBar(
           toolbarHeight: 50,
           elevation: 1,
-          backgroundColor: Colors.white,
+          backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
           title: Text('Search App', style: TextStyle(color: Colors.black)),
           actions: <Widget>[
             IconButton(
