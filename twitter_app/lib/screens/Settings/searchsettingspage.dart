@@ -23,13 +23,14 @@ class _SearchSettingsPageState extends State<SearchSettingsPage> {
           ),
         ),
         appBar: AppBar(
+          toolbarHeight: 50,
+          elevation: 1,
           leading: IconButton(
             icon: Icon(Icons.arrow_back, color: Colors.black),
             onPressed: () => Navigator.of(context).pop(),
           ),
           centerTitle: true,
           backgroundColor: Colors.white,
-          elevation: 0.5,
           title: TextFormField(
             decoration: const InputDecoration(
               border: UnderlineInputBorder(),

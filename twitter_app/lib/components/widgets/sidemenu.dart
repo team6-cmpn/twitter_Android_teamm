@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../pages/settingspage.dart';
+import '../../screens/Settings/settingspage.dart';
+import '../../screens/home/Timeline.dart';
 
 class SideMenu extends StatefulWidget {
   const SideMenu({Key key}) : super(key: key);
@@ -91,7 +92,8 @@ class _SideMenuState extends State<SideMenu> {
                 ListTile(
                   leading: Icon(Icons.home),
                   title: Text('Home'),
-                  onTap: () => null,
+                  onTap: () => Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => TimelinePage())),
                 ),
                 ListTile(
                   leading: Icon(Icons.person),

@@ -13,9 +13,9 @@ import './screens/welcome/welcome_screen.dart';
 //import 'package:firebase_core/firebase_core.dart';
 
 Future main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  // ignore: await_only_futures
-  await Firebase.initializeApp();
+  // WidgetsFlutterBinding.ensureInitialized();
+  // // ignore: await_only_futures
+  // await Firebase.initializeApp();
 
   // await Hive.initFlutter();
 
@@ -29,17 +29,30 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => GoogleSignInProvider(),
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false, //see what does this make
-        title: 'twitter_app',
-        theme: ThemeData(
-          primaryColor: kPrimaryColor,
-          scaffoldBackgroundColor: Colors.white,
-        ),
-        home: WelcomeScreen(),
+    return
+        // ChangeNotifierProvider(
+        //   create: (context) => GoogleSignInProvider(),
+        //   child:
+        MaterialApp(
+      debugShowCheckedModeBanner: false, //see what does this make
+      title: 'twitter_app',
+      theme: ThemeData(
+        primaryColor: kPrimaryColor,
+        scaffoldBackgroundColor: Colors.white,
       ),
+      home: WelcomeScreen(),
     );
+    // ChangeNotifierProvider(
+    //     create: (context) => ThemeProvider(),
+    //     builder: (context, _) {
+    //       final themeProvider = Provider.of<ThemeProvider>(context);
+    //       return MaterialApp(
+    //         themeMode: themeProvider.themeMode,
+    //         theme: MyThemes.lightTheme,
+    //         darkTheme: MyThemes.darkTheme,
+    //         home: WelcomeScreen(),
+    //       );
+    //     },
+    //   );
   }
 }

@@ -20,9 +20,9 @@ class Background extends StatelessWidget {
           children: [
             Positioned(
               top: 25,
-              left: 0,
+              left: 160,
               child: Image.asset(
-                "assests/images/mockingay2.png",
+                "assests/images/applogov2.png",
                 width: size.width * 0.2,
               ),
             ),

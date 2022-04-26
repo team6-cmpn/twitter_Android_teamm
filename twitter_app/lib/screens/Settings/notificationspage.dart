@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import '../pages/notificationsettings.dart';
-import '../widgets/navigationbar.dart';
+import '../../components/widgets/sidemenu.dart';
+
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
-import '../widgets/sidemenu.dart';
+
+import 'notificationsettings.dart';
 
 class NotificationsPage extends StatefulWidget {
   NotificationsPage({Key key}) : super(key: key);
@@ -20,6 +21,8 @@ class _NotificationsPageState extends State<NotificationsPage> {
         key: scaffoldkey,
         drawer: SideMenu(),
         appBar: AppBar(
+          toolbarHeight: 50,
+          elevation: 1,
           actions: <Widget>[
             IconButton(
               icon: Icon(Icons.settings, color: Colors.black),
