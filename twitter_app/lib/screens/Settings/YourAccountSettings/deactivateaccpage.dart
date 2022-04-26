@@ -64,7 +64,7 @@ class DeactivateAccountPage extends StatelessWidget {
                   ),
                   Text(
                       "You're about to start the process of deactivating your Mockingjay account. Your display name, @username, and public profile will no longer be viewale on Mockingjay for Web or Android.",
-                      style: TextStyle(fontWeight: FontWeight.w200)),
+                      style: TextStyle(fontWeight: FontWeight.w300)),
                   Divider(
                     thickness: 2,
                     height: 20,
@@ -76,37 +76,37 @@ class DeactivateAccountPage extends StatelessWidget {
                   ),
                   Text(
                       "You can restore your Twitter account if it was accidentally or wrongfully deactivated for up to 30 days after deactivation.",
-                      style: TextStyle(fontWeight: FontWeight.w200)),
+                      style: TextStyle(fontWeight: FontWeight.w300)),
                   SizedBox(
                     height: 10,
                   ),
                   Text(
                       "Some account information may still be available in search engines,such as Google or Bing.",
-                      style: TextStyle(fontWeight: FontWeight.w200)),
+                      style: TextStyle(fontWeight: FontWeight.w300)),
                   SizedBox(
                     height: 10,
                   ),
                   Text(
                       " If you just want to change your @username, you don't need to deactivate your account - edit it in your settings.",
-                      style: TextStyle(fontWeight: FontWeight.w200)),
+                      style: TextStyle(fontWeight: FontWeight.w300)),
                   SizedBox(
                     height: 10,
                   ),
                   Text(
                       "To use your current @username or email address with a different Twitter account, change them before you deactivate this account",
-                      style: TextStyle(fontWeight: FontWeight.w200)),
+                      style: TextStyle(fontWeight: FontWeight.w300)),
                   SizedBox(
                     height: 10,
                   ),
                   Text(
                       " If you want to download your Twitter data, you'll need to complete both the request and download process before deactivating your account.",
-                      style: TextStyle(fontWeight: FontWeight.w200)),
+                      style: TextStyle(fontWeight: FontWeight.w300)),
                   SizedBox(
                     height: 10,
                   ),
                   Text(
                       " Links to download your data cannot be sent to deactivated",
-                      style: TextStyle(fontWeight: FontWeight.w200)),
+                      style: TextStyle(fontWeight: FontWeight.w300)),
                   SizedBox(
                     height: 20,
                   ),
@@ -115,7 +115,7 @@ class DeactivateAccountPage extends StatelessWidget {
                     height: 20,
                   ),
                   SizedBox(
-                    height: 50,
+                    height: 40,
                   ),
                   Container(
                     width: double.infinity,
