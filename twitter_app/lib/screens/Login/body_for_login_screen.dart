@@ -3,13 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:twitter_app/components/google_sign_in.dart';
 import 'package:twitter_app/screens/home/Timeline.dart';
-import 'package:twitter_app/unused/body_for_home_page_screen.dart';
-import 'package:twitter_app/unused/logged_in_widget.dart';
+/* import 'package:twitter_app/unused/body_for_home_page_screen.dart';
+import 'package:twitter_app/unused/logged_in_widget.dart'; */
 //import 'package:flutter_svg/svg.dart';
 import '../../components/google_rounded_button.dart';
 import '../../components/or_divider_line.dart';
 
 import '../../components/rounded_button.dart';
+import '../../model/text_field_validation.dart';
 import '../forgot_password/FogotPassword.dart';
 import '../../components/text_field_container.dart';
 import '../home/twitter_home_page.dart';
@@ -17,10 +18,11 @@ import '../welcome/welcome_screen.dart';
 import 'background_for_login_screen.dart';
 
 class BodyForLoginScreen extends StatelessWidget {
-  const BodyForLoginScreen({
+  BodyForLoginScreen({
     Key key,
   }) : super(key: key);
 
+  final formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -114,21 +116,28 @@ class BodyForLoginScreen extends StatelessWidget {
             ),
           ), */
           OrDivider(),
-          TextFieldContainer(
-            size: size,
-            titleText: '  Phone, email, or username',
-            passedOnChanged: (value) {},
+          Form(
+            key: formKey,
+            child: TextFieldContainer(
+              size: size,
+              titleText: '  Phone, email, or username',
+              passedOnChanged: (value) {},
+              validator: (value) => emailValidator.validate(value),
+            ),
           ),
           RoundedButton(
             passedText: 'Next',
             textColor: Colors.white,
             pressed: () => {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => TimelinePage(),
-                ),
-              ),
+              if (formKey.currentState.validate())
+                {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => TimelinePage(),
+                    ),
+                  ),
+                }
             },
             colorPassed: Colors.black,
             marginValue: 14,

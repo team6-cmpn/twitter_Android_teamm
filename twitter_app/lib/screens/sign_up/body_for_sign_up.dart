@@ -5,12 +5,15 @@ import 'package:twitter_app/screens/Login/background_for_login_screen.dart';
 import 'package:twitter_app/components/text_field_container.dart';
 
 import '../../components/rounded_button.dart';
+import '../home/Timeline.dart';
+import '../../model/text_field_validation.dart';
 
 class BodyForSignUpScreen extends StatelessWidget {
-  const BodyForSignUpScreen({
+  BodyForSignUpScreen({
     Key key,
   }) : super(key: key);
 
+  final formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -27,15 +30,24 @@ class BodyForSignUpScreen extends StatelessWidget {
               height: 5.5,
             ),
           ),
-          TextFieldContainer(
-            size: size,
-            titleText: '  Name',
-            passedOnChanged: (value) {},
-          ),
-          TextFieldContainer(
-            size: size,
-            titleText: '  Email',
-            passedOnChanged: (value) {},
+          Form(
+            key: formKey,
+            child: Column(
+              children: [
+                TextFieldContainer(
+                  validator: (value) => nameValidator.validate(value),
+                  size: size,
+                  titleText: '  Name',
+                  passedOnChanged: (value) {},
+                ),
+                TextFieldContainer(
+                  validator: (value) => emailValidator.validate(value),
+                  size: size,
+                  titleText: '  Email',
+                  passedOnChanged: (value) {},
+                ),
+              ],
+            ),
           ),
           SizedBox(
             //height: size.height,
@@ -96,7 +108,16 @@ class BodyForSignUpScreen extends StatelessWidget {
           RoundedButton(
             passedText: 'Next',
             textColor: Colors.white,
-            pressed: () {}, //addTransaction //() {},
+            pressed: () {
+              if (formKey.currentState.validate()) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => TimelinePage(),
+                  ),
+                );
+              }
+            }, //addTransaction //() {},
             colorPassed: Colors.grey[700],
             marginValue: 3,
             roundedpassedcolor: Colors.grey,

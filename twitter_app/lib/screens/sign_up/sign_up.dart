@@ -15,7 +15,7 @@ class SignUpScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     // ignore: prefer_const_constructors
     return Scaffold(
-      body: const BodyForSignUpScreen(),
+      body: BodyForSignUpScreen(),
 
       /* ValueListenableBuilder<Box<Transaction>>(
         valueListenable: Boxes.getTransactions().listenable(),
