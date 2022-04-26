@@ -11,26 +11,28 @@ class Background extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     // ignore: sized_box_for_whitespace
-    return SingleChildScrollView(
-      child: SizedBox(
-        height: size.height,
-        width: double.infinity,
-        child: Stack(
-          alignment: Alignment.center,
-          children: [
-            Positioned(
-              top: 25,
-              left: 160,
-              child: Image.asset(
-                "assests/images/FinalLogo.png",
-                width: size.width * 0.2,
+    return SafeArea(
+      child: SingleChildScrollView(
+        child: SizedBox(
+          height: size.height,
+          width: double.infinity,
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              Positioned(
+                top: 25,
+                left: 160,
+                child: Image.asset(
+                  "assests/images/FinalLogo.png",
+                  width: size.width * 0.2,
+                ),
               ),
-            ),
-            /* Positioned(
-              child: child,
-            ), */
-            child
-          ],
+              /* Positioned(
+                child: child,
+              ), */
+              child
+            ],
+          ),
         ),
       ),
     );
