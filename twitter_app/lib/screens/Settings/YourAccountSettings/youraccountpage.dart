@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:sizer/sizer.dart';
+import 'deactivateaccpage.dart';
 
 import '../../home/Timeline.dart';
 import '../displaysettingspage.dart';
@@ -104,8 +105,10 @@ class _YourAccountPageState extends State<YourAccountPage> {
                     title: Text('Deactivate Account'),
                     subtitle:
                         Text('Find out how you can deactivate your account'),
-                    onTap: () => Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => TestPage())),
+                    onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => DeactivateAccountPage())),
                   ),
                 ],
               ),

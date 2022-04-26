@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import '../../../components/rounded_button.dart';
+import '../../forgot_password/FogotPassword.dart';
+import '/integration/handeling.dart';
 
 class ResetPasswordPage extends StatelessWidget {
   @override
@@ -34,7 +37,7 @@ class ResetPasswordPage extends StatelessWidget {
           ),
         ),
         body: Container(
-          padding: EdgeInsets.only(top: 60, left: 40, right: 40),
+          padding: EdgeInsets.only(top: 10, left: 20, right: 40),
           child: ListView(
             children: <Widget>[
               Column(
@@ -44,6 +47,9 @@ class ResetPasswordPage extends StatelessWidget {
                     width: double.infinity,
                     child: Column(
                       children: <Widget>[
+                        SizedBox(
+                          height: 10,
+                        ),
                         TextFormField(
                           keyboardType: TextInputType.emailAddress,
                           decoration: InputDecoration(
@@ -84,10 +90,11 @@ class ResetPasswordPage extends StatelessWidget {
                           style: TextStyle(fontSize: 20),
                         ),
                         SizedBox(
-                          height: 20,
+                          height: 40,
                         ),
                         Container(
                           height: 60,
+                          width: 200,
                           alignment: Alignment.centerLeft,
                           decoration: BoxDecoration(
                             gradient: LinearGradient(
@@ -105,19 +112,28 @@ class ResetPasswordPage extends StatelessWidget {
                           ),
                           child: SizedBox.expand(
                             child: TextButton(
-                              child: Text(
-                                "Update password",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
-                                  fontSize: 20,
+                                child: Text(
+                                  "Update password",
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                    fontSize: 20,
+                                  ),
+                                  textAlign: TextAlign.center,
                                 ),
-                                textAlign: TextAlign.center,
-                              ),
-                              onPressed: () {},
-                            ),
+                                onPressed: () {}),
                           ),
                         ),
+                        TextButton(
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => ForgotPasswordScreen(),
+                                ),
+                              );
+                            },
+                            child: Text("Forgot your password?")),
                         SizedBox(
                           height: 20,
                         ),
