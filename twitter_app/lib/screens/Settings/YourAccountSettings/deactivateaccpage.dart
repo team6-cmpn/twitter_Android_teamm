@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:twitter_app/screens/Settings/YourAccountSettings/confirmpasspag.dart';
 import 'package:twitter_app/screens/Settings/testpage.dart';
 import '/integration/handeling.dart';
 
 class DeactivateAccountPage extends StatelessWidget {
-  RequestHandeling handeler;
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -34,7 +33,7 @@ class DeactivateAccountPage extends StatelessWidget {
           ),
         ),
         body: Container(
-          //padding: EdgeInsets.only(top: 60, left: 40, right: 40),
+          padding: EdgeInsets.only(top: 0, left: 5, right: 0),
           child: ListView(
             children: <Widget>[
               Column(
@@ -125,38 +124,33 @@ class DeactivateAccountPage extends StatelessWidget {
                           height: 60,
                           alignment: Alignment.centerLeft,
                           decoration: BoxDecoration(
-                            // gradient: LinearGradient(
-                            //   begin: Alignment.topLeft,
-                            //   end: Alignment.bottomRight,
-                            //   stops: [0.3, 1],
-                            //   colors: [
-                            //     Color.fromARGB(255, 216, 51, 10),
-                            //     Color.fromARGB(255, 216, 14, 7),
-                            //   ],
-                            // ),
                             borderRadius: BorderRadius.all(
                               Radius.circular(45),
                             ),
                           ),
                           child: SizedBox.expand(
-                            child: TextButton(
-                                child: Text(
-                                  "Deactivate",
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.normal,
-                                    color: Colors.red,
-                                    fontSize: 19,
-                                  ),
-                                  textAlign: TextAlign.center,
-                                ),
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => TestPage(),
+                            child: Align(
+                              alignment: Alignment.bottomCenter,
+                              child: TextButton(
+                                  child: Text(
+                                    "Deactivate",
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.normal,
+                                      color: Colors.red,
+                                      fontSize: 19,
                                     ),
-                                  );
-                                }),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            ConfrimPasswordPage(),
+                                      ),
+                                    );
+                                  }),
+                            ),
                           ),
                         ),
                       ],
@@ -171,5 +165,6 @@ class DeactivateAccountPage extends StatelessWidget {
     );
   }
 }
+//RequestHandeling handeler;
   // if (await handeler
  //     .deactivateaccount("TOKEN")) {}

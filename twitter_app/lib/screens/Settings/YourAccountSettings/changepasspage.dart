@@ -51,7 +51,8 @@ class ResetPasswordPage extends StatelessWidget {
                           height: 10,
                         ),
                         TextFormField(
-                          keyboardType: TextInputType.emailAddress,
+                          obscureText: true,
+                          keyboardType: TextInputType.visiblePassword,
                           decoration: InputDecoration(
                             labelText: "Current password",
                             labelStyle: TextStyle(
@@ -65,7 +66,8 @@ class ResetPasswordPage extends StatelessWidget {
                           height: 20,
                         ),
                         TextFormField(
-                          keyboardType: TextInputType.emailAddress,
+                          obscureText: true,
+                          keyboardType: TextInputType.visiblePassword,
                           decoration: InputDecoration(
                               labelText: "New password",
                               labelStyle: TextStyle(
@@ -79,7 +81,8 @@ class ResetPasswordPage extends StatelessWidget {
                           height: 20,
                         ),
                         TextFormField(
-                          keyboardType: TextInputType.emailAddress,
+                          obscureText: true,
+                          keyboardType: TextInputType.visiblePassword,
                           decoration: InputDecoration(
                               labelText: "Confirm new password",
                               labelStyle: TextStyle(
