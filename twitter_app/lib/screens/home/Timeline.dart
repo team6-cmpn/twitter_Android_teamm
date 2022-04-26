@@ -25,6 +25,7 @@ class TimelinePage extends StatelessWidget {
         appBar: AppBar(
           toolbarHeight: 45,
           elevation: 1,
+
           backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
           // scaffoldkey.currentState?.openDrawer();
           leading: InkWell(
