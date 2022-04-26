@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 
 import 'package:sizer/sizer.dart';
+import 'package:twitter_app/components/widgets/SearchBar/SearchBar.dart';
 
 import '../home/Timeline.dart';
 import 'displaysettingspage.dart';
 import 'notificationsettings.dart';
 import 'searchsettingspage.dart';
 import 'testpage.dart';
-import 'youraccountpage.dart';
+import 'YourAccountSettings/youraccountpage.dart';
 
 class SettingsPage extends StatefulWidget {
   @override
@@ -66,7 +67,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => SearchSettingsPage(),
+                          builder: (context) => SearchBar(),
                         ),
                       ),
                     },
@@ -95,7 +96,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     onTap: () => Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => YourAccountePage())),
+                            builder: (context) => YourAccountPage())),
                   ),
                   ListTile(
                     leading: Icon(

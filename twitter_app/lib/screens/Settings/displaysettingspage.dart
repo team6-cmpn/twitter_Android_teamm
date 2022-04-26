@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
+import '../../components/widgets/change_theme_button_widget.dart';
+
 class DisplaySettingsPage extends StatefulWidget {
   DisplaySettingsPage({Key key}) : super(key: key);
 
@@ -60,13 +62,13 @@ class _DisplaySettingsPageState extends State<DisplaySettingsPage> {
             ],
           ),
 
-          //     SizedBox(
-          //       width: 180,
-          //     ),
-          //     //ChangeThemeButtonWidget(),
-          //   ],
-          // ),
-          // Row()
+          //   //     SizedBox(
+          //   //       width: 180,
+          //   //     ),
+          //  ChangeThemeButtonWidget(),
+          //   //   ],
+          //   // ),
+          //   // Row()
         ),
       ),
     );

@@ -2,18 +2,19 @@ import 'package:flutter/material.dart';
 
 import 'package:sizer/sizer.dart';
 
-import '../home/Timeline.dart';
-import 'displaysettingspage.dart';
-import 'notificationsettings.dart';
-import 'searchsettingspage.dart';
-import 'testpage.dart';
+import '../../home/Timeline.dart';
+import '../displaysettingspage.dart';
+import '../notificationsettings.dart';
+import '../searchsettingspage.dart';
+import '../testpage.dart';
+import 'accountinfopage.dart';
 
-class YourAccountePage extends StatefulWidget {
+class YourAccountPage extends StatefulWidget {
   @override
-  State<YourAccountePage> createState() => _SettingsPageState();
+  State<YourAccountPage> createState() => _YourAccountPageState();
 }
 
-class _SettingsPageState extends State<YourAccountePage> {
+class _YourAccountPageState extends State<YourAccountPage> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -72,7 +73,12 @@ class _SettingsPageState extends State<YourAccountePage> {
                     ),
                     title: Text('Account information'),
                     subtitle: Text('See information about your account'),
-                    onTap: () => {Navigator.of(context).pop()},
+                    onTap: () => {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => AccountInfoPage())),
+                    },
                   ),
                   ListTile(
                     leading: Icon(
