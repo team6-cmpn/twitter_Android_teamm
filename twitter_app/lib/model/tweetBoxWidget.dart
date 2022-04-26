@@ -222,7 +222,6 @@ class _TweetBoxWidgetyState extends State<TweetBoxWidgety> {
   ) =>
       Container(
         padding: EdgeInsets.all(0),
-        color: Colors.white,
         child: Column(
           children: [
             ...Tweets.map(

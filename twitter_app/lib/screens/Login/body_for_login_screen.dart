@@ -99,7 +99,7 @@ class BodyForLoginScreen extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 15,
                     //fontWeight: FontWeight.w100,
-                    color: Colors.black,
+                    
                     //height: 1,
                   ),
                 ),

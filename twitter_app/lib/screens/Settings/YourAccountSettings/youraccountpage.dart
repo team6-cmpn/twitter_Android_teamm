@@ -24,7 +24,9 @@ class _YourAccountPageState extends State<YourAccountPage> {
         preferredSize: Size.fromHeight(50.0),
         child: AppBar(
           leading: IconButton(
-            icon: Icon(Icons.arrow_back, color: Colors.black),
+            icon: Icon(
+              Icons.arrow_back,
+            ),
             onPressed: () => {Navigator.of(context).pop()},
           ),
           backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
@@ -36,12 +38,11 @@ class _YourAccountPageState extends State<YourAccountPage> {
             children: [
               Text(
                 "Your Account",
-                style: TextStyle(color: Colors.black, fontSize: 20.0),
+                style: TextStyle(fontSize: 20.0),
               ),
               Text(
                 "@Username",
-                style: TextStyle(
-                    color: Colors.black.withOpacity(0.5), fontSize: 15.0),
+                style: TextStyle(fontSize: 15.0),
               )
             ],
           ),
@@ -58,8 +59,7 @@ class _YourAccountPageState extends State<YourAccountPage> {
                 child: Text(
                   "See information about your account, change your password, or learn about your account deactivation",
                   textAlign: TextAlign.start,
-                  style: TextStyle(
-                      color: Colors.black.withOpacity(0.5), fontSize: 15.0),
+                  style: TextStyle(fontSize: 15.0),
                 ),
               ),
             ),

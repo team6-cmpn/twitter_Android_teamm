@@ -20,19 +20,27 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
         showUnselectedLabels: false,
         items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home, color: Colors.black),
+            icon: Icon(
+              Icons.home,
+            ),
             label: 'News Feed',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.search, color: Colors.black),
+            icon: Icon(
+              Icons.search,
+            ),
             label: 'Search',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.notifications, color: Colors.black),
+            icon: Icon(
+              Icons.notifications,
+            ),
             label: 'Notifications',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person, color: Colors.black),
+            icon: Icon(
+              Icons.person,
+            ),
             label: 'Profile',
           ),
         ],

@@ -25,7 +25,9 @@ class _NotificationsPageState extends State<NotificationsPage> {
           elevation: 1,
           actions: <Widget>[
             IconButton(
-              icon: Icon(Icons.settings, color: Colors.black),
+              icon: Icon(
+                Icons.settings,
+              ),
               onPressed: () => Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -34,12 +36,16 @@ class _NotificationsPageState extends State<NotificationsPage> {
             ),
           ],
           centerTitle: false,
-          title: Text("Notifications", style: TextStyle(color: Colors.black)),
+          title: Text(
+            "Notifications",
+          ),
           leading: IconButton(
               onPressed: () {
                 scaffoldkey.currentState?.openDrawer();
               },
-              icon: Icon(Icons.person, color: Colors.black)),
+              icon: Icon(
+                Icons.person,
+              )),
           backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
         ),
       ),

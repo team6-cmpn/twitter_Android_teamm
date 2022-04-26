@@ -23,7 +23,9 @@ class _SettingsPageState extends State<SettingsPage> {
         appBar: AppBar(
           toolbarHeight: 50,
           leading: IconButton(
-            icon: Icon(Icons.arrow_back, color: Colors.black),
+            icon: Icon(
+              Icons.arrow_back,
+            ),
             onPressed: () => Navigator.push(context,
                 MaterialPageRoute(builder: (context) => TimelinePage())),
           ),
@@ -36,12 +38,11 @@ class _SettingsPageState extends State<SettingsPage> {
             children: [
               Text(
                 "Settings",
-                style: TextStyle(color: Colors.black, fontSize: 20.0),
+                style: TextStyle(fontSize: 20.0),
               ),
               Text(
                 "@Username",
-                style: TextStyle(
-                    color: Colors.black.withOpacity(0.5), fontSize: 15.0),
+                style: TextStyle(fontSize: 15.0),
               )
             ],
           ),
@@ -59,10 +60,8 @@ class _SettingsPageState extends State<SettingsPage> {
                     icon: Icon(
                       Icons.search,
                       size: 24.0,
-                      color: Colors.black.withOpacity(0.3),
                     ),
-                    label: Text('Search Settings',
-                        style: TextStyle(color: Colors.black.withOpacity(0.5))),
+                    label: Text('Search Settings', style: TextStyle()),
                     onPressed: () => {
                       Navigator.push(
                         context,

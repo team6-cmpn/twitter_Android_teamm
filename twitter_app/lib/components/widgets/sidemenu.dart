@@ -44,9 +44,9 @@ class _SideMenuState extends State<SideMenu> {
                         Text(
                           'Mr.Ahmed hassan',
                           style: TextStyle(
+                            color: Colors.black,
                             fontSize: 16,
                             fontWeight: FontWeight.w800,
-                            color: Colors.black,
                           ),
                         ),
                         SizedBox(
@@ -66,7 +66,9 @@ class _SideMenuState extends State<SideMenu> {
                           children: [
                             Text(
                               '31 ',
-                              style: TextStyle(fontWeight: FontWeight.bold),
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold),
                             ),
                             Text(
                               'Following',
@@ -77,7 +79,9 @@ class _SideMenuState extends State<SideMenu> {
                             ),
                             Text(
                               '2 ',
-                              style: TextStyle(fontWeight: FontWeight.bold),
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold),
                             ),
                             Text(
                               'Followers',

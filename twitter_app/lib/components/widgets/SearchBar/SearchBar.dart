@@ -13,12 +13,11 @@ class SearchBar extends StatelessWidget {
           toolbarHeight: 50,
           elevation: 1,
           backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
-          title: Text('Search App', style: TextStyle(color: Colors.black)),
+          title: Text('Search App', style: TextStyle()),
           actions: <Widget>[
             IconButton(
                 icon: Icon(
                   Icons.search,
-                  color: Colors.black,
                 ),
                 onPressed: () {
                   showSearch(context: context, delegate: DataSearch(listWords));
@@ -30,8 +29,9 @@ class SearchBar extends StatelessWidget {
           alignment: Alignment.topCenter,
           child: Text(
             "Try searching for password reset, notifications, etc",
-            style:
-                TextStyle(fontSize: 15, color: Colors.black.withOpacity(0.6)),
+            style: TextStyle(
+              fontSize: 15,
+            ),
           ),
         ),
       ),

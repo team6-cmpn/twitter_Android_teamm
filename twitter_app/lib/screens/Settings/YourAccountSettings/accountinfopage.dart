@@ -22,7 +22,9 @@ class AccountInfoPageState extends State<AccountInfoPage> {
         preferredSize: Size.fromHeight(50.0),
         child: AppBar(
           leading: IconButton(
-            icon: Icon(Icons.arrow_back, color: Colors.black),
+            icon: Icon(
+              Icons.arrow_back,
+            ),
             onPressed: () => {Navigator.of(context).pop()},
           ),
           backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
@@ -34,12 +36,11 @@ class AccountInfoPageState extends State<AccountInfoPage> {
             children: [
               Text(
                 "Account information",
-                style: TextStyle(color: Colors.black, fontSize: 20.0),
+                style: TextStyle(fontSize: 20.0),
               ),
               Text(
                 "@Username",
-                style: TextStyle(
-                    color: Colors.black.withOpacity(0.5), fontSize: 15.0),
+                style: TextStyle(fontSize: 15.0),
               )
             ],
           ),

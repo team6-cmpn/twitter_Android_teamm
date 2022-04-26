@@ -155,7 +155,7 @@ class BodyStartUpPage extends StatelessWidget {
               style: TextStyle(
                 fontSize: 10,
                 //fontWeight: FontWeight.bold,
-                color: Colors.black,
+                
                 height: 7,
               ),
             ), */

@@ -9,7 +9,9 @@ class ResetPasswordPage extends StatelessWidget {
           preferredSize: Size.fromHeight(50.0),
           child: AppBar(
             leading: IconButton(
-              icon: Icon(Icons.arrow_back, color: Colors.black),
+              icon: Icon(
+                Icons.arrow_back,
+              ),
               onPressed: () => {Navigator.of(context).pop()},
             ),
             backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
@@ -21,12 +23,11 @@ class ResetPasswordPage extends StatelessWidget {
               children: [
                 Text(
                   "Account information",
-                  style: TextStyle(color: Colors.black, fontSize: 20.0),
+                  style: TextStyle(fontSize: 20.0),
                 ),
                 Text(
                   "@Username",
-                  style: TextStyle(
-                      color: Colors.black.withOpacity(0.5), fontSize: 15.0),
+                  style: TextStyle(fontSize: 15.0),
                 )
               ],
             ),
@@ -34,7 +35,6 @@ class ResetPasswordPage extends StatelessWidget {
         ),
         body: Container(
           padding: EdgeInsets.only(top: 60, left: 40, right: 40),
-          color: Colors.white,
           child: ListView(
             children: <Widget>[
               Column(
@@ -49,7 +49,6 @@ class ResetPasswordPage extends StatelessWidget {
                           decoration: InputDecoration(
                             labelText: "Current password",
                             labelStyle: TextStyle(
-                              color: Colors.black38,
                               fontWeight: FontWeight.w400,
                               fontSize: 20,
                             ),
@@ -64,7 +63,6 @@ class ResetPasswordPage extends StatelessWidget {
                           decoration: InputDecoration(
                               labelText: "New password",
                               labelStyle: TextStyle(
-                                color: Colors.black38,
                                 fontWeight: FontWeight.w400,
                                 fontSize: 20,
                               ),
@@ -79,7 +77,6 @@ class ResetPasswordPage extends StatelessWidget {
                           decoration: InputDecoration(
                               labelText: "Confirm new password",
                               labelStyle: TextStyle(
-                                color: Colors.black38,
                                 fontWeight: FontWeight.w400,
                                 fontSize: 20,
                               ),

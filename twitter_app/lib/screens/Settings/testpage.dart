@@ -16,7 +16,9 @@ class _TestPageState extends State<TestPage> {
         appBar: AppBar(
           backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
           leading: IconButton(
-            icon: Icon(Icons.arrow_back, color: Colors.black),
+            icon: Icon(
+              Icons.arrow_back,
+            ),
             onPressed: () => {Navigator.of(context).pop()},
           ),
         ),
