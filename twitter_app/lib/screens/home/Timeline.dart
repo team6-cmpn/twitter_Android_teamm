@@ -64,7 +64,9 @@ class TimelinePage extends StatelessWidget {
                     ),
                   );
                 },
-                icon: FaIcon(FontAwesomeIcons.star, color: Colors.black),
+                icon: FaIcon(
+                  FontAwesomeIcons.star,
+                ),
                 iconSize: 20.0,
               ),
             ],
