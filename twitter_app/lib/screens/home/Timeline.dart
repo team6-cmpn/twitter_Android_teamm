@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:twitter_app/components/icon.dart';
 
 import '../../components/widgets/sidemenu.dart';
 import '../Settings/notificationspage.dart';
@@ -90,7 +91,7 @@ class TimelinePage extends StatelessWidget {
             showUnselectedLabels: false,
             items: [
               BottomNavigationBarItem(
-                icon: FaIcon(FontAwesomeIcons.home),
+                icon: Icon(FontAwesomeIcons.home),
                 label: 'News Feed',
               ),
               BottomNavigationBarItem(

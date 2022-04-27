@@ -5,6 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 
 import '../components/greyLine_seperator.dart';
+
 import 'tweet_model.dart';
 
 class TweetBoxWidgety extends StatefulWidget {
@@ -299,16 +300,23 @@ class _TweetBoxWidgetyState extends State<TweetBoxWidgety> {
                                 TextSpan(
                                   children: [
                                     WidgetSpan(
-                                      child: tweetaya.isReTweet
-                                          ? FaIcon(
+                                        child: tweetaya.isReTweet
+                                            ? FaIcon(
+                                                FontAwesomeIcons.retweet,
+                                                size: 17,
+                                                color: Colors.green,
+                                              )
+                                            : FaIcon(
+                                                FontAwesomeIcons.retweet,
+                                                size: 17,
+                                                //color: Colors.green,
+                                              )
+
+                                        /* FaIcon(
                                               FontAwesomeIcons.retweet,
                                               size: 17,
-                                            )
-                                          : FaIcon(
-                                              FontAwesomeIcons.heart,
-                                              size: 17,
-                                            ),
-                                    ),
+                                            ), */
+                                        ),
                                     TextSpan(
                                       text: '  ${tweetaya.retweets.toString()}',
                                     ),
@@ -318,11 +326,11 @@ class _TweetBoxWidgetyState extends State<TweetBoxWidgety> {
                             ),
                             onTap: () {
                               setState(() {
-                                if (tweetaya.isCommented == false) {
-                                  tweetaya.isCommented = true;
+                                if (tweetaya.isReTweet == false) {
+                                  tweetaya.isReTweet = true;
                                   tweetaya.retweets += 1;
                                 } else {
-                                  tweetaya.isCommented = false;
+                                  tweetaya.isReTweet = false;
                                   tweetaya.retweets -= 1;
                                 }
                               });

@@ -19,7 +19,7 @@ class BodyStartUpPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // ignore: unused_local_variable
-    Size size = MediaQuery.of(context).size;
+    int size = 500;
     //this size provide the total height and width of the screen
 
     return SafeArea(
@@ -91,7 +91,7 @@ class BodyStartUpPage extends StatelessWidget {
               ),
             ), */
 
-            Container(
+            /* Container(
               padding: EdgeInsets.all(5),
               width: size.width * 0.86,
               child: Row(
@@ -125,7 +125,8 @@ class BodyStartUpPage extends StatelessWidget {
                   ),
                 ],
               ),
-            ),
+            ), */
+
             SizedBox(),
             /* Container(
               height: 70,
@@ -160,7 +161,8 @@ class BodyStartUpPage extends StatelessWidget {
               ),
             ), */
             SizedBox(
-              height: size.height * 0.2,
+              // height: size.height * 0.2,
+              height: size * 0.2,
             ),
             Text(
               'Already have an account?',
