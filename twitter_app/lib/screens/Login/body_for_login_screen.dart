@@ -120,7 +120,7 @@ class BodyForLoginScreen extends StatelessWidget {
             key: formKey,
             child: TextFieldContainer(
               size: size,
-              titleText: '  Phone, email, or username',
+              titleText: '  Email',
               passedOnChanged: (value) {},
               validator: (value) => emailValidator.validate(value),
             ),
