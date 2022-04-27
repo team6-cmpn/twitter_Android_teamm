@@ -49,19 +49,6 @@ class _TweetBoxWidgetyState extends State<TweetBoxWidgety> {
       loves: 27,
       retweets: 22,
     ),
-    /* TweetModel(
-      username: " Ammar",
-      tweetmessg: "my name is ammar",
-      twitterHandle: "@Ammar1",
-      time: "7h",
-      date: DateTime.now(),
-      comments: 23,
-      isCommented: true,
-      isLiked: true,
-      isReTweet: true,
-      loves: 77,
-      retweets: 99,
-    ),
     TweetModel(
       username: " Ammar",
       tweetmessg: "my name is ammar",
@@ -126,7 +113,20 @@ class _TweetBoxWidgetyState extends State<TweetBoxWidgety> {
       isReTweet: true,
       loves: 77,
       retweets: 99,
-    ), */
+    ),
+    TweetModel(
+      username: " Ammar",
+      tweetmessg: "my name is ammar",
+      twitterHandle: "@Ammar1",
+      time: "7h",
+      date: DateTime.now(),
+      comments: 23,
+      isCommented: true,
+      isLiked: true,
+      isReTweet: true,
+      loves: 77,
+      retweets: 99,
+    ),
 
     /* TweetModel(
       username: "Ahmed",
