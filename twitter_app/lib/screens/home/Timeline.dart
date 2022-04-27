@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:twitter_app/components/icon.dart';
 
 import '../../components/widgets/sidemenu.dart';
 import '../Settings/notificationspage.dart';
@@ -21,63 +20,63 @@ class TimelinePage extends StatelessWidget {
   bool scaffoldKey = false;
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: SafeArea(
-        child: Scaffold(
-          appBar: AppBar(
-            toolbarHeight: 50,
-            elevation: 1,
-            backgroundColor: Colors.white,
-            // scaffoldkey.currentState?.openDrawer();
-            leading: InkWell(
-              child: Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: CircleAvatar(
-                  backgroundImage: NetworkImage(
-                      'https://previews.123rf.com/images/koblizeek/koblizeek2001/koblizeek200100050/138262629-usuario-miembro-de-perfil-de-icono-de-hombre-vector-de-s%C3%ADmbolo-perconal-sobre-fondo-blanco-aislado-.jpg'),
-                  radius: 16,
-                ),
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          toolbarHeight: 50,
+          elevation: 1,
+          backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
+          // scaffoldkey.currentState?.openDrawer();
+          leading: InkWell(
+            child: Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: CircleAvatar(
+                backgroundImage: NetworkImage(
+                    'https://previews.123rf.com/images/koblizeek/koblizeek2001/koblizeek200100050/138262629-usuario-miembro-de-perfil-de-icono-de-hombre-vector-de-s%C3%ADmbolo-perconal-sobre-fondo-blanco-aislado-.jpg'),
+                radius: 16,
               ),
-              onTap: () {
-                scaffoldkey.currentState?.openDrawer();
-              },
             ),
-            title: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                SizedBox(),
-                IconButton(
-                  onPressed: () {
-                    scrollUp();
-                  },
-                  icon: Image.asset(
-                    "assests/images/FinalLogo.png",
-                    scale: 0.5,
-                  ),
-                  iconSize: 55.0,
-                  // color: Colors.blue,
-                ),
-                IconButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => NotificationsPage(),
-                      ),
-                    );
-                  },
-                  icon: FaIcon(FontAwesomeIcons.star, color: Colors.black),
-                  iconSize: 20.0,
-                ),
-              ],
-            ),
+            onTap: () {
+              scaffoldkey.currentState?.openDrawer();
+            },
           ),
-          key: scaffoldkey,
-          body: SingleChildScrollView(
-            controller: scrollController,
-            child:
-                TweetBoxWidgety(), /* Column(
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              SizedBox(),
+              IconButton(
+                onPressed: () {
+                  scrollUp();
+                },
+                icon: Image.asset(
+                  "assests/images/FInalLogowhite.png",
+                  scale: 0.5,
+                ),
+                iconSize: 55.0,
+                // color: Colors.blue,
+              ),
+              IconButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => NotificationsPage(),
+                    ),
+                  );
+                },
+                icon: FaIcon(
+                  FontAwesomeIcons.star,
+                ),
+                iconSize: 20.0,
+              ),
+            ],
+          ),
+        ),
+        key: scaffoldkey,
+        body: SingleChildScrollView(
+          controller: scrollController,
+          child:
+              TweetBoxWidgety(), /* Column(
                 children: /* Tweets.map((tweetaya) {
                 return tweetBoxWidget(Tweets, true, () {}, 30);
               }).toList(),*/
@@ -85,42 +84,41 @@ class TimelinePage extends StatelessWidget {
                     [
                   
                 ]), */
-          ),
-          drawer: SideMenu(),
-          bottomNavigationBar: BottomNavigationBar(
-            //backgroundColor: Colors.indigo,
-            fixedColor: Colors.black,
-            showSelectedLabels: false,
-            showUnselectedLabels: false,
-            items: [
-              BottomNavigationBarItem(
-                icon: Icon(FontAwesomeIcons.home),
-                label: 'News Feed',
-              ),
-              BottomNavigationBarItem(
-                icon: FaIcon(FontAwesomeIcons.search, color: Colors.black),
-                label: 'Search',
-              ),
-              BottomNavigationBarItem(
-                icon: FaIcon(FontAwesomeIcons.microphone, color: Colors.black),
-                label: 'Spaces',
-              ),
-              BottomNavigationBarItem(
-                icon: FaIcon(FontAwesomeIcons.bell, color: Colors.black),
-                label: 'Notifications',
-              ),
-              BottomNavigationBarItem(
-                icon: FaIcon(FontAwesomeIcons.envelope, color: Colors.black),
-                label: 'Inbox',
-              ),
-            ],
-          ),
-          floatingActionButton: FloatingActionButton(
-            onPressed: () {
-              openAddTweetDialog();
-            },
-            child: const Icon(Icons.add),
-          ),
+        ),
+        drawer: SideMenu(),
+        bottomNavigationBar: BottomNavigationBar(
+          //backgroundColor: Colors.indigo,
+          fixedColor: Colors.black,
+          showSelectedLabels: false,
+          showUnselectedLabels: false,
+          items: [
+            BottomNavigationBarItem(
+              icon: Icon(FontAwesomeIcons.home),
+              label: 'News Feed',
+            ),
+            BottomNavigationBarItem(
+              icon: FaIcon(FontAwesomeIcons.search, color: Colors.black),
+              label: 'Search',
+            ),
+            BottomNavigationBarItem(
+              icon: FaIcon(FontAwesomeIcons.microphone, color: Colors.black),
+              label: 'Spaces',
+            ),
+            BottomNavigationBarItem(
+              icon: FaIcon(FontAwesomeIcons.bell, color: Colors.black),
+              label: 'Notifications',
+            ),
+            BottomNavigationBarItem(
+              icon: FaIcon(FontAwesomeIcons.envelope, color: Colors.black),
+              label: 'Inbox',
+            ),
+          ],
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            openAddTweetDialog();
+          },
+          child: const Icon(Icons.add),
         ),
       ),
     );
