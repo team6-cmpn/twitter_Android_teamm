@@ -50,9 +50,12 @@ class TimelinePage extends StatelessWidget {
                   onPressed: () {
                     scrollUp();
                   },
-                  icon: FaIcon(FontAwesomeIcons.twitter),
-                  iconSize: 20.0,
-                  color: Colors.blue,
+                  icon: Image.asset(
+                    "assests/images/FinalLogo.png",
+                    scale: 0.5,
+                  ),
+                  iconSize: 55.0,
+                  // color: Colors.blue,
                 ),
                 IconButton(
                   onPressed: () {
