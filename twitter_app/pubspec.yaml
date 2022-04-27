@@ -95,6 +95,7 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets :
+
     - assests/images/  #see why ther is error here
     - assests/icons/
     - assests/images/main_bottom.png
@@ -113,10 +114,21 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
+  fonts:
+    - family: MyFlutterAppicon2
+      fonts:
+        - asset: assests\icons\tweetgreen.ttf
+        - asset: assests/icons/mixtweets.ttf
+        
+
+    # fonts:
+    #   - family:  MyFlutterAppicon
+    #     fonts:
+    #       -asset: twitter_app\assests\MyFlutterApp.ttf
+        # - asset: twitter_app\assests\MyFlutterApp.ttf
+        # - asset: twitter_app/assests/MyFlutterApp.ttf
+            
+
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro
