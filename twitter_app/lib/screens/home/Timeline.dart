@@ -2,6 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:twitter_app/components/widgets/customnavbar.dart';
+import 'package:twitter_app/screens/Settings/settingspage.dart';
 
 import '../../components/widgets/sidemenu.dart';
 import '../Settings/notificationspage.dart';
@@ -12,12 +14,29 @@ import '../../model/tweet_model.dart';
 // ignore: unused_import
 import '../../state/drawer_for_icon.dart';
 
-class TimelinePage extends StatelessWidget {
+const TextStyle _textStyle = TextStyle(
+  fontSize: 40,
+  fontWeight: FontWeight.bold,
+  letterSpacing: 2,
+  fontStyle: FontStyle.italic,
+);
+
+class TimelinePage extends StatefulWidget {
   TimelinePage({Key key}) : super(key: key);
+
+  @override
+  State<TimelinePage> createState() => _TimelinePageState();
+}
+
+class _TimelinePageState extends State<TimelinePage> {
   final scrollController = ScrollController();
+
   var scaffoldkey = GlobalKey<ScaffoldState>();
 
   bool scaffoldKey = false;
+
+  int _currentIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -84,34 +103,7 @@ class TimelinePage extends StatelessWidget {
                 ]), */
         ),
         drawer: SideMenu(),
-        bottomNavigationBar: BottomNavigationBar(
-          //backgroundColor: Colors.indigo,
-          fixedColor: Colors.black,
-          showSelectedLabels: false,
-          showUnselectedLabels: false,
-          items: [
-            BottomNavigationBarItem(
-              icon: Icon(FontAwesomeIcons.home),
-              label: 'News Feed',
-            ),
-            BottomNavigationBarItem(
-              icon: FaIcon(FontAwesomeIcons.search, color: Colors.black),
-              label: 'Search',
-            ),
-            BottomNavigationBarItem(
-              icon: FaIcon(FontAwesomeIcons.microphone, color: Colors.black),
-              label: 'Spaces',
-            ),
-            BottomNavigationBarItem(
-              icon: FaIcon(FontAwesomeIcons.bell, color: Colors.black),
-              label: 'Notifications',
-            ),
-            BottomNavigationBarItem(
-              icon: FaIcon(FontAwesomeIcons.envelope, color: Colors.black),
-              label: 'Inbox',
-            ),
-          ],
-        ),
+        // bottomNavigationBar: MaterialYou(),
         floatingActionButton: FloatingActionButton(
           backgroundColor: Colors.blue,
           onPressed: () {
