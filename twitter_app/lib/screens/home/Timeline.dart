@@ -40,37 +40,35 @@ class TimelinePage extends StatelessWidget {
               scaffoldkey.currentState?.openDrawer();
             },
           ),
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              SizedBox(),
-              IconButton(
-                onPressed: () {
-                  scrollUp();
-                },
-                icon: Image.asset(
-                  "assests/images/FInalLogowhite.png",
-                  scale: 0.5,
-                ),
-                iconSize: 55.0,
-                // color: Colors.blue,
+          title:
+              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+            SizedBox(),
+            IconButton(
+              onPressed: () {
+                scrollUp();
+              },
+              icon: Image.asset(
+                "assests/images/FInalLogowhite.png",
+                scale: 0.5,
               ),
-              IconButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => NotificationsPage(),
-                    ),
-                  );
-                },
-                icon: FaIcon(
-                  FontAwesomeIcons.star,
-                ),
-                iconSize: 20.0,
+              iconSize: 55.0,
+              // color: Colors.blue,
+            ),
+            IconButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => NotificationsPage(),
+                  ),
+                );
+              },
+              icon: FaIcon(
+                FontAwesomeIcons.star,
               ),
-            ],
-          ),
+              iconSize: 20.0,
+            ),
+          ]),
         ),
         key: scaffoldkey,
         body: SingleChildScrollView(
@@ -115,6 +113,7 @@ class TimelinePage extends StatelessWidget {
           ],
         ),
         floatingActionButton: FloatingActionButton(
+          backgroundColor: Colors.blue,
           onPressed: () {
             openAddTweetDialog();
           },

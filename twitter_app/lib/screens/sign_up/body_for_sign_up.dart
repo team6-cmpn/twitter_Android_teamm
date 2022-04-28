@@ -35,12 +35,14 @@ class BodyForSignUpScreen extends StatelessWidget {
             child: Column(
               children: [
                 TextFieldContainer(
+                  obs: false,
                   validator: (value) => nameValidator.validate(value),
                   size: size,
                   titleText: '  Name',
                   passedOnChanged: (value) {},
                 ),
                 TextFieldContainer(
+                  obs: false,
                   validator: (value) => emailValidator.validate(value),
                   size: size,
                   titleText: '  Email',
@@ -91,6 +93,7 @@ class BodyForSignUpScreen extends StatelessWidget {
             height: 10,
           ),
           TextFieldContainer(
+            obs: false,
             size: size,
             titleText: '  Date of birth',
             passedOnChanged: (value) {

@@ -27,6 +27,7 @@ class BodyForForgotPassword extends StatelessWidget {
             ),
           ),
           TextFieldContainer(
+            obs: false,
             size: size,
             titleText: '  Enter your email, phone number, or username',
             passedOnChanged: (value) {},

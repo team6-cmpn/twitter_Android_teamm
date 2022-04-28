@@ -5,7 +5,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 
 import '../components/greyLine_seperator.dart';
-
 import 'tweet_model.dart';
 
 class TweetBoxWidgety extends StatefulWidget {
@@ -33,8 +32,8 @@ class _TweetBoxWidgetyState extends State<TweetBoxWidgety> {
       isCommented: true,
       isLiked: true,
       isReTweet: true,
-      loves: 77,
-      retweets: 99,
+      loves: 9,
+      retweets: 15,
     ),
     TweetModel(
       username: " lord",
@@ -46,60 +45,47 @@ class _TweetBoxWidgetyState extends State<TweetBoxWidgety> {
       isCommented: false,
       isLiked: false,
       isReTweet: false,
-      loves: 27,
+      loves: 2,
       retweets: 22,
     ),
     TweetModel(
-      username: " Ammar",
-      tweetmessg: "my name is ammar",
-      twitterHandle: "@Ammar1",
-      time: "7h",
+      username: " hassan",
+      tweetmessg: "here is my first tweet",
+      twitterHandle: "@hassan",
+      time: "3h",
       date: DateTime.now(),
       comments: 23,
-      isCommented: true,
-      isLiked: true,
-      isReTweet: true,
-      loves: 77,
-      retweets: 99,
+      isCommented: false,
+      isLiked: false,
+      isReTweet: false,
+      loves: 13,
+      retweets: 0,
     ),
     TweetModel(
-      username: " Ammar",
-      tweetmessg: "my name is ammar",
-      twitterHandle: "@Ammar1",
+      username: " Gemy",
+      tweetmessg: "we Don't need memories ",
+      twitterHandle: "@gemmmy",
       time: "7h",
       date: DateTime.now(),
       comments: 23,
       isCommented: true,
-      isLiked: true,
+      isLiked: false,
       isReTweet: true,
-      loves: 77,
-      retweets: 99,
+      loves: 0,
+      retweets: 9,
     ),
     TweetModel(
-      username: " Ammar",
-      tweetmessg: "my name is ammar",
-      twitterHandle: "@Ammar1",
-      time: "7h",
+      username: " Eren",
+      tweetmessg: "Keep moving forward all the time",
+      twitterHandle: "@Eren00",
+      time: "2h",
       date: DateTime.now(),
       comments: 23,
       isCommented: true,
       isLiked: true,
-      isReTweet: true,
-      loves: 77,
-      retweets: 99,
-    ),
-    TweetModel(
-      username: " Ammar",
-      tweetmessg: "my name is ammar",
-      twitterHandle: "@Ammar1",
-      time: "7h",
-      date: DateTime.now(),
-      comments: 23,
-      isCommented: true,
-      isLiked: true,
-      isReTweet: true,
-      loves: 77,
-      retweets: 99,
+      isReTweet: false,
+      loves: 7,
+      retweets: 8,
     ),
     TweetModel(
       username: " Ammar",
@@ -111,99 +97,61 @@ class _TweetBoxWidgetyState extends State<TweetBoxWidgety> {
       isCommented: true,
       isLiked: true,
       isReTweet: true,
-      loves: 77,
-      retweets: 99,
+      loves: 9,
+      retweets: 15,
     ),
     TweetModel(
-      username: " Ammar",
-      tweetmessg: "my name is ammar",
-      twitterHandle: "@Ammar1",
+      username: " lord",
+      tweetmessg: "my name is mohamed",
+      twitterHandle: "@lxrd",
+      time: "3h",
+      date: DateTime.now(),
+      comments: 23,
+      isCommented: false,
+      isLiked: false,
+      isReTweet: false,
+      loves: 2,
+      retweets: 22,
+    ),
+    TweetModel(
+      username: " hassan",
+      tweetmessg: "here is my first tweet",
+      twitterHandle: "@hassan",
+      time: "3h",
+      date: DateTime.now(),
+      comments: 23,
+      isCommented: false,
+      isLiked: false,
+      isReTweet: false,
+      loves: 13,
+      retweets: 0,
+    ),
+    TweetModel(
+      username: " Gemy",
+      tweetmessg: "we Don't need memories ",
+      twitterHandle: "@gemmmy",
       time: "7h",
       date: DateTime.now(),
       comments: 23,
       isCommented: true,
-      isLiked: true,
+      isLiked: false,
       isReTweet: true,
-      loves: 77,
-      retweets: 99,
+      loves: 0,
+      retweets: 9,
     ),
-
-    /* TweetModel(
-      username: "Ahmed",
-      tweetmessg: "Hello world",
-      time: "3m",
-      twitterHandle: "@Ahmed28",
+    TweetModel(
+      username: " Eren",
+      tweetmessg: "Keep moving forward all the time",
+      twitterHandle: "@Eren00",
+      time: "2h",
+      date: DateTime.now(),
       comments: 23,
       isCommented: true,
       isLiked: true,
-      isReTweet: true,
-      loves: 77,
-      retweets: 99,
-    ), */
-
-    /* TweetModel(
-      username: " Kareem",
-      tweet: "Lorem ipsum dolor sit amet",
-      time: "7h",
-      twitterHandle: "@Kareem1",
+      isReTweet: false,
+      loves: 7,
+      retweets: 8,
     ),
-    TweetModel(
-        username: "Ahmed",
-        tweet: "Lorem ipsum dolor sit amet",
-        time: "3m",
-        twitterHandle: "@Ahmed28"),
-    TweetModel(
-        username: "Hassan",
-        tweet: "Lorem ipsum dolor sit amet",
-        time: "3m",
-        twitterHandle: "@Hassan212"),
-    TweetModel(
-        username: "Ahmed",
-        tweet: "Lorem ipsum dolor sit amet",
-        time: "3m",
-        twitterHandle: "@Ahmed28"),
-    TweetModel(
-        username: "Hassan",
-        tweet: "Lorem ipsum dolor sit amet",
-        time: "3m",
-        twitterHandle: "@Hassan212"),
-    TweetModel(
-      username: " Kareem",
-      tweet: "Lorem ipsum dolor sit amet",
-      time: "7h",
-      twitterHandle: "@Kareem1",
-    ),
-    TweetModel(
-        username: "Ahmed",
-        tweet: "Lorem ipsum dolor sit amet",
-        time: "3m",
-        twitterHandle: "@Ahmed28"),
-    TweetModel(
-      username: " Kareem",
-      tweet: "Lorem ipsum dolor sit amet",
-      time: "7h",
-      twitterHandle: "@Kareem1",
-    ),
-    TweetModel(
-        username: "Ahmed",
-        tweet: "Lorem ipsum dolor sit amet",
-        time: "3m",
-        twitterHandle: "@Ahmed28"),
-    TweetModel(
-        username: "Hassan",
-        tweet: "Lorem ipsum dolor sit amet",
-        time: "3m",
-        twitterHandle: "@Hassan212"),
-    TweetModel(
-        username: "Ahmed",
-        tweet: "Lorem ipsum dolor sit amet",
-        time: "3m",
-        twitterHandle: "@Ahmed28"),
-    TweetModel(
-        username: "Hassan",
-        tweet: "Lorem ipsum dolor sit amet",
-        time: "3m",
-        twitterHandle: "@Hassan212"), */
   ];
 
 /*   @override
@@ -258,10 +206,10 @@ class _TweetBoxWidgetyState extends State<TweetBoxWidgety> {
                               "${tweetaya.time}",
                               style: TextStyle(fontSize: 17),
                             ),
-                            Text(
+                            /* Text(
                               "  ${tweetaya.date}",
                               style: TextStyle(fontSize: 10),
-                            ),
+                            ), */
                           ],
                         ),
                       ),
@@ -277,21 +225,26 @@ class _TweetBoxWidgetyState extends State<TweetBoxWidgety> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          Container(
-                            margin: EdgeInsets.all(8),
-                            child: Text.rich(
-                              TextSpan(
-                                children: [
-                                  WidgetSpan(
-                                    child: FaIcon(
-                                      FontAwesomeIcons.comment,
-                                      size: 17,
+                          InkWell(
+                            child: Container(
+                              margin: EdgeInsets.all(8),
+                              child: Text.rich(
+                                TextSpan(
+                                  children: [
+                                    WidgetSpan(
+                                      child: FaIcon(
+                                        FontAwesomeIcons.comment,
+                                        size: 17,
+                                      ),
                                     ),
-                                  ),
-                                  TextSpan(text: "  $comments"),
-                                ],
+                                    TextSpan(text: "  $comments"),
+                                  ],
+                                ),
                               ),
                             ),
+                            onTap: () {
+                              addComment();
+                            },
                           ),
                           InkWell(
                             child: Container(
@@ -309,13 +262,7 @@ class _TweetBoxWidgetyState extends State<TweetBoxWidgety> {
                                                 FontAwesomeIcons.retweet,
                                                 size: 17,
                                                 //color: Colors.green,
-                                              )
-
-                                        /* FaIcon(
-                                              FontAwesomeIcons.retweet,
-                                              size: 17,
-                                            ), */
-                                        ),
+                                              )),
                                     TextSpan(
                                       text: '  ${tweetaya.retweets.toString()}',
                                     ),
@@ -382,6 +329,26 @@ class _TweetBoxWidgetyState extends State<TweetBoxWidgety> {
 
   @override
   Widget build(BuildContext context) {
-    return tweetBoxWidget(Tweets, true, () {}, 30);
+    return tweetBoxWidget(Tweets, true, () {}, 0);
   }
+
+  Future addComment() => showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: Text(
+            'Your comment',
+          ),
+          content: TextField(
+            decoration: InputDecoration(
+              hintText: "Enter your comment",
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {},
+              child: Text('submit'),
+            ),
+          ],
+        ),
+      );
 }

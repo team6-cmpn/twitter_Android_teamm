@@ -101,6 +101,7 @@ class LogInScreen2 extends StatelessWidget {
                     Form(
                       key: formKey,
                       child: TextFieldContainer(
+                        obs: false,
                         size: size,
                         titleText: '  Phone, email, or username',
                         passedOnChanged: (value) {},

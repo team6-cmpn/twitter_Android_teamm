@@ -43,7 +43,7 @@ class BodyForLoginScreen extends StatelessWidget {
           ),
           GoogleRoundedButton(
             passedText: 'Sign in with Google',
-            textColor: Colors.black,
+
             pressed: () {
               //final provider = Provider.of<GoogleSignInProvider>(context, listen: false);
               final provider =
@@ -63,24 +63,24 @@ class BodyForLoginScreen extends StatelessWidget {
             roundedPassedColor: Colors.grey,
             //highlightPassedColor: Colors.grey,
           ),
-          RoundedButton(
-            passedText: 'Sign in with Apple',
-            textColor: Colors.black,
-            pressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) {
-                    return TwitterHomePage();
-                  },
-                ),
-              );
-            },
-            colorPassed: Colors.white,
-            marginValue: 3,
-            roundedpassedcolor: Colors.grey[700],
-            highlightPassedColor: Colors.grey,
-          ),
+          // RoundedButton(
+          //   passedText: 'Sign in with Apple',
+          //   textColor: Colors.black,
+          //   pressed: () {
+          //     Navigator.push(
+          //       context,
+          //       MaterialPageRoute(
+          //         builder: (context) {
+          //           return TwitterHomePage();
+          //         },
+          //       ),
+          //     );
+          //   },
+          //   colorPassed: Colors.white,
+          //   marginValue: 3,
+          //   roundedpassedcolor: Colors.grey[700],
+          //   highlightPassedColor: Colors.grey,
+          // ),
           /* Container( //Or_divider_container_me
             padding: EdgeInsets.all(5),
             width: size.width * 0.8,
@@ -119,11 +119,23 @@ class BodyForLoginScreen extends StatelessWidget {
           OrDivider(),
           Form(
             key: formKey,
-            child: TextFieldContainer(
-              size: size,
-              titleText: '  Email',
-              passedOnChanged: (value) {},
-              validator: (value) => emailValidator.validate(value),
+            child: Column(
+              children: [
+                TextFieldContainer(
+                  obs: false,
+                  size: size,
+                  titleText: '  Email',
+                  passedOnChanged: (value) {},
+                  validator: (value) => emailValidator.validate(value),
+                ),
+                TextFieldContainer(
+                  obs: true,
+                  size: size,
+                  titleText: '  password',
+                  passedOnChanged: (value) {},
+                  //validator: (value) => emailValidator.validate(value),
+                ),
+              ],
             ),
           ),
           RoundedButton(
