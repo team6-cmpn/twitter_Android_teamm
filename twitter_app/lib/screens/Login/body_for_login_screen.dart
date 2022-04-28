@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:twitter_app/components/google_sign_in.dart';
 import 'package:twitter_app/components/widgets/customnavbar.dart';
+import 'package:twitter_app/components/widgets/navigationbar.dart';
 
 import 'package:twitter_app/screens/home/Timeline.dart';
 /* import 'package:twitter_app/unused/body_for_home_page_screen.dart';
@@ -148,7 +149,7 @@ class BodyForLoginScreen extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => MaterialYou(),
+                      builder: (context) => CustomNavBar(),
                     ),
                   ),
                 }

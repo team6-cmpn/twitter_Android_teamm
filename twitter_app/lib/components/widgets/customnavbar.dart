@@ -4,13 +4,6 @@ import '../../screens/Settings/notificationspage.dart';
 import '../../screens/Settings/settingspage.dart';
 import '../../screens/home/Timeline.dart';
 
-const TextStyle _textStyle = TextStyle(
-  fontSize: 40,
-  fontWeight: FontWeight.bold,
-  letterSpacing: 2,
-  fontStyle: FontStyle.italic,
-);
-
 class MaterialYou extends StatefulWidget {
   const MaterialYou({Key key}) : super(key: key);
 
