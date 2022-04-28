@@ -23,11 +23,12 @@ class _SettingsPageState extends State<SettingsPage> {
         appBar: AppBar(
           toolbarHeight: 50,
           leading: IconButton(
-            icon: Icon(Icons.arrow_back, color: Colors.black),
-            onPressed: () => Navigator.push(context,
-                MaterialPageRoute(builder: (context) => TimelinePage())),
+            icon: Icon(
+              Icons.arrow_back,
+            ),
+            onPressed: () => Navigator.pop(context),
           ),
-          backgroundColor: Colors.white,
+          backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
           elevation: 3,
           centerTitle: false,
           title: Column(
@@ -36,12 +37,11 @@ class _SettingsPageState extends State<SettingsPage> {
             children: [
               Text(
                 "Settings",
-                style: TextStyle(color: Colors.black, fontSize: 20.0),
+                style: TextStyle(fontSize: 20.0),
               ),
               Text(
                 "@Username",
-                style: TextStyle(
-                    color: Colors.black.withOpacity(0.5), fontSize: 15.0),
+                style: TextStyle(fontSize: 15.0),
               )
             ],
           ),
@@ -59,10 +59,8 @@ class _SettingsPageState extends State<SettingsPage> {
                     icon: Icon(
                       Icons.search,
                       size: 24.0,
-                      color: Colors.black.withOpacity(0.3),
                     ),
-                    label: Text('Search Settings',
-                        style: TextStyle(color: Colors.black.withOpacity(0.5))),
+                    label: Text('Search Settings', style: TextStyle()),
                     onPressed: () => {
                       Navigator.push(
                         context,
@@ -97,27 +95,6 @@ class _SettingsPageState extends State<SettingsPage> {
                         context,
                         MaterialPageRoute(
                             builder: (context) => YourAccountPage())),
-                  ),
-                  ListTile(
-                    leading: Icon(
-                      Icons.lock,
-                      size: 30,
-                    ),
-                    title: Text('Security and account acess'),
-                    subtitle: Text('Manage your account"s security'),
-                    onTap: () => {},
-                  ),
-                  ListTile(
-                    minVerticalPadding: 20,
-                    leading: Icon(
-                      Icons.shield,
-                      size: 30,
-                    ),
-                    title: Text('Privacy and safety'),
-                    subtitle: Text(
-                        'Manage what information you see and share on twitter'),
-                    onTap: () => Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => TestPage())),
                   ),
                   ListTile(
                     leading: Icon(

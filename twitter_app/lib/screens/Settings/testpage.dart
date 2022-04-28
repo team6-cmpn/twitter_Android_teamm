@@ -14,9 +14,11 @@ class _TestPageState extends State<TestPage> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.white,
+          backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
           leading: IconButton(
-            icon: Icon(Icons.arrow_back, color: Colors.black),
+            icon: Icon(
+              Icons.arrow_back,
+            ),
             onPressed: () => {Navigator.of(context).pop()},
           ),
         ),

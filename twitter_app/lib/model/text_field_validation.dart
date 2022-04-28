@@ -2,18 +2,6 @@
 
 import 'package:flutter/material.dart';
 
-/* class NameFieldValidator {
-  NameFieldValidator(String? value);
-
-  static String? validate(String value) {
-    if (value.isEmpty || !RegExp(r'^[a-z A-Z]').hasMatch(value)) {
-      return "Enter correct Name";
-    } else {
-      return null;
-    }
-  }
-} */
-
 class emailValidator {
   emailValidator(String value);
 

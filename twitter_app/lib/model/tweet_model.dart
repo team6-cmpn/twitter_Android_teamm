@@ -19,7 +19,7 @@ class TweetModel {
     @required this.username,
     @required this.tweetmessg,
     this.time,
-    @required this.date,
+    this.date,
     @required this.twitterHandle,
     @required this.isCommented,
     @required this.isLiked,

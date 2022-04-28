@@ -18,31 +18,30 @@ class AccountInfoPageState extends State<AccountInfoPage> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(50.0),
-        child: AppBar(
-          leading: IconButton(
-            icon: Icon(Icons.arrow_back, color: Colors.black),
-            onPressed: () => {Navigator.of(context).pop()},
+      appBar: AppBar(
+        toolbarHeight: 70,
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back,
           ),
-          backgroundColor: Colors.white,
-          elevation: 1,
-          centerTitle: false,
-          title: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "Account information",
-                style: TextStyle(color: Colors.black, fontSize: 20.0),
-              ),
-              Text(
-                "@Username",
-                style: TextStyle(
-                    color: Colors.black.withOpacity(0.5), fontSize: 15.0),
-              )
-            ],
-          ),
+          onPressed: () => {Navigator.of(context).pop()},
+        ),
+        backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
+        elevation: 1,
+        centerTitle: false,
+        title: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "Account information",
+              style: TextStyle(fontSize: 20.0),
+            ),
+            Text(
+              "@Username",
+              style: TextStyle(fontSize: 15.0),
+            )
+          ],
         ),
       ),
       body: Container(

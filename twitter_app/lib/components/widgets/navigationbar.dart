@@ -1,41 +1,71 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
-class CustomNavigationBar extends StatefulWidget {
-  const CustomNavigationBar({Key key}) : super(key: key);
+import '../../screens/Settings/notificationspage.dart';
+import '../../screens/Settings/settingspage.dart';
+import '../../screens/home/Timeline.dart';
 
-  @override
-  State<CustomNavigationBar> createState() => _CustomNavigationBarState();
+void main() {
+  runApp(CustomNavBar());
 }
 
-class _CustomNavigationBarState extends State<CustomNavigationBar> {
+class CustomNavBar extends StatefulWidget {
+  static final title = 'salomon_bottom_bar';
+
+  @override
+  _CustomNavBarState createState() => _CustomNavBarState();
+}
+
+class _CustomNavBarState extends State<CustomNavBar> {
+  var _currentIndex = 0;
+
+  List<Widget> pages = [
+    TimelinePage(),
+    NotificationsPage(),
+    SettingsPage(),
+    Text("Profile"),
+  ];
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: BottomNavigationBar(
-        //backgroundColor: Colors.indigo,
-        fixedColor: Colors.black,
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home, color: Colors.black),
-            label: 'News Feed',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.search, color: Colors.black),
-            label: 'Search',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.notifications, color: Colors.black),
-            label: 'Notifications',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person, color: Colors.black),
-            label: 'Profile',
-          ),
-        ],
+    return SafeArea(
+      child: Scaffold(
+        body: Center(
+          child: pages[_currentIndex],
+        ),
+        bottomNavigationBar: SalomonBottomBar(
+          currentIndex: _currentIndex,
+          onTap: (i) => setState(() => _currentIndex = i),
+          items: [
+            /// Home
+            SalomonBottomBarItem(
+              icon: Icon(Icons.home),
+              title: Text("Home"),
+              selectedColor: Colors.blueAccent,
+            ),
+
+            /// Likes
+            SalomonBottomBarItem(
+              icon: Icon(Icons.notifications),
+              title: Text("Notifications"),
+              selectedColor: Colors.blueAccent,
+            ),
+
+            /// Search
+            SalomonBottomBarItem(
+              icon: Icon(Icons.settings),
+              title: Text("Settings"),
+              selectedColor: Colors.blueAccent,
+            ),
+
+            /// Profile
+            SalomonBottomBarItem(
+              icon: Icon(Icons.person),
+              title: Text("Profile"),
+              selectedColor: Colors.blueAccent,
+            ),
+          ],
+        ),
       ),
     );
   }

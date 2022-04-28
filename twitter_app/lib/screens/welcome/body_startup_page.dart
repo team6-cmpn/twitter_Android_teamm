@@ -156,7 +156,7 @@ class BodyStartUpPage extends StatelessWidget {
               style: TextStyle(
                 fontSize: 10,
                 //fontWeight: FontWeight.bold,
-                color: Colors.black,
+                
                 height: 7,
               ),
             ), */
@@ -180,7 +180,7 @@ class BodyStartUpPage extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => LogInScreen2(),
+                    builder: (context) => LoginScreen(),
                   ),
                 ),
               },

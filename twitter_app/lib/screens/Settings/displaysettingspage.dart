@@ -21,10 +21,12 @@ class _DisplaySettingsPageState extends State<DisplaySettingsPage> {
         appBar: AppBar(
           toolbarHeight: 50,
           leading: IconButton(
-            icon: Icon(Icons.arrow_back, color: Colors.black),
+            icon: Icon(
+              Icons.arrow_back,
+            ),
             onPressed: () => Navigator.of(context).pop(),
           ),
-          backgroundColor: Colors.white,
+          backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
           elevation: 1,
           centerTitle: false,
           title: Column(
@@ -33,12 +35,11 @@ class _DisplaySettingsPageState extends State<DisplaySettingsPage> {
             children: [
               Text(
                 "Display settings",
-                style: TextStyle(color: Colors.black, fontSize: 20.0),
+                style: TextStyle(fontSize: 20.0),
               ),
               Text(
                 "@Username",
-                style: TextStyle(
-                    color: Colors.black.withOpacity(0.5), fontSize: 15.0),
+                style: TextStyle(fontSize: 15.0),
               )
             ],
           ),
@@ -54,26 +55,18 @@ class _DisplaySettingsPageState extends State<DisplaySettingsPage> {
                   SizedBox(
                     child: Text(
                       "Dark Mode",
-                      style: TextStyle(color: Colors.black, fontSize: 20.0),
+                      style: TextStyle(fontSize: 20.0),
                     ),
                   ),
                   Text(
                     "In Devolopment",
-                    style: TextStyle(
-                        color: Colors.black.withOpacity(0.5), fontSize: 15.0),
+                    style: TextStyle(fontSize: 15.0),
                   )
                 ],
               ),
-
-              //        SizedBox(
-              //          width: 180,
-              //        ),
-              //
-              //
-              //    ),
-              // Row()
             ),
-            changetheme("Dark Theme"),
+
+            // changetheme("Dark Theme"),
             //Switch(value: null, onChanged: null),
             //Container(height: 50, width: 50, child: ChangeThemeButtonWidget()),
           ],

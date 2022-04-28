@@ -10,17 +10,18 @@ class TextFieldContainer extends StatelessWidget {
   //final passwordController = TextEditingController();
   final ValueChanged<String> passedOnChanged;
   final Function TapeddFunction;
-  TextFieldContainer(
-      {Key key,
-      this.titleText,
-      this.passedOnChanged,
-      this.TapeddFunction,
-      this.sizePassed,
-      this.size,
-      this.validator
-      //this.emailController
-      })
-      : super(key: key);
+  bool obs;
+  TextFieldContainer({
+    Key key,
+    this.titleText,
+    this.passedOnChanged,
+    this.TapeddFunction,
+    this.sizePassed,
+    this.size,
+    this.validator,
+    this.obs,
+    //this.emailController
+  }) : super(key: key);
 
   final Size size;
 
@@ -36,6 +37,7 @@ class TextFieldContainer extends StatelessWidget {
           ),
         ),
         child: TextFormField(
+          obscureText: obs,
           validator: validator,
           onTap: () => TapeddFunction,
 

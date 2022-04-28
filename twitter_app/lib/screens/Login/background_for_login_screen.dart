@@ -23,7 +23,7 @@ class BackGroundForLoginScreen extends StatelessWidget {
               top: 25,
               //left: size.width * 0.4,
               child: Image.asset(
-                'assests/images/applogov2.png',
+                'assests/images/FinalLogo.png',
                 width: size.width * 0.11,
               ),
             ),

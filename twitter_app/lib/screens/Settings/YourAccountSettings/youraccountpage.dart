@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:sizer/sizer.dart';
+import 'deactivateaccpage.dart';
 
 import '../../home/Timeline.dart';
 import '../displaysettingspage.dart';
@@ -8,6 +9,7 @@ import '../notificationsettings.dart';
 import '../searchsettingspage.dart';
 import '../testpage.dart';
 import 'accountinfopage.dart';
+import 'changepasspage.dart';
 
 class YourAccountPage extends StatefulWidget {
   @override
@@ -19,48 +21,52 @@ class _YourAccountPageState extends State<YourAccountPage> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(50.0),
-        child: AppBar(
-          leading: IconButton(
-            icon: Icon(Icons.arrow_back, color: Colors.black),
-            onPressed: () => {Navigator.of(context).pop()},
+      appBar: AppBar(
+        toolbarHeight: 70,
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back,
           ),
-          backgroundColor: Colors.white,
-          elevation: 1,
-          centerTitle: false,
-          title: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "Your Account",
-                style: TextStyle(color: Colors.black, fontSize: 20.0),
-              ),
-              Text(
-                "@Username",
-                style: TextStyle(
-                    color: Colors.black.withOpacity(0.5), fontSize: 15.0),
-              )
-            ],
-          ),
+          onPressed: () => {Navigator.of(context).pop()},
+        ),
+        backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
+        elevation: 1,
+        centerTitle: false,
+        title: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "Your Account",
+              style: TextStyle(fontSize: 20.0),
+            ),
+            Text(
+              "@Username",
+              style: TextStyle(fontSize: 15.0),
+            )
+          ],
         ),
       ),
       body: Container(
         padding: EdgeInsets.symmetric(horizontal: 0),
         child: Column(
           children: [
+            SizedBox(
+              height: 20,
+            ),
             Container(
               width: 400,
               child: Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  "See information about your account, change your password, or learn about your account deactivation",
+                  "See information about your account, change your password, or learn about your account deactivation.",
                   textAlign: TextAlign.start,
-                  style: TextStyle(
-                      color: Colors.black.withOpacity(0.5), fontSize: 15.0),
+                  style: TextStyle(fontSize: 15.0),
                 ),
               ),
+            ),
+            SizedBox(
+              height: 20,
             ),
             Expanded(
               child: ListView(
@@ -87,7 +93,12 @@ class _YourAccountPageState extends State<YourAccountPage> {
                     ),
                     title: Text('Change your password'),
                     subtitle: Text('Change your password at anytime'),
-                    onTap: () => {},
+                    onTap: () => {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ResetPasswordPage())),
+                    },
                   ),
                   ListTile(
                     minVerticalPadding: 20,
@@ -98,8 +109,10 @@ class _YourAccountPageState extends State<YourAccountPage> {
                     title: Text('Deactivate Account'),
                     subtitle:
                         Text('Find out how you can deactivate your account'),
-                    onTap: () => Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => TestPage())),
+                    onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => DeactivateAccountPage())),
                   ),
                 ],
               ),

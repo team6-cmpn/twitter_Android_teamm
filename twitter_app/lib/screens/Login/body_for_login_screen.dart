@@ -2,7 +2,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:twitter_app/components/google_sign_in.dart';
-import 'package:twitter_app/components/icon.dart';
+import 'package:twitter_app/components/widgets/customnavbar.dart';
+import 'package:twitter_app/components/widgets/navigationbar.dart';
+
 import 'package:twitter_app/screens/home/Timeline.dart';
 /* import 'package:twitter_app/unused/body_for_home_page_screen.dart';
 import 'package:twitter_app/unused/logged_in_widget.dart'; */
@@ -43,7 +45,7 @@ class BodyForLoginScreen extends StatelessWidget {
           ),
           GoogleRoundedButton(
             passedText: 'Sign in with Google',
-            textColor: Colors.black,
+
             pressed: () {
               //final provider = Provider.of<GoogleSignInProvider>(context, listen: false);
               final provider =
@@ -63,24 +65,24 @@ class BodyForLoginScreen extends StatelessWidget {
             roundedPassedColor: Colors.grey,
             //highlightPassedColor: Colors.grey,
           ),
-          RoundedButton(
-            passedText: 'Sign in with Apple',
-            textColor: Colors.black,
-            pressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) {
-                    return TwitterHomePage();
-                  },
-                ),
-              );
-            },
-            colorPassed: Colors.white,
-            marginValue: 3,
-            roundedpassedcolor: Colors.grey[700],
-            highlightPassedColor: Colors.grey,
-          ),
+          // RoundedButton(
+          //   passedText: 'Sign in with Apple',
+          //   textColor: Colors.black,
+          //   pressed: () {
+          //     Navigator.push(
+          //       context,
+          //       MaterialPageRoute(
+          //         builder: (context) {
+          //           return TwitterHomePage();
+          //         },
+          //       ),
+          //     );
+          //   },
+          //   colorPassed: Colors.white,
+          //   marginValue: 3,
+          //   roundedpassedcolor: Colors.grey[700],
+          //   highlightPassedColor: Colors.grey,
+          // ),
           /* Container( //Or_divider_container_me
             padding: EdgeInsets.all(5),
             width: size.width * 0.8,
@@ -100,7 +102,7 @@ class BodyForLoginScreen extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 15,
                     //fontWeight: FontWeight.w100,
-                    color: Colors.black,
+                    
                     //height: 1,
                   ),
                 ),
@@ -119,11 +121,23 @@ class BodyForLoginScreen extends StatelessWidget {
           OrDivider(),
           Form(
             key: formKey,
-            child: TextFieldContainer(
-              size: size,
-              titleText: '  Phone, email, or username',
-              passedOnChanged: (value) {},
-              validator: (value) => emailValidator.validate(value),
+            child: Column(
+              children: [
+                TextFieldContainer(
+                  obs: false,
+                  size: size,
+                  titleText: '  Email',
+                  passedOnChanged: (value) {},
+                  validator: (value) => emailValidator.validate(value),
+                ),
+                TextFieldContainer(
+                  obs: true,
+                  size: size,
+                  titleText: '  password',
+                  passedOnChanged: (value) {},
+                  //validator: (value) => emailValidator.validate(value),
+                ),
+              ],
             ),
           ),
           RoundedButton(
@@ -135,7 +149,7 @@ class BodyForLoginScreen extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => TimelinePage(),
+                      builder: (context) => CustomNavBar(),
                     ),
                   ),
                 }

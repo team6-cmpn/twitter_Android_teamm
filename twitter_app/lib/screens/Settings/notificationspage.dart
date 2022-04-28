@@ -25,7 +25,9 @@ class _NotificationsPageState extends State<NotificationsPage> {
           elevation: 1,
           actions: <Widget>[
             IconButton(
-              icon: Icon(Icons.settings, color: Colors.black),
+              icon: Icon(
+                Icons.settings,
+              ),
               onPressed: () => Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -34,13 +36,23 @@ class _NotificationsPageState extends State<NotificationsPage> {
             ),
           ],
           centerTitle: false,
-          title: Text("Notifications", style: TextStyle(color: Colors.black)),
-          leading: IconButton(
-              onPressed: () {
-                scaffoldkey.currentState?.openDrawer();
-              },
-              icon: Icon(Icons.person, color: Colors.black)),
-          backgroundColor: Colors.white,
+          title: Text(
+            "Notifications",
+          ),
+          leading: InkWell(
+            child: Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: CircleAvatar(
+                backgroundImage: NetworkImage(
+                    'https://previews.123rf.com/images/koblizeek/koblizeek2001/koblizeek200100050/138262629-usuario-miembro-de-perfil-de-icono-de-hombre-vector-de-s%C3%ADmbolo-perconal-sobre-fondo-blanco-aislado-.jpg'),
+                radius: 16,
+              ),
+            ),
+            onTap: () {
+              scaffoldkey.currentState?.openDrawer();
+            },
+          ),
+          backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
         ),
       ),
     );

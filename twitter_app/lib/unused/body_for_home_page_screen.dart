@@ -29,11 +29,13 @@ class BodyForHomePageScreen extends StatelessWidget {
             ),
           ),
           TextFieldContainer(
+            obs: false,
             size: size,
             titleText: '  Name',
             passedOnChanged: (value) {},
           ),
           TextFieldContainer(
+            obs: false,
             size: size,
             titleText: '  Email',
             passedOnChanged: (value) {},
@@ -80,6 +82,7 @@ class BodyForHomePageScreen extends StatelessWidget {
             height: 10,
           ),
           TextFieldContainer(
+            obs: false,
             size: size,
             titleText: '  Date of birth',
             passedOnChanged: (value) {

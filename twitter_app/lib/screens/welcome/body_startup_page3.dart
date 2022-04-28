@@ -44,18 +44,14 @@ class _BodyStartUpPage3State extends State<BodyStartUpPage3> {
         children: [
           Text(
             'Happening now',
-            style: TextStyle(
-                fontSize: 50,
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
-                height: 4),
+            style:
+                TextStyle(fontSize: 50, fontWeight: FontWeight.bold, height: 4),
           ),
           Text(
             'Join Twitter today.',
             style: TextStyle(
               fontSize: 25,
               fontWeight: FontWeight.bold,
-              color: Colors.black,
               height: 1,
             ),
           ),
@@ -126,7 +122,7 @@ class _BodyStartUpPage3State extends State<BodyStartUpPage3> {
                   style: TextStyle(
                     fontSize: 15,
                     //fontWeight: FontWeight.w100,
-                    color: Colors.black,
+
                     //height: 1,
                   ),
                 ),
@@ -165,7 +161,7 @@ class _BodyStartUpPage3State extends State<BodyStartUpPage3> {
             style: TextStyle(
               fontSize: 10,
               //fontWeight: FontWeight.bold,
-              color: Colors.black,
+              
               height: 7,
             ),
           ), */
@@ -177,7 +173,6 @@ class _BodyStartUpPage3State extends State<BodyStartUpPage3> {
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
-              color: Colors.black,
               height: 3,
             ),
           ),
@@ -244,7 +239,7 @@ class _BodyStartUpPage3State extends State<BodyStartUpPage3> {
             style: TextStyle(
                 fontSize: 50,
                 fontWeight: FontWeight.bold,
-                color: Colors.black,
+                
                 height: 4),
           ),
           Text(
@@ -252,7 +247,7 @@ class _BodyStartUpPage3State extends State<BodyStartUpPage3> {
             style: TextStyle(
               fontSize: 25,
               fontWeight: FontWeight.bold,
-              color: Colors.black,
+              
               height: 1,
             ),
           ),
@@ -323,7 +318,7 @@ class _BodyStartUpPage3State extends State<BodyStartUpPage3> {
                   style: TextStyle(
                     fontSize: 15,
                     //fontWeight: FontWeight.w100,
-                    color: Colors.black,
+                    
                     //height: 1,
                   ),
                 ),
@@ -362,7 +357,7 @@ class _BodyStartUpPage3State extends State<BodyStartUpPage3> {
             style: TextStyle(
               fontSize: 10,
               //fontWeight: FontWeight.bold,
-              color: Colors.black,
+              
               height: 7,
             ),
           ), */
@@ -374,7 +369,7 @@ class _BodyStartUpPage3State extends State<BodyStartUpPage3> {
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
-              color: Colors.black,
+              
               height: 3,
             ),
           ),

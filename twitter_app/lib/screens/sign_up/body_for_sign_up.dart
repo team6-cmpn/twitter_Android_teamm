@@ -5,6 +5,7 @@ import 'package:twitter_app/screens/Login/background_for_login_screen.dart';
 import 'package:twitter_app/components/text_field_container.dart';
 
 import '../../components/rounded_button.dart';
+import '../../components/widgets/navigationbar.dart';
 import '../home/Timeline.dart';
 import '../../model/text_field_validation.dart';
 
@@ -35,12 +36,14 @@ class BodyForSignUpScreen extends StatelessWidget {
             child: Column(
               children: [
                 TextFieldContainer(
+                  obs: false,
                   validator: (value) => nameValidator.validate(value),
                   size: size,
                   titleText: '  Name',
                   passedOnChanged: (value) {},
                 ),
                 TextFieldContainer(
+                  obs: false,
                   validator: (value) => emailValidator.validate(value),
                   size: size,
                   titleText: '  Email',
@@ -91,6 +94,7 @@ class BodyForSignUpScreen extends StatelessWidget {
             height: 10,
           ),
           TextFieldContainer(
+            obs: false,
             size: size,
             titleText: '  Date of birth',
             passedOnChanged: (value) {
@@ -113,7 +117,7 @@ class BodyForSignUpScreen extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => TimelinePage(),
+                    builder: (context) => CustomNavBar(),
                   ),
                 );
               }

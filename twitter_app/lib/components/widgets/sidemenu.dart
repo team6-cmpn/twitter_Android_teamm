@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../screens/Settings/settingspage.dart';
 import '../../screens/home/Timeline.dart';
+import 'navigationbar.dart';
 
 class SideMenu extends StatefulWidget {
   const SideMenu({Key key}) : super(key: key);
@@ -44,9 +45,9 @@ class _SideMenuState extends State<SideMenu> {
                         Text(
                           'Mr.Ahmed hassan',
                           style: TextStyle(
+                            color: Colors.black,
                             fontSize: 16,
                             fontWeight: FontWeight.w800,
-                            color: Colors.black,
                           ),
                         ),
                         SizedBox(
@@ -66,7 +67,9 @@ class _SideMenuState extends State<SideMenu> {
                           children: [
                             Text(
                               '31 ',
-                              style: TextStyle(fontWeight: FontWeight.bold),
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold),
                             ),
                             Text(
                               'Following',
@@ -77,7 +80,9 @@ class _SideMenuState extends State<SideMenu> {
                             ),
                             Text(
                               '2 ',
-                              style: TextStyle(fontWeight: FontWeight.bold),
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold),
                             ),
                             Text(
                               'Followers',
@@ -93,7 +98,7 @@ class _SideMenuState extends State<SideMenu> {
                   leading: Icon(Icons.home),
                   title: Text('Home'),
                   onTap: () => Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => TimelinePage())),
+                      MaterialPageRoute(builder: (context) => CustomNavBar())),
                 ),
                 ListTile(
                   leading: Icon(Icons.person),

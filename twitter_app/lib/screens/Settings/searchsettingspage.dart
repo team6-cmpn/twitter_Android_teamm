@@ -18,19 +18,22 @@ class _SearchSettingsPageState extends State<SearchSettingsPage> {
           alignment: Alignment.topCenter,
           child: Text(
             "Try searching for password reset, notifications, etc",
-            style:
-                TextStyle(fontSize: 15, color: Colors.black.withOpacity(0.6)),
+            style: TextStyle(
+              fontSize: 15,
+            ),
           ),
         ),
         appBar: AppBar(
           toolbarHeight: 50,
           elevation: 1,
           leading: IconButton(
-            icon: Icon(Icons.arrow_back, color: Colors.black),
+            icon: Icon(
+              Icons.arrow_back,
+            ),
             onPressed: () => Navigator.of(context).pop(),
           ),
           centerTitle: true,
-          backgroundColor: Colors.white,
+          backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
           title: TextFormField(
             decoration: const InputDecoration(
               border: UnderlineInputBorder(),
@@ -38,7 +41,7 @@ class _SearchSettingsPageState extends State<SearchSettingsPage> {
             ),
           ),
         ),
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
       ),
     );
   }
