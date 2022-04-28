@@ -35,8 +35,6 @@ class _TimelinePageState extends State<TimelinePage> {
 
   bool scaffoldKey = false;
 
-  int _currentIndex = 0;
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(

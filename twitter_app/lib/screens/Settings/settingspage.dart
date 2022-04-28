@@ -26,8 +26,7 @@ class _SettingsPageState extends State<SettingsPage> {
             icon: Icon(
               Icons.arrow_back,
             ),
-            onPressed: () => Navigator.push(context,
-                MaterialPageRoute(builder: (context) => TimelinePage())),
+            onPressed: () => Navigator.pop(context),
           ),
           backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
           elevation: 3,

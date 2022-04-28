@@ -39,13 +39,19 @@ class _NotificationsPageState extends State<NotificationsPage> {
           title: Text(
             "Notifications",
           ),
-          leading: IconButton(
-              onPressed: () {
-                scaffoldkey.currentState?.openDrawer();
-              },
-              icon: Icon(
-                Icons.person,
-              )),
+          leading: InkWell(
+            child: Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: CircleAvatar(
+                backgroundImage: NetworkImage(
+                    'https://previews.123rf.com/images/koblizeek/koblizeek2001/koblizeek200100050/138262629-usuario-miembro-de-perfil-de-icono-de-hombre-vector-de-s%C3%ADmbolo-perconal-sobre-fondo-blanco-aislado-.jpg'),
+                radius: 16,
+              ),
+            ),
+            onTap: () {
+              scaffoldkey.currentState?.openDrawer();
+            },
+          ),
           backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
         ),
       ),

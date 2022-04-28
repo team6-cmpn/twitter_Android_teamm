@@ -8,28 +8,26 @@ class DeactivateAccountPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: PreferredSize(
-          preferredSize: Size.fromHeight(50.0),
-          child: AppBar(
-            leading: IconButton(
-              icon: Icon(
-                Icons.arrow_back,
+        appBar: AppBar(
+          toolbarHeight: 70,
+          leading: IconButton(
+            icon: Icon(
+              Icons.arrow_back,
+            ),
+            onPressed: () => {Navigator.of(context).pop()},
+          ),
+          backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
+          elevation: 1,
+          centerTitle: false,
+          title: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "Deactivate your account",
+                style: TextStyle(fontSize: 20.0),
               ),
-              onPressed: () => {Navigator.of(context).pop()},
-            ),
-            backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
-            elevation: 1,
-            centerTitle: false,
-            title: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Deactivate your account",
-                  style: TextStyle(fontSize: 20.0),
-                ),
-              ],
-            ),
+            ],
           ),
         ),
         body: Container(

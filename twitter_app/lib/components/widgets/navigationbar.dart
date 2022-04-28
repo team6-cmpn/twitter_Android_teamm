@@ -47,7 +47,7 @@ class _CustomNavBarState extends State<CustomNavBar> {
             /// Likes
             SalomonBottomBarItem(
               icon: Icon(Icons.notifications),
-              title: Text("NOtifications"),
+              title: Text("Notifications"),
               selectedColor: Colors.blueAccent,
             ),
 

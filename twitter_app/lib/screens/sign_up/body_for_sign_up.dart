@@ -5,6 +5,7 @@ import 'package:twitter_app/screens/Login/background_for_login_screen.dart';
 import 'package:twitter_app/components/text_field_container.dart';
 
 import '../../components/rounded_button.dart';
+import '../../components/widgets/navigationbar.dart';
 import '../home/Timeline.dart';
 import '../../model/text_field_validation.dart';
 
@@ -116,7 +117,7 @@ class BodyForSignUpScreen extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => TimelinePage(),
+                    builder: (context) => CustomNavBar(),
                   ),
                 );
               }
