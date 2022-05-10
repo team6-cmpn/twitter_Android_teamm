@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
+import 'package:twitter_app/components/widgets/sidemenu.dart';
 
 import '../../screens/Settings/notificationspage.dart';
 import '../../screens/Settings/settingspage.dart';
@@ -33,6 +34,7 @@ class _CustomNavBarState extends State<CustomNavBar> {
         body: Center(
           child: pages[_currentIndex],
         ),
+        // drawer: SideMenu(),
         bottomNavigationBar: SalomonBottomBar(
           currentIndex: _currentIndex,
           onTap: (i) => setState(() => _currentIndex = i),

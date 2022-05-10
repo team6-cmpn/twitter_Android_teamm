@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'package:twitter_app/components/widgets/DarkMode/changetheme.dart';
 
-import '../../components/widgets/change_theme_button_widget.dart';
+import '../../components/widgets/DarkMode/change_theme_button_widget.dart';
 
 class DisplaySettingsPage extends StatefulWidget {
   DisplaySettingsPage({Key key}) : super(key: key);
