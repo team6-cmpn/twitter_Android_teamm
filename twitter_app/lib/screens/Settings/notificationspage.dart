@@ -16,43 +16,52 @@ class _NotificationsPageState extends State<NotificationsPage> {
   var scaffoldkey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        key: scaffoldkey,
-        drawer: SideMenu(),
-        appBar: AppBar(
-          toolbarHeight: 50,
-          elevation: 1,
-          actions: <Widget>[
-            IconButton(
-              icon: Icon(
-                Icons.settings,
+    return DefaultTabController(
+      length: 2,
+      child: SafeArea(
+        child: Scaffold(
+          key: scaffoldkey,
+          drawer: SideMenu(),
+          appBar: AppBar(
+            toolbarHeight: 50,
+            elevation: 1,
+            actions: <Widget>[
+              IconButton(
+                icon: Icon(
+                  Icons.settings,
+                ),
+                onPressed: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => NotificationSettingsPage()),
+                ),
               ),
-              onPressed: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => NotificationSettingsPage()),
-              ),
+            ],
+            centerTitle: false,
+            title: Text(
+              "Notifications",
             ),
-          ],
-          centerTitle: false,
-          title: Text(
-            "Notifications",
-          ),
-          leading: InkWell(
-            child: Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: CircleAvatar(
-                backgroundImage: NetworkImage(
-                    'https://previews.123rf.com/images/koblizeek/koblizeek2001/koblizeek200100050/138262629-usuario-miembro-de-perfil-de-icono-de-hombre-vector-de-s%C3%ADmbolo-perconal-sobre-fondo-blanco-aislado-.jpg'),
-                radius: 16,
+            leading: InkWell(
+              child: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: CircleAvatar(
+                  backgroundImage: NetworkImage(
+                      'https://previews.123rf.com/images/koblizeek/koblizeek2001/koblizeek200100050/138262629-usuario-miembro-de-perfil-de-icono-de-hombre-vector-de-s%C3%ADmbolo-perconal-sobre-fondo-blanco-aislado-.jpg'),
+                  radius: 16,
+                ),
               ),
+              onTap: () {
+                scaffoldkey.currentState?.openDrawer();
+              },
             ),
-            onTap: () {
-              scaffoldkey.currentState?.openDrawer();
-            },
+            backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
+            bottom: TabBar(
+              tabs: [
+                Tab(text: 'All'),
+                Tab(text: 'Likes'),
+              ],
+            ),
           ),
-          backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
         ),
       ),
     );
