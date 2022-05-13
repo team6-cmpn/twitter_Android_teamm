@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:twitter_app/screens/Settings/NotificationsPage/allnotifications.dart';
+import 'package:twitter_app/screens/Settings/NotificationsPage/likes.dart';
+import 'package:twitter_app/screens/Settings/searchsettingspage.dart';
 import '../../components/widgets/sidemenu.dart';
 
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
@@ -61,6 +64,12 @@ class _NotificationsPageState extends State<NotificationsPage> {
                 Tab(text: 'Likes'),
               ],
             ),
+          ),
+          body: TabBarView(
+            children: [
+              AllNotificationsPage(),
+              LikesNotificationsPage(),
+            ],
           ),
         ),
       ),
