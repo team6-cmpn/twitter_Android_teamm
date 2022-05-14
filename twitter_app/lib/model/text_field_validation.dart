@@ -5,9 +5,17 @@ import 'package:flutter/material.dart';
 class emailValidator {
   emailValidator(String value);
 
-  static String validate(String value) {
+  static String validate(String value)
+  /* {
     if (value.isEmpty ||
         !RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w]{2,4}').hasMatch(value)) {
+      return "Enter correct email";
+    } else {
+      return null;
+    }
+  } */
+  {
+    if (value.isEmpty || !RegExp(r'^[a-z A-Z 0-9 @ .]').hasMatch(value)) {
       return "Enter correct email";
     } else {
       return null;

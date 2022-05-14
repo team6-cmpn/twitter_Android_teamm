@@ -1,6 +1,8 @@
 // ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors, deprecated_member_use
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 import 'package:twitter_app/components/google_sign_in.dart';
 import 'package:twitter_app/components/widgets/customnavbar.dart';
 import 'package:twitter_app/components/widgets/navigationbar.dart';
@@ -20,12 +22,22 @@ import '../home/twitter_home_page.dart';
 import '../welcome/welcome_screen.dart';
 import 'background_for_login_screen.dart';
 
-class BodyForLoginScreen extends StatelessWidget {
+class BodyForLoginScreen extends StatefulWidget {
   BodyForLoginScreen({
     Key key,
   }) : super(key: key);
 
+  @override
+  State<BodyForLoginScreen> createState() => _BodyForLoginScreenState();
+}
+
+class _BodyForLoginScreenState extends State<BodyForLoginScreen> {
   final formKey = GlobalKey<FormState>();
+  final String token = '';
+  TextEditingController userController = new TextEditingController();
+
+  TextEditingController passwordController = new TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -129,12 +141,14 @@ class BodyForLoginScreen extends StatelessWidget {
                   titleText: '  Email',
                   passedOnChanged: (value) {},
                   validator: (value) => emailValidator.validate(value),
+                  nameController: userController,
                 ),
                 TextFieldContainer(
                   obs: true,
                   size: size,
                   titleText: '  password',
                   passedOnChanged: (value) {},
+                  nameController: passwordController,
                   //validator: (value) => emailValidator.validate(value),
                 ),
               ],
@@ -146,12 +160,14 @@ class BodyForLoginScreen extends StatelessWidget {
             pressed: () => {
               if (formKey.currentState.validate())
                 {
-                  Navigator.push(
+                  /* Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (context) => CustomNavBar(),
                     ),
-                  ),
+                  ), */
+
+                  SignIn(userController.text, passwordController.text, token),
                 }
             },
             colorPassed: Colors.black,
@@ -225,8 +241,42 @@ class BodyForLoginScreen extends StatelessWidget {
       ),
     );
   }
-}
 
+  SignIn(String email, String password, String token) async {
+    Map data = {'data': email, 'password': password};
+    //var jsonData = null;
+    Map mapResponse;
+    Map dataResponse;
+    var response = await http
+        .post(Uri.parse("http://twi-jay.me:8080/auth/signin"), body: data);
+    if (response.statusCode == 200) {
+      mapResponse = json.decode(response.body);
+      dataResponse = mapResponse;
+      token = dataResponse["accessToken"];
+      setState(
+        () {
+          //dataResponse = mapResponse["data"];
+          //dataResponse["role"].toString() == 'Admin'
+          print('nooooooooooo');
+          print(token);
+          Navigator.of(context).pushAndRemoveUntil(
+              MaterialPageRoute(
+                  builder: (BuildContext context) =>
+                      TimelinePage(token: token)),
+              (Route<dynamic> route) => false);
+          dataResponse = mapResponse;
+        },
+      );
+    } else if (response.statusCode == 400) {
+      print('bad request');
+    } else if (response.statusCode == 401) {
+      print('Unauthorized');
+    } else if (response.statusCode == 404) {
+      print('Not Found');
+    } else if (response.statusCode == 500) {
+      print('Internal Server Error');
+    }
+  }
 /* class TextFieldContainer extends StatelessWidget {
   final String titleText;
   final ValueChanged<String> passedOnChanged;
@@ -271,3 +321,5 @@ class BodyForLoginScreen extends StatelessWidget {
   }
 }
  */
+
+}
