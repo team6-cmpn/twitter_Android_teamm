@@ -6,7 +6,7 @@ class TextFieldContainer extends StatelessWidget {
   final String titleText;
   final double sizePassed;
   var validator;
-  final nameController = TextEditingController();
+  TextEditingController nameController = new TextEditingController();
   //final passwordController = TextEditingController();
   final ValueChanged<String> passedOnChanged;
   final Function TapeddFunction;
@@ -20,6 +20,7 @@ class TextFieldContainer extends StatelessWidget {
     this.size,
     this.validator,
     this.obs,
+    this.nameController,
     //this.emailController
   }) : super(key: key);
 

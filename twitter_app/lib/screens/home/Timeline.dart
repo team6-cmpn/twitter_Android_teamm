@@ -2,15 +2,13 @@
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:twitter_app/components/widgets/customnavbar.dart';
-import 'package:twitter_app/screens/Settings/settingspage.dart';
-
+//import 'package:twitter_app/components/widgets/customnavbar.dart';
+//import 'package:twitter_app/screens/Settings/settingspage.dart';
 import '../../components/greyLine_seperator.dart';
 import '../../components/widgets/sidemenu.dart';
 import '../Settings/notificationspage.dart';
-import 'twitter_drawer.dart';
-
-import '../../model/tweetBoxWidgety.dart';
+//import 'twitter_drawer.dart';
+//import '../../model/tweetBoxWidgety.dart';
 import '../../model/tweet_model.dart';
 // ignore: unused_import
 import '../../state/drawer_for_icon.dart';
@@ -23,7 +21,12 @@ const TextStyle _textStyle = TextStyle(
 );
 
 class TimelinePage extends StatefulWidget {
-  TimelinePage({Key key}) : super(key: key);
+  final String token;
+
+  TimelinePage({
+    Key key,
+    @required this.token,
+  }) : super(key: key);
 
   @override
   State<TimelinePage> createState() => _TimelinePageState(() {
@@ -47,6 +50,8 @@ class _TimelinePageState extends State<TimelinePage> {
 
   @override
   Widget build(BuildContext context) {
+    print(widget.token);
+    print('yayy2222222222');
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -536,13 +541,9 @@ class _TimelinePageState extends State<TimelinePage> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                left: 5, bottom: 5, top: 5),
-                            child: Text(
-                              tweetaya.tweetmessg,
-                              style: TextStyle(fontSize: 18),
-                            ),
+                          Text(
+                            tweetaya.tweetmessg,
+                            style: TextStyle(fontSize: 18),
                           ),
                         ],
                       ),
