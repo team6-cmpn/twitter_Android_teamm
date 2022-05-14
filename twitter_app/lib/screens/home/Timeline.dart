@@ -25,7 +25,7 @@ class TimelinePage extends StatefulWidget {
 
   TimelinePage({
     Key key,
-    @required this.token,
+    this.token,
   }) : super(key: key);
 
   @override

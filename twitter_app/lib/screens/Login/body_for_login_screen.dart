@@ -262,7 +262,7 @@ class _BodyForLoginScreenState extends State<BodyForLoginScreen> {
           Navigator.of(context).pushAndRemoveUntil(
               MaterialPageRoute(
                   builder: (BuildContext context) =>
-                      TimelinePage(token: token)),
+                      CustomNavBar(token: token)),
               (Route<dynamic> route) => false);
           dataResponse = mapResponse;
         },
