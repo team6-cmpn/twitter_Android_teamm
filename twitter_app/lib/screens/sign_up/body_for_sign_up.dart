@@ -1,171 +1,246 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
-import 'package:twitter_app/screens/Login/background_for_login_screen.dart';
-import 'package:twitter_app/components/text_field_container.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
+import '../Login/background_for_login_screen.dart';
+import '../../components/text_field_container.dart';
+
+import 'verification.dart';
 import '../../components/rounded_button.dart';
-import '../../components/widgets/navigationbar.dart';
 import '../home/Timeline.dart';
 import '../../model/text_field_validation.dart';
 
-class BodyForSignUpScreen extends StatelessWidget {
+class BodyForSignUpScreen extends StatefulWidget {
   BodyForSignUpScreen({
     Key key,
   }) : super(key: key);
 
+  @override
+  State<BodyForSignUpScreen> createState() => _BodyForSignUpScreenState();
+}
+
+class _BodyForSignUpScreenState extends State<BodyForSignUpScreen> {
   final formKey = GlobalKey<FormState>();
+
+  TextEditingController nameController = new TextEditingController();
+  TextEditingController userController = new TextEditingController();
+  TextEditingController emailController = new TextEditingController();
+  TextEditingController phoneController = new TextEditingController();
+  TextEditingController passwordController = new TextEditingController();
+  TextEditingController dateController = new TextEditingController();
+  String token;
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return BackGroundForLoginScreen(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'Create your account',
-            style: TextStyle(
-              fontSize: 28,
-              fontWeight: FontWeight.bold,
-              height: 5.5,
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Create your account',
+              style: TextStyle(
+                fontSize: 28,
+                fontWeight: FontWeight.bold,
+                height: 5.5,
+              ),
             ),
-          ),
-          Form(
-            key: formKey,
-            child: Column(
-              children: [
-                TextFieldContainer(
-                  obs: false,
-                  validator: (value) => nameValidator.validate(value),
-                  size: size,
-                  titleText: '  Name',
-                  passedOnChanged: (value) {},
-                ),
-                TextFieldContainer(
-                  obs: false,
-                  validator: (value) => emailValidator.validate(value),
-                  size: size,
-                  titleText: '  Email',
-                  passedOnChanged: (value) {},
-                ),
-              ],
-            ),
-          ),
-          SizedBox(
-            //height: size.height,
-            width: size.width * 0.9,
-            height: 70,
-          ),
-          Text(
-            'Date of birth',
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-              height: 1,
-            ),
-          ),
-          Text(
-            'This will not be shown publicly. Confirm your own age',
-            style: TextStyle(
-              fontSize: 14,
-              color: Colors.grey[800],
-              //fontWeight: FontWeight.bold,
-              //height: 5.5,
-            ),
-          ),
-          Text(
-            'even if this account is for a business, a pet, or     ',
-            style: TextStyle(
-              fontSize: 14,
-              color: Colors.grey[800],
-            ),
-          ),
-          Text(
-            'something else.',
-            style: TextStyle(
-              fontSize: 14,
-              color: Colors.grey[800],
-            ),
-          ),
-          SizedBox(
-            //height: size.height,
-            width: size.width * 0.9,
-            height: 10,
-          ),
-          TextFieldContainer(
-            obs: false,
-            size: size,
-            titleText: '  Date of birth',
-            passedOnChanged: (value) {
-              showDatePicker(
-                context: context,
-                initialDate: DateTime.now(),
-                firstDate: DateTime(2022),
-                lastDate: DateTime.now(),
-              );
-            },
-          ),
-          SizedBox(
-            height: size.height * 0.07,
-          ),
-          RoundedButton(
-            passedText: 'Next',
-            textColor: Colors.white,
-            pressed: () {
-              if (formKey.currentState.validate()) {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => CustomNavBar(),
+            Form(
+              key: formKey,
+              child: Column(
+                children: [
+                  TextFieldContainer(
+                    obs: false,
+                    validator: (value) => nameValidator.validate(value),
+                    size: size,
+                    titleText: '  Name',
+                    passedOnChanged: (value) {},
+                    nameController: nameController,
                   ),
+                  TextFieldContainer(
+                    obs: false,
+                    //validator: (value) => emailValidator.validate(value),
+                    size: size,
+                    titleText: '  username',
+                    passedOnChanged: (value) {},
+                    nameController: userController,
+                  ),
+                  TextFieldContainer(
+                    obs: false,
+                    validator: (value) => emailValidator.validate(value),
+                    size: size,
+                    titleText: '  Email',
+                    passedOnChanged: (value) {},
+                    nameController: emailController,
+                  ),
+                  TextFieldContainer(
+                    obs: false,
+                    //validator: (value) => emailValidator.validate(value),
+                    size: size,
+                    titleText: '  Phone number',
+                    passedOnChanged: (value) {},
+                    nameController: phoneController,
+                  ),
+                  TextFieldContainer(
+                    obs: false,
+                    //validator: (value) => emailValidator.validate(value),
+                    size: size,
+                    titleText: '  Password',
+                    passedOnChanged: (value) {},
+                    nameController: passwordController,
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(
+              //height: size.height,
+              width: size.width * 0.9,
+              height: 30, //70
+            ),
+            Text(
+              'Date of birth',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                height: 1,
+              ),
+            ),
+            Text(
+              'This will not be shown publicly. Confirm your own age',
+              style: TextStyle(
+                fontSize: 14,
+                color: Colors.grey[800],
+                //fontWeight: FontWeight.bold,
+                //height: 5.5,
+              ),
+            ),
+            Text(
+              'even if this account is for a business, a pet, or     ',
+              style: TextStyle(
+                fontSize: 14,
+                color: Colors.grey[800],
+              ),
+            ),
+            Text(
+              'something else.',
+              style: TextStyle(
+                fontSize: 14,
+                color: Colors.grey[800],
+              ),
+            ),
+            SizedBox(
+              //height: size.height,
+              width: size.width * 0.9,
+              height: 10,
+            ),
+            TextFieldContainer(
+              obs: false,
+              size: size,
+              titleText: '  Date of birth',
+              passedOnChanged: (value) {
+                showDatePicker(
+                  context: context,
+                  initialDate: DateTime.now(),
+                  firstDate: DateTime(2022),
+                  lastDate: DateTime.now(),
                 );
-              }
-            }, //addTransaction //() {},
-            colorPassed: Colors.grey[700],
-            marginValue: 3,
-            roundedpassedcolor: Colors.grey,
-            highlightPassedColor: Colors.grey,
-          ),
-        ],
+              },
+            ),
+            SizedBox(
+              height: size.height * 0.07,
+            ),
+            RoundedButton(
+              passedText: 'Next',
+              textColor: Colors.white,
+              pressed: () {
+                if (formKey.currentState.validate()) {
+                  /* Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => CustomNavBar(),
+                    ),
+                  ); */
+                  SignUp(
+                    nameController.text,
+                    userController.text,
+                    emailController.text,
+                    phoneController.text,
+                    passwordController.text,
+                    dateController.text,
+                    token,
+                  );
+                }
+              }, //addTransaction //() {},
+              colorPassed: Colors.grey[700],
+              marginValue: 3,
+              roundedpassedcolor: Colors.grey,
+              highlightPassedColor: Colors.grey,
+            ),
+          ],
+        ),
       ),
     );
   }
 
-  /* Future addTransaction(String name, String passwordPassed) async {
-    final transaction = Transaction()
-      ..name = name
-      ..createdDate = DateTime.now()
-      ..passwordPassed = passwordPassed;
+  SignUp(
+    String name,
+    String userName,
+    String email,
+    String phone,
+    String password,
+    String date,
+    String token,
+  ) async {
+    Map data = {
+      "name": name,
+      "username": userName,
+      "email": email,
+      "phoneNumber": phone,
+      "dateOfBirth": date,
+      "password": password,
+    };
+    //var jsonData = null;
+    Map mapResponse;
+    Map dataResponse;
+    var response = await http
+        .post(Uri.parse("http://twi-jay.me:8080/auth/signup"), body: data);
 
-    final box = Boxes.getTransactions();
-    box.add(transaction);
-    //box.put('mykey', transaction);
-
-    // final mybox = Boxes.getTransactions();
-    // final myTransaction = mybox.get('key');
-    // mybox.values;
-    // mybox.keys;
+    print(name);
+    print(userName);
+    print(email);
+    print(phone);
+    print(password);
+    print(date);
+    if (response.statusCode == 200) {
+      mapResponse = json.decode(response.body);
+      dataResponse = mapResponse;
+      token = dataResponse["accessToken"];
+      setState(
+        () {
+          print('yayyyyyyyyy');
+          print(token);
+          Navigator.of(context).pushAndRemoveUntil(
+              MaterialPageRoute(
+                  builder: (BuildContext context) =>
+                      VerificationBody(token: token)),
+              (Route<dynamic> route) => false);
+          dataResponse = mapResponse;
+        },
+      );
+      print('goooooooooo');
+      print(token);
+    } else if (response.statusCode == 400) {
+      print('bad request');
+    } else if (response.statusCode == 401) {
+      print('Unauthorized');
+    } else if (response.statusCode == 404) {
+      print('Not Found');
+    } else if (response.statusCode == 500) {
+      print('Internal Server Error');
+    }
   }
-}
- */
-
-/* SizedBox(
-        width: double.infinity,
-        height: size.height,
-        child: Stack(
-          alignment: Alignment.center,
-          children: [
-            Positioned(
-              top: 25,
-              //left: size.width * 0.4,
-              child: Image.asset(
-                'assests/images/mockingay2.png',
-                width: size.width * 0.2,
-              ),
-            ),
-          ],
-        ),
-      ) 
-      */
 }
