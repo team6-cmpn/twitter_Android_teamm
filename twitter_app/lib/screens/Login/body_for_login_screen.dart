@@ -4,8 +4,8 @@ import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:twitter_app/components/google_sign_in.dart';
-import 'package:twitter_app/components/widgets/customnavbar.dart';
-import 'package:twitter_app/components/widgets/navigationbar.dart';
+import 'package:twitter_app/components/widgets/Unusednavbar.dart';
+import 'package:twitter_app/components/widgets/CustomNavBar2.0.dart';
 
 import 'package:twitter_app/screens/home/Timeline.dart';
 /* import 'package:twitter_app/unused/body_for_home_page_screen.dart';

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:twitter_app/screens/Settings/bookmarkspage.dart';
 
 import '../../screens/Settings/settingspage.dart';
 import '../../screens/home/Timeline.dart';
-import 'navigationbar.dart';
+import 'CustomNavBar2.0.dart';
 
 class SideMenu extends StatefulWidget {
   const SideMenu({Key key}) : super(key: key);
@@ -118,7 +119,8 @@ class _SideMenuState extends State<SideMenu> {
                 ListTile(
                   leading: Icon(Icons.bookmark_border),
                   title: Text('Bookmarks'),
-                  onTap: () => null,
+                  onTap: () => Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => BookmarksPage())),
                 ),
                 ListTile(
                   leading: Icon(Icons.bolt),

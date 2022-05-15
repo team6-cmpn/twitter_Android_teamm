@@ -16,7 +16,7 @@ class CustomNavBar extends StatefulWidget {
 
   CustomNavBar({
     Key key,
-    @required this.token,
+    this.token,
   }) : super(key: key);
 
   @override

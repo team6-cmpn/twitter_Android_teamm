@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 //import 'package:twitter_app/screens/Login/body_for_login_screen.dart';
 //import './components/body_for_login_screen.dart';
 import '../../components/google_sign_in.dart';
-import '../../components/widgets/navigationbar.dart';
+import '../../components/widgets/CustomNavBar2.0.dart';
 import '/model/text_field_validation.dart';
 
 import '../../components/google_rounded_button.dart';
