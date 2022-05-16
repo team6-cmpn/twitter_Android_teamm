@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:twitter_app/screens/Settings/YourAccountSettings/confirmpasspag.dart';
 import 'package:twitter_app/screens/Settings/testpage.dart';
-import '/integration/handeling.dart';
 
 class DeactivateAccountPage extends StatelessWidget {
   @override

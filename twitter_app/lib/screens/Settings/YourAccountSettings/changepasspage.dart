@@ -1,9 +1,75 @@
 import 'package:flutter/material.dart';
 import '../../../components/rounded_button.dart';
 import '../../forgot_password/FogotPassword.dart';
-import '/integration/handeling.dart';
+
+import 'package:http/http.dart' as http;
+import 'package:twitter_app/components/widgets/CustomNavBar2.0.dart';
+import 'dart:convert';
+import 'dart:async';
+
+Future<changepassword> ChangePassword(
+  String currentPassword,
+  String password,
+  String confirmNewPassword,
+  String token,
+) async {
+  Map<String, dynamic> bodydata = {
+    "currentPassword": currentPassword,
+    "password": password,
+    "confirmNewPassword": confirmNewPassword
+  };
+  // Map headerdata = {
+  //   "x-access-token": token,
+  // };
+  const String BaseURL = 'http://twi-jay.me:8080';
+  final response = await http.post(
+      Uri.parse('$BaseURL/settings/changePassword'),
+      headers: {"x-access-token": token},
+      body: json.encode(bodydata));
+  print(bodydata);
+  if (response.statusCode == 200) {
+    changepassword.fromJson(jsonDecode(response.body));
+    print("Sucess");
+  } else if (response.statusCode == 400) {
+    print('bad request');
+  } else if (response.statusCode == 401) {
+    print('Unauthorized');
+  } else if (response.statusCode == 404) {
+    print('Not Found');
+  } else if (response.statusCode == 500) {
+    print('Internal Server Error');
+  } else
+    print("fail");
+}
+
+class changepassword {
+  String currentPassword;
+  String password;
+  String confirmNewPassword;
+
+  changepassword(
+      {this.currentPassword, this.password, this.confirmNewPassword});
+
+  changepassword.fromJson(Map<String, dynamic> json) {
+    currentPassword = json['currentPassword'];
+    password = json['password'];
+    confirmNewPassword = json['confirmNewPassword'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['currentPassword'] = this.currentPassword;
+    data['password'] = this.password;
+    data['confirmNewPassword'] = this.confirmNewPassword;
+    return data;
+  }
+}
 
 class ResetPasswordPage extends StatefulWidget {
+  ResetPasswordPage(
+    String lxrdtoken,
+  );
+
   @override
   State<ResetPasswordPage> createState() => _ResetPasswordPageState();
 }
@@ -12,7 +78,9 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
   final CurrentPassword = TextEditingController();
   final NewPassword = TextEditingController();
   final ConfirmPassword = TextEditingController();
-
+  String token =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyODAxZDc2OGRiY2FiZDhmNTFlNTVhMyIsImlzRGVhY3RpdmF0ZWQiOmZhbHNlLCJpYXQiOjE2NTI3Mjk1MTIsImV4cCI6MTcwOTI5NTE2OH0.5OwunlauRpttWHvCKdVYzBUj9-bMBtGVwbS0X64xg8Q";
+  //String token = widget.lxrdtoken;
   @override
   void dispose() {
     // Clean up the controller when the widget is disposed.
@@ -144,11 +212,11 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                                   textAlign: TextAlign.center,
                                 ),
                                 onPressed: () {
-                                  if (CurrentPassword == null) {
-                                    print("Please fill in the fields");
-                                  } else if (CurrentPassword == NewPassword) {
-                                    print("Please enter a new password");
-                                  }
+                                  ChangePassword(
+                                      CurrentPassword.text,
+                                      NewPassword.text,
+                                      ConfirmPassword.text,
+                                      token);
                                 }),
                           ),
                         ),
@@ -175,5 +243,55 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
         ),
       ),
     );
+  }
+
+  ChangePasswordIntegrate(
+    String CurrentPasswordPassed,
+    String NewPasswordPassed,
+    String ConfirmPasswordPassed,
+    String token,
+  ) async {
+    Map<String, dynamic> headerdata = {
+      "x-access-token": token,
+    };
+    Map<String, dynamic> data = {
+      "currentPassword": CurrentPasswordPassed,
+      "password": NewPasswordPassed,
+      "confirmNewPassword": ConfirmPasswordPassed
+    };
+    //var jsonData = null;
+    const String BaseURL = 'http://twi-jay.me:8080';
+
+    Map mapResponse;
+    Map dataResponse;
+    var response = await http.post(
+        Uri.parse('$BaseURL/settings/changePassword'),
+        headers: headerdata,
+        body: data);
+    print(data);
+    print("Waiting");
+    if (response.statusCode == 200) {
+      mapResponse = json.decode(response.body);
+      dataResponse = mapResponse;
+      token = dataResponse["accessToken"];
+      setState(
+        () {
+          //dataResponse = mapResponse["data"];
+          //dataResponse["role"].toString() == 'Admin'
+          print('Success');
+          print(token);
+
+          dataResponse = mapResponse;
+        },
+      );
+    } else if (response.statusCode == 400) {
+      print('bad request');
+    } else if (response.statusCode == 401) {
+      print('Unauthorized');
+    } else if (response.statusCode == 404) {
+      print('Not Found');
+    } else if (response.statusCode == 500) {
+      print('Internal Server Error');
+    }
   }
 }
