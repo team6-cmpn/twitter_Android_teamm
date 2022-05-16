@@ -25,7 +25,7 @@ class TimelinePage extends StatefulWidget {
 
   TimelinePage({
     Key key,
-    @required this.token,
+    this.token,
   }) : super(key: key);
 
   @override
@@ -80,7 +80,7 @@ class _TimelinePageState extends State<TimelinePage> {
                 scrollUp();
               },
               icon: Image.asset(
-                "assests/images/FInalLogowhite.png",
+                "assests/images/FinalLogo.png",
                 scale: 0.5,
               ),
               iconSize: 55.0,

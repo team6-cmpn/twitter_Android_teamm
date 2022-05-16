@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:http/http.dart' as http;
+import 'package:twitter_app/components/widgets/CustomNavBar2.0.dart';
 import 'dart:convert';
 
 import '../../components/rounded_button.dart';
@@ -159,7 +160,7 @@ class _VerificationBodyState extends State<VerificationBody> {
           Navigator.of(context).pushAndRemoveUntil(
               MaterialPageRoute(
                   builder: (BuildContext context) =>
-                      TimelinePage(token: token)),
+                      CustomNavBar(token: token)),
               (Route<dynamic> route) => false);
           dataResponse = mapResponse;
         },

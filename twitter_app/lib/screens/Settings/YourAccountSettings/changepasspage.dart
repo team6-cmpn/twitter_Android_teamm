@@ -3,7 +3,25 @@ import '../../../components/rounded_button.dart';
 import '../../forgot_password/FogotPassword.dart';
 import '/integration/handeling.dart';
 
-class ResetPasswordPage extends StatelessWidget {
+class ResetPasswordPage extends StatefulWidget {
+  @override
+  State<ResetPasswordPage> createState() => _ResetPasswordPageState();
+}
+
+class _ResetPasswordPageState extends State<ResetPasswordPage> {
+  final CurrentPassword = TextEditingController();
+  final NewPassword = TextEditingController();
+  final ConfirmPassword = TextEditingController();
+
+  @override
+  void dispose() {
+    // Clean up the controller when the widget is disposed.
+    CurrentPassword.dispose();
+    NewPassword.dispose();
+    ConfirmPassword.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -59,6 +77,7 @@ class ResetPasswordPage extends StatelessWidget {
                             ),
                           ),
                           style: TextStyle(fontSize: 20),
+                          controller: CurrentPassword,
                         ),
                         SizedBox(
                           height: 20,
@@ -74,6 +93,7 @@ class ResetPasswordPage extends StatelessWidget {
                               ),
                               hintText: "At least 8 characters"),
                           style: TextStyle(fontSize: 20),
+                          controller: NewPassword,
                         ),
                         SizedBox(
                           height: 20,
@@ -89,6 +109,7 @@ class ResetPasswordPage extends StatelessWidget {
                               ),
                               hintText: "At least 8 characters"),
                           style: TextStyle(fontSize: 20),
+                          controller: ConfirmPassword,
                         ),
                         SizedBox(
                           height: 40,
@@ -122,7 +143,13 @@ class ResetPasswordPage extends StatelessWidget {
                                   ),
                                   textAlign: TextAlign.center,
                                 ),
-                                onPressed: () {}),
+                                onPressed: () {
+                                  if (CurrentPassword == null) {
+                                    print("Please fill in the fields");
+                                  } else if (CurrentPassword == NewPassword) {
+                                    print("Please enter a new password");
+                                  }
+                                }),
                           ),
                         ),
                         TextButton(
