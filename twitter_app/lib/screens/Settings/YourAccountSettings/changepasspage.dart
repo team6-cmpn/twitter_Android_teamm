@@ -6,8 +6,9 @@ import 'package:http/http.dart' as http;
 
 import 'dart:convert';
 import 'dart:async';
+import '../../../API/userdata.dart';
 
-ChangePasswordApi(
+Future<String> ChangePasswordApi(
   String currentPassword,
   String password,
   String confirmNewPassword,
@@ -30,7 +31,7 @@ ChangePasswordApi(
       body: bodydata);
   print(bodydata);
   responsedata = (jsonDecode(response.body));
-  String message = responsedata.toString();
+  String message = responsedata["message"];
   print(message);
 
   if (response.statusCode == 200) {
@@ -46,6 +47,7 @@ ChangePasswordApi(
   } else
     print("fail");
   //return ('${responsedata}');
+  return message;
 }
 
 class changepassword {
@@ -84,8 +86,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
   final CurrentPassword = TextEditingController();
   final NewPassword = TextEditingController();
   final ConfirmPassword = TextEditingController();
-  String token =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyODAxZDc2OGRiY2FiZDhmNTFlNTVhMyIsImlzRGVhY3RpdmF0ZWQiOmZhbHNlLCJpYXQiOjE2NTI3Mjk1MTIsImV4cCI6MTcwOTI5NTE2OH0.5OwunlauRpttWHvCKdVYzBUj9-bMBtGVwbS0X64xg8Q";
+
   //String token = widget.lxrdtoken;
   @override
   void dispose() {
@@ -217,12 +218,27 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                                   ),
                                   textAlign: TextAlign.center,
                                 ),
-                                onPressed: () {
-                                  String message = ChangePasswordApi(
+                                onPressed: () async {
+                                  String message = await ChangePasswordApi(
                                       CurrentPassword.text,
                                       NewPassword.text,
                                       ConfirmPassword.text,
-                                      token);
+                                      userdata.token);
+                                  showDialog<String>(
+                                    context: context,
+                                    builder: (BuildContext context) =>
+                                        AlertDialog(
+                                      title: const Text(''),
+                                      content: Text(message),
+                                      actions: <Widget>[
+                                        TextButton(
+                                          onPressed: () =>
+                                              Navigator.pop(context, 'Log out'),
+                                          child: const Text("Ok"),
+                                        ),
+                                      ],
+                                    ),
+                                  );
                                 }),
                           ),
                         ),
