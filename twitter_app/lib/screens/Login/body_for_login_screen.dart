@@ -254,6 +254,7 @@ class _BodyForLoginScreenState extends State<BodyForLoginScreen> {
       mapResponse = json.decode(response.body);
       dataResponse = mapResponse;
       userdata.token = dataResponse["accessToken"];
+      userdata.name = dataResponse["user"]["name"];
       setState(
         () {
           //dataResponse = mapResponse["data"];
