@@ -17,6 +17,8 @@ class YourAccountPage extends StatefulWidget {
 }
 
 class _YourAccountPageState extends State<YourAccountPage> {
+  String lxrdtoken =
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyODAxZDc2OGRiY2FiZDhmNTFlNTVhMyIsImlzRGVhY3RpdmF0ZWQiOmZhbHNlLCJpYXQiOjE2NTI3MTc0OTgsImV4cCI6MTcwOTI4MzE1NH0.ynk6A5ZwY6VV6uzKEJfMKpWfMr2M6j-XyiH0g57JGQ4';
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -97,7 +99,8 @@ class _YourAccountPageState extends State<YourAccountPage> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => ResetPasswordPage())),
+                              builder: (context) =>
+                                  ResetPasswordPage(lxrdtoken))),
                     },
                   ),
                   ListTile(

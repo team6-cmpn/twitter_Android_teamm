@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../components/rounded_button.dart';
 import '../../forgot_password/FogotPassword.dart';
-import '/integration/handeling.dart';
+
 
 class ConfrimPasswordPage extends StatelessWidget {
   @override
