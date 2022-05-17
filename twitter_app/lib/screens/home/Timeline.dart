@@ -13,6 +13,9 @@ import '../../model/tweet_model.dart';
 // ignore: unused_import
 import '../../state/drawer_for_icon.dart';
 
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+
 const TextStyle _textStyle = TextStyle(
   fontSize: 40,
   fontWeight: FontWeight.bold,
@@ -22,10 +25,14 @@ const TextStyle _textStyle = TextStyle(
 
 class TimelinePage extends StatefulWidget {
   final String token;
+  final String userName;
+  final String nameOfUser;
 
   TimelinePage({
     Key key,
     this.token,
+    this.userName,
+    this.nameOfUser,
   }) : super(key: key);
 
   @override
@@ -51,7 +58,7 @@ class _TimelinePageState extends State<TimelinePage> {
   @override
   Widget build(BuildContext context) {
     print(widget.token);
-    print('yayy2222222222');
+    print('we r in timeline');
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -175,7 +182,10 @@ class _TimelinePageState extends State<TimelinePage> {
           actions: [
             TextButton(
               onPressed: () {
-                addPostt(messgController.text, 20);
+                addPostt(
+                  messgController.text,
+                  20,
+                );
               },
               child: Text('Tweet'),
             ),
@@ -351,9 +361,9 @@ class _TimelinePageState extends State<TimelinePage> {
       isReTweet: false,
       loves: txamount,
       retweets: 0,
-      username: 'Mr.Ahmed hassan',
+      username: widget.nameOfUser,
       date: DateTime.now(),
-      twitterHandle: '@mr.gggg',
+      twitterHandle: widget.userName,
       time: '1min',
     );
 
@@ -363,7 +373,7 @@ class _TimelinePageState extends State<TimelinePage> {
   }
 
   final List<TweetModel> Tweets = [
-    TweetModel(
+    /* TweetModel(
       username: " Ammar",
       tweetmessg: "my name is ammar",
       twitterHandle: "@Ammar1",
@@ -492,7 +502,7 @@ class _TimelinePageState extends State<TimelinePage> {
       isReTweet: false,
       loves: 7,
       retweets: 8,
-    ),
+    ), */
   ];
   Widget tweetBoxWidgety() => Container(
         padding: EdgeInsets.all(0),
@@ -547,6 +557,7 @@ class _TimelinePageState extends State<TimelinePage> {
                           ),
                         ],
                       ),
+                      SizedBox(),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
@@ -716,4 +727,86 @@ class _TimelinePageState extends State<TimelinePage> {
         ),
       ); */
 
+/* PostsIntegeration(String username, String name, String token) async {
+    Map data = {'data': email, 'password': password};
+    //var jsonData = null;
+    Map mapResponse;
+    Map dataResponse;
+    String nameResponse;
+    String userResponse;
+    String idResponse;
+
+    var response = await http
+        .post(Uri.parse("http://twi-jay.me:8080/auth/signin"), body: data);
+    if (response.statusCode == 200) {
+      mapResponse = json.decode(response.body);
+      dataResponse = mapResponse;
+      nameResponse = mapResponse['user']['name'];
+      userResponse = mapResponse['user']['username'];
+      idResponse = mapResponse['user']['_id'];
+      print('tez 3ez 7mra');
+      print(nameResponse);
+      token = dataResponse["accessToken"];
+
+      setState(
+        () {
+          //dataResponse = mapResponse["data"];
+          //dataResponse["role"].toString() == 'Admin'
+          print('nooooooooooo');
+          print(token);
+          //print(dataResponse['user']);
+          Navigator.of(context).pushAndRemoveUntil(
+              MaterialPageRoute(
+                builder: (BuildContext context) => TimelinePage(
+                  token: token,
+                  nameOfUser: nameResponse,
+                  userName: userResponse,
+                ),
+              ),
+              (Route<dynamic> route) => false);
+          dataResponse = mapResponse;
+        },
+      );
+    } else if (response.statusCode == 400) {
+      print('bad request');
+    } else if (response.statusCode == 401) {
+      print('Unauthorized');
+    } else if (response.statusCode == 404) {
+      print('Not Found');
+    } else if (response.statusCode == 500) {
+      print('Internal Server Error');
+    }
+  } */
+
+  @override
+  void initState() {
+    super.initState();
+    getUser(widget.token);
+  }
+
+  getUser(tokenpassed) async {
+    //await Future.delayed(const Duration(seconds: 2));
+    var response = await http.get(
+      Uri.parse(
+        ('http://twi-jay.me:8080/tweets/lookup/1/2'),
+      ),
+      headers: {
+        'x-access-token': tokenpassed,
+      },
+    );
+    if (response.statusCode == 200) {
+      var posts = json.decode(response.body)[0];
+      //List infoOfUser = posts[0]['data'];
+      print('this is post');
+      print(posts);
+
+      /* setState(() {
+        users = info;
+      });
+    } else {
+      setState(() {
+        users = [];
+      }); */
+    }
+  }
 }

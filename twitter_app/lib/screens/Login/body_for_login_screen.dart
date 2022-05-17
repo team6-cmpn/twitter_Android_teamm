@@ -34,9 +34,11 @@ class BodyForLoginScreen extends StatefulWidget {
 class _BodyForLoginScreenState extends State<BodyForLoginScreen> {
   final formKey = GlobalKey<FormState>();
   final String token = '';
-  TextEditingController userController = new TextEditingController();
 
+  TextEditingController userController = new TextEditingController();
   TextEditingController passwordController = new TextEditingController();
+  TextEditingController nameController = new TextEditingController();
+  TextEditingController followingController = new TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -247,22 +249,37 @@ class _BodyForLoginScreenState extends State<BodyForLoginScreen> {
     //var jsonData = null;
     Map mapResponse;
     Map dataResponse;
+    String nameResponse;
+    String userResponse;
+    String idResponse;
+
     var response = await http
         .post(Uri.parse("http://twi-jay.me:8080/auth/signin"), body: data);
     if (response.statusCode == 200) {
       mapResponse = json.decode(response.body);
       dataResponse = mapResponse;
+      nameResponse = mapResponse['user']['name'];
+      userResponse = mapResponse['user']['username'];
+      idResponse = mapResponse['user']['_id'];
+      print('tez 3ez 7mra');
+      print(nameResponse);
       token = dataResponse["accessToken"];
+
       setState(
         () {
           //dataResponse = mapResponse["data"];
           //dataResponse["role"].toString() == 'Admin'
           print('nooooooooooo');
           print(token);
+          //print(dataResponse['user']);
           Navigator.of(context).pushAndRemoveUntil(
               MaterialPageRoute(
-                  builder: (BuildContext context) =>
-                      CustomNavBar(token: token)),
+                builder: (BuildContext context) => TimelinePage(
+                  token: token,
+                  nameOfUser: nameResponse,
+                  userName: userResponse,
+                ),
+              ),
               (Route<dynamic> route) => false);
           dataResponse = mapResponse;
         },

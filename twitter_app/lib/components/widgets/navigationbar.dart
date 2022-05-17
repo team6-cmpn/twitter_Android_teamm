@@ -12,15 +12,12 @@ void main() {
 
 class CustomNavBar extends StatefulWidget {
   static final title = 'salomon_bottom_bar';
+
   final String token;
-  final String userName;
-  final String nameOfUser;
 
   CustomNavBar({
     Key key,
-    this.token,
-    this.nameOfUser,
-    this.userName,
+    @required this.token,
   }) : super(key: key);
 
   @override
