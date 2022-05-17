@@ -21,6 +21,7 @@ import '../../components/text_field_container.dart';
 import '../home/twitter_home_page.dart';
 import '../welcome/welcome_screen.dart';
 import 'background_for_login_screen.dart';
+import '../../API/userdata.dart';
 
 class BodyForLoginScreen extends StatefulWidget {
   BodyForLoginScreen({
@@ -258,6 +259,7 @@ class _BodyForLoginScreenState extends State<BodyForLoginScreen> {
     if (response.statusCode == 200) {
       mapResponse = json.decode(response.body);
       dataResponse = mapResponse;
+<<<<<<< HEAD
       nameResponse = mapResponse['user']['name'];
       userResponse = mapResponse['user']['username'];
       idResponse = mapResponse['user']['_id'];
@@ -265,6 +267,10 @@ class _BodyForLoginScreenState extends State<BodyForLoginScreen> {
       print(nameResponse);
       token = dataResponse["accessToken"];
 
+=======
+      userdata.token = dataResponse["accessToken"];
+      userdata.name = dataResponse["user"]["name"];
+>>>>>>> main
       setState(
         () {
           //dataResponse = mapResponse["data"];

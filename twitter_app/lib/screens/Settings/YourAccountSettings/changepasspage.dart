@@ -3,18 +3,19 @@ import '../../../components/rounded_button.dart';
 import '../../forgot_password/FogotPassword.dart';
 
 import 'package:http/http.dart' as http;
-import 'package:twitter_app/components/widgets/CustomNavBar2.0.dart';
+
 import 'dart:convert';
 import 'dart:async';
+import '../../../API/userdata.dart';
 
-Future<int> ChangePasswordApi(
-  var currentPassword,
-  var password,
-  var confirmNewPassword,
+Future<String> ChangePasswordApi(
+  String currentPassword,
+  String password,
+  String confirmNewPassword,
   String token,
 ) async {
   Map responsedata;
-  Map<String, dynamic> bodydata = {
+  Map bodydata = {
     "currentPassword": currentPassword,
     "password": password,
     "confirmNewPassword": confirmNewPassword
@@ -27,13 +28,14 @@ Future<int> ChangePasswordApi(
   final response = await http.post(
       Uri.parse("$BaseURL/settings/changePassword"),
       headers: {"x-access-token": token},
-      body: json.encode(bodydata));
+      body: bodydata);
   print(bodydata);
-  print(response.body);
+  responsedata = (jsonDecode(response.body));
+  String message = responsedata["message"];
+  print(message);
 
   if (response.statusCode == 200) {
-    responsedata = (jsonDecode(response.body));
-    print(responsedata);
+    return message;
   } else if (response.statusCode == 400) {
     print('bad request');
   } else if (response.statusCode == 401) {
@@ -44,7 +46,8 @@ Future<int> ChangePasswordApi(
     print('Internal Server Error');
   } else
     print("fail");
-  return (response.statusCode);
+  //return ('${responsedata}');
+  return message;
 }
 
 class changepassword {
@@ -83,8 +86,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
   final CurrentPassword = TextEditingController();
   final NewPassword = TextEditingController();
   final ConfirmPassword = TextEditingController();
-  String token =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyODAxZDc2OGRiY2FiZDhmNTFlNTVhMyIsImlzRGVhY3RpdmF0ZWQiOmZhbHNlLCJpYXQiOjE2NTI3Mjk1MTIsImV4cCI6MTcwOTI5NTE2OH0.5OwunlauRpttWHvCKdVYzBUj9-bMBtGVwbS0X64xg8Q";
+
   //String token = widget.lxrdtoken;
   @override
   void dispose() {
@@ -216,12 +218,27 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                                   ),
                                   textAlign: TextAlign.center,
                                 ),
-                                onPressed: () {
-                                  ChangePasswordApi(
+                                onPressed: () async {
+                                  String message = await ChangePasswordApi(
                                       CurrentPassword.text,
                                       NewPassword.text,
                                       ConfirmPassword.text,
-                                      token);
+                                      userdata.token);
+                                  showDialog<String>(
+                                    context: context,
+                                    builder: (BuildContext context) =>
+                                        AlertDialog(
+                                      title: const Text(''),
+                                      content: Text(message),
+                                      actions: <Widget>[
+                                        TextButton(
+                                          onPressed: () =>
+                                              Navigator.pop(context, 'Log out'),
+                                          child: const Text("Ok"),
+                                        ),
+                                      ],
+                                    ),
+                                  );
                                 }),
                           ),
                         ),
@@ -248,55 +265,5 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
         ),
       ),
     );
-  }
-
-  ChangePasswordIntegrate(
-    String CurrentPasswordPassed,
-    String NewPasswordPassed,
-    String ConfirmPasswordPassed,
-    String token,
-  ) async {
-    // Map<String, dynamic> headerdata = {
-    //   "x-access-token": token,
-    // };
-    Map<String, dynamic> data = {
-      "currentPassword": CurrentPasswordPassed,
-      "password": NewPasswordPassed,
-      "confirmNewPassword": ConfirmPasswordPassed
-    };
-    //var jsonData = null;
-    const String BaseURL = "http://twi-jay.me:8080";
-
-    Map mapResponse;
-    Map dataResponse;
-    var response = await http.post(
-        Uri.parse("http://twi-jay.me:8080/settings/changePassword"),
-        headers: {"x-access-token": token},
-        body: json.encode(data));
-    print(data);
-    print("Waiting");
-    if (response.statusCode == 200) {
-      mapResponse = json.decode(response.body);
-      dataResponse = mapResponse;
-      token = dataResponse["accessToken"];
-      setState(
-        () {
-          //dataResponse = mapResponse["data"];
-          //dataResponse["role"].toString() == 'Admin'
-          print('Success');
-          print(token);
-
-          dataResponse = mapResponse;
-        },
-      );
-    } else if (response.statusCode == 400) {
-      print('bad request');
-    } else if (response.statusCode == 401) {
-      print('Unauthorized');
-    } else if (response.statusCode == 404) {
-      print('Not Found');
-    } else if (response.statusCode == 500) {
-      print('Internal Server Error');
-    }
   }
 }
