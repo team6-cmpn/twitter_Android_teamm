@@ -7,12 +7,13 @@ import 'package:twitter_app/components/widgets/CustomNavBar2.0.dart';
 import 'dart:convert';
 import 'dart:async';
 
-Future<changepassword> ChangePassword(
-  String currentPassword,
-  String password,
-  String confirmNewPassword,
+Future<int> ChangePasswordApi(
+  var currentPassword,
+  var password,
+  var confirmNewPassword,
   String token,
 ) async {
+  Map responsedata;
   Map<String, dynamic> bodydata = {
     "currentPassword": currentPassword,
     "password": password,
@@ -21,15 +22,18 @@ Future<changepassword> ChangePassword(
   // Map headerdata = {
   //   "x-access-token": token,
   // };
-  const String BaseURL = 'http://twi-jay.me:8080';
+  const String BaseURL = "http://twi-jay.me:8080";
+
   final response = await http.post(
-      Uri.parse('$BaseURL/settings/changePassword'),
+      Uri.parse("$BaseURL/settings/changePassword"),
       headers: {"x-access-token": token},
       body: json.encode(bodydata));
   print(bodydata);
+  print(response.body);
+
   if (response.statusCode == 200) {
-    changepassword.fromJson(jsonDecode(response.body));
-    print("Sucess");
+    responsedata = (jsonDecode(response.body));
+    print(responsedata);
   } else if (response.statusCode == 400) {
     print('bad request');
   } else if (response.statusCode == 401) {
@@ -40,6 +44,7 @@ Future<changepassword> ChangePassword(
     print('Internal Server Error');
   } else
     print("fail");
+  return (response.statusCode);
 }
 
 class changepassword {
@@ -212,7 +217,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                                   textAlign: TextAlign.center,
                                 ),
                                 onPressed: () {
-                                  ChangePassword(
+                                  ChangePasswordApi(
                                       CurrentPassword.text,
                                       NewPassword.text,
                                       ConfirmPassword.text,
@@ -251,23 +256,23 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
     String ConfirmPasswordPassed,
     String token,
   ) async {
-    Map<String, dynamic> headerdata = {
-      "x-access-token": token,
-    };
+    // Map<String, dynamic> headerdata = {
+    //   "x-access-token": token,
+    // };
     Map<String, dynamic> data = {
       "currentPassword": CurrentPasswordPassed,
       "password": NewPasswordPassed,
       "confirmNewPassword": ConfirmPasswordPassed
     };
     //var jsonData = null;
-    const String BaseURL = 'http://twi-jay.me:8080';
+    const String BaseURL = "http://twi-jay.me:8080";
 
     Map mapResponse;
     Map dataResponse;
     var response = await http.post(
-        Uri.parse('$BaseURL/settings/changePassword'),
-        headers: headerdata,
-        body: data);
+        Uri.parse("http://twi-jay.me:8080/settings/changePassword"),
+        headers: {"x-access-token": token},
+        body: json.encode(data));
     print(data);
     print("Waiting");
     if (response.statusCode == 200) {
