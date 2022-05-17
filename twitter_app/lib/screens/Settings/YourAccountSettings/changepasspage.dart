@@ -3,11 +3,11 @@ import '../../../components/rounded_button.dart';
 import '../../forgot_password/FogotPassword.dart';
 
 import 'package:http/http.dart' as http;
-import 'package:twitter_app/components/widgets/CustomNavBar2.0.dart';
+
 import 'dart:convert';
 import 'dart:async';
 
-Future<dynamic> ChangePasswordApi(
+ChangePasswordApi(
   String currentPassword,
   String password,
   String confirmNewPassword,
@@ -30,10 +30,11 @@ Future<dynamic> ChangePasswordApi(
       body: bodydata);
   print(bodydata);
   responsedata = (jsonDecode(response.body));
-  print(responsedata);
+  String message = responsedata.toString();
+  print(message);
 
   if (response.statusCode == 200) {
-    responsedata = (jsonDecode(response.body));
+    return message;
   } else if (response.statusCode == 400) {
     print('bad request');
   } else if (response.statusCode == 401) {
@@ -44,7 +45,7 @@ Future<dynamic> ChangePasswordApi(
     print('Internal Server Error');
   } else
     print("fail");
-  return (responsedata);
+  //return ('${responsedata}');
 }
 
 class changepassword {
@@ -217,7 +218,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                                   textAlign: TextAlign.center,
                                 ),
                                 onPressed: () {
-                                  ChangePasswordApi(
+                                  String message = ChangePasswordApi(
                                       CurrentPassword.text,
                                       NewPassword.text,
                                       ConfirmPassword.text,
@@ -248,55 +249,5 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
         ),
       ),
     );
-  }
-
-  ChangePasswordIntegrate(
-    String CurrentPasswordPassed,
-    String NewPasswordPassed,
-    String ConfirmPasswordPassed,
-    String token,
-  ) async {
-    // Map<String, dynamic> headerdata = {
-    //   "x-access-token": token,
-    // };
-    Map<String, dynamic> data = {
-      "currentPassword": CurrentPasswordPassed,
-      "password": NewPasswordPassed,
-      "confirmNewPassword": ConfirmPasswordPassed
-    };
-    //var jsonData = null;
-    const String BaseURL = "http://twi-jay.me:8080";
-
-    Map mapResponse;
-    Map dataResponse;
-    var response = await http.post(
-        Uri.parse("http://twi-jay.me:8080/settings/changePassword"),
-        headers: {"x-access-token": token},
-        body: json.encode(data));
-    print(data);
-    print("Waiting");
-    if (response.statusCode == 200) {
-      mapResponse = json.decode(response.body);
-      dataResponse = mapResponse;
-      token = dataResponse["accessToken"];
-      setState(
-        () {
-          //dataResponse = mapResponse["data"];
-          //dataResponse["role"].toString() == 'Admin'
-          print('Success');
-          print(token);
-
-          dataResponse = mapResponse;
-        },
-      );
-    } else if (response.statusCode == 400) {
-      print('bad request');
-    } else if (response.statusCode == 401) {
-      print('Unauthorized');
-    } else if (response.statusCode == 404) {
-      print('Not Found');
-    } else if (response.statusCode == 500) {
-      print('Internal Server Error');
-    }
   }
 }
