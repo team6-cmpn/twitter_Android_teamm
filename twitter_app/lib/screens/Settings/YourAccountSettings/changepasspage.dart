@@ -7,14 +7,14 @@ import 'package:twitter_app/components/widgets/CustomNavBar2.0.dart';
 import 'dart:convert';
 import 'dart:async';
 
-Future<int> ChangePasswordApi(
-  var currentPassword,
-  var password,
-  var confirmNewPassword,
+Future<dynamic> ChangePasswordApi(
+  String currentPassword,
+  String password,
+  String confirmNewPassword,
   String token,
 ) async {
   Map responsedata;
-  Map<String, dynamic> bodydata = {
+  Map bodydata = {
     "currentPassword": currentPassword,
     "password": password,
     "confirmNewPassword": confirmNewPassword
@@ -27,13 +27,13 @@ Future<int> ChangePasswordApi(
   final response = await http.post(
       Uri.parse("$BaseURL/settings/changePassword"),
       headers: {"x-access-token": token},
-      body: json.encode(bodydata));
+      body: bodydata);
   print(bodydata);
-  print(response.body);
+  responsedata = (jsonDecode(response.body));
+  print(responsedata);
 
   if (response.statusCode == 200) {
     responsedata = (jsonDecode(response.body));
-    print(responsedata);
   } else if (response.statusCode == 400) {
     print('bad request');
   } else if (response.statusCode == 401) {
@@ -44,7 +44,7 @@ Future<int> ChangePasswordApi(
     print('Internal Server Error');
   } else
     print("fail");
-  return (response.statusCode);
+  return (responsedata);
 }
 
 class changepassword {
