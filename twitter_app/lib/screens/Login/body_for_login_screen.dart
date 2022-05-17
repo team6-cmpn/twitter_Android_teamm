@@ -21,6 +21,7 @@ import '../../components/text_field_container.dart';
 import '../home/twitter_home_page.dart';
 import '../welcome/welcome_screen.dart';
 import 'background_for_login_screen.dart';
+import '../../API/userdata.dart';
 
 class BodyForLoginScreen extends StatefulWidget {
   BodyForLoginScreen({
@@ -34,11 +35,9 @@ class BodyForLoginScreen extends StatefulWidget {
 class _BodyForLoginScreenState extends State<BodyForLoginScreen> {
   final formKey = GlobalKey<FormState>();
   final String token = '';
-
   TextEditingController userController = new TextEditingController();
+
   TextEditingController passwordController = new TextEditingController();
-  TextEditingController nameController = new TextEditingController();
-  TextEditingController followingController = new TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -249,37 +248,23 @@ class _BodyForLoginScreenState extends State<BodyForLoginScreen> {
     //var jsonData = null;
     Map mapResponse;
     Map dataResponse;
-    String nameResponse;
-    String userResponse;
-    String idResponse;
-
     var response = await http
         .post(Uri.parse("http://twi-jay.me:8080/auth/signin"), body: data);
     if (response.statusCode == 200) {
       mapResponse = json.decode(response.body);
       dataResponse = mapResponse;
-      nameResponse = mapResponse['user']['name'];
-      userResponse = mapResponse['user']['username'];
-      idResponse = mapResponse['user']['_id'];
-      print('tez 3ez 7mra');
-      print(nameResponse);
-      token = dataResponse["accessToken"];
-
+      userdata.token = dataResponse["accessToken"];
+      userdata.name = dataResponse["user"]["name"];
       setState(
         () {
           //dataResponse = mapResponse["data"];
           //dataResponse["role"].toString() == 'Admin'
           print('nooooooooooo');
           print(token);
-          //print(dataResponse['user']);
           Navigator.of(context).pushAndRemoveUntil(
               MaterialPageRoute(
-                builder: (BuildContext context) => TimelinePage(
-                  token: token,
-                  nameOfUser: nameResponse,
-                  userName: userResponse,
-                ),
-              ),
+                  builder: (BuildContext context) =>
+                      CustomNavBar(token: token)),
               (Route<dynamic> route) => false);
           dataResponse = mapResponse;
         },

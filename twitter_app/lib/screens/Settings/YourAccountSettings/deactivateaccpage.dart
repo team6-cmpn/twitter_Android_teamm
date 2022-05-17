@@ -1,6 +1,41 @@
 import 'package:flutter/material.dart';
 import 'package:twitter_app/screens/Settings/YourAccountSettings/confirmpasspag.dart';
 import 'package:twitter_app/screens/Settings/testpage.dart';
+import 'package:http/http.dart' as http;
+
+import 'dart:convert';
+import 'dart:async';
+
+Future<bool> DeactivateAccountApi(
+  String token,
+) async {
+  Map responsedata;
+  bool isdeactivated = false;
+
+  // Map headerdata = {
+  //   "x-access-token": token,
+  // };
+  const String BaseURL = "http://twi-jay.me:8080";
+
+  final response = await http.put(
+      Uri.parse("$BaseURL/settings/deactivateAccount"),
+      headers: {"x-access-token": token},
+      body: {});
+
+  responsedata = (jsonDecode(response.body));
+
+  if (response.statusCode == 200) {
+    isdeactivated = true;
+  } else if (response.statusCode == 401) {
+    print('Unauthorized');
+  } else if (response.statusCode == 403) {
+    print('Forbidden');
+  } else if (response.statusCode == 500) {
+    print('Internal Server Error');
+  }
+
+  return isdeactivated;
+}
 
 class DeactivateAccountPage extends StatelessWidget {
   @override
