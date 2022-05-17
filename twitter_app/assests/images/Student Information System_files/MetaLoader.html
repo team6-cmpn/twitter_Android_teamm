@@ -1,0 +1,158 @@
+
+<!-- saved from url=(0102)http://chreg.eng.cu.edu.eg/SIS/Modules/MetaLoader.aspx?path=~/SIS/Modules/Student/Warning/Warning.ascx -->
+<html id="ext-gen3" class=" x-theme-blue"><head id="Head1"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<link rel="stylesheet" type="text/css" href="./ext.axd">
+
+<!--<meta http-equiv="X-UA-Compatible" value="IE=7" />-->
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7"><meta http-equiv="Expires" content="-1"><meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"><meta http-equiv="pragma" content="no-cache"><title>
+
+</title>
+    <script type="text/javascript">
+        function GetBrowsingData() {
+            return '';
+            var res = '';
+            var nVer = navigator.appVersion;
+            var nAgt = navigator.userAgent;
+            var browserName = navigator.appName;
+            var fullVersion = '' + parseFloat(navigator.appVersion);
+            var majorVersion = parseInt(navigator.appVersion, 10);
+            var nameOffset, verOffset, ix;
+
+            // In Opera, the true version is after "Opera" or after "Version"
+            if ((verOffset = nAgt.indexOf("Opera")) != -1) {
+                browserName = "Opera";
+                fullVersion = nAgt.substring(verOffset + 6);
+                if ((verOffset = nAgt.indexOf("Version")) != -1)
+                    fullVersion = nAgt.substring(verOffset + 8);
+            }
+            // In MSIE, the true version is after "MSIE" in userAgent
+            else if ((verOffset = nAgt.indexOf("MSIE")) != -1) {
+                browserName = "Microsoft Internet Explorer";
+                fullVersion = nAgt.substring(verOffset + 5);
+            }
+            // In Chrome, the true version is after "Chrome" 
+            else if ((verOffset = nAgt.indexOf("Chrome")) != -1) {
+                browserName = "Chrome";
+                fullVersion = nAgt.substring(verOffset + 7);
+            }
+            // In Safari, the true version is after "Safari" or after "Version" 
+            else if ((verOffset = nAgt.indexOf("Safari")) != -1) {
+                browserName = "Safari";
+                fullVersion = nAgt.substring(verOffset + 7);
+                if ((verOffset = nAgt.indexOf("Version")) != -1)
+                    fullVersion = nAgt.substring(verOffset + 8);
+            }
+            // In Firefox, the true version is after "Firefox" 
+            else if ((verOffset = nAgt.indexOf("Firefox")) != -1) {
+                browserName = "Firefox";
+                fullVersion = nAgt.substring(verOffset + 8);
+            }
+            // In most other browsers, "name/version" is at the end of userAgent 
+            else if ((nameOffset = nAgt.lastIndexOf(' ') + 1) <
+          (verOffset = nAgt.lastIndexOf('/'))) {
+                browserName = nAgt.substring(nameOffset, verOffset);
+                fullVersion = nAgt.substring(verOffset + 1);
+                if (browserName.toLowerCase() == browserName.toUpperCase()) {
+                    browserName = navigator.appName;
+                }
+            }
+            // trim the fullVersion string at semicolon/space if present
+            if ((ix = fullVersion.indexOf(";")) != -1)
+                fullVersion = fullVersion.substring(0, ix);
+            if ((ix = fullVersion.indexOf(" ")) != -1)
+                fullVersion = fullVersion.substring(0, ix);
+
+            majorVersion = parseInt('' + fullVersion, 10);
+            if (isNaN(majorVersion)) {
+                fullVersion = '' + parseFloat(navigator.appVersion);
+                majorVersion = parseInt(navigator.appVersion, 10);
+            }
+
+            res = ''
+ + 'Browser name  = ' + browserName + '<br>'
+ + 'Full version  = ' + fullVersion + '<br>'
+ + 'Major version = ' + majorVersion + '<br>'
+ + 'navigator.appName = ' + navigator.appName + '<br>'
+ + 'navigator.userAgent = ' + navigator.userAgent + '<br>'
+
+            var OSName = "Unknown OS";
+            if (navigator.appVersion.indexOf("Win") != -1) OSName = "Windows";
+            if (navigator.appVersion.indexOf("Mac") != -1) OSName = "MacOS";
+            if (navigator.appVersion.indexOf("X11") != -1) OSName = "UNIX";
+            if (navigator.appVersion.indexOf("Linux") != -1) OSName = "Linux";
+            res = res + 'Your OS: ' + OSName;
+            return res;
+        }
+</script>
+
+	<script type="text/javascript" src="./ext(2).axd"></script>
+	<script type="text/javascript" src="./ext(3).axd"></script>
+	<script type="text/javascript" src="./ext(4).axd"></script><style type="text/css" id="extnet-resources"> .x-form-radio-group .x-panel-body,.x-form-check-group .x-panel-body{background-color:transparent;} .x-form-cb-label-nowrap{white-space:nowrap;} .x-form-cb-label-nowrap .x-form-item-label{white-space:normal;}.x-label-icon{width:16px;height:16px;margin-left:3px;margin-right:3px;vertical-align:middle;border:0px !important;}.x-label-value{vertical-align:middle;}.ext-ie6 .x-form-field-trigger-wrap .x-form-text, .ext-ie7 .x-form-field-trigger-wrap .x-form-text{margin-bottom: -2px;}.ext-ie6 .x-form-item .x-form-field-trigger-wrap .x-form-text, .ext-ie7 .x-form-item .x-form-field-trigger-wrap .x-form-text{margin-bottom: -1px;} .ext-ie8 .x-toolbar-cell .x-form-field-trigger-wrap .x-form-text{top:0px;}.x-textfield-icon{background-repeat:no-repeat;background-position:0 50%;width:16px;height:16px;margin-left:1px;}.x-textfield-icon-input{padding-left:20px;}.x-form-field-wrap .x-textfield-icon{top:3px;left:2px;}input.x-tree-node-cb{margin-left:1px;height:18px;vertical-align:bottom;}.x-tree-node .x-tree-node-inline-icon{background:transparent;height:16px !important;}.x-field-note{font-size:12px;color:gray;}.x-field-multi{float:left;padding-right:3px;position:relative;}div.x-inline-toolbar{padding:0px !important;border:0px !important;background-color:transparent !important;background-image:none !important;}.x-grid3 .x-row-expander-control TABLE{table-layout: auto;} .x-grid3 .x-row-expander-control TABLE.x-grid3-row-table, .x-grid3 .x-row-expander-control .x-grid3-header-offset table {table-layout:fixed;} .x-fieldset.x-form-invalid{border-color:#c30;}.ext-ie6 ul.x-menu-list li.x-menu-sep-li{height:5px !important;}.x-form-item.x-form-label-top label.x-form-item-label{width:auto;float:none;clear:none;display:inline;margin-bottom:4px;position:static;}.x-menu-field-icon{top:auto;margin-top:3px;margin-left:3px;}.x-toolbar-classic .x-btn-tl{background-position:0 0} .x-toolbar-classic .x-btn-tr{background-position:-3px 0} .x-toolbar-classic .x-btn-tc{background-position:0 -6px} .x-toolbar-classic .x-btn-ml{background-position:0 -24px} .x-toolbar-classic .x-btn-mr{background-position:-3px -24px} .x-toolbar-classic .x-btn-mc{background-position:0 -1096px} .x-toolbar-classic .x-btn-bl{background-position:0 -3px} .x-toolbar-classic .x-btn-br{background-position:-3px -3px} .x-toolbar-classic .x-btn-bc{background-position:0 -15px}.x-table-layout-cell{vertical-align:top;}.x-form-field-wrap.x-top-note .x-form-trigger{top:auto;}.x-btn-no-arrow{padding-right:0px !important;background:none !important;}.x-form-indicator{height:18px;position:absolute;left:0;top:0;display:block;background-color: transparent;background-repeat:no-repeat;background-position:0 3px;padding-top:3px;}.x-column-layout-ct {overflow:hidden;zoom:1;}.x-column-layout-bg-ct, .x-column-layout-bg-ct .x-column-inner {background-color:#f0f0f0;}.x-theme-blue .x-column-layout-bg-ct, .blue .x-column-layout-bg-ct .x-column-inner {background-color:#dfe8f6;}.x-fieldset.x-column{padding:10px;padding-top:0px;}.x-top-note-label{margin-top:14px;}.x-form-item .x-form-element .x-form-display-field{padding-top:3px;}.ux-layout-center-item{margin:0 auto;text-align:left;}.x-form-field-wrap .x-form-text.clear-right{border-right:0px !important} .x-form-field-wrap img.shift-trigger{margin-left:-1px !important}.x-combo-list-item{border: 1px dotted white;} .x-multi-selected{border: 1px dotted black;cursor:pointer;} .x-mcombo-nimg-item img {height:16px;width:0px;float:left;} .x-mcombo-img-item img {width:16px;height:16px;float:left;background-color: transparent; background-position: -1px -1px !important; background-repeat:no-repeat !important;}.ux-editable-grid{padding:0;}.x-notification-auto-hide .x-tool-close{display:none !important}.x-grid3-row-expanded .x-grid3-row-expander {background-position:-21px 2px;} .x-grid3-row-collapsed .x-grid3-row-expander {background-position:4px 2px;} .x-grid3-row-expanded .x-grid3-row-body {display:block !important;} .x-grid3-row-collapsed .x-grid3-row-body {display:none !important;}.x-form-invalid.x-form-composite{background-color:transparent !important;}.x-form-file-wrap.x-box-item{position:absolute;}.x-fieldset{padding-top: 0px !important;}.ext-shim{background-color:#cccccc;}.x-tab-strip-text{text-overflow:ellipsis;white-space:nowrap;overflow:hidden;}</style>
+	<script type="text/javascript">
+	//<![CDATA[
+		Ext.net.ResourceMgr.init({id:"ResourceManager1",BLANK_IMAGE_URL:"/extjs/resources/images/default/s-gif/ext.axd",aspForm:"form1",theme:"blue"});Ext.onReady(function(){Ext.QuickTips.init();new Ext.form.DisplayField({id:"ctl07_Message",renderTo:"ctl07_Message_Container",value:"<font size=\"5\" color =\"red\"><div dir='ltr' align = 'left'>Welcome Ammar Ahmed Ammar Abdel Nabi</div><br><div dir=\"rtl\" align=\"right\">بيان الانذارات الاكاديمية للطالب منذ بدء العام الاكاديمى 2008/2009 كالتالى:    </br>1-خريف 2018<br><br> ويعد هذا البيان بمثابة اعلان رسمى من  للطالب </div><br><hr> <div dir = 'rtl' align='center'><br>1- يتم تطبيق حساب الرسوم الدراسية للطالب الذي سبق رسوبه في مقرر دراسي (مرتين) علي المعدل الحالي للعام الجامعي 2021/2022 .<br>  2- يرصد تقدير راسب (F)  للطالب الذي تم حرمانه من حضور الأمتحان النهائي لتجاوز نسبة الغياب المقرر طبقاً للائحة الدراسية (بند 19/5).<br>  3- فى حالات التحسين عند إنسحاب الطالب من المقرر في المرحلة الثانية (WITHDRAWAL)؛ يتم إلغاء النتيجة السابقة للمقرر وتحتسب نتيجة المقرر (W) وعليه يجب إعادة دراسة المقرر مرة أخري.<br><br><br>  <hr> <div dir = \"rtl\" align=\"center\"> انذارات غياب فصل ربيع 2022 <br> <br> انذار اول فى مقرر Medical Monitors &amp; Life Support Equipment-SBEN226 بتاريخ Apr  8 2022 11:28PM</font>"});});
+	//]]>
+	</script>
+</head>
+<body class="   ext-webkit ext-chrome" id="ext-gen4" data-new-gr-c-s-check-loaded="14.1060.0" data-gr-ext-installed="">
+    <form method="post" action="http://chreg.eng.cu.edu.eg/SIS/Modules/MetaLoader.aspx?path=%7e%2fSIS%2fModules%2fStudent%2fWarning%2fWarning.ascx" id="form1">
+<div class="aspNetHidden">
+<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="">
+<input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="">
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="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">
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['form1'];
+if (!theForm) {
+    theForm = document.form1;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+</script>
+
+
+<script src="./WebResource.axd" type="text/javascript"></script>
+
+
+<script src="./ScriptResource.axd" type="text/javascript"></script>
+<script src="./ScriptResource(1).axd" type="text/javascript"></script>
+<div class="aspNetHidden">
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="122479DE">
+	<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="/wEdAAL4QtF8FQaqIKPmm+Cc7howBUdYWMLkI/tXuqI0HQ389N+xOeDXuhd+mZAnieKIAc/e18rzgPYBgdPzta2ex/o6">
+</div>
+    
+    <div>
+        <script type="text/javascript">
+//<![CDATA[
+Sys.WebForms.PageRequestManager._initialize('ScriptManager1', 'form1', [], [], [], 36000, '');
+//]]>
+</script>
+
+    
+    <div id="ctl07_Message_Container" style="display:inline;">
+
+<div id="ctl07_Message" name="ctl07_Message" class=" x-form-display-field"><font size="5" color="red"><div dir="ltr" align="left">Welcome Ammar Ahmed Ammar Abdel Nabi</div><br><div dir="rtl" align="right">بيان الانذارات الاكاديمية للطالب منذ بدء العام الاكاديمى 2008/2009 كالتالى:    <br>1-خريف 2018<br><br> ويعد هذا البيان بمثابة اعلان رسمى من  للطالب </div><br><hr> </font><div dir="rtl" align="center"><font size="5" color="red"><br>1- يتم تطبيق حساب الرسوم الدراسية للطالب الذي سبق رسوبه في مقرر دراسي (مرتين) علي المعدل الحالي للعام الجامعي 2021/2022 .<br>  2- يرصد تقدير راسب (F)  للطالب الذي تم حرمانه من حضور الأمتحان النهائي لتجاوز نسبة الغياب المقرر طبقاً للائحة الدراسية (بند 19/5).<br>  3- فى حالات التحسين عند إنسحاب الطالب من المقرر في المرحلة الثانية (WITHDRAWAL)؛ يتم إلغاء النتيجة السابقة للمقرر وتحتسب نتيجة المقرر (W) وعليه يجب إعادة دراسة المقرر مرة أخري.<br><br><br>  <hr> </font><div dir="rtl" align="center"><font size="5" color="red"> انذارات غياب فصل ربيع 2022 <br> <br> انذار اول فى مقرر Medical Monitors &amp; Life Support Equipment-SBEN226 بتاريخ Apr  8 2022 11:28PM</font></div></div></div></div>
+
+    </div>
+    <input id="BData" name="BData" type="hidden" value="">
+    </form>
+    <script type="text/javascript">
+        try {
+            document.getElementById("BData").value = GetBrowsingData();
+        }
+        catch (err) {
+            document.getElementById("BData").value = 'JsErr';
+        }
+    </script>
+
+
+<div id="ext-comp-1001" class=" x-tip" style="position: absolute; z-index: 20002; visibility: hidden; display: none;"><div class="x-tip-tl"><div class="x-tip-tr"><div class="x-tip-tc"><div class="x-tip-header x-unselectable" id="ext-gen5"><span class="x-tip-header-text"></span></div></div></div></div><div class="x-tip-bwrap" id="ext-gen6"><div class="x-tip-ml"><div class="x-tip-mr"><div class="x-tip-mc" id="ext-gen9"><div class="x-tip-body" id="ext-gen7" style="height: auto;"></div></div></div></div><div class="x-tip-bl x-panel-nofooter" id="ext-gen8"><div class="x-tip-br"><div class="x-tip-bc"></div></div></div></div><div class="x-tip-anchor x-tip-anchor-top" id="ext-gen10" style="z-index: 20003;"></div></div></body><grammarly-desktop-integration data-grammarly-shadow-root="true"></grammarly-desktop-integration></html>
