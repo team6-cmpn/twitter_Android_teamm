@@ -63,6 +63,7 @@ class _NotificationsPageState extends State<NotificationsPage> {
                 Tab(text: 'All'),
                 Tab(text: 'Likes'),
               ],
+              labelColor: Colors.blueAccent,
             ),
           ),
           body: TabBarView(

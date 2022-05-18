@@ -58,7 +58,7 @@ class AccountInfoPageState extends State<AccountInfoPage> {
                   ),
                   ListTile(
                     title: Text('Phone number'),
-                    subtitle: userdata.phonenum == null
+                    subtitle: userdata.phonenum == ""
                         ? Text("No phone number registered")
                         : Text(userdata.phonenum),
                     onTap: () => {},
@@ -83,6 +83,7 @@ class AccountInfoPageState extends State<AccountInfoPage> {
                           TextButton(
                               onPressed: () {
                                 userdata.token = null;
+
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(

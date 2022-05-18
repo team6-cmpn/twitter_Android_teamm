@@ -38,8 +38,7 @@ class MyApp extends StatelessWidget {
       themeMode: ThemeMode.system,
       theme: ThemeClass.lightTheme,
       darkTheme: ThemeClass.darkTheme,
-      home: AuthContainer(),
-      //userdata.token == null ? WelcomeScreen() : CustomNavBar(),
+      home: userdata.token == null ? WelcomeScreen() : CustomNavBar(),
     );
     // ChangeNotifierProvider(
     //   create: (context) => GoogleSignInProvider(),

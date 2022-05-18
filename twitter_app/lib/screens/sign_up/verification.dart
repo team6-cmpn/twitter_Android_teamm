@@ -159,8 +159,7 @@ class _VerificationBodyState extends State<VerificationBody> {
           print(token);
           Navigator.of(context).pushAndRemoveUntil(
               MaterialPageRoute(
-                  builder: (BuildContext context) =>
-                      CustomNavBar(token: token)),
+                  builder: (BuildContext context) => CustomNavBar()),
               (Route<dynamic> route) => false);
           dataResponse = mapResponse;
         },

@@ -35,10 +35,10 @@ class BodyForLoginScreen extends StatefulWidget {
 
 class _BodyForLoginScreenState extends State<BodyForLoginScreen> {
   final formKey = GlobalKey<FormState>();
-  final String token = '';
-  TextEditingController userController = new TextEditingController();
 
-  TextEditingController passwordController = new TextEditingController();
+  final userController = TextEditingController();
+
+  final passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -148,9 +148,10 @@ class _BodyForLoginScreenState extends State<BodyForLoginScreen> {
                 TextFieldContainer(
                   obs: true,
                   size: size,
-                  titleText: '  password',
+                  titleText: '  Password',
                   passedOnChanged: (value) {},
                   nameController: passwordController,
+
                   //validator: (value) => emailValidator.validate(value),
                 ),
               ],
@@ -169,7 +170,10 @@ class _BodyForLoginScreenState extends State<BodyForLoginScreen> {
                     ),
                   ), */
 
-                  SignIn(userController.text, passwordController.text, token),
+                  SignIn(
+                    userController.text,
+                    passwordController.text,
+                  ),
                 }
             },
             colorPassed: Colors.black,
@@ -244,7 +248,7 @@ class _BodyForLoginScreenState extends State<BodyForLoginScreen> {
     );
   }
 
-  SignIn(String email, String password, String token) async {
+  SignIn(String email, String password) async {
     Map data = {'data': email, 'password': password};
     //var jsonData = null;
     Map mapResponse;
@@ -254,23 +258,24 @@ class _BodyForLoginScreenState extends State<BodyForLoginScreen> {
     if (response.statusCode == 200) {
       mapResponse = json.decode(response.body);
       dataResponse = mapResponse;
-      userdata.token = dataResponse["accessToken"];
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      prefs.setString('userdata.token', userdata.token);
 
+      // SharedPreferences prefs = await SharedPreferences.getInstance();
+      // prefs.setString(userdata.token, token);
+      userdata.token = dataResponse["accessToken"];
       userdata.name = dataResponse["user"]["name"];
       userdata.username = dataResponse["user"]["username"];
-      userdata.email = dataResponse["user"]["phoneNumber"];
+      userdata.email = dataResponse["user"]["email"];
+      userdata.phonenum = dataResponse["user"]["phoneNumber"];
+      userdata.password = password;
+
       setState(
         () {
           //dataResponse = mapResponse["data"];
           //dataResponse["role"].toString() == 'Admin'
-          print('nooooooooooo');
-          print(token);
+
           Navigator.of(context).pushAndRemoveUntil(
               MaterialPageRoute(
-                  builder: (BuildContext context) =>
-                      CustomNavBar(token: token)),
+                  builder: (BuildContext context) => CustomNavBar()),
               (Route<dynamic> route) => false);
           dataResponse = mapResponse;
         },

@@ -12,19 +12,20 @@ class AuthContainer extends StatefulWidget {
 
 class _AuthContainerState extends State<AuthContainer> {
   bool initial = true;
-
+  String token;
   @override
   Widget build(BuildContext context) {
     if (initial) {
       SharedPreferences.getInstance().then((sharedPrefValue) {
         setState(() {
           initial = false;
-          userdata.token = sharedPrefValue.getString(userdata.token);
+          token = sharedPrefValue.getString(userdata.token);
+          print(token);
         });
       });
       return CircularProgressIndicator();
     } else {
-      if (userdata.token == null) {
+      if (token == null) {
         return WelcomeScreen();
       } else {
         return CustomNavBar();
