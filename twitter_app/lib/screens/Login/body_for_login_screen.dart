@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 import 'package:twitter_app/components/google_sign_in.dart';
 import 'package:twitter_app/components/widgets/Unusednavbar.dart';
@@ -254,7 +255,12 @@ class _BodyForLoginScreenState extends State<BodyForLoginScreen> {
       mapResponse = json.decode(response.body);
       dataResponse = mapResponse;
       userdata.token = dataResponse["accessToken"];
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      prefs.setString('userdata.token', userdata.token);
+
       userdata.name = dataResponse["user"]["name"];
+      userdata.username = dataResponse["user"]["username"];
+      userdata.email = dataResponse["user"]["phoneNumber"];
       setState(
         () {
           //dataResponse = mapResponse["data"];

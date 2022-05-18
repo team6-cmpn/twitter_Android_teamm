@@ -4,13 +4,15 @@ import 'package:flutter/material.dart';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
+import 'package:twitter_app/components/widgets/CustomNavBar2.0.dart';
+import 'package:twitter_app/screens/Login/checklogin.dart';
 //import 'package:flutter/services.dart';
 
 import './unused/constants.dart';
 import './components/google_sign_in.dart';
 import './screens/welcome/welcome_screen.dart';
 import 'components/widgets/DarkMode/themeclass.dart';
-
+import '../../API/userdata.dart';
 //import 'package:firebase_core/firebase_core.dart';
 
 Future main() async {
@@ -36,7 +38,8 @@ class MyApp extends StatelessWidget {
       themeMode: ThemeMode.system,
       theme: ThemeClass.lightTheme,
       darkTheme: ThemeClass.darkTheme,
-      home: WelcomeScreen(),
+      home: AuthContainer(),
+      //userdata.token == null ? WelcomeScreen() : CustomNavBar(),
     );
     // ChangeNotifierProvider(
     //   create: (context) => GoogleSignInProvider(),

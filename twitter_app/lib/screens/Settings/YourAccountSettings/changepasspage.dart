@@ -74,10 +74,6 @@ class changepassword {
 }
 
 class ResetPasswordPage extends StatefulWidget {
-  ResetPasswordPage(
-    String lxrdtoken,
-  );
-
   @override
   State<ResetPasswordPage> createState() => _ResetPasswordPageState();
 }
