@@ -23,7 +23,7 @@ class TweetBoxWidgety extends StatefulWidget {
 class _TweetBoxWidgetyState extends State<TweetBoxWidgety> {
   final List<TweetModel> Tweets = [
     TweetModel(
-      username: " Ammar",
+      name: " Ammar",
       tweetmessg: "my name is ammar",
       twitterHandle: "@Ammar1",
       time: "7h",
@@ -36,7 +36,7 @@ class _TweetBoxWidgetyState extends State<TweetBoxWidgety> {
       retweets: 15,
     ),
     TweetModel(
-      username: " lord",
+      name: " lord",
       tweetmessg: "my name is mohamed",
       twitterHandle: "@lxrd",
       time: "3h",
@@ -49,7 +49,7 @@ class _TweetBoxWidgetyState extends State<TweetBoxWidgety> {
       retweets: 22,
     ),
     TweetModel(
-      username: " hassan",
+      name: " hassan",
       tweetmessg: "here is my first tweet",
       twitterHandle: "@hassan",
       time: "3h",
@@ -62,7 +62,7 @@ class _TweetBoxWidgetyState extends State<TweetBoxWidgety> {
       retweets: 0,
     ),
     TweetModel(
-      username: " Gemy",
+      name: " Gemy",
       tweetmessg: "we Don't need memories ",
       twitterHandle: "@gemmmy",
       time: "7h",
@@ -75,7 +75,7 @@ class _TweetBoxWidgetyState extends State<TweetBoxWidgety> {
       retweets: 9,
     ),
     TweetModel(
-      username: " Eren",
+      name: " Eren",
       tweetmessg: "Keep moving forward all the time",
       twitterHandle: "@Eren00",
       time: "2h",
@@ -88,7 +88,7 @@ class _TweetBoxWidgetyState extends State<TweetBoxWidgety> {
       retweets: 8,
     ),
     TweetModel(
-      username: " Ammar",
+      name: " Ammar",
       tweetmessg: "my name is ammar",
       twitterHandle: "@Ammar1",
       time: "7h",
@@ -101,7 +101,7 @@ class _TweetBoxWidgetyState extends State<TweetBoxWidgety> {
       retweets: 15,
     ),
     TweetModel(
-      username: " lord",
+      name: " lord",
       tweetmessg: "my name is mohamed",
       twitterHandle: "@lxrd",
       time: "3h",
@@ -114,7 +114,7 @@ class _TweetBoxWidgetyState extends State<TweetBoxWidgety> {
       retweets: 22,
     ),
     TweetModel(
-      username: " hassan",
+      name: " hassan",
       tweetmessg: "here is my first tweet",
       twitterHandle: "@hassan",
       time: "3h",
@@ -127,7 +127,7 @@ class _TweetBoxWidgetyState extends State<TweetBoxWidgety> {
       retweets: 0,
     ),
     TweetModel(
-      username: " Gemy",
+      name: " Gemy",
       tweetmessg: "we Don't need memories ",
       twitterHandle: "@gemmmy",
       time: "7h",
@@ -140,7 +140,7 @@ class _TweetBoxWidgetyState extends State<TweetBoxWidgety> {
       retweets: 9,
     ),
     TweetModel(
-      username: " Eren",
+      name: " Eren",
       tweetmessg: "Keep moving forward all the time",
       twitterHandle: "@Eren00",
       time: "2h",

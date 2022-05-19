@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
-import 'package:twitter_app/components/widgets/sidemenu.dart';
+import 'package:twitter_app/API/userdata.dart';
 
 import '../../screens/Settings/notificationspage.dart';
 import '../../screens/Settings/settingspage.dart';
@@ -31,7 +31,9 @@ class _CustomNavBarState extends State<CustomNavBar> {
   var _currentIndex = 0;
 
   List<Widget> pages = [
-    TimelinePage(),
+    TimelinePage(
+      token: userdata.token,
+    ),
     NotificationsPage(),
     SettingsPage(),
     Text("Profile"),
