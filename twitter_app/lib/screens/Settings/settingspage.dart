@@ -9,6 +9,7 @@ import 'notificationsettings.dart';
 import 'searchsettingspage.dart';
 import 'testpage.dart';
 import 'YourAccountSettings/youraccountpage.dart';
+import '../../API/userdata.dart';
 
 class SettingsPage extends StatefulWidget {
   @override
@@ -40,7 +41,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 style: TextStyle(fontSize: 20.0),
               ),
               Text(
-                "@Username",
+                userdata.username,
                 style: TextStyle(fontSize: 15.0),
               )
             ],
@@ -49,37 +50,38 @@ class _SettingsPageState extends State<SettingsPage> {
         body: Column(
           //buildlist(),
           children: [
-            Material(
-              elevation: 0,
-              child: Container(
-                alignment: Alignment.topCenter,
-                child: SizedBox(
-                  width: 500,
-                  child: ElevatedButton.icon(
-                    icon: Icon(
-                      Icons.search,
-                      size: 24.0,
-                    ),
-                    label: Text('Search Settings', style: TextStyle()),
-                    onPressed: () => {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => SearchBar(),
-                        ),
-                      ),
-                    },
-                    style: ElevatedButton.styleFrom(
-                      shape: new RoundedRectangleBorder(
-                        borderRadius: new BorderRadius.circular(30.0),
-                      ),
-                      primary:
-                          Color.fromARGB(255, 211, 208, 208).withOpacity(0.9),
-                    ),
-                  ),
-                ),
-              ),
-            ),
+            // Material(
+            //   elevation: 0,
+            //   child: Container(
+            //     alignment: Alignment.topCenter,
+            //     child: SizedBox(
+            //       width: 500,
+            //       child: ElevatedButton.icon(
+            //         icon: Icon(
+            //           Icons.search,
+            //           size: 24.0,
+            //         ),
+            //         label: Text('Search Settings', style: TextStyle()),
+            //         onPressed: () => {
+            //           Navigator.push(
+            //             context,
+            //             MaterialPageRoute(
+            //               builder: (context) => SearchBar(),
+            //             ),
+            //           ),
+            //         },
+            //         style: ElevatedButton.styleFrom(
+            //           shape: new RoundedRectangleBorder(
+            //             borderRadius: new BorderRadius.circular(30.0),
+            //           ),
+            //           primary:
+            //               Color.fromARGB(255, 211, 208, 208).withOpacity(0.9),
+            //         ),
+            //       ),
+            //     ),
+            //   ),
+            // ),
+            SizedBox(height: 25),
             Expanded(
               child: ListView(
                 padding: EdgeInsets.zero,
