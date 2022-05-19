@@ -297,7 +297,7 @@ class _BodyForLoginScreenState extends State<BodyForLoginScreen> {
       userdata.token = dataResponse["accessToken"];
       userdata.name = dataResponse["user"]["name"];
       userdata.username = dataResponse["user"]["username"];
-      userdata.idUser = mapResponse['user']['_id'];
+      userdata.idUser = dataResponse['user']['_id'];
       userdata.email = dataResponse["user"]["email"];
       userdata.phonenum = dataResponse["user"]["phoneNumber"];
       userdata.password = password;
