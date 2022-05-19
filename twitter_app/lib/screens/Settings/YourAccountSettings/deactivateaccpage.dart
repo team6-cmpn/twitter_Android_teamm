@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'dart:async';
 
-Future<bool> DeactivateAccountApi() async {
+Future<String> DeactivateAccountApi() async {
   Map responsedata;
   userdata.isdeactivated = false;
 
@@ -35,7 +35,37 @@ Future<bool> DeactivateAccountApi() async {
     print('Internal Server Error');
   }
 
-  return userdata.isdeactivated;
+  return message;
+}
+
+Future<String> ReactivateAccountApi() async {
+  Map responsedata;
+
+  // Map headerdata = {
+  //   "x-access-token": token,
+  // };
+  const String BaseURL = "http://twi-jay.me:8080";
+
+  final response = await http.put(
+      Uri.parse("$BaseURL/settings/reactivateAccount"),
+      headers: {"x-access-token": userdata.token},
+      body: {});
+
+  responsedata = (jsonDecode(response.body));
+  String message = responsedata["message"];
+  print(message);
+
+  if (response.statusCode == 200) {
+    userdata.isdeactivated = false;
+  } else if (response.statusCode == 401) {
+    print('Unauthorized');
+  } else if (response.statusCode == 403) {
+    print('Forbidden');
+  } else if (response.statusCode == 500) {
+    print('Internal Server Error');
+  }
+
+  return message;
 }
 
 class DeactivateAccountPage extends StatelessWidget {

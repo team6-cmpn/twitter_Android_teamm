@@ -95,17 +95,35 @@ class ConfrimPasswordPage extends StatelessWidget {
                                     ),
                                     textAlign: TextAlign.center,
                                   ),
-                                  onPressed: () {
+                                  onPressed: () async {
                                     print(confirmpassword.text);
                                     print(userdata.password);
                                     if (confirmpassword.text ==
                                         userdata.password) {
-                                      DeactivateAccountApi();
-                                      userdata.token = null;
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => WelcomeScreen(),
+                                      String message =
+                                          await DeactivateAccountApi();
+
+                                      showDialog<String>(
+                                        context: context,
+                                        builder: (BuildContext context) =>
+                                            AlertDialog(
+                                          title: const Text(''),
+                                          content: Text(message),
+                                          actions: <Widget>[
+                                            TextButton(
+                                              onPressed: () {
+                                                userdata.token = null;
+                                                Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        WelcomeScreen(),
+                                                  ),
+                                                );
+                                              },
+                                              child: const Text("Ok"),
+                                            ),
+                                          ],
                                         ),
                                       );
                                     } else
@@ -118,8 +136,8 @@ class ConfrimPasswordPage extends StatelessWidget {
                                               "Please enter a correct password"),
                                           actions: <Widget>[
                                             TextButton(
-                                              onPressed: () => Navigator.pop(
-                                                  context, 'Log out'),
+                                              onPressed: () =>
+                                                  Navigator.pop(context, ''),
                                               child: const Text("Ok"),
                                             ),
                                           ],

@@ -6,4 +6,7 @@ class userdata {
   static String phonenum;
   static String password;
   static bool isdeactivated;
+
+  static String activationmessage = null;
+  //static String activationmessage;
 }
