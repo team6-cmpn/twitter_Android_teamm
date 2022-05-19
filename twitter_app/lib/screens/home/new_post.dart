@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:twitter_app/API/userdata.dart';
 import '../../model/tweet_model.dart';
 import 'package:get/get.dart';
 
@@ -12,9 +13,9 @@ class postController extends GetxController {
       isReTweet: false,
       loves: txamount,
       retweets: 0,
-      username: 'Mr.Ahmed hassan',
+      name: userdata.name,
       date: DateTime.now(),
-      twitterHandle: '@mr.gggg',
+      twitterHandle: userdata.idUser,
       time: '1min',
     );
 

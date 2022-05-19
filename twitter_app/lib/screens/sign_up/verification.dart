@@ -144,8 +144,10 @@ class _VerificationBodyState extends State<VerificationBody> {
     Map mapResponse;
     Map dataResponse;
     var response = await http.post(
-        Uri.parse("http://twi-jay.me:8080/auth/confirmation"),
-        body: data);
+      Uri.parse("http://twi-jay.me:8080/auth/confirmation"),
+      body: data,
+    );
+    //headers:token;
     print('we r here');
     if (response.statusCode == 200) {
       mapResponse = json.decode(response.body);

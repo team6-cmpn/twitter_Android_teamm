@@ -6,7 +6,21 @@ import '../../screens/Settings/notificationspage.dart';
 import '../../screens/Settings/settingspage.dart';
 import '../../screens/home/Timeline.dart';
 
+void main() {
+  runApp(CustomNavBar());
+}
+
 class CustomNavBar extends StatefulWidget {
+  static final title = 'salomon_bottom_bar';
+
+  final String token;
+
+  CustomNavBar({
+    Key key,
+    @required this.token,
+  }) : super(key: key);
+
+  @override
   _CustomNavBarState createState() => _CustomNavBarState();
 }
 
@@ -14,7 +28,7 @@ class _CustomNavBarState extends State<CustomNavBar> {
   var _currentIndex = 0;
 
   List<Widget> pages = [
-    TimelinePage(token: userdata.token,),
+    TimelinePage(),
     NotificationsPage(),
     SettingsPage(),
     Text("Profile"),

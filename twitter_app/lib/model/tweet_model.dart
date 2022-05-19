@@ -9,14 +9,14 @@ class TweetModel {
   int comments, retweets, loves;
 
   String tweetmessg;
-  String username;
+  String name;
   String time;
   String twitterHandle;
 
   DateTime date;
 
   TweetModel({
-    @required this.username,
+    @required this.name,
     @required this.tweetmessg,
     this.time,
     this.date,

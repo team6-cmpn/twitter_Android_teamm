@@ -2,16 +2,14 @@
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-//import 'package:twitter_app/components/widgets/customnavbar.dart';
-//import 'package:twitter_app/screens/Settings/settingspage.dart';
+import 'package:twitter_app/API/userdata.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+
 import '../../components/greyLine_seperator.dart';
 import '../../components/widgets/sidemenu.dart';
-import '../Settings/notificationspage.dart';
-//import 'twitter_drawer.dart';
-//import '../../model/tweetBoxWidgety.dart';
 import '../../model/tweet_model.dart';
-// ignore: unused_import
-import '../../state/drawer_for_icon.dart';
+import '../Settings/notificationspage.dart';
 
 const TextStyle _textStyle = TextStyle(
   fontSize: 40,
@@ -22,36 +20,496 @@ const TextStyle _textStyle = TextStyle(
 
 class TimelinePage extends StatefulWidget {
   final String token;
+  final String userName;
+  final String nameOfUser;
 
   TimelinePage({
     Key key,
-    this.token,
+    @required this.token,
+    this.userName,
+    this.nameOfUser,
   }) : super(key: key);
 
   @override
-  State<TimelinePage> createState() => _TimelinePageState(() {
-        print('not here');
-      });
+  State<TimelinePage> createState() => _TimelinePageState();
 }
 
 class _TimelinePageState extends State<TimelinePage> {
   final scrollController = ScrollController();
   var scaffoldkey = GlobalKey<ScaffoldState>();
-  bool scaffoldKey = false;
   final messgController = TextEditingController();
-  final Function addNewPosting;
+  bool scaffoldKey = false;
+  //final Function addNewPosting;
 
-  _TimelinePageState(this.addNewPosting);
+  var idOfPost = '';
+  var token = '';
+  List listOfTweets = [];
+  //List infoOfPosts = [];
+  // List URLss = [];
+  // var URLs;
+  Future<String> countFuture;
 
-  /* Function addNewPost() {
-    addPost;
-    print('we r here');
+  @override
+  void initState() {
+    super.initState();
+    countFuture = getTweetId(userdata.token);
+  }
+
+  Future getTweet(tokenpassed) async {
+    //await Future.delayed(const Duration(seconds: 2));
+    var response = await http.get(
+      Uri.parse(
+        ('http://twi-jay.me:8080/tweets/lookup/1/7'),
+      ),
+      headers: {
+        'x-access-token': tokenpassed,
+      },
+    );
+    if (response.statusCode == 200) {
+      var items = json.decode(response.body);
+      List info = items;
+      setState(
+        () {
+          listOfTweets = info;
+        },
+      );
+    } else {
+      setState(
+        () {
+          print('take care cause the list of Tweets is empty');
+          listOfTweets = [];
+        },
+      );
+    }
+  }
+
+  Future<String> getTweetId(token) async {
+    var response = await http.get(
+      Uri.parse(
+        ('http://twi-jay.me:8080/tweets/lookup/1/7'),
+      ),
+      headers: {
+        'x-access-token': token,
+      },
+    );
+
+    // print('md5l444444444');
+    print(response.statusCode);
+    if (response.statusCode == 200) {
+      var posts = json.decode(response.body)[0];
+      var infoOfPosts = json.decode(response.body)[0]['tweet'];
+      var infoOfUser = json.decode(response.body)[0]['user'];
+      print('this is list of posts');
+      print(infoOfPosts);
+      print('this is posts');
+      print(posts);
+
+      idOfPost = infoOfPosts['_id'];
+    } else if (response.statusCode == 400) {
+      print('bad request');
+    } else if (response.statusCode == 401) {
+      print('Unauthorized');
+    } else if (response.statusCode == 404) {
+      print('Not Found');
+    } else if (response.statusCode == 500) {
+      print('Internal Server Error');
+    }
+    return idOfPost;
+  }
+
+  /* final List<TweetModel> Tweets = [
+    /* TweetModel(
+      name: " Ammar",
+      tweetmessg: "my name is ammar",
+      twitterHandle: "@Ammar1",
+      time: "7h",
+      date: DateTime.now(),
+      comments: 7,
+      isCommented: true,
+      isLiked: true,
+      isReTweet: true,
+      loves: 9,
+      retweets: 15,
+    ),
+    TweetModel(
+      name: " lord",
+      tweetmessg: "my name is mohamed",
+      twitterHandle: "@lxrd",
+      time: "3h",
+      date: DateTime.now(),
+      comments: 5,
+      isCommented: false,
+      isLiked: false,
+      isReTweet: false,
+      loves: 2,
+      retweets: 22,
+    ),
+    TweetModel(
+      name: " hassan",
+      tweetmessg: "here is my first tweet",
+      twitterHandle: "@hassan",
+      time: "3h",
+      date: DateTime.now(),
+      comments: 2,
+      isCommented: false,
+      isLiked: false,
+      isReTweet: false,
+      loves: 13,
+      retweets: 0,
+    ),
+    TweetModel(
+      name: " Gemy",
+      tweetmessg: "we Don't need memories ",
+      twitterHandle: "@gemmmy",
+      time: "7h",
+      date: DateTime.now(),
+      comments: 9,
+      isCommented: false,
+      isLiked: false,
+      isReTweet: true,
+      loves: 0,
+      retweets: 9,
+    ),
+    TweetModel(
+      name: " Eren",
+      tweetmessg: "Keep moving forward all the time",
+      twitterHandle: "@Eren00",
+      time: "2h",
+      date: DateTime.now(),
+      comments: 3,
+      isCommented: false,
+      isLiked: true,
+      isReTweet: false,
+      loves: 7,
+      retweets: 8,
+    ),
+    TweetModel(
+      name: " Ammar",
+      tweetmessg: "my name is ammar",
+      twitterHandle: "@Ammar1",
+      time: "7h",
+      date: DateTime.now(),
+      comments: 1,
+      isCommented: false,
+      isLiked: true,
+      isReTweet: true,
+      loves: 9,
+      retweets: 15,
+    ),
+    TweetModel(
+      name: " lord",
+      tweetmessg: "my name is mohamed",
+      twitterHandle: "@lxrd",
+      time: "3h",
+      date: DateTime.now(),
+      comments: 0,
+      isCommented: false,
+      isLiked: false,
+      isReTweet: false,
+      loves: 2,
+      retweets: 22,
+    ),
+    TweetModel(
+      name: " hassan",
+      tweetmessg: "here is my first tweet",
+      twitterHandle: "@hassan",
+      time: "3h",
+      date: DateTime.now(),
+      comments: 0,
+      isCommented: false,
+      isLiked: false,
+      isReTweet: false,
+      loves: 13,
+      retweets: 0,
+    ),
+    TweetModel(
+      name: " Gemy",
+      tweetmessg: "we Don't need memories ",
+      twitterHandle: "@gemmmy",
+      time: "7h",
+      date: DateTime.now(),
+      comments: 0,
+      isCommented: false,
+      isLiked: false,
+      isReTweet: true,
+      loves: 0,
+      retweets: 9,
+    ),
+    TweetModel(
+      name: " Eren",
+      tweetmessg: "Keep moving forward all the time",
+      twitterHandle: "@Eren00",
+      time: "2h",
+      date: DateTime.now(),
+      comments: 23,
+      isCommented: false,
+      isLiked: true,
+      isReTweet: false,
+      loves: 7,
+      retweets: 8,
+    ), */
+  ];
+ */
+
+  void scrollUp() {
+    final double start = 0;
+    scrollController.animateTo(start,
+        duration: Duration(seconds: 1), curve: Curves.easeIn);
+  }
+
+  Future addPostPage() => showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: Text(
+            'Add Tweet',
+          ),
+          content: TextField(
+            controller: messgController,
+            decoration: InputDecoration(
+              hintText: "What's happening?",
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                addPostt(
+                  messgController.text,
+                  20,
+                );
+              },
+              child: Text('Tweet'),
+            ),
+          ],
+        ),
+      );
+
+/* PostsIntegeration(String username, String name, String token) async {
+    Map data = {'data': email, 'password': password};
+    //var jsonData = null;
+    Map mapResponse;
+    Map dataResponse;
+    String nameResponse;
+    String userResponse;
+    String idResponse;
+
+    var response = await http
+        .post(Uri.parse("http://twi-jay.me:8080/auth/signin"), body: data);
+    if (response.statusCode == 200) {
+      mapResponse = json.decode(response.body);
+      dataResponse = mapResponse;
+      nameResponse = mapResponse['user']['name'];
+      userResponse = mapResponse['user']['username'];
+      idResponse = mapResponse['user']['_id'];
+      print('tez 3ez 7mra');
+      print(nameResponse);
+      token = dataResponse["accessToken"];
+
+      setState(
+        () {
+          //dataResponse = mapResponse["data"];
+          //dataResponse["role"].toString() == 'Admin'
+          print('nooooooooooo');
+          print(token);
+          //print(dataResponse['user']);
+          Navigator.of(context).pushAndRemoveUntil(
+              MaterialPageRoute(
+                builder: (BuildContext context) => TimelinePage(
+                  token: token,
+                  nameOfUser: nameResponse,
+                  name: userResponse,
+                ),
+              ),
+              (Route<dynamic> route) => false);
+          dataResponse = mapResponse;
+        },
+      );
+    } else if (response.statusCode == 400) {
+      print('bad request');
+    } else if (response.statusCode == 401) {
+      print('Unauthorized');
+    } else if (response.statusCode == 404) {
+      print('Not Found');
+    } else if (response.statusCode == 500) {
+      print('Internal Server Error');
+    }
   } */
+
+  Widget getTweetBody() {
+    return ListView.builder(
+      itemCount: listOfTweets.length,
+      itemBuilder: (context, index) {
+        return tweetBoxWidgety(listOfTweets[index]); //Text('index $index');
+      },
+    );
+  }
+
+  Widget tweetBoxWidgety(item) {
+    var name = item['user']['name'];
+    var userName = item['user']['username'];
+    var profilePic = item['url'];
+    var tweetMessg = item['tweet']['text'];
+    var date = item['tweet']['date'];
+    var isLoved = item['tweet']['date'];
+    var isRetweeted = item['tweet']['date'];
+    var isCommented = item['tweet']['date'];
+    var countOfLoves = item['tweet']['date'];
+    var countOfReteweeted = item['tweet']['date'];
+    var countOfComments = item['tweet']['date'];
+
+    //List URLss = item['URLs'];
+    /* if (URLss.isEmpty) {
+      URLs = 'URLss';
+    } else {
+      URLs = URLss[0];
+    } */
+
+    return Container(
+      //decoration: BoxDecoration(border: Border.all(color: Color.fromARGB(255, 0, 0, 0),width: 0)),
+      padding: EdgeInsets.all(7),
+      child: Column(
+        children: [
+          Container(
+            padding: EdgeInsets.only(bottom: 7),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                CircleAvatar(
+                  backgroundImage: NetworkImage('${profilePic}'),
+                  radius: 20,
+                ),
+                SizedBox(
+                  width: 7,
+                ),
+                Text(
+                  "${name} ",
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                ),
+                Text(
+                  "${userName} . ",
+                  style: TextStyle(fontSize: 18),
+                ),
+                Text(
+                  "{item.time}",
+                  style: TextStyle(fontSize: 17),
+                ),
+                Text(
+                  "  ${date}",
+                  style: TextStyle(fontSize: 10),
+                ),
+              ],
+            ),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Text(
+                tweetMessg,
+                style: TextStyle(fontSize: 18),
+              ),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              InkWell(
+                child: Container(
+                  margin: EdgeInsets.all(8),
+                  child: Text.rich(
+                    TextSpan(
+                      children: [
+                        WidgetSpan(
+                          child: FaIcon(
+                            FontAwesomeIcons.comment,
+                            size: 17,
+                          ),
+                        ),
+                        TextSpan(text: '  ${tweetMessg.toString()}'),
+                      ],
+                    ),
+                  ),
+                ),
+                onTap: () {
+                  addComment();
+                },
+              ),
+              InkWell(
+                child: Container(
+                  child: Text.rich(
+                    TextSpan(
+                      children: [
+                        WidgetSpan(
+                            child: isRetweeted
+                                ? FaIcon(
+                                    FontAwesomeIcons.retweet,
+                                    size: 17,
+                                    color: Colors.green,
+                                  )
+                                : FaIcon(
+                                    FontAwesomeIcons.retweet,
+                                    size: 17,
+                                    //color: Colors.green,
+                                  )),
+                        TextSpan(text: '  ${countOfReteweeted.toString()}'),
+                      ],
+                    ),
+                  ),
+                ),
+                onTap: () {
+                  setState(() {
+                    if (isRetweeted == false) {
+                      isRetweeted = true;
+                      countOfReteweeted += 1;
+                    } else {
+                      isRetweeted = false;
+                      countOfReteweeted -= 1;
+                    }
+                  });
+                },
+              ),
+              InkWell(
+                child: Text.rich(
+                  TextSpan(
+                    children: [
+                      WidgetSpan(
+                        child: isLoved
+                            ? FaIcon(
+                                FontAwesomeIcons.solidHeart,
+                                size: 17,
+                                color: Colors.redAccent,
+                              )
+                            : FaIcon(
+                                FontAwesomeIcons.heart,
+                                size: 17,
+                              ),
+                      ),
+                      // TextSpan(text: '  {item.loves.toString()}')
+                    ],
+                  ),
+                ),
+                onTap: () {
+                  setState(() {
+                    if (isLoved == false) {
+                      isLoved = true;
+                      countOfLoves += 1;
+                    } else {
+                      isLoved = false;
+                      countOfLoves -= 1;
+                    }
+                  });
+                }, //function,
+              )
+            ],
+          ),
+          GreyLineSeperator(),
+        ],
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
-    print(widget.token);
-    print('yayy2222222222');
+    //// print(widget.token);
+    //print('we r in timeline');
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -103,24 +561,28 @@ class _TimelinePageState extends State<TimelinePage> {
           ]),
         ),
         key: scaffoldkey,
-        body: SingleChildScrollView(
-          controller: scrollController,
-          child: Column(
-            children: [
-              Text('Fuck off'),
-              tweetBoxWidgety(),
-            ],
-          ),
-
-          /* Column(
-                children: /* Tweets.map((tweetaya) {
-                return tweetBoxWidget(Tweets, true, () {}, 30);
-              }).toList(),*/
-      
-                    [
-                  
-                ]), */
-        ),
+        body:
+            // SingleChildScrollView(
+            //   controller: scrollController,
+            //   child: Column(
+            //     children: [
+            //       Text('zh2ttttttttttttttttt'),
+            //       tweetBoxWidgety(),
+            //     ],
+            //   ),
+            // ),
+            FutureBuilder<String>(
+                future: countFuture,
+                builder: ((context, snapshot) {
+                  if (snapshot.hasData) {
+                    idOfPost = snapshot.data;
+                    getTweet(userdata.token);
+                    //return SingleChildScrollView(child: TweetBoxWidgety());
+                    return getTweetBody();
+                  } else {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+                })),
         drawer: SideMenu(),
         // bottomNavigationBar: MaterialYou(),
         floatingActionButton: FloatingActionButton(
@@ -133,546 +595,6 @@ class _TimelinePageState extends State<TimelinePage> {
       ),
     );
   }
-
-  void scrollUp() {
-    final double start = 0;
-    scrollController.animateTo(start,
-        duration: Duration(seconds: 1), curve: Curves.easeIn);
-  }
-
-  /* Future addCommenet() => showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-          title: Text(
-            'Your comment',
-          ),
-          content: TextField(
-            decoration: InputDecoration(
-              hintText: "Enter your comment",
-            ),
-          ),
-          actions: [
-            TextButton(
-              onPressed: () {},
-              child: Text('submit'),
-            ),
-          ],
-        ),
-      ); */
-
-  Future addPostPage() => showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-          title: Text(
-            'Add Tweet',
-          ),
-          content: TextField(
-            controller: messgController,
-            decoration: InputDecoration(
-              hintText: "What's happening?",
-            ),
-          ),
-          actions: [
-            TextButton(
-              onPressed: () {
-                addPostt(messgController.text, 20);
-              },
-              child: Text('Tweet'),
-            ),
-          ],
-        ),
-      );
-  // Widget tweetBoxWidgety() => Container(
-  //   padding: EdgeInsets.all(0),
-  //   child: Column(
-  //     children: [
-  //       ...Tweets.map(
-  //         (tweetaya) {
-  //           return Container(
-  //             //decoration: BoxDecoration(border: Border.all(color: Color.fromARGB(255, 0, 0, 0),width: 0)),
-  //             padding: EdgeInsets.all(7),
-  //             child: Column(
-  //               children: [
-  //                 Container(
-  //                   padding: EdgeInsets.only(bottom: 7),
-  //                   child: Row(
-  //                     mainAxisAlignment: MainAxisAlignment.start,
-  //                     children: [
-  //                       CircleAvatar(
-  //                         backgroundImage: NetworkImage(
-  //                             'https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png'),
-  //                         radius: 20,
-  //                       ),
-  //                       SizedBox(
-  //                         width: 7,
-  //                       ),
-  //                       Text(
-  //                         "${tweetaya.username} ",
-  //                         style: TextStyle(
-  //                             fontWeight: FontWeight.bold, fontSize: 18),
-  //                       ),
-  //                       Text(
-  //                         "${tweetaya.twitterHandle} . ",
-  //                         style: TextStyle(fontSize: 18),
-  //                       ),
-  //                       Text(
-  //                         "${tweetaya.time}",
-  //                         style: TextStyle(fontSize: 17),
-  //                       ),
-  //                       /* Text(
-  //                         "  ${tweetaya.date}",
-  //                         style: TextStyle(fontSize: 10),
-  //                       ), */
-  //                     ],
-  //                   ),
-  //                 ),
-  //                 Row(
-  //                   mainAxisAlignment: MainAxisAlignment.start,
-  //                   children: [
-  //                     Text(
-  //                       tweetaya.tweetmessg,
-  //                       style: TextStyle(fontSize: 18),
-  //                     ),
-  //                   ],
-  //                 ),
-  //                 Row(
-  //                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-  //                   children: [
-  //                     InkWell(
-  //                       child: Container(
-  //                         margin: EdgeInsets.all(8),
-  //                         child: Text.rich(
-  //                           TextSpan(
-  //                             children: [
-  //                               WidgetSpan(
-  //                                 child: FaIcon(
-  //                                   FontAwesomeIcons.comment,
-  //                                   size: 17,
-  //                                 ),
-  //                               ),
-  //                               TextSpan(
-  //                                   text:
-  //                                       '  ${tweetaya.comments.toString()}'),
-  //                             ],
-  //                           ),
-  //                         ),
-  //                       ),
-  //                       onTap: () {
-  //                         addComment();
-  //                       },
-  //                     ),
-  //                     InkWell(
-  //                       child: Container(
-  //                         child: Text.rich(
-  //                           TextSpan(
-  //                             children: [
-  //                               WidgetSpan(
-  //                                   child: tweetaya.isReTweet
-  //                                       ? FaIcon(
-  //                                           FontAwesomeIcons.retweet,
-  //                                           size: 17,
-  //                                           color: Colors.green,
-  //                                         )
-  //                                       : FaIcon(
-  //                                           FontAwesomeIcons.retweet,
-  //                                           size: 17,
-  //                                           //color: Colors.green,
-  //                                         )),
-  //                               TextSpan(
-  //                                 text: '  ${tweetaya.retweets.toString()}',
-  //                               ),
-  //                             ],
-  //                           ),
-  //                         ),
-  //                       ),
-  //                       onTap: () {
-  //                         setState(() {
-  //                           if (tweetaya.isReTweet == false) {
-  //                             tweetaya.isReTweet = true;
-  //                             tweetaya.retweets += 1;
-  //                           } else {
-  //                             tweetaya.isReTweet = false;
-  //                             tweetaya.retweets -= 1;
-  //                           }
-  //                         });
-  //                       },
-  //                     ),
-  //                     InkWell(
-  //                       child: Text.rich(
-  //                         TextSpan(
-  //                           children: [
-  //                             WidgetSpan(
-  //                               child: tweetaya.isLiked
-  //                                   ? FaIcon(
-  //                                       FontAwesomeIcons.solidHeart,
-  //                                       size: 17,
-  //                                       color: Colors.redAccent,
-  //                                     )
-  //                                   : FaIcon(
-  //                                       FontAwesomeIcons.heart,
-  //                                       size: 17,
-  //                                     ),
-  //                             ),
-  //                             TextSpan(
-  //                                 text: '  ${tweetaya.loves.toString()}')
-  //                           ],
-  //                         ),
-  //                       ),
-  //                       onTap: () {
-  //                         setState(() {
-  //                           if (tweetaya.isLiked == false) {
-  //                             tweetaya.isLiked = true;
-  //                             tweetaya.loves += 1;
-  //                           } else {
-  //                             tweetaya.isLiked = false;
-  //                             tweetaya.loves -= 1;
-  //                           }
-  //                         });
-  //                       }, //function,
-  //                     )
-  //                   ],
-  //                 ),
-  //                 GreyLineSeperator(),
-  //               ],
-  //             ),
-  //           );
-  //         },
-  //       ),
-  //     ],
-  //   ),
-  // );
-
-  void addPostt(String post, int txamount) {
-    final newPost = TweetModel(
-      tweetmessg: post,
-      comments: 0,
-      isCommented: false,
-      isLiked: false,
-      isReTweet: false,
-      loves: txamount,
-      retweets: 0,
-      username: 'Mr.Ahmed hassan',
-      date: DateTime.now(),
-      twitterHandle: '@mr.gggg',
-      time: '1min',
-    );
-
-    setState(() {
-      Tweets.add(newPost);
-    });
-  }
-
-  final List<TweetModel> Tweets = [
-    TweetModel(
-      username: " Ammar",
-      tweetmessg: "my name is ammar",
-      twitterHandle: "@Ammar1",
-      time: "7h",
-      date: DateTime.now(),
-      comments: 7,
-      isCommented: true,
-      isLiked: true,
-      isReTweet: true,
-      loves: 9,
-      retweets: 15,
-    ),
-    TweetModel(
-      username: " lord",
-      tweetmessg: "my name is mohamed",
-      twitterHandle: "@lxrd",
-      time: "3h",
-      date: DateTime.now(),
-      comments: 5,
-      isCommented: false,
-      isLiked: false,
-      isReTweet: false,
-      loves: 2,
-      retweets: 22,
-    ),
-    TweetModel(
-      username: " hassan",
-      tweetmessg: "here is my first tweet",
-      twitterHandle: "@hassan",
-      time: "3h",
-      date: DateTime.now(),
-      comments: 2,
-      isCommented: false,
-      isLiked: false,
-      isReTweet: false,
-      loves: 13,
-      retweets: 0,
-    ),
-    TweetModel(
-      username: " Gemy",
-      tweetmessg: "we Don't need memories ",
-      twitterHandle: "@gemmmy",
-      time: "7h",
-      date: DateTime.now(),
-      comments: 9,
-      isCommented: false,
-      isLiked: false,
-      isReTweet: true,
-      loves: 0,
-      retweets: 9,
-    ),
-    TweetModel(
-      username: " Eren",
-      tweetmessg: "Keep moving forward all the time",
-      twitterHandle: "@Eren00",
-      time: "2h",
-      date: DateTime.now(),
-      comments: 3,
-      isCommented: false,
-      isLiked: true,
-      isReTweet: false,
-      loves: 7,
-      retweets: 8,
-    ),
-    TweetModel(
-      username: " Ammar",
-      tweetmessg: "my name is ammar",
-      twitterHandle: "@Ammar1",
-      time: "7h",
-      date: DateTime.now(),
-      comments: 1,
-      isCommented: false,
-      isLiked: true,
-      isReTweet: true,
-      loves: 9,
-      retweets: 15,
-    ),
-    TweetModel(
-      username: " lord",
-      tweetmessg: "my name is mohamed",
-      twitterHandle: "@lxrd",
-      time: "3h",
-      date: DateTime.now(),
-      comments: 0,
-      isCommented: false,
-      isLiked: false,
-      isReTweet: false,
-      loves: 2,
-      retweets: 22,
-    ),
-    TweetModel(
-      username: " hassan",
-      tweetmessg: "here is my first tweet",
-      twitterHandle: "@hassan",
-      time: "3h",
-      date: DateTime.now(),
-      comments: 0,
-      isCommented: false,
-      isLiked: false,
-      isReTweet: false,
-      loves: 13,
-      retweets: 0,
-    ),
-    TweetModel(
-      username: " Gemy",
-      tweetmessg: "we Don't need memories ",
-      twitterHandle: "@gemmmy",
-      time: "7h",
-      date: DateTime.now(),
-      comments: 0,
-      isCommented: false,
-      isLiked: false,
-      isReTweet: true,
-      loves: 0,
-      retweets: 9,
-    ),
-    TweetModel(
-      username: " Eren",
-      tweetmessg: "Keep moving forward all the time",
-      twitterHandle: "@Eren00",
-      time: "2h",
-      date: DateTime.now(),
-      comments: 23,
-      isCommented: false,
-      isLiked: true,
-      isReTweet: false,
-      loves: 7,
-      retweets: 8,
-    ),
-  ];
-  Widget tweetBoxWidgety() => Container(
-        padding: EdgeInsets.all(0),
-        child: Column(
-          children: [
-            ...Tweets.map(
-              (tweetaya) {
-                return Container(
-                  //decoration: BoxDecoration(border: Border.all(color: Color.fromARGB(255, 0, 0, 0),width: 0)),
-                  padding: EdgeInsets.all(7),
-                  child: Column(
-                    children: [
-                      Container(
-                        padding: EdgeInsets.only(bottom: 7),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            CircleAvatar(
-                              backgroundImage: NetworkImage(
-                                  'https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png'),
-                              radius: 20,
-                            ),
-                            SizedBox(
-                              width: 7,
-                            ),
-                            Text(
-                              "${tweetaya.username} ",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 18),
-                            ),
-                            Text(
-                              "${tweetaya.twitterHandle} . ",
-                              style: TextStyle(fontSize: 18),
-                            ),
-                            Text(
-                              "${tweetaya.time}",
-                              style: TextStyle(fontSize: 17),
-                            ),
-                            /* Text(
-                              "  ${tweetaya.date}",
-                              style: TextStyle(fontSize: 10),
-                            ), */
-                          ],
-                        ),
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Text(
-                            tweetaya.tweetmessg,
-                            style: TextStyle(fontSize: 18),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          InkWell(
-                            child: Container(
-                              margin: EdgeInsets.all(8),
-                              child: Text.rich(
-                                TextSpan(
-                                  children: [
-                                    WidgetSpan(
-                                      child: FaIcon(
-                                        FontAwesomeIcons.comment,
-                                        size: 17,
-                                      ),
-                                    ),
-                                    TextSpan(
-                                        text:
-                                            '  ${tweetaya.comments.toString()}'),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            onTap: () {
-                              addComment();
-                            },
-                          ),
-                          InkWell(
-                            child: Container(
-                              child: Text.rich(
-                                TextSpan(
-                                  children: [
-                                    WidgetSpan(
-                                        child: tweetaya.isReTweet
-                                            ? FaIcon(
-                                                FontAwesomeIcons.retweet,
-                                                size: 17,
-                                                color: Colors.green,
-                                              )
-                                            : FaIcon(
-                                                FontAwesomeIcons.retweet,
-                                                size: 17,
-                                                //color: Colors.green,
-                                              )),
-                                    TextSpan(
-                                      text: '  ${tweetaya.retweets.toString()}',
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            onTap: () {
-                              setState(() {
-                                if (tweetaya.isReTweet == false) {
-                                  tweetaya.isReTweet = true;
-                                  tweetaya.retweets += 1;
-                                } else {
-                                  tweetaya.isReTweet = false;
-                                  tweetaya.retweets -= 1;
-                                }
-                              });
-                            },
-                          ),
-                          InkWell(
-                            child: Text.rich(
-                              TextSpan(
-                                children: [
-                                  WidgetSpan(
-                                    child: tweetaya.isLiked
-                                        ? FaIcon(
-                                            FontAwesomeIcons.solidHeart,
-                                            size: 17,
-                                            color: Colors.redAccent,
-                                          )
-                                        : FaIcon(
-                                            FontAwesomeIcons.heart,
-                                            size: 17,
-                                          ),
-                                  ),
-                                  TextSpan(
-                                      text: '  ${tweetaya.loves.toString()}')
-                                ],
-                              ),
-                            ),
-                            onTap: () {
-                              setState(() {
-                                if (tweetaya.isLiked == false) {
-                                  tweetaya.isLiked = true;
-                                  tweetaya.loves += 1;
-                                } else {
-                                  tweetaya.isLiked = false;
-                                  tweetaya.loves -= 1;
-                                }
-                              });
-                            }, //function,
-                          )
-                        ],
-                      ),
-                      GreyLineSeperator(),
-                    ],
-                  ),
-                );
-              },
-            ),
-          ],
-        ),
-      );
-
-  /* void addPostt(String post, int txamount) {
-    final newPost = TweetModel(
-      tweetmessg: post,
-      comments: 0,
-      isCommented: false,
-      isLiked: false,
-      isReTweet: false,
-      loves: txamount,
-      retweets: 0,
-      username: 'Mr.Ahmed hassan',
-      date: DateTime.now(),
-      twitterHandle: '@mr.gggg',
-      time: '1min',
-    );
-
-    setState(() {
-      Tweets.add(newPost);
-    });
-  } */
 
   Future addComment() => showDialog(
         context: context,
@@ -696,24 +618,23 @@ class _TimelinePageState extends State<TimelinePage> {
         ),
       );
 
-  /* Future addPost() => showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-          title: Text(
-            'Your comment',
-          ),
-          content: TextField(
-            decoration: InputDecoration(
-              hintText: "Enter your comment",
-            ),
-          ),
-          actions: [
-            TextButton(
-              onPressed: () {},
-              child: Text('submit'),
-            ),
-          ],
-        ),
-      ); */
+  void addPostt(String post, int txamount) {
+    final newPost = TweetModel(
+      tweetmessg: post,
+      comments: 0,
+      isCommented: false,
+      isLiked: false,
+      isReTweet: false,
+      loves: txamount,
+      retweets: 0,
+      name: userdata.name,
+      date: DateTime.now(),
+      twitterHandle: userdata.username,
+      time: '1min',
+    );
 
+    setState(() {
+      //Tweets.add(newPost);
+    });
+  }
 }
