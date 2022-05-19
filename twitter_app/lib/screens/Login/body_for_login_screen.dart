@@ -2,13 +2,14 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 import 'package:twitter_app/components/google_sign_in.dart';
 import 'package:twitter_app/components/widgets/Unusednavbar.dart';
 import 'package:twitter_app/components/widgets/CustomNavBar2.0.dart';
+import 'package:twitter_app/screens/Settings/YourAccountSettings/deactivateaccpage.dart';
 
 import 'package:twitter_app/screens/home/Timeline.dart';
-
 /* import 'package:twitter_app/unused/body_for_home_page_screen.dart';
 import 'package:twitter_app/unused/logged_in_widget.dart'; */
 //import 'package:flutter_svg/svg.dart';
@@ -35,10 +36,10 @@ class BodyForLoginScreen extends StatefulWidget {
 
 class _BodyForLoginScreenState extends State<BodyForLoginScreen> {
   final formKey = GlobalKey<FormState>();
-  final String token = '';
-  TextEditingController userController = new TextEditingController();
 
-  TextEditingController passwordController = new TextEditingController();
+  final userController = TextEditingController();
+
+  final passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -116,7 +117,7 @@ class _BodyForLoginScreenState extends State<BodyForLoginScreen> {
                   style: TextStyle(
                     fontSize: 15,
                     //fontWeight: FontWeight.w100,
-
+                    
                     //height: 1,
                   ),
                 ),
@@ -148,16 +149,10 @@ class _BodyForLoginScreenState extends State<BodyForLoginScreen> {
                 TextFieldContainer(
                   obs: true,
                   size: size,
-                  titleText: '  password',
+                  titleText: '  Password',
                   passedOnChanged: (value) {},
-                  doneButton: () {
-                    if (formKey.currentState.validate()) {
-                      print('clicked');
-                      SignIn(
-                          userController.text, passwordController.text, token);
-                    }
-                  },
                   nameController: passwordController,
+
                   //validator: (value) => emailValidator.validate(value),
                 ),
               ],
@@ -166,7 +161,7 @@ class _BodyForLoginScreenState extends State<BodyForLoginScreen> {
           RoundedButton(
             passedText: 'Next',
             textColor: Colors.white,
-            pressed: () => {
+            pressed: () async => {
               if (formKey.currentState.validate())
                 {
                   /* Navigator.push(
@@ -176,7 +171,41 @@ class _BodyForLoginScreenState extends State<BodyForLoginScreen> {
                     ),
                   ), */
 
-                  SignIn(userController.text, passwordController.text, token),
+                  await SignIn(
+                    userController.text,
+                    passwordController.text,
+                  ),
+                  if (userdata.activationmessage ==
+                      "This account is deactivated!")
+                    {
+                      showDialog<String>(
+                        context: context,
+                        builder: (BuildContext context) => AlertDialog(
+                          title: const Text(''),
+                          content: Text(userdata.activationmessage +
+                              "  Would you like to reactivate?"),
+                          actions: <Widget>[
+                            TextButton(
+                              onPressed: () =>
+                                  Navigator.pop(context, 'Log out'),
+                              child: const Text("No"),
+                            ),
+                            TextButton(
+                              onPressed: () async {
+                                await ReactivateAccountApi();
+                                // SignIn(userController.text,
+                                //  passwordController.text);
+                                userdata.activationmessage = null;
+                                Navigator.pop(context, '');
+                                await SignIn(userController.text,
+                                    passwordController.text);
+                              },
+                              child: const Text("Yes"),
+                            ),
+                          ],
+                        ),
+                      )
+                    }
                 }
             },
             colorPassed: Colors.black,
@@ -251,38 +280,44 @@ class _BodyForLoginScreenState extends State<BodyForLoginScreen> {
     );
   }
 
-  SignIn(String email, String password, String token) async {
+  SignIn(String email, String password) async {
     Map data = {'data': email, 'password': password};
     //var jsonData = null;
-    Map mapResponse;
+
     Map dataResponse;
-    var response = await http
-        .post(Uri.parse("http://twi-jay.me:8080/auth/signin"), body: data);
+    const String BaseURL = "http://twi-jay.me:8080";
+
+    final response =
+        await http.post(Uri.parse("$BaseURL/auth/signin"), body: data);
+    dataResponse = json.decode(response.body);
+
     if (response.statusCode == 200) {
-      mapResponse = json.decode(response.body);
-      dataResponse = mapResponse;
+      // SharedPreferences prefs = await SharedPreferences.getInstance();
+      // prefs.setString(userdata.token, token);
       userdata.token = dataResponse["accessToken"];
-      token = dataResponse["accessToken"];
       userdata.name = dataResponse["user"]["name"];
       userdata.username = dataResponse["user"]["username"];
       userdata.idUser = mapResponse['user']['_id'];
+      userdata.email = dataResponse["user"]["email"];
+      userdata.phonenum = dataResponse["user"]["phoneNumber"];
+      userdata.password = password;
+      userdata.isdeactivated = dataResponse["user"]["isDeactivated"];
+      print(userdata.activationmessage);
+
       setState(
         () {
           //dataResponse = mapResponse["data"];
           //dataResponse["role"].toString() == 'Admin'
-          print(userdata.token);
-          print('this is token');
-          print(token);
 
           Navigator.of(context).pushAndRemoveUntil(
               MaterialPageRoute(
-                  builder: (BuildContext context) =>
-                      CustomNavBar(token: token)),
+                  builder: (BuildContext context) => CustomNavBar()),
               (Route<dynamic> route) => false);
-          dataResponse = mapResponse;
         },
       );
     } else if (response.statusCode == 400) {
+      userdata.activationmessage = dataResponse["message"];
+      userdata.token = dataResponse["accessToken"];
       print('bad request');
     } else if (response.statusCode == 401) {
       print('Unauthorized');
@@ -292,7 +327,6 @@ class _BodyForLoginScreenState extends State<BodyForLoginScreen> {
       print('Internal Server Error');
     }
   }
-
 /* class TextFieldContainer extends StatelessWidget {
   final String titleText;
   final ValueChanged<String> passedOnChanged;

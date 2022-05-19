@@ -50,34 +50,7 @@ Future<String> ChangePasswordApi(
   return message;
 }
 
-class changepassword {
-  String currentPassword;
-  String password;
-  String confirmNewPassword;
-
-  changepassword(
-      {this.currentPassword, this.password, this.confirmNewPassword});
-
-  changepassword.fromJson(Map<String, dynamic> json) {
-    currentPassword = json['currentPassword'];
-    password = json['password'];
-    confirmNewPassword = json['confirmNewPassword'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['currentPassword'] = this.currentPassword;
-    data['password'] = this.password;
-    data['confirmNewPassword'] = this.confirmNewPassword;
-    return data;
-  }
-}
-
 class ResetPasswordPage extends StatefulWidget {
-  ResetPasswordPage(
-    String lxrdtoken,
-  );
-
   @override
   State<ResetPasswordPage> createState() => _ResetPasswordPageState();
 }
@@ -121,7 +94,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                 style: TextStyle(fontSize: 20.0),
               ),
               Text(
-                "@Username",
+                userdata.username,
                 style: TextStyle(fontSize: 15.0),
               )
             ],

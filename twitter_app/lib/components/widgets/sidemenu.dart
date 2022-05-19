@@ -4,7 +4,9 @@ import 'package:twitter_app/screens/Settings/bookmarkspage.dart';
 
 import '../../screens/Settings/settingspage.dart';
 import '../../screens/home/Timeline.dart';
+import '../../screens/welcome/welcome_screen.dart';
 import 'CustomNavBar2.0.dart';
+import '../../API/userdata.dart';
 
 class SideMenu extends StatefulWidget {
   const SideMenu({
@@ -164,7 +166,16 @@ class _SideMenuState extends State<SideMenu> {
                 ListTile(
                   leading: Icon(Icons.exit_to_app),
                   title: Text('Logout'),
-                  onTap: () => null,
+                  onTap: () {
+                    userdata.token = null;
+
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => WelcomeScreen(),
+                      ),
+                    );
+                  },
                 ),
               ],
             ),

@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:twitter_app/screens/Settings/YourAccountSettings/confirmpasspag.dart';
 import 'package:twitter_app/screens/Settings/testpage.dart';
+import '../../../API/userdata.dart';
 import 'package:http/http.dart' as http;
 
 import 'dart:convert';
 import 'dart:async';
 
-Future<bool> DeactivateAccountApi(
-  String token,
-) async {
+Future<String> DeactivateAccountApi() async {
   Map responsedata;
-  bool isdeactivated = false;
+  userdata.isdeactivated = false;
 
   // Map headerdata = {
   //   "x-access-token": token,
@@ -19,13 +18,15 @@ Future<bool> DeactivateAccountApi(
 
   final response = await http.put(
       Uri.parse("$BaseURL/settings/deactivateAccount"),
-      headers: {"x-access-token": token},
+      headers: {"x-access-token": userdata.token},
       body: {});
 
   responsedata = (jsonDecode(response.body));
+  String message = responsedata["message"];
+  print(message);
 
   if (response.statusCode == 200) {
-    isdeactivated = true;
+    userdata.isdeactivated = true;
   } else if (response.statusCode == 401) {
     print('Unauthorized');
   } else if (response.statusCode == 403) {
@@ -34,7 +35,37 @@ Future<bool> DeactivateAccountApi(
     print('Internal Server Error');
   }
 
-  return isdeactivated;
+  return message;
+}
+
+Future<String> ReactivateAccountApi() async {
+  Map responsedata;
+
+  // Map headerdata = {
+  //   "x-access-token": token,
+  // };
+  const String BaseURL = "http://twi-jay.me:8080";
+
+  final response = await http.put(
+      Uri.parse("$BaseURL/settings/reactivateAccount"),
+      headers: {"x-access-token": userdata.token},
+      body: {});
+
+  responsedata = (jsonDecode(response.body));
+  String message = responsedata["message"];
+  print(message);
+
+  if (response.statusCode == 200) {
+    userdata.isdeactivated = false;
+  } else if (response.statusCode == 401) {
+    print('Unauthorized');
+  } else if (response.statusCode == 403) {
+    print('Forbidden');
+  } else if (response.statusCode == 500) {
+    print('Internal Server Error');
+  }
+
+  return message;
 }
 
 class DeactivateAccountPage extends StatelessWidget {
@@ -79,7 +110,7 @@ class DeactivateAccountPage extends StatelessWidget {
                         radius: 45,
                       ),
                       Text(
-                        "  @Username",
+                        userdata.username,
                         style: TextStyle(fontSize: 35),
                       ),
                     ],
@@ -146,7 +177,7 @@ class DeactivateAccountPage extends StatelessWidget {
                     height: 20,
                   ),
                   SizedBox(
-                    height: 40,
+                    height: 20,
                   ),
                   Container(
                     width: double.infinity,

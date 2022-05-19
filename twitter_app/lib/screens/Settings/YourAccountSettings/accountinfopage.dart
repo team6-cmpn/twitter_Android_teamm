@@ -1,12 +1,6 @@
 import 'package:flutter/material.dart';
-
-import 'package:sizer/sizer.dart';
-
-import '../../home/Timeline.dart';
-import '../displaysettingspage.dart';
-import '../notificationsettings.dart';
-import '../searchsettingspage.dart';
-import '../testpage.dart';
+import 'package:twitter_app/screens/welcome/welcome_screen.dart';
+import '../../../API/userdata.dart';
 
 class AccountInfoPage extends StatefulWidget {
   @override
@@ -38,7 +32,7 @@ class AccountInfoPageState extends State<AccountInfoPage> {
               style: TextStyle(fontSize: 20.0),
             ),
             Text(
-              "@Username",
+              userdata.username,
               style: TextStyle(fontSize: 15.0),
             )
           ],
@@ -54,12 +48,19 @@ class AccountInfoPageState extends State<AccountInfoPage> {
                 children: <Widget>[
                   ListTile(
                     title: Text('Username'),
-                    subtitle: Text('@Username'),
+                    subtitle: Text(userdata.username),
                     onTap: () => {},
                   ),
                   ListTile(
                     title: Text('Email'),
-                    subtitle: Text('example@gmail.com'),
+                    subtitle: Text(userdata.email),
+                    onTap: () => {},
+                  ),
+                  ListTile(
+                    title: Text('Phone number'),
+                    subtitle: userdata.phonenum == ""
+                        ? Text("No phone number registered")
+                        : Text(userdata.phonenum),
                     onTap: () => {},
                   ),
                   ListTile(
@@ -80,9 +81,17 @@ class AccountInfoPageState extends State<AccountInfoPage> {
                             child: const Text('Cancel'),
                           ),
                           TextButton(
-                            onPressed: () => Navigator.pop(context, 'Log out'),
-                            child: const Text('Log out'),
-                          ),
+                              onPressed: () {
+                                userdata.token = null;
+
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => WelcomeScreen(),
+                                  ),
+                                );
+                              },
+                              child: Text("Log out")),
                         ],
                       ),
                     ),

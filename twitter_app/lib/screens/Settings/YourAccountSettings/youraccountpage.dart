@@ -99,8 +99,7 @@ class _YourAccountPageState extends State<YourAccountPage> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) =>
-                                  ResetPasswordPage(lxrdtoken))),
+                              builder: (context) => ResetPasswordPage())),
                     },
                   ),
                   ListTile(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../API/userdata.dart';
 
 class NotificationSettingsPage extends StatefulWidget {
   @override
@@ -32,7 +33,7 @@ class _NotificationSettingsPageState extends State<NotificationSettingsPage> {
                 style: TextStyle(fontSize: 20.0),
               ),
               Text(
-                "@Username",
+                userdata.username,
                 style: TextStyle(fontSize: 15.0),
               )
             ],

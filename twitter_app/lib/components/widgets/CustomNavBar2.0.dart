@@ -1,29 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
-import 'package:twitter_app/API/userdata.dart';
+import 'package:twitter_app/components/widgets/sidemenu.dart';
 
 import '../../screens/Settings/notificationspage.dart';
 import '../../screens/Settings/settingspage.dart';
 import '../../screens/home/Timeline.dart';
 
-void main() {
-  runApp(CustomNavBar());
-}
-
 class CustomNavBar extends StatefulWidget {
-  static final title = 'salomon_bottom_bar';
-  final String token;
-  final String userName;
-  final String nameOfUser;
-
-  CustomNavBar({
-    Key key,
-    this.token,
-    this.nameOfUser,
-    this.userName,
-  }) : super(key: key);
-
-  @override
   _CustomNavBarState createState() => _CustomNavBarState();
 }
 
@@ -31,9 +14,7 @@ class _CustomNavBarState extends State<CustomNavBar> {
   var _currentIndex = 0;
 
   List<Widget> pages = [
-    TimelinePage(
-      token: userdata.token,
-    ),
+    TimelinePage(token: userdata.token,),
     NotificationsPage(),
     SettingsPage(),
     Text("Profile"),

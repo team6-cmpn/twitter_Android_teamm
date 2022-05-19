@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:twitter_app/API/userdata.dart';
 import '../../../components/rounded_button.dart';
 import '../../forgot_password/FogotPassword.dart';
-
+import '../../welcome/welcome_screen.dart';
+import 'deactivateaccpage.dart';
 
 class ConfrimPasswordPage extends StatelessWidget {
+  final confirmpassword = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -56,7 +59,7 @@ class ConfrimPasswordPage extends StatelessWidget {
                             style: TextStyle(fontWeight: FontWeight.w300)),
                         TextFormField(
                           obscureText: true,
-                          keyboardType: TextInputType.emailAddress,
+                          keyboardType: TextInputType.visiblePassword,
                           decoration: InputDecoration(
                             labelText: "Password",
                             labelStyle: TextStyle(
@@ -65,12 +68,13 @@ class ConfrimPasswordPage extends StatelessWidget {
                             ),
                           ),
                           style: TextStyle(fontSize: 20),
+                          controller: confirmpassword,
                         ),
                         SizedBox(
                           height: 150,
                         ),
                         Container(
-                          height: 60,
+                          height: 40,
                           width: 350,
                           alignment: Alignment.centerLeft,
                           decoration: BoxDecoration(
@@ -91,12 +95,60 @@ class ConfrimPasswordPage extends StatelessWidget {
                                     ),
                                     textAlign: TextAlign.center,
                                   ),
-                                  onPressed: () {}),
+                                  onPressed: () async {
+                                    print(confirmpassword.text);
+                                    print(userdata.password);
+                                    if (confirmpassword.text ==
+                                        userdata.password) {
+                                      String message =
+                                          await DeactivateAccountApi();
+
+                                      showDialog<String>(
+                                        context: context,
+                                        builder: (BuildContext context) =>
+                                            AlertDialog(
+                                          title: const Text(''),
+                                          content: Text(message),
+                                          actions: <Widget>[
+                                            TextButton(
+                                              onPressed: () {
+                                                userdata.token = null;
+                                                Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        WelcomeScreen(),
+                                                  ),
+                                                );
+                                              },
+                                              child: const Text("Ok"),
+                                            ),
+                                          ],
+                                        ),
+                                      );
+                                    } else
+                                      showDialog<String>(
+                                        context: context,
+                                        builder: (BuildContext context) =>
+                                            AlertDialog(
+                                          title: const Text(''),
+                                          content: Text(
+                                              "Please enter a correct password"),
+                                          actions: <Widget>[
+                                            TextButton(
+                                              onPressed: () =>
+                                                  Navigator.pop(context, ''),
+                                              child: const Text("Ok"),
+                                            ),
+                                          ],
+                                        ),
+                                      );
+                                  }),
                             ),
                           ),
                         ),
                         SizedBox(
-                          height: 20,
+                          height: 40,
                         ),
                       ],
                     ),
