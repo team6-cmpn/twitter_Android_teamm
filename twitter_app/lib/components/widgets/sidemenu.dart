@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:twitter_app/API/userdata.dart';
 import 'package:twitter_app/screens/Settings/bookmarkspage.dart';
 
 import '../../screens/Settings/settingspage.dart';
@@ -6,7 +7,10 @@ import '../../screens/home/Timeline.dart';
 import 'CustomNavBar2.0.dart';
 
 class SideMenu extends StatefulWidget {
-  const SideMenu({Key key}) : super(key: key);
+  const SideMenu({
+    Key key,
+    String token,
+  }) : super(key: key);
 
   @override
   State<SideMenu> createState() => _SideMenuState();
@@ -44,7 +48,7 @@ class _SideMenuState extends State<SideMenu> {
                           height: 0,
                         ),
                         Text(
-                          'Mr.Ahmed hassan',
+                          userdata.name,
                           style: TextStyle(
                             color: Colors.black,
                             fontSize: 16,
@@ -55,7 +59,7 @@ class _SideMenuState extends State<SideMenu> {
                           height: 1,
                         ),
                         Text(
-                          '@ammarhunter0',
+                          userdata.username,
                           style: TextStyle(
                             color: Colors.grey,
                             fontSize: 15,

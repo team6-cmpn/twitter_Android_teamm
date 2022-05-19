@@ -8,6 +8,7 @@ import 'package:twitter_app/components/widgets/Unusednavbar.dart';
 import 'package:twitter_app/components/widgets/CustomNavBar2.0.dart';
 
 import 'package:twitter_app/screens/home/Timeline.dart';
+
 /* import 'package:twitter_app/unused/body_for_home_page_screen.dart';
 import 'package:twitter_app/unused/logged_in_widget.dart'; */
 //import 'package:flutter_svg/svg.dart';
@@ -149,6 +150,13 @@ class _BodyForLoginScreenState extends State<BodyForLoginScreen> {
                   size: size,
                   titleText: '  password',
                   passedOnChanged: (value) {},
+                  doneButton: () {
+                    if (formKey.currentState.validate()) {
+                      print('clicked');
+                      SignIn(
+                          userController.text, passwordController.text, token);
+                    }
+                  },
                   nameController: passwordController,
                   //validator: (value) => emailValidator.validate(value),
                 ),
@@ -254,13 +262,18 @@ class _BodyForLoginScreenState extends State<BodyForLoginScreen> {
       mapResponse = json.decode(response.body);
       dataResponse = mapResponse;
       userdata.token = dataResponse["accessToken"];
+      token = dataResponse["accessToken"];
       userdata.name = dataResponse["user"]["name"];
+      userdata.username = dataResponse["user"]["username"];
+      userdata.idUser = mapResponse['user']['_id'];
       setState(
         () {
           //dataResponse = mapResponse["data"];
           //dataResponse["role"].toString() == 'Admin'
-          print('nooooooooooo');
+          print(userdata.token);
+          print('this is token');
           print(token);
+
           Navigator.of(context).pushAndRemoveUntil(
               MaterialPageRoute(
                   builder: (BuildContext context) =>
@@ -279,6 +292,7 @@ class _BodyForLoginScreenState extends State<BodyForLoginScreen> {
       print('Internal Server Error');
     }
   }
+
 /* class TextFieldContainer extends StatelessWidget {
   final String titleText;
   final ValueChanged<String> passedOnChanged;
