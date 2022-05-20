@@ -52,6 +52,8 @@ class _TimelinePageState extends State<TimelinePage> {
 
   Duration constantSuperDuration;
 
+  String BaseURL = 'http://twi-jay.me:8080';
+
   @override
   void initState() {
     super.initState();
@@ -353,6 +355,9 @@ class _TimelinePageState extends State<TimelinePage> {
     var countOfLoves = item['tweet']['favorites'].length;
     var countOfReteweeted = item['tweet']['retweetUsers'].length;
     var countOfComments = item['user']['__v'];
+    var idOfTweet = item['tweet']['_id'];
+    var listOfLove = item['tweet']['favorites'];
+    var listOfRetweet = item['tweet']['retweetUsers'];
 
     constantSuperDuration =
         Duration(seconds: 00, hours: 0, microseconds: 0, days: 1);
@@ -471,6 +476,22 @@ class _TimelinePageState extends State<TimelinePage> {
                 ),
                 onTap: () {
                   setState(() {
+                    isRetweeted = false;
+                    print('this is length of retweets');
+                    print(listOfRetweet.length);
+                    for (int i = 0; i < listOfRetweet.length; i++) {
+                      if (userdata.idUser == listOfRetweet[i]) {
+                        isRetweeted = true;
+                        removeReTweetIntegeration(idOfTweet, userdata.token);
+
+                        break;
+                      }
+                    }
+
+                    if (isRetweeted == false) {
+                      addTweetIntegeration(idOfTweet, userdata.token);
+                      //isLoved = true;
+                    }
                     /* if (isRetweeted == false) {
                       isRetweeted = true;
                       countOfReteweeted += 1;
@@ -502,6 +523,20 @@ class _TimelinePageState extends State<TimelinePage> {
                   ),
                 ),
                 onTap: () {
+                  isLoved = false;
+                  for (int i = 0; i < listOfLove.length; i++) {
+                    if (userdata.idUser == listOfLove[i]) {
+                      isLoved = true;
+                      removeLikeIntegeration(idOfTweet, userdata.token);
+                      break;
+                    }
+                  }
+
+                  if (isLoved == false) {
+                    addLikeIntegeration(idOfTweet, userdata.token);
+                    //isLoved = true;
+                  }
+
                   /* setState(() {
                     if (isLoved == false) {
                       isLoved = true;
@@ -646,7 +681,7 @@ class _TimelinePageState extends State<TimelinePage> {
       twitterHandle: userdata.username,
       time: '1min',
     ); */
-    addTweetIntergeration(
+    addTweetIntegeration(
       post,
       userdata.token,
     );
@@ -655,7 +690,7 @@ class _TimelinePageState extends State<TimelinePage> {
     });
   }
 
-  addTweetIntergeration(String message, String token) async {
+  addTweetIntegeration(String message, String token) async {
     Map data = {
       "text": message,
       "source": '',
@@ -663,9 +698,7 @@ class _TimelinePageState extends State<TimelinePage> {
       "imageUrl": " ",
     };
 
-    //var jsonData = null;
-
-    const String BaseURL = "http://twi-jay.me:8080";
+    //const String BaseURL = "http://twi-jay.me:8080";
     final response = await http.post(
       Uri.parse("$BaseURL/tweets/update"),
       body: data,
@@ -679,6 +712,130 @@ class _TimelinePageState extends State<TimelinePage> {
       // SharedPreferences prefs = await SharedPreferences.getInstance();
       // prefs.setString(userdata.token, token);
 
+      /*  setState(
+        () {
+          //dataResponse = mapResponse["data"];
+          //dataResponse["role"].toString() == 'Admin'
+          Navigator.of(context).pushAndRemoveUntil(
+              MaterialPageRoute(
+                  builder: (BuildContext context) => TimelinePage()),
+              (Route<dynamic> route) => false);
+        },
+      ); */
+
+    } else if (response.statusCode == 400) {
+      print('bad request');
+    } else if (response.statusCode == 401) {
+      print('Unauthorized');
+    } else if (response.statusCode == 404) {
+      print('Not Found');
+    } else if (response.statusCode == 500) {
+      print('Internal Server Error');
+    }
+  }
+
+  addLikeIntegeration(String idOfTweetpassed, String token) async {
+    final response = await http.post(
+      Uri.parse("$BaseURL/tweets/favorites/create/${idOfTweetpassed}"),
+      headers: {
+        'x-access-token': token,
+      },
+    );
+    if (response.statusCode == 200) {
+      print('love will increase by +++++1');
+    } else if (response.statusCode == 400) {
+      print('bad request');
+    } else if (response.statusCode == 401) {
+      print('Unauthorized');
+    } else if (response.statusCode == 404) {
+      print('Not Found');
+    } else if (response.statusCode == 500) {
+      print('Internal Server Error');
+    }
+  }
+
+  removeLikeIntegeration(String idOfTweetpassed, String token) async {
+    //const String BaseURL = "http://twi-jay.me:8080";
+    final response = await http.post(
+      Uri.parse("$BaseURL/tweets/favorites/destroy/${idOfTweetpassed}"),
+      // body: data,
+      headers: {
+        'x-access-token': token,
+      },
+    );
+
+    if (response.statusCode == 200) {
+      print('love will decrease by ------1');
+      /*  setState(
+        () {
+          //dataResponse = mapResponse["data"];
+          //dataResponse["role"].toString() == 'Admin'
+          Navigator.of(context).pushAndRemoveUntil(
+              MaterialPageRoute(
+                  builder: (BuildContext context) => TimelinePage()),
+              (Route<dynamic> route) => false);
+        },
+      ); */
+
+    } else if (response.statusCode == 400) {
+      print('bad request');
+    } else if (response.statusCode == 401) {
+      print('Unauthorized');
+    } else if (response.statusCode == 404) {
+      print('Not Found');
+    } else if (response.statusCode == 500) {
+      print('Internal Server Error');
+    }
+  }
+
+  addReTweetIntegeration(String idOfTweetpassed, String token) async {
+    //const String BaseURL = "http://twi-jay.me:8080";
+    final response = await http.post(
+      Uri.parse("$BaseURL/tweets/retweet/create/${idOfTweetpassed}"),
+      // body: data,
+      headers: {
+        'x-access-token': token,
+      },
+    );
+
+    //Map dataResponse = json.decode(response.body);
+    print('did I enter here');
+    if (response.statusCode == 200) {
+      print('horray');
+      /*  setState(
+        () {
+          //dataResponse = mapResponse["data"];
+          //dataResponse["role"].toString() == 'Admin'
+          Navigator.of(context).pushAndRemoveUntil(
+              MaterialPageRoute(
+                  builder: (BuildContext context) => TimelinePage()),
+              (Route<dynamic> route) => false);
+        },
+      ); */
+
+    } else if (response.statusCode == 400) {
+      print('bad request');
+    } else if (response.statusCode == 401) {
+      print('Unauthorized');
+    } else if (response.statusCode == 404) {
+      print('Not Found');
+    } else if (response.statusCode == 500) {
+      print('Internal Server Error');
+    }
+  }
+
+  removeReTweetIntegeration(String idOfTweetpassed, String token) async {
+    //const String BaseURL = "http://twi-jay.me:8080";
+    final response = await http.post(
+      Uri.parse("$BaseURL/tweets/retweet/destroy/${idOfTweetpassed}"),
+      // body: data,
+      headers: {
+        'x-access-token': token,
+      },
+    );
+
+    if (response.statusCode == 200) {
+      print('horray by reverse');
       /*  setState(
         () {
           //dataResponse = mapResponse["data"];
