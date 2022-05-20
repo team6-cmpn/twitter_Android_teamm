@@ -8,7 +8,7 @@ class userdata {
   static String password;
   static bool isdeactivated;
   static bool isAdmin;
-  static var followingsCount;
+  static int followingsCount = 0;
 
   static String activationmessage = null;
   //static String activationmessage;
