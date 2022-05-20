@@ -152,7 +152,9 @@ class _BodyForLoginScreenState extends State<BodyForLoginScreen> {
                   titleText: '  Password',
                   passedOnChanged: (value) {},
                   nameController: passwordController,
-
+                  doneButton: () {
+                    SignIn(userController.text, passwordController.text);
+                  },
                   //validator: (value) => emailValidator.validate(value),
                 ),
               ],
