@@ -2,15 +2,14 @@
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:twitter_app/API/userdata.dart';
 import 'dart:convert';
 
 import '../Login/background_for_login_screen.dart';
 import '../../components/text_field_container.dart';
-
-import 'verification.dart';
 import '../../components/rounded_button.dart';
-import '../home/Timeline.dart';
 import '../../model/text_field_validation.dart';
+import 'verification.dart';
 
 class BodyForSignUpScreen extends StatefulWidget {
   BodyForSignUpScreen({
@@ -30,7 +29,9 @@ class _BodyForSignUpScreenState extends State<BodyForSignUpScreen> {
   TextEditingController phoneController = new TextEditingController();
   TextEditingController passwordController = new TextEditingController();
   TextEditingController dateController = new TextEditingController();
-  String token;
+
+  String token = '';
+  String messagebody = '';
 
   @override
   Widget build(BuildContext context) {
@@ -164,6 +165,7 @@ class _BodyForSignUpScreenState extends State<BodyForSignUpScreen> {
                       builder: (context) => CustomNavBar(),
                     ),
                   ); */
+                  print('here ?');
                   SignUp(
                     nameController.text,
                     userController.text,
@@ -172,6 +174,7 @@ class _BodyForSignUpScreenState extends State<BodyForSignUpScreen> {
                     passwordController.text,
                     dateController.text,
                     token,
+                    messagebody,
                   );
                 }
               }, //addTransaction //() {},
@@ -186,15 +189,8 @@ class _BodyForSignUpScreenState extends State<BodyForSignUpScreen> {
     );
   }
 
-  SignUp(
-    String name,
-    String userName,
-    String email,
-    String phone,
-    String password,
-    String date,
-    String token,
-  ) async {
+  SignUp(String name, String userName, String email, String phone,
+      String password, String date, String token, String messgbody) async {
     Map data = {
       "name": name,
       "username": userName,
@@ -218,7 +214,9 @@ class _BodyForSignUpScreenState extends State<BodyForSignUpScreen> {
     if (response.statusCode == 200) {
       mapResponse = json.decode(response.body);
       dataResponse = mapResponse;
-      token = dataResponse["accessToken"];
+      token = dataResponse["emailtoken"];
+      messgbody = dataResponse["message"];
+
       setState(
         () {
           print('yayyyyyyyyy');
@@ -228,11 +226,13 @@ class _BodyForSignUpScreenState extends State<BodyForSignUpScreen> {
                   builder: (BuildContext context) =>
                       VerificationBody(token: token)),
               (Route<dynamic> route) => false);
-          dataResponse = mapResponse;
+          //dataResponse = mapResponse;
         },
       );
+      print(messgbody);
       print('goooooooooo');
       print(token);
+      print(userdata.token);
     } else if (response.statusCode == 400) {
       print('bad request');
     } else if (response.statusCode == 401) {

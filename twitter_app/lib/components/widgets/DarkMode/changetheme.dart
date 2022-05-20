@@ -21,7 +21,7 @@ Padding changetheme(String title) {
           scale: 0.7,
           child: Consumer<ThemeNotifier>(
             builder: (context, notifier, child) => CupertinoSwitch(
-              activeColor: Color(0xff6d71ff),
+              activeColor: Colors.blueAccent,
               trackColor: Colors.grey,
               value: notifier.darkTheme,
               onChanged: (val) {
