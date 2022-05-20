@@ -1,23 +1,21 @@
 // ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors, deprecated_member_use
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart';
-import 'dart:convert';
-import 'package:twitter_app/components/google_sign_in.dart';
-import 'package:twitter_app/components/widgets/Unusednavbar.dart';
-import 'package:twitter_app/components/widgets/CustomNavBar2.0.dart';
-import 'package:twitter_app/screens/Settings/YourAccountSettings/deactivateaccpage.dart';
-
 import 'package:twitter_app/screens/home/Timeline.dart';
-/* import 'package:twitter_app/unused/body_for_home_page_screen.dart';
-import 'package:twitter_app/unused/logged_in_widget.dart'; */
-//import 'package:flutter_svg/svg.dart';
-import '../../components/google_rounded_button.dart';
-import '../../components/or_divider_line.dart';
+import 'dart:convert';
+//import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../components/google_rounded_button.dart';
+import '../../components/google_sign_in.dart';
+import '../../components/or_divider_line.dart';
 import '../../components/rounded_button.dart';
+import '../../components/widgets/CustomNavBar2.0.dart';
 import '../../model/text_field_validation.dart';
+import '../Settings/YourAccountSettings/deactivateaccpage.dart';
 import '../forgot_password/FogotPassword.dart';
 import '../../components/text_field_container.dart';
 import '../home/twitter_home_page.dart';
@@ -36,9 +34,7 @@ class BodyForLoginScreen extends StatefulWidget {
 
 class _BodyForLoginScreenState extends State<BodyForLoginScreen> {
   final formKey = GlobalKey<FormState>();
-
   final userController = TextEditingController();
-
   final passwordController = TextEditingController();
 
   @override
@@ -145,18 +141,23 @@ class _BodyForLoginScreenState extends State<BodyForLoginScreen> {
                   passedOnChanged: (value) {},
                   validator: (value) => emailValidator.validate(value),
                   nameController: userController,
+                  //doneButton: null,
                 ),
                 TextFieldContainer(
-                  obs: true,
-                  size: size,
-                  titleText: '  Password',
-                  passedOnChanged: (value) {},
-                  nameController: passwordController,
-                  doneButton: () {
-                    SignIn(userController.text, passwordController.text);
-                  },
-                  //validator: (value) => emailValidator.validate(value),
-                ),
+                    obs: true,
+                    size: size,
+                    titleText: '  Password',
+                    passedOnChanged: (value) {},
+                    nameController: passwordController,
+                    doneButton: () {
+                      SignIn(
+                        userController.text,
+                        passwordController.text,
+                      );
+                    }
+
+                    //validator: (value) => emailValidator.validate(value),
+                    ),
               ],
             ),
           ),
@@ -283,15 +284,16 @@ class _BodyForLoginScreenState extends State<BodyForLoginScreen> {
   }
 
   SignIn(String email, String password) async {
-    Map data = {'data': email, 'password': password};
+    Map data = {
+      'data': email,
+      'password': password,
+    };
     //var jsonData = null;
 
-    Map dataResponse;
     const String BaseURL = "http://twi-jay.me:8080";
-
     final response =
         await http.post(Uri.parse("$BaseURL/auth/signin"), body: data);
-    dataResponse = json.decode(response.body);
+    Map dataResponse = json.decode(response.body);
 
     if (response.statusCode == 200) {
       // SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -304,22 +306,25 @@ class _BodyForLoginScreenState extends State<BodyForLoginScreen> {
       userdata.phonenum = dataResponse["user"]["phoneNumber"];
       userdata.password = password;
       userdata.isdeactivated = dataResponse["user"]["isDeactivated"];
+      userdata.isAdmin = dataResponse['user']['isAdmin'];
+      userdata.profileImage = dataResponse['user']['profile_image_url'];
       print(userdata.activationmessage);
-
+      print('ha?');
+      print(userdata.token);
       setState(
         () {
           //dataResponse = mapResponse["data"];
           //dataResponse["role"].toString() == 'Admin'
-
           Navigator.of(context).pushAndRemoveUntil(
               MaterialPageRoute(
-                  builder: (BuildContext context) => CustomNavBar()),
+                  builder: (BuildContext context) => TimelinePage()),
               (Route<dynamic> route) => false);
         },
       );
     } else if (response.statusCode == 400) {
       userdata.activationmessage = dataResponse["message"];
       userdata.token = dataResponse["accessToken"];
+
       print('bad request');
     } else if (response.statusCode == 401) {
       print('Unauthorized');

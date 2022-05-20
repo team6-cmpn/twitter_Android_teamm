@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:intl/intl.dart';
 import 'package:twitter_app/API/userdata.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -49,6 +50,8 @@ class _TimelinePageState extends State<TimelinePage> {
   // var URLs;
   Future<String> countFuture;
 
+  Duration constantSuperDuration;
+
   @override
   void initState() {
     super.initState();
@@ -59,7 +62,7 @@ class _TimelinePageState extends State<TimelinePage> {
     //await Future.delayed(const Duration(seconds: 2));
     var response = await http.get(
       Uri.parse(
-        ('http://twi-jay.me:8080/tweets/lookup/1/7'),
+        ('http://twi-jay.me:8080/tweets/lookup/1/50'),
       ),
       headers: {
         'x-access-token': tokenpassed,
@@ -86,7 +89,7 @@ class _TimelinePageState extends State<TimelinePage> {
   Future<String> getTweetId(token) async {
     var response = await http.get(
       Uri.parse(
-        ('http://twi-jay.me:8080/tweets/lookup/1/7'),
+        ('http://twi-jay.me:8080/tweets/lookup/1/50'),
       ),
       headers: {
         'x-access-token': token,
@@ -94,16 +97,11 @@ class _TimelinePageState extends State<TimelinePage> {
     );
 
     // print('md5l444444444');
-    print(response.statusCode);
+    //print(response.statusCode);
     if (response.statusCode == 200) {
       var posts = json.decode(response.body)[0];
       var infoOfPosts = json.decode(response.body)[0]['tweet'];
       var infoOfUser = json.decode(response.body)[0]['user'];
-      print('this is list of posts');
-      print(infoOfPosts);
-      print('this is posts');
-      print(posts);
-
       idOfPost = infoOfPosts['_id'];
     } else if (response.statusCode == 400) {
       print('bad request');
@@ -346,23 +344,33 @@ class _TimelinePageState extends State<TimelinePage> {
   Widget tweetBoxWidgety(item) {
     var name = item['user']['name'];
     var userName = item['user']['username'];
-    var profilePic = item['url'];
+    var userProfilePic = item['url'];
     var tweetMessg = item['tweet']['text'];
-    var date = item['tweet']['date'];
-    var isLoved = item['tweet']['date'];
-    var isRetweeted = item['tweet']['date'];
-    var isCommented = item['tweet']['date'];
-    var countOfLoves = item['tweet']['date'];
-    var countOfReteweeted = item['tweet']['date'];
-    var countOfComments = item['tweet']['date'];
+    var date = item['tweet']['created_at'];
+    var isLoved = item['tweet']['hasImage'];
+    var isRetweeted = item['user']['isAdmin'];
+    // var isCommented = item['tweet']['date'];
+    var countOfLoves = item['tweet']['favorites'].length;
+    var countOfReteweeted = item['tweet']['retweetUsers'].length;
+    var countOfComments = item['user']['__v'];
 
-    //List URLss = item['URLs'];
-    /* if (URLss.isEmpty) {
-      URLs = 'URLss';
-    } else {
-      URLs = URLss[0];
-    } */
+    constantSuperDuration =
+        Duration(seconds: 00, hours: 0, microseconds: 0, days: 1);
+    Duration myDuration1 = Duration(seconds: 15, days: 0);
 
+    var timeParsed = DateTime.parse(date);
+    var dateFormated = DateFormat.jm().format(timeParsed);
+
+    // //List URLss = item['URLs'];
+    // /* if (URLss.isEmpty) {
+    //   URLs = 'URLss';
+    // } else {
+    //   URLs = URLss[0];
+    // }
+
+    /* print('here is the pictures');
+    print(userdata.profileImage);
+    print(userdata.profileImage.toString()); */
     return Container(
       //decoration: BoxDecoration(border: Border.all(color: Color.fromARGB(255, 0, 0, 0),width: 0)),
       padding: EdgeInsets.all(7),
@@ -374,7 +382,9 @@ class _TimelinePageState extends State<TimelinePage> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 CircleAvatar(
-                  backgroundImage: NetworkImage('${profilePic}'),
+                  backgroundImage: NetworkImage(isRetweeted
+                      ? userProfilePic.toString()
+                      : 'https://i.pinimg.com/custom_covers/222x/85498161615209203_1636332751.jpg'),
                   radius: 20,
                 ),
                 SizedBox(
@@ -387,15 +397,19 @@ class _TimelinePageState extends State<TimelinePage> {
                 Text(
                   "${userName} . ",
                   style: TextStyle(fontSize: 18),
+                  softWrap: true,
                 ),
-                Text(
-                  "{item.time}",
-                  style: TextStyle(fontSize: 17),
+                Flexible(
+                  child: Text(
+                    //heeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+                    "${(dateFormated).toString()}",
+                    style: TextStyle(fontSize: 17),
+                  ),
                 ),
-                Text(
+                /* Text(
                   "  ${date}",
                   style: TextStyle(fontSize: 10),
-                ),
+                ), */
               ],
             ),
           ),
@@ -419,17 +433,17 @@ class _TimelinePageState extends State<TimelinePage> {
                       children: [
                         WidgetSpan(
                           child: FaIcon(
-                            FontAwesomeIcons.comment,
+                            FontAwesomeIcons.bookmark,
                             size: 17,
                           ),
                         ),
-                        TextSpan(text: '  ${tweetMessg.toString()}'),
+                        TextSpan(text: '  ${countOfComments}'),
                       ],
                     ),
                   ),
                 ),
                 onTap: () {
-                  addComment();
+                  //addComment();
                 },
               ),
               InkWell(
@@ -438,31 +452,32 @@ class _TimelinePageState extends State<TimelinePage> {
                     TextSpan(
                       children: [
                         WidgetSpan(
-                            child: isRetweeted
-                                ? FaIcon(
-                                    FontAwesomeIcons.retweet,
-                                    size: 17,
-                                    color: Colors.green,
-                                  )
-                                : FaIcon(
-                                    FontAwesomeIcons.retweet,
-                                    size: 17,
-                                    //color: Colors.green,
-                                  )),
-                        TextSpan(text: '  ${countOfReteweeted.toString()}'),
+                          child: isRetweeted
+                              ? FaIcon(
+                                  FontAwesomeIcons.retweet,
+                                  size: 17,
+                                  color: Colors.green,
+                                )
+                              : FaIcon(
+                                  FontAwesomeIcons.retweet,
+                                  size: 17,
+                                  //color: Colors.green,
+                                ),
+                        ),
+                        TextSpan(text: '  ${countOfReteweeted}'),
                       ],
                     ),
                   ),
                 ),
                 onTap: () {
                   setState(() {
-                    if (isRetweeted == false) {
+                    /* if (isRetweeted == false) {
                       isRetweeted = true;
                       countOfReteweeted += 1;
                     } else {
                       isRetweeted = false;
                       countOfReteweeted -= 1;
-                    }
+                    } */
                   });
                 },
               ),
@@ -482,12 +497,12 @@ class _TimelinePageState extends State<TimelinePage> {
                                 size: 17,
                               ),
                       ),
-                      // TextSpan(text: '  {item.loves.toString()}')
+                      TextSpan(text: '  ${countOfLoves}')
                     ],
                   ),
                 ),
                 onTap: () {
-                  setState(() {
+                  /* setState(() {
                     if (isLoved == false) {
                       isLoved = true;
                       countOfLoves += 1;
@@ -495,7 +510,7 @@ class _TimelinePageState extends State<TimelinePage> {
                       isLoved = false;
                       countOfLoves -= 1;
                     }
-                  });
+                  }); */
                 }, //function,
               )
             ],
@@ -521,8 +536,7 @@ class _TimelinePageState extends State<TimelinePage> {
             child: Padding(
               padding: const EdgeInsets.all(10.0),
               child: CircleAvatar(
-                backgroundImage: NetworkImage(
-                    'https://previews.123rf.com/images/koblizeek/koblizeek2001/koblizeek200100050/138262629-usuario-miembro-de-perfil-de-icono-de-hombre-vector-de-s%C3%ADmbolo-perconal-sobre-fondo-blanco-aislado-.jpg'),
+                backgroundImage: NetworkImage(userdata.profileImage),
                 radius: 16,
               ),
             ),
@@ -619,7 +633,7 @@ class _TimelinePageState extends State<TimelinePage> {
       );
 
   void addPostt(String post, int txamount) {
-    final newPost = TweetModel(
+    /* final newPost = TweetModel(
       tweetmessg: post,
       comments: 0,
       isCommented: false,
@@ -631,10 +645,59 @@ class _TimelinePageState extends State<TimelinePage> {
       date: DateTime.now(),
       twitterHandle: userdata.username,
       time: '1min',
+    ); */
+    addTweetIntergeration(
+      post,
+      userdata.token,
     );
-
     setState(() {
       //Tweets.add(newPost);
     });
+  }
+
+  addTweetIntergeration(String message, String token) async {
+    Map data = {
+      "text": message,
+      "source": '',
+      "mention": " ",
+      "imageUrl": " ",
+    };
+
+    //var jsonData = null;
+
+    const String BaseURL = "http://twi-jay.me:8080";
+    final response = await http.post(
+      Uri.parse("$BaseURL/tweets/update"),
+      body: data,
+      headers: {
+        'x-access-token': token,
+      },
+    );
+    //Map dataResponse = json.decode(response.body);
+
+    if (response.statusCode == 200) {
+      // SharedPreferences prefs = await SharedPreferences.getInstance();
+      // prefs.setString(userdata.token, token);
+
+      /*  setState(
+        () {
+          //dataResponse = mapResponse["data"];
+          //dataResponse["role"].toString() == 'Admin'
+          Navigator.of(context).pushAndRemoveUntil(
+              MaterialPageRoute(
+                  builder: (BuildContext context) => TimelinePage()),
+              (Route<dynamic> route) => false);
+        },
+      ); */
+
+    } else if (response.statusCode == 400) {
+      print('bad request');
+    } else if (response.statusCode == 401) {
+      print('Unauthorized');
+    } else if (response.statusCode == 404) {
+      print('Not Found');
+    } else if (response.statusCode == 500) {
+      print('Internal Server Error');
+    }
   }
 }

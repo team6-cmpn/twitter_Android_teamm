@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:twitter_app/API/userdata.dart';
 import 'package:twitter_app/screens/Settings/bookmarkspage.dart';
+import 'package:twitter_app/screens/admin_page/admin_page.dart';
 
 import '../../screens/Settings/settingspage.dart';
-import '../../screens/home/Timeline.dart';
 import '../../screens/welcome/welcome_screen.dart';
 import 'CustomNavBar2.0.dart';
 import '../../API/userdata.dart';
@@ -42,8 +42,8 @@ class _SideMenuState extends State<SideMenu> {
                           width: 70,
                           height: 70,
                           child: CircleAvatar(
-                            backgroundImage: NetworkImage(
-                                'https://previews.123rf.com/images/koblizeek/koblizeek2001/koblizeek200100050/138262629-usuario-miembro-de-perfil-de-icono-de-hombre-vector-de-s%C3%ADmbolo-perconal-sobre-fondo-blanco-aislado-.jpg'),
+                            backgroundImage:
+                                NetworkImage(userdata.profileImage),
                           ),
                         ),
                         SizedBox(
@@ -73,7 +73,7 @@ class _SideMenuState extends State<SideMenu> {
                         Row(
                           children: [
                             Text(
-                              '31 ',
+                              userdata.followingsCount.toString(),
                               style: TextStyle(
                                   color: Colors.black,
                                   fontWeight: FontWeight.bold),
@@ -144,7 +144,47 @@ class _SideMenuState extends State<SideMenu> {
                 ListTile(
                   leading: Icon(Icons.rocket_launch_outlined),
                   title: Text('Twitter for Professionals'),
-                  onTap: () => null,
+                  onTap: () => {
+                    if (userdata.isAdmin == true)
+                      {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => AdminPage(
+                              token: userdata.token,
+                              adminToken: '',
+                            ),
+                          ),
+                        )
+                      }
+                    else
+                      {
+                        showDialog(
+                          context: context,
+                          builder: (context) => AlertDialog(
+                            /* title: Text(
+                              'Your comment',
+                            ), */
+                            content: Text(
+                              "Sorry but you are not admin",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: 23,
+                                color: Colors.blueAccent,
+                              ),
+                            ),
+                          ),
+                          /* actions: [
+                              TextButton(
+                                onPressed: () {
+                                  // addPostt('gggggggg', 23);
+                                },
+                                child: Text('submit'),
+                              ),
+                            ], */
+                        ),
+                      }
+                  },
                 ),
                 Divider(
                   height: 2,

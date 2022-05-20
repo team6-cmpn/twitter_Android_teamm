@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
-import 'package:twitter_app/components/widgets/sidemenu.dart';
 
 import '../../screens/Settings/notificationspage.dart';
 import '../../screens/Settings/settingspage.dart';
 import '../../screens/home/Timeline.dart';
-import '../../Api/userdata.dart';
+import '../../API/userdata.dart';
 
 class CustomNavBar extends StatefulWidget {
   _CustomNavBarState createState() => _CustomNavBarState();
