@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:twitter_app/screens/Settings/YourAccountSettings/verifypasswordemailpage.dart';
 import 'package:twitter_app/screens/welcome/welcome_screen.dart';
 import '../../../API/userdata.dart';
+import 'changeusernamepage.dart';
 
 class AccountInfoPage extends StatefulWidget {
   @override
@@ -49,12 +51,26 @@ class AccountInfoPageState extends State<AccountInfoPage> {
                   ListTile(
                     title: Text('Username'),
                     subtitle: Text(userdata.username),
-                    onTap: () => {},
+                    onTap: () => {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ChangeUsernamePage(),
+                        ),
+                      )
+                    },
                   ),
                   ListTile(
                     title: Text('Email'),
                     subtitle: Text(userdata.email),
-                    onTap: () => {},
+                    onTap: () => {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => VerifyPasswordPage(),
+                        ),
+                      )
+                    },
                   ),
                   ListTile(
                     title: Text('Phone number'),
