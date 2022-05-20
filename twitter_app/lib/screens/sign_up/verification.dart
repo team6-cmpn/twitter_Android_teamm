@@ -1,15 +1,10 @@
 import 'package:flutter/material.dart';
-
 import 'package:http/http.dart' as http;
-import 'package:twitter_app/components/widgets/CustomNavBar2.0.dart';
 import 'dart:convert';
 
 import '../../components/rounded_button.dart';
 import '../../components/text_field_container.dart';
-import '../home/Timeline.dart';
-import '../welcome/welcome_screen.dart';
-
-//import 'background_for_login_screen.dart';
+import '../../components/widgets/CustomNavBar2.0.dart';
 
 // ignore: use_key_in_widget_constructors
 class VerificationBody extends StatefulWidget {
@@ -152,7 +147,7 @@ class _VerificationBodyState extends State<VerificationBody> {
     if (response.statusCode == 200) {
       mapResponse = json.decode(response.body);
       dataResponse = mapResponse;
-      token = dataResponse["accessToken"];
+      token = dataResponse["emailtoken"];
       setState(
         () {
           //dataResponse = mapResponse["data"];
