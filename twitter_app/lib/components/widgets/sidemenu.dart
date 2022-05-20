@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:twitter_app/API/userdata.dart';
 import 'package:twitter_app/screens/Settings/bookmarkspage.dart';
-import 'package:twitter_app/screens/admin_page/admin_page.dart';
+//import 'package:twitter_app/screens/admin_page/admin_page.dart';
 
 import '../../screens/Settings/settingspage.dart';
 import '../../screens/welcome/welcome_screen.dart';
@@ -42,8 +42,10 @@ class _SideMenuState extends State<SideMenu> {
                           width: 70,
                           height: 70,
                           child: CircleAvatar(
-                            backgroundImage:
-                                NetworkImage(userdata.profileImage),
+                            backgroundImage: NetworkImage(false
+                                ? userdata.profileImage
+                                : 'https://i.pinimg.com/custom_covers/222x/85498161615209203_1636332751.jpg'),
+                            radius: 20,
                           ),
                         ),
                         SizedBox(
@@ -147,15 +149,15 @@ class _SideMenuState extends State<SideMenu> {
                   onTap: () => {
                     if (userdata.isAdmin == true)
                       {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => AdminPage(
-                              token: userdata.token,
-                              adminToken: '',
-                            ),
-                          ),
-                        )
+                        // Navigator.push(
+                        //   context,
+                        //   MaterialPageRoute(
+                        //     builder: (context) => AdminPage(
+                        //       token: userdata.token,
+                        //       adminToken: '',
+                        //     ),
+                        //   ),
+                        // )
                       }
                     else
                       {

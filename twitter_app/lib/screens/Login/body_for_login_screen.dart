@@ -317,7 +317,7 @@ class _BodyForLoginScreenState extends State<BodyForLoginScreen> {
           //dataResponse["role"].toString() == 'Admin'
           Navigator.of(context).pushAndRemoveUntil(
               MaterialPageRoute(
-                  builder: (BuildContext context) => TimelinePage()),
+                  builder: (BuildContext context) => CustomNavBar()),
               (Route<dynamic> route) => false);
         },
       );

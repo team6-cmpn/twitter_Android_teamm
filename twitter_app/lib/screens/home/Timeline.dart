@@ -536,8 +536,10 @@ class _TimelinePageState extends State<TimelinePage> {
             child: Padding(
               padding: const EdgeInsets.all(10.0),
               child: CircleAvatar(
-                backgroundImage: NetworkImage(userdata.profileImage),
-                radius: 16,
+                backgroundImage: NetworkImage(false
+                    ? userdata.profileImage
+                    : 'https://i.pinimg.com/custom_covers/222x/85498161615209203_1636332751.jpg'),
+                radius: 20,
               ),
             ),
             onTap: () {
