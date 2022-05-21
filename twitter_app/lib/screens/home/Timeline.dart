@@ -793,7 +793,7 @@ class _TimelinePageState extends State<TimelinePage> {
   addReTweetIntegeration(String idOfTweetpassed, String token) async {
     //const String BaseURL = "http://twi-jay.me:8080";
     final response = await http.post(
-      Uri.parse("$BaseURL/tweets/retweet/create/${idOfTweetpassed}"),
+      Uri.parse("$BaseURL/tweets/retweet/${idOfTweetpassed}"),
       // body: data,
       headers: {
         'x-access-token': token,
@@ -829,7 +829,7 @@ class _TimelinePageState extends State<TimelinePage> {
   removeReTweetIntegeration(String idOfTweetpassed, String token) async {
     //const String BaseURL = "http://twi-jay.me:8080";
     final response = await http.post(
-      Uri.parse("$BaseURL/tweets/retweet/destroy/${idOfTweetpassed}"),
+      Uri.parse("$BaseURL/tweets/unretweet/${idOfTweetpassed}"),
       // body: data,
       headers: {
         'x-access-token': token,

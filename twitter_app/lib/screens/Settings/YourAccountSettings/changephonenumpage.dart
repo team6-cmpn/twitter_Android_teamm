@@ -1,13 +1,52 @@
 import 'package:flutter/material.dart';
-import 'package:twitter_app/API/userdata.dart';
-import 'package:twitter_app/screens/Settings/YourAccountSettings/changeemailpage.dart';
+import 'package:twitter_app/screens/Settings/YourAccountSettings/youraccountpage.dart';
 import '../../../components/rounded_button.dart';
 import '../../forgot_password/FogotPassword.dart';
-import '../../welcome/welcome_screen.dart';
-import 'deactivateaccpage.dart';
 
-class VerifyPasswordPageEmail extends StatelessWidget {
-  final confirmpassword = TextEditingController();
+import 'package:http/http.dart' as http;
+
+import 'dart:convert';
+import 'dart:async';
+import '../../../API/userdata.dart';
+
+Future<String> ChangePhoneNumApi(
+  String phoneNum,
+  String token,
+) async {
+  Map responsedata;
+  Map bodydata = {
+    "phone_number": phoneNum,
+  };
+  // Map headerdata = {
+  //   "x-access-token": token,
+  // };
+  const String BaseURL = "http://twi-jay.me:8080";
+
+  final response = await http.post(Uri.parse("$BaseURL/user/changePhoneNumber"),
+      headers: {"x-access-token": token}, body: bodydata);
+  print(bodydata);
+  responsedata = (jsonDecode(response.body));
+  String message = responsedata["message"];
+  print(message);
+
+  if (response.statusCode == 200) {
+    return message;
+  } else if (response.statusCode == 400) {
+    print('bad request');
+  } else if (response.statusCode == 401) {
+    print('Unauthorized');
+  } else if (response.statusCode == 404) {
+    print('Not Found');
+  } else if (response.statusCode == 500) {
+    print('Internal Server Error');
+  } else
+    print("fail");
+  //return ('${responsedata}');
+  return message;
+}
+
+class ChangePhoneNumPage extends StatelessWidget {
+  final phoneNum = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -48,27 +87,30 @@ class VerifyPasswordPageEmail extends StatelessWidget {
                         ),
                         Align(
                           alignment: Alignment.centerLeft,
-                          child: Text("Verify your password",
+                          child: Text("Change email",
                               style: TextStyle(
                                   fontSize: 30, fontWeight: FontWeight.w900)),
                         ),
                         SizedBox(
                           height: 20,
                         ),
-                        Text("Re-enter your Twitter password to continue",
+                        Text(
+                            "Your current email is" +
+                                userdata.email +
+                                " What would uou like to update it to? Your email is not displayed in your public profile on Mockingjay.",
                             style: TextStyle(fontWeight: FontWeight.w300)),
                         TextFormField(
-                          obscureText: true,
+                          obscureText: false,
                           keyboardType: TextInputType.visiblePassword,
                           decoration: InputDecoration(
-                            labelText: "Password",
+                            labelText: "Email address",
                             labelStyle: TextStyle(
                               fontWeight: FontWeight.w400,
                               fontSize: 20,
                             ),
                           ),
                           style: TextStyle(fontSize: 20),
-                          controller: confirmpassword,
+                          controller: phoneNum,
                         ),
                         SizedBox(
                           height: 150,
@@ -96,25 +138,19 @@ class VerifyPasswordPageEmail extends StatelessWidget {
                                     textAlign: TextAlign.center,
                                   ),
                                   onPressed: () async {
-                                    print(confirmpassword.text);
-                                    print(userdata.password);
-                                    if (confirmpassword.text ==
-                                        userdata.password) {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              ChangeEmailPage(),
-                                        ),
-                                      );
-                                    } else
+                                    print(phoneNum.text);
+                                    print(userdata.email);
+                                    if (userdata.email == phoneNum.text) {
+                                      String message = await ChangePhoneNumApi(
+                                          phoneNum.text, userdata.token);
+
+                                      print("Matching" + message);
                                       showDialog<String>(
                                         context: context,
                                         builder: (BuildContext context) =>
                                             AlertDialog(
                                           title: const Text(''),
-                                          content: Text(
-                                              "Please enter a correct password"),
+                                          content: Text(message),
                                           actions: <Widget>[
                                             TextButton(
                                               onPressed: () =>
@@ -124,6 +160,27 @@ class VerifyPasswordPageEmail extends StatelessWidget {
                                           ],
                                         ),
                                       );
+                                    } else {
+                                      String message = await ChangePhoneNumApi(
+                                          phoneNum.text, userdata.token);
+                                      userdata.email = phoneNum.text;
+                                      print("Successful" + message);
+                                      showDialog<String>(
+                                        context: context,
+                                        builder: (BuildContext context) =>
+                                            AlertDialog(
+                                          title: const Text(''),
+                                          content: Text(message),
+                                          actions: <Widget>[
+                                            TextButton(
+                                              onPressed: () =>
+                                                  Navigator.of(context).pop(),
+                                              child: const Text("Ok"),
+                                            ),
+                                          ],
+                                        ),
+                                      );
+                                    }
                                   }),
                             ),
                           ),

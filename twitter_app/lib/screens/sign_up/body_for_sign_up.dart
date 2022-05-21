@@ -214,8 +214,18 @@ class _BodyForSignUpScreenState extends State<BodyForSignUpScreen> {
     if (response.statusCode == 200) {
       mapResponse = json.decode(response.body);
       dataResponse = mapResponse;
-      token = dataResponse["emailtoken"];
+      userdata.token = dataResponse["emailtoken"];
       messgbody = dataResponse["message"];
+
+      userdata.name = dataResponse["user"]["name"];
+      userdata.username = dataResponse["user"]["username"];
+      userdata.idUser = dataResponse['user']['_id'];
+      userdata.email = dataResponse["user"]["email"];
+      userdata.phonenum = dataResponse["user"]["phoneNumber"];
+      userdata.password = password;
+      userdata.isdeactivated = dataResponse["user"]["isDeactivated"];
+      userdata.isAdmin = dataResponse['user']['isAdmin'];
+      userdata.profileImage = dataResponse['user']['profile_image_url'];
 
       setState(
         () {
@@ -235,6 +245,7 @@ class _BodyForSignUpScreenState extends State<BodyForSignUpScreen> {
       print(userdata.token);
     } else if (response.statusCode == 400) {
       print('bad request');
+      print(messgbody);
     } else if (response.statusCode == 401) {
       print('Unauthorized');
     } else if (response.statusCode == 404) {

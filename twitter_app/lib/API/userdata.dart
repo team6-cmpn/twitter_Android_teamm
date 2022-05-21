@@ -9,7 +9,7 @@ class userdata {
   static bool isdeactivated;
   static bool isAdmin;
   static int followingsCount = 0;
-
+  static String BaseURL = "http://twi-jay.me:8080";
   static String activationmessage = null;
   //static String activationmessage;
 
