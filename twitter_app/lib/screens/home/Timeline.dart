@@ -558,13 +558,13 @@ class _TimelinePageState extends State<TimelinePage> {
                   ? Image.network(imageOfTweet[0].toString())
                   : SizedBox()), */
 
-          Container(
-            child: !hasImageTweet
-                ? SizedBox()
-                : (imageOfTweet[0].toString() == 'any')
-                    ? SizedBox()
-                    : Image.network(imageOfTweet[0].toString()),
-          ),
+          // Container(
+          //   child: !hasImageTweet
+          //       ? SizedBox()
+          //       : (imageOfTweet[0].toString() == 'any')
+          //           ? SizedBox()
+          //           : Image.network(imageOfTweet[0].toString()),
+          // ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
