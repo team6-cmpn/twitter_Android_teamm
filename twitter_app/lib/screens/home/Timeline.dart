@@ -1,7 +1,12 @@
 // ignore_for_file: prefer_const_constructors, file_names, prefer_const_literals_to_create_immutables, non_constant_identifier_names, unnecessary_string_interpolations, must_be_immutable
 
+//import 'dart:ffi';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:twitter_app/API/userdata.dart';
 import 'package:http/http.dart' as http;
@@ -9,7 +14,7 @@ import 'dart:convert';
 
 import '../../components/greyLine_seperator.dart';
 import '../../components/widgets/sidemenu.dart';
-import '../../model/tweet_model.dart';
+// import '../../model/tweet_model.dart';
 import '../Settings/notificationspage.dart';
 
 const TextStyle _textStyle = TextStyle(
@@ -41,6 +46,8 @@ class _TimelinePageState extends State<TimelinePage> {
   final messgController = TextEditingController();
   bool scaffoldKey = false;
   //final Function addNewPosting;
+
+  File addedimage;
 
   var idOfPost = '';
   var token = '';
@@ -263,21 +270,139 @@ class _TimelinePageState extends State<TimelinePage> {
           title: Text(
             'Add Tweet',
           ),
-          content: TextField(
-            controller: messgController,
-            decoration: InputDecoration(
-              hintText: "What's happening?",
+          content: Container(
+            height: 225,
+            width: 550,
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  TextField(
+                    controller: messgController,
+                    decoration: InputDecoration(
+                      hintText: "What's happening?",
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Container(
+                    //color: Colors.amberAccent,
+                    height: 150,
+                    child: addedimage != null
+                        ? Image.file(addedimage)
+                        : SizedBox(height: 1),
+                  ),
+                ],
+              ),
             ),
           ),
           actions: [
+            InkWell(
+              child: Text.rich(
+                TextSpan(
+                  children: [
+                    WidgetSpan(
+                      child: FaIcon(
+                        FontAwesomeIcons.camera,
+                        size: 18,
+                      ),
+                    ),
+                    // TextSpan(
+                    //   text: ' Image',
+                    //   style: TextStyle(
+                    //     color: Colors.lightBlue,
+                    //     fontWeight: FontWeight.bold,
+                    //   ),
+                    // ),
+                  ],
+                ),
+              ),
+              onTap: () {
+                pickImage(ImageSource.camera);
+              },
+              onLongPress: () {
+                showModalBottomSheet(
+                  clipBehavior: Clip.antiAlias,
+                  context: context,
+                  builder: (context) => Container(
+                    height: 127,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        ListTile(
+                          leading: Icon(Icons.camera_alt),
+                          title: Text('Camera'),
+                          onTap: () =>
+                              Navigator.of(context).pop(ImageSource.camera),
+                        ),
+                        ListTile(
+                          leading: Icon(Icons.image),
+                          title: Text('Gallery'),
+                          onTap: () =>
+                              Navigator.of(context).pop(ImageSource.gallery),
+                        )
+                      ],
+                    ),
+                  ),
+                );
+              },
+            ),
+            SizedBox(
+              width: 1,
+            ),
+            /* TextButton(
+              onPressed: () {
+                addPostt(
+                  messgController.text,
+                  '',
+                );
+              },
+              child: Text(
+                'Image',
+                style: TextStyle(
+                  color: Colors.lightBlue,
+                ),
+              ),
+            ), */
+            //Icon(Icons.image,),
+            InkWell(
+              child: Text.rich(
+                TextSpan(
+                  children: [
+                    WidgetSpan(
+                      child: FaIcon(
+                        FontAwesomeIcons.solidImage,
+                        size: 18,
+                      ),
+                    ),
+                    // TextSpan(
+                    //   text: ' Image',
+                    //   style: TextStyle(
+                    //     color: Colors.lightBlue,
+                    //     fontWeight: FontWeight.bold,
+                    //   ),
+                    // ),
+                  ],
+                ),
+              ),
+              onTap: () {
+                pickImage(ImageSource.gallery);
+              },
+            ),
             TextButton(
               onPressed: () {
                 addPostt(
                   messgController.text,
-                  20,
+                  addedimage.toString(),
                 );
               },
-              child: Text('Tweet'),
+              child: Text(
+                'Tweet',
+                style: TextStyle(
+                  color: Colors.lightBlue,
+                  //fontWeight: FontWeight.bold,
+                ),
+              ),
             ),
           ],
         ),
@@ -336,6 +461,7 @@ class _TimelinePageState extends State<TimelinePage> {
 
   Widget getTweetBody() {
     return ListView.builder(
+      controller: scrollController,
       itemCount: listOfTweets.length,
       itemBuilder: (context, index) {
         return tweetBoxWidgety(listOfTweets[index]); //Text('index $index');
@@ -352,6 +478,8 @@ class _TimelinePageState extends State<TimelinePage> {
     var isLoved = item['tweet']['hasImage'];
     var isRetweeted = item['user']['isAdmin'];
     // var isCommented = item['tweet']['date'];
+    var imageOfTweet = item['tweet']['imageUrl'];
+    var hasImageTweet = item['tweet']['hasImage'];
     var countOfLoves = item['tweet']['favorites'].length;
     var countOfReteweeted = item['tweet']['retweetUsers'].length;
     var countOfComments = item['user']['__v'];
@@ -363,7 +491,7 @@ class _TimelinePageState extends State<TimelinePage> {
         Duration(seconds: 00, hours: 0, microseconds: 0, days: 1);
     Duration myDuration1 = Duration(seconds: 15, days: 0);
 
-    var timeParsed = DateTime.parse(date);
+    var timeParsed = DateTime.parse(date).toLocal();
     var dateFormated = DateFormat.jm().format(timeParsed);
 
     // //List URLss = item['URLs'];
@@ -387,7 +515,7 @@ class _TimelinePageState extends State<TimelinePage> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 CircleAvatar(
-                  backgroundImage: NetworkImage(isRetweeted
+                  backgroundImage: NetworkImage(false
                       ? userProfilePic.toString()
                       : 'https://i.pinimg.com/custom_covers/222x/85498161615209203_1636332751.jpg'),
                   radius: 20,
@@ -411,21 +539,31 @@ class _TimelinePageState extends State<TimelinePage> {
                     style: TextStyle(fontSize: 17),
                   ),
                 ),
-                /* Text(
-                  "  ${date}",
-                  style: TextStyle(fontSize: 10),
-                ), */
               ],
             ),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Text(
-                tweetMessg,
-                style: TextStyle(fontSize: 18),
+              Flexible(
+                child: Text(
+                  tweetMessg,
+                  style: TextStyle(fontSize: 18),
+                ),
               ),
             ],
+          ),
+          /* Container(
+              child: hasImageTweet
+                  ? Image.network(imageOfTweet[0].toString())
+                  : SizedBox()), */
+
+          Container(
+            child: !hasImageTweet
+                ? SizedBox()
+                : (imageOfTweet[0].toString() == 'any')
+                    ? SizedBox()
+                    : Image.network(imageOfTweet[0].toString()),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -489,7 +627,7 @@ class _TimelinePageState extends State<TimelinePage> {
                     }
 
                     if (isRetweeted == false) {
-                      addTweetIntegeration(idOfTweet, userdata.token);
+                      addReTweetIntegeration(idOfTweet, userdata.token);
                       //isLoved = true;
                     }
                     /* if (isRetweeted == false) {
@@ -660,16 +798,14 @@ class _TimelinePageState extends State<TimelinePage> {
           ),
           actions: [
             TextButton(
-              onPressed: () {
-                // addPostt('gggggggg', 23);
-              },
+              onPressed: () {},
               child: Text('submit'),
             ),
           ],
         ),
       );
 
-  void addPostt(String post, int txamount) {
+  void addPostt(String post, String imageGif) {
     /* final newPost = TweetModel(
       tweetmessg: post,
       comments: 0,
@@ -683,21 +819,18 @@ class _TimelinePageState extends State<TimelinePage> {
       twitterHandle: userdata.username,
       time: '1min',
     ); */
-    addTweetIntegeration(
-      post,
-      userdata.token,
-    );
+    addTweetIntegeration(post, userdata.token, imageGif);
     setState(() {
       //Tweets.add(newPost);
     });
   }
 
-  addTweetIntegeration(String message, String token) async {
+  addTweetIntegeration(String message, String token, String imageGif) async {
     Map data = {
       "text": message,
       "source": '',
       "mention": " ",
-      "imageUrl": " ",
+      "imageUrl": imageGif,
     };
 
     //const String BaseURL = "http://twi-jay.me:8080";
@@ -867,7 +1000,7 @@ class _TimelinePageState extends State<TimelinePage> {
     };
     final response = await http.post(
       Uri.parse("$BaseURL/user/show/${idOfTweetpassed}"),
-      // body: data,
+      body: data,
       headers: {
         'x-access-token': token,
       },
@@ -934,4 +1067,32 @@ class _TimelinePageState extends State<TimelinePage> {
       print('Internal Server Error');
     }
   }
+
+  Future pickImage(source) async {
+    try {
+      final image = await ImagePicker().pickImage(
+        source: source,
+      );
+      if (image == null) return;
+      //return image;
+      List<Object> garbage;
+      final imagePath = File(image.path);
+      setState(() {
+        this.addedimage = imagePath;
+      });
+
+      print('this is the garbage');
+      print(garbage);
+      print('this is the image path');
+      print(imagePath);
+      print('this is the image ');
+      print(image);
+    } on PlatformException catch (e) {
+      print('failed to pick image: $e');
+    }
+  }
+
+  /* Future pickImageSelfi() async {
+    await ImagePicker().pickImage(source: ImageSource.camera);
+  } */
 }
