@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:twitter_app/components/widgets/CustomNavBar2.0.dart';
 import 'package:twitter_app/screens/Login/checklogin.dart';
@@ -19,13 +20,17 @@ Future main() async {
   // WidgetsFlutterBinding.ensureInitialized();
   // // ignore: await_only_futures
   // await Firebase.initializeApp();
-
   // await Hive.initFlutter();
-
   // Hive.registerAdapter(TransactionAdapter());
   // await Hive.openBox<Transaction>('transactions');
 
   runApp(MyApp());
+
+  /* try {
+    runApp(MyApp());
+  } on PlatformException catch (e) {
+    print('failed to pick image: $e');
+  } */
 }
 
 class MyApp extends StatelessWidget {
