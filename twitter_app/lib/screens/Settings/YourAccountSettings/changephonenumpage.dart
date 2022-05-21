@@ -106,18 +106,20 @@ class _ChangePhoneNumPageState extends State<ChangePhoneNumPage> {
                                 userdata.phonenum +
                                 " What would uou like to update it to? ",
                             style: TextStyle(fontWeight: FontWeight.w300)),
-                        TextFormField(
-                          obscureText: false,
-                          keyboardType: TextInputType.visiblePassword,
-                          decoration: InputDecoration(
-                            labelText: "+20 Egypt",
-                            labelStyle: TextStyle(
-                              fontWeight: FontWeight.w400,
-                              fontSize: 20,
+                        Container(
+                          child: TextFormField(
+                            obscureText: false,
+                            keyboardType: TextInputType.visiblePassword,
+                            decoration: InputDecoration(
+                              labelText: "+20 Egypt",
+                              labelStyle: TextStyle(
+                                fontWeight: FontWeight.w400,
+                                fontSize: 20,
+                              ),
                             ),
+                            style: TextStyle(fontSize: 20),
+                            controller: phoneNum,
                           ),
-                          style: TextStyle(fontSize: 20),
-                          controller: phoneNum,
                         ),
                         SizedBox(
                           height: 150,

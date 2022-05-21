@@ -103,18 +103,20 @@ class _ChangeUsernamePageState extends State<ChangeUsernamePage> {
                         SizedBox(
                           height: 10,
                         ),
-                        TextFormField(
-                          obscureText: false,
-                          keyboardType: TextInputType.visiblePassword,
-                          decoration: InputDecoration(
-                            labelText: "New",
-                            labelStyle: TextStyle(
-                              fontWeight: FontWeight.w400,
-                              fontSize: 20,
+                        Container(
+                          child: TextFormField(
+                            obscureText: false,
+                            keyboardType: TextInputType.visiblePassword,
+                            decoration: InputDecoration(
+                              labelText: "New",
+                              labelStyle: TextStyle(
+                                fontWeight: FontWeight.w400,
+                                fontSize: 20,
+                              ),
                             ),
+                            style: TextStyle(fontSize: 20),
+                            controller: newUsername,
                           ),
-                          style: TextStyle(fontSize: 20),
-                          controller: newUsername,
                         ),
                         SizedBox(
                           height: 20,

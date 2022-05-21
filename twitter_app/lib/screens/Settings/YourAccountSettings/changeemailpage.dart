@@ -99,18 +99,20 @@ class ChangeEmailPage extends StatelessWidget {
                                 userdata.email +
                                 " What would uou like to update it to? Your email is not displayed in your public profile on Mockingjay.",
                             style: TextStyle(fontWeight: FontWeight.w300)),
-                        TextFormField(
-                          obscureText: false,
-                          keyboardType: TextInputType.visiblePassword,
-                          decoration: InputDecoration(
-                            labelText: "Email address",
-                            labelStyle: TextStyle(
-                              fontWeight: FontWeight.w400,
-                              fontSize: 20,
+                        Container(
+                          child: TextFormField(
+                            obscureText: false,
+                            keyboardType: TextInputType.visiblePassword,
+                            decoration: InputDecoration(
+                              labelText: "Email address",
+                              labelStyle: TextStyle(
+                                fontWeight: FontWeight.w400,
+                                fontSize: 20,
+                              ),
                             ),
+                            style: TextStyle(fontSize: 20),
+                            controller: newEmail,
                           ),
-                          style: TextStyle(fontSize: 20),
-                          controller: newEmail,
                         ),
                         SizedBox(
                           height: 150,

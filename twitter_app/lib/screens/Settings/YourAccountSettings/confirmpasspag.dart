@@ -57,18 +57,20 @@ class ConfrimPasswordPage extends StatelessWidget {
                         Text(
                             "Complete your deactivation request by entering the password associated with your account",
                             style: TextStyle(fontWeight: FontWeight.w300)),
-                        TextFormField(
-                          obscureText: true,
-                          keyboardType: TextInputType.visiblePassword,
-                          decoration: InputDecoration(
-                            labelText: "Password",
-                            labelStyle: TextStyle(
-                              fontWeight: FontWeight.w400,
-                              fontSize: 20,
+                        Container(
+                          child: TextFormField(
+                            obscureText: true,
+                            keyboardType: TextInputType.visiblePassword,
+                            decoration: InputDecoration(
+                              labelText: "Password",
+                              labelStyle: TextStyle(
+                                fontWeight: FontWeight.w400,
+                                fontSize: 20,
+                              ),
                             ),
+                            style: TextStyle(fontSize: 20),
+                            controller: confirmpassword,
                           ),
-                          style: TextStyle(fontSize: 20),
-                          controller: confirmpassword,
                         ),
                         SizedBox(
                           height: 150,

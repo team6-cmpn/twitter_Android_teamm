@@ -114,50 +114,56 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                         SizedBox(
                           height: 10,
                         ),
-                        TextFormField(
-                          obscureText: true,
-                          keyboardType: TextInputType.visiblePassword,
-                          decoration: InputDecoration(
-                            labelText: "Current password",
-                            labelStyle: TextStyle(
-                              fontWeight: FontWeight.w400,
-                              fontSize: 20,
+                        Container(
+                          child: TextFormField(
+                            obscureText: true,
+                            keyboardType: TextInputType.visiblePassword,
+                            decoration: InputDecoration(
+                              labelText: "Current password",
+                              labelStyle: TextStyle(
+                                fontWeight: FontWeight.w400,
+                                fontSize: 20,
+                              ),
                             ),
+                            style: TextStyle(fontSize: 20),
+                            controller: CurrentPassword,
                           ),
-                          style: TextStyle(fontSize: 20),
-                          controller: CurrentPassword,
                         ),
                         SizedBox(
                           height: 20,
                         ),
-                        TextFormField(
-                          obscureText: true,
-                          keyboardType: TextInputType.visiblePassword,
-                          decoration: InputDecoration(
-                              labelText: "New password",
-                              labelStyle: TextStyle(
-                                fontWeight: FontWeight.w400,
-                                fontSize: 20,
-                              ),
-                              hintText: "At least 8 characters"),
-                          style: TextStyle(fontSize: 20),
-                          controller: NewPassword,
+                        Container(
+                          child: TextFormField(
+                            obscureText: true,
+                            keyboardType: TextInputType.visiblePassword,
+                            decoration: InputDecoration(
+                                labelText: "New password",
+                                labelStyle: TextStyle(
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 20,
+                                ),
+                                hintText: "At least 8 characters"),
+                            style: TextStyle(fontSize: 20),
+                            controller: NewPassword,
+                          ),
                         ),
                         SizedBox(
                           height: 20,
                         ),
-                        TextFormField(
-                          obscureText: true,
-                          keyboardType: TextInputType.visiblePassword,
-                          decoration: InputDecoration(
-                              labelText: "Confirm new password",
-                              labelStyle: TextStyle(
-                                fontWeight: FontWeight.w400,
-                                fontSize: 20,
-                              ),
-                              hintText: "At least 8 characters"),
-                          style: TextStyle(fontSize: 20),
-                          controller: ConfirmPassword,
+                        Container(
+                          child: TextFormField(
+                            obscureText: true,
+                            keyboardType: TextInputType.visiblePassword,
+                            decoration: InputDecoration(
+                                labelText: "Confirm new password",
+                                labelStyle: TextStyle(
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 20,
+                                ),
+                                hintText: "At least 8 characters"),
+                            style: TextStyle(fontSize: 20),
+                            controller: ConfirmPassword,
+                          ),
                         ),
                         SizedBox(
                           height: 40,
