@@ -205,27 +205,17 @@ class _BodyForSignUpScreenState extends State<BodyForSignUpScreen> {
     var response = await http
         .post(Uri.parse("http://twi-jay.me:8080/auth/signup"), body: data);
 
-    print(name);
+    /* print(name);
     print(userName);
     print(email);
     print(phone);
     print(password);
-    print(date);
+    print(date); */
     if (response.statusCode == 200) {
       mapResponse = json.decode(response.body);
       dataResponse = mapResponse;
       userdata.token = dataResponse["emailtoken"];
       messgbody = dataResponse["message"];
-
-      userdata.name = dataResponse["user"]["name"];
-      userdata.username = dataResponse["user"]["username"];
-      userdata.idUser = dataResponse['user']['_id'];
-      userdata.email = dataResponse["user"]["email"];
-      userdata.phonenum = dataResponse["user"]["phoneNumber"];
-      userdata.password = password;
-      userdata.isdeactivated = dataResponse["user"]["isDeactivated"];
-      userdata.isAdmin = dataResponse['user']['isAdmin'];
-      userdata.profileImage = dataResponse['user']['profile_image_url'];
 
       setState(
         () {
