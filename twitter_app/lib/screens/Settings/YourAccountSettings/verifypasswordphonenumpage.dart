@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:twitter_app/API/userdata.dart';
 import 'package:twitter_app/screens/Settings/YourAccountSettings/changeemailpage.dart';
+import 'package:twitter_app/screens/Settings/YourAccountSettings/changephonenumpage.dart';
 import '../../../components/rounded_button.dart';
 import '../../forgot_password/FogotPassword.dart';
 import '../../welcome/welcome_screen.dart';
@@ -104,7 +105,7 @@ class VerifyPasswordPagePhoneNum extends StatelessWidget {
                                         context,
                                         MaterialPageRoute(
                                           builder: (context) =>
-                                              ChangeEmailPage(),
+                                              ChangePhoneNumPage(),
                                         ),
                                       );
                                     } else

@@ -87,7 +87,7 @@ class ChangePhoneNumPage extends StatelessWidget {
                         ),
                         Align(
                           alignment: Alignment.centerLeft,
-                          child: Text("Change email",
+                          child: Text("Change Phone ",
                               style: TextStyle(
                                   fontSize: 30, fontWeight: FontWeight.w900)),
                         ),
@@ -95,15 +95,15 @@ class ChangePhoneNumPage extends StatelessWidget {
                           height: 20,
                         ),
                         Text(
-                            "Your current email is" +
-                                userdata.email +
-                                " What would uou like to update it to? Your email is not displayed in your public profile on Mockingjay.",
+                            "Your current phone number is" +
+                                userdata.phonenum +
+                                " What would uou like to update it to? ",
                             style: TextStyle(fontWeight: FontWeight.w300)),
                         TextFormField(
                           obscureText: false,
                           keyboardType: TextInputType.visiblePassword,
                           decoration: InputDecoration(
-                            labelText: "Email address",
+                            labelText: "+20 Egypt",
                             labelStyle: TextStyle(
                               fontWeight: FontWeight.w400,
                               fontSize: 20,
@@ -139,8 +139,8 @@ class ChangePhoneNumPage extends StatelessWidget {
                                   ),
                                   onPressed: () async {
                                     print(phoneNum.text);
-                                    print(userdata.email);
-                                    if (userdata.email == phoneNum.text) {
+                                    print(userdata.phonenum);
+                                    if (userdata.phonenum == phoneNum.text) {
                                       String message = await ChangePhoneNumApi(
                                           phoneNum.text, userdata.token);
 
@@ -163,7 +163,7 @@ class ChangePhoneNumPage extends StatelessWidget {
                                     } else {
                                       String message = await ChangePhoneNumApi(
                                           phoneNum.text, userdata.token);
-                                      userdata.email = phoneNum.text;
+                                      userdata.phonenum = phoneNum.text;
                                       print("Successful" + message);
                                       showDialog<String>(
                                         context: context,
