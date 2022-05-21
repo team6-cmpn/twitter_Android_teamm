@@ -67,7 +67,7 @@ class AccountInfoPageState extends State<AccountInfoPage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => VerifyPasswordPage(),
+                          builder: (context) => VerifyPasswordPageEmail(),
                         ),
                       )
                     },
