@@ -7,6 +7,9 @@ class ThemeClass {
     appBarTheme: AppBarTheme(
       backgroundColor: Colors.white,
       titleTextStyle: TextStyle(color: Colors.black),
+      textTheme: TextTheme(
+        headline2: TextStyle(color: Colors.black),
+      ),
       iconTheme: IconThemeData(color: Colors.black),
     ),
   );
