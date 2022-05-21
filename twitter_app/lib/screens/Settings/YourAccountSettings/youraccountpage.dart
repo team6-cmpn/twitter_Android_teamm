@@ -77,7 +77,8 @@ class _YourAccountPageState extends State<YourAccountPage> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => AccountInfoPage())),
+                            builder: (context) => AccountInfoPage(),
+                          )),
                     },
                   ),
                   ListTile(

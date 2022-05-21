@@ -106,21 +106,25 @@ class AccountInfoPageState extends State<AccountInfoPage> {
                                   ),
                                 ),
                                 TextButton(
-                                  onPressed: () => Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          VerifyPasswordPagePhoneNum(),
-                                    ),
-                                  ),
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            VerifyPasswordPagePhoneNum(),
+                                      ),
+                                    );
+                                  },
                                   child: const Text('Update'),
                                 ),
                                 TextButton(
                                     onPressed: () {
                                       print("clicked");
-                                      ChangePhoneNumApi("", userdata.token);
-                                      userdata.phonenum = "";
-                                      Navigator.pop(context, 'Delete');
+                                      setState(() {
+                                        ChangePhoneNumApi("", userdata.token);
+                                        userdata.phonenum = "";
+                                        Navigator.pop(context, 'Delete');
+                                      });
                                     },
                                     child: Text("Delete")),
                                 TextButton(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:twitter_app/screens/Settings/YourAccountSettings/accountinfopage.dart';
 import 'package:twitter_app/screens/Settings/YourAccountSettings/youraccountpage.dart';
 import '../../../components/rounded_button.dart';
 import '../../forgot_password/FogotPassword.dart';
@@ -45,8 +46,14 @@ Future<String> ChangePhoneNumApi(
   return message;
 }
 
-class ChangePhoneNumPage extends StatelessWidget {
+class ChangePhoneNumPage extends StatefulWidget {
+  @override
+  State<ChangePhoneNumPage> createState() => _ChangePhoneNumPageState();
+}
+
+class _ChangePhoneNumPageState extends State<ChangePhoneNumPage> {
   final phoneNum = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -150,7 +157,8 @@ class ChangePhoneNumPage extends StatelessWidget {
                                         builder: (BuildContext context) =>
                                             AlertDialog(
                                           title: const Text(''),
-                                          content: Text(message),
+                                          content: Text(
+                                              "You entered the same phone number registered"),
                                           actions: <Widget>[
                                             TextButton(
                                               onPressed: () =>
@@ -163,8 +171,11 @@ class ChangePhoneNumPage extends StatelessWidget {
                                     } else {
                                       String message = await ChangePhoneNumApi(
                                           phoneNum.text, userdata.token);
-                                      userdata.phonenum = phoneNum.text;
-                                      print("Successful" + message);
+                                      setState(() {
+                                        userdata.phonenum = phoneNum.text;
+                                      });
+
+                                      print("Successful " + message);
                                       showDialog<String>(
                                         context: context,
                                         builder: (BuildContext context) =>
@@ -174,7 +185,8 @@ class ChangePhoneNumPage extends StatelessWidget {
                                           actions: <Widget>[
                                             TextButton(
                                               onPressed: () =>
-                                                  Navigator.of(context).pop(),
+                                                  Navigator.of(context)
+                                                      .pop(context),
                                               child: const Text("Ok"),
                                             ),
                                           ],
