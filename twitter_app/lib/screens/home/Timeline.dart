@@ -859,4 +859,79 @@ class _TimelinePageState extends State<TimelinePage> {
       print('Internal Server Error');
     }
   }
+
+  showLoveIntegeration(
+      String idOfTweetpassed, String token, bool isLikedPassed) async {
+    Map data = {
+      'isLiked': isLikedPassed,
+    };
+    final response = await http.post(
+      Uri.parse("$BaseURL/user/show/${idOfTweetpassed}"),
+      // body: data,
+      headers: {
+        'x-access-token': token,
+      },
+    );
+
+    if (response.statusCode == 200) {
+      print('love toggle');
+      /*  setState(
+        () {
+          //dataResponse = mapResponse["data"];
+          //dataResponse["role"].toString() == 'Admin'
+          Navigator.of(context).pushAndRemoveUntil(
+              MaterialPageRoute(
+                  builder: (BuildContext context) => TimelinePage()),
+              (Route<dynamic> route) => false);
+        },
+      ); */
+
+    } else if (response.statusCode == 400) {
+      print('bad request');
+    } else if (response.statusCode == 401) {
+      print('Unauthorized');
+    } else if (response.statusCode == 404) {
+      print('Not Found');
+    } else if (response.statusCode == 500) {
+      print('Internal Server Error');
+    }
+  }
+
+  showReetweetedIntegeration(
+      String idOfTweetpassed, String token, bool isRetweetedPassed) async {
+    //const String BaseURL = "http://twi-jay.me:8080";
+    Map data = {
+      'isRetweeted': isRetweetedPassed,
+    };
+    final response = await http.post(
+      Uri.parse("$BaseURL/user/show/${idOfTweetpassed}"),
+      body: data,
+      headers: {
+        'x-access-token': token,
+      },
+    );
+
+    if (response.statusCode == 200) {
+      print('retweet toggle');
+      /*  setState(
+        () {
+          //dataResponse = mapResponse["data"];
+          //dataResponse["role"].toString() == 'Admin'
+          Navigator.of(context).pushAndRemoveUntil(
+              MaterialPageRoute(
+                  builder: (BuildContext context) => TimelinePage()),
+              (Route<dynamic> route) => false);
+        },
+      ); */
+
+    } else if (response.statusCode == 400) {
+      print('bad request');
+    } else if (response.statusCode == 401) {
+      print('Unauthorized');
+    } else if (response.statusCode == 404) {
+      print('Not Found');
+    } else if (response.statusCode == 500) {
+      print('Internal Server Error');
+    }
+  }
 }
