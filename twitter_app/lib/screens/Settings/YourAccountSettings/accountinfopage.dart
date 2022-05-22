@@ -8,7 +8,6 @@ import 'package:http/http.dart' as http;
 
 import 'dart:convert';
 import 'dart:async';
-import '../../../API/userdata.dart';
 
 class AccountInfoPage extends StatefulWidget {
   @override
@@ -16,13 +15,17 @@ class AccountInfoPage extends StatefulWidget {
 }
 
 class AccountInfoPageState extends State<AccountInfoPage> {
-  @override
-  Widget build(BuildContext context) {
+  void initState() {
+    super.initState();
     setState(() {
       userdata.username;
       userdata.email;
       userdata.phonenum;
     });
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
       appBar: AppBar(

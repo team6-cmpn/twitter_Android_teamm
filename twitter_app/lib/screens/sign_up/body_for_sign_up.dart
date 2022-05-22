@@ -183,12 +183,6 @@ class _BodyForSignUpScreenState extends State<BodyForSignUpScreen> {
                     token,
                     messagebody,
                   );
-                  setState(() {
-                    userdata.name = nameController.text;
-                    userdata.username = userController.text;
-                    userdata.email = emailController.text;
-                    userdata.phonenum = phoneController.text;
-                  });
                 }
               }, //addTransaction //() {},
               colorPassed: Colors.grey[700],

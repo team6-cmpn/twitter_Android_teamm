@@ -11,7 +11,7 @@ import 'package:intl/intl.dart';
 import 'package:twitter_app/API/userdata.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-
+import '../Settings/bookmarkspage.dart';
 import '../../components/greyLine_seperator.dart';
 import '../../components/widgets/sidemenu.dart';
 // import '../../model/tweet_model.dart';
@@ -587,6 +587,7 @@ class _TimelinePageState extends State<TimelinePage> {
                   ),
                 ),
                 onTap: () {
+                  BookmarksPage.addBookmark(userdata.token, idOfTweet);
                   //addComment();
                 },
               ),
