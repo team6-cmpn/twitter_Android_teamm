@@ -31,7 +31,7 @@ class _AdminPage extends State<AdminPage> {
   @override
   void initState() {
     super.initState();
-    getUserCountFuture = getNumberOfUsers(widget.token);
+    getUserCountFuture = getNumberOfUsers(widget.token) as Future<int>;
   }
 
   Future blockUserIntegeration(token, user_id, duration) async {
@@ -72,7 +72,7 @@ class _AdminPage extends State<AdminPage> {
     });
   }
 
-  Future<int> getNumberOfUsers(token) async {
+  Future<String> getNumberOfUsers(token) async {
     var response = await http.get(
       Uri.parse(
         ('$BaseURL/admin/showUsers'),
@@ -195,7 +195,7 @@ class _AdminPage extends State<AdminPage> {
                   future: getUserCountFuture,
                   builder: (context, snapshot) {
                     if (snapshot.hasData) {
-                      countOfUsers = snapshot.data;
+                      countOfUsers = snapshot.data as String;
                       getUsersIntegeration(widget.token);
                       return getBodyOfUsers();
                     } else {
@@ -216,7 +216,6 @@ class _AdminPage extends State<AdminPage> {
       ),
     );
   }
-
 
   Widget getBodyOfUsers() {
     return ListView.builder(
