@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
+import 'package:twitter_app/API/userdata.dart';
 import 'package:twitter_app/components/widgets/DarkMode/changetheme.dart';
 
 import '../../components/widgets/DarkMode/change_theme_button_widget.dart';
@@ -38,7 +39,7 @@ class _DisplaySettingsPageState extends State<DisplaySettingsPage> {
                 style: TextStyle(fontSize: 20.0),
               ),
               Text(
-                "@Username",
+                userdata.username,
                 style: TextStyle(fontSize: 15.0),
               )
             ],

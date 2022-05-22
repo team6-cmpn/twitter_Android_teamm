@@ -135,6 +135,8 @@ class _BodyForLoginScreenState extends State<BodyForLoginScreen> {
             child: Column(
               children: [
                 TextFieldContainer(
+                  key: Key('Email_field'),
+
                   obs: false,
                   size: size,
                   titleText: '  Email',
@@ -144,6 +146,7 @@ class _BodyForLoginScreenState extends State<BodyForLoginScreen> {
                   //doneButton: null,
                 ),
                 TextFieldContainer(
+                    key: Key('Password_field'),
                     obs: true,
                     size: size,
                     titleText: '  Password',
@@ -162,6 +165,7 @@ class _BodyForLoginScreenState extends State<BodyForLoginScreen> {
             ),
           ),
           RoundedButton(
+            key: Key('Next_key'),
             passedText: 'Next',
             textColor: Colors.white,
             pressed: () async => {
@@ -217,6 +221,7 @@ class _BodyForLoginScreenState extends State<BodyForLoginScreen> {
             roundedpassedcolor: Colors.white24,
           ),
           RoundedButton(
+            key: Key('Forgotpass_key'),
             passedText: 'Forgot password?',
             textColor: Colors.black,
             pressed: () {

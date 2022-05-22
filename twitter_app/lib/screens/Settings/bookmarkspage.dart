@@ -86,6 +86,7 @@ class _BookmarksPageState extends State<BookmarksPage> {
               },
               itemBuilder: (conetxt) => [
                 PopupMenuItem(
+                   key: Key('Clear_all'),
                   value: "Remove",
                   child: Text('Clear all bookmarks'),
                 ),
@@ -94,6 +95,7 @@ class _BookmarksPageState extends State<BookmarksPage> {
           ],
           toolbarHeight: 50,
           leading: IconButton(
+            key: Key('arrow_back2'),
             icon: Icon(
               Icons.arrow_back,
             ),

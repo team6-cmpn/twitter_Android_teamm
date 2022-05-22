@@ -57,18 +57,21 @@ class VerifyPasswordPageEmail extends StatelessWidget {
                         ),
                         Text("Re-enter your Twitter password to continue",
                             style: TextStyle(fontWeight: FontWeight.w300)),
-                        TextFormField(
-                          obscureText: true,
-                          keyboardType: TextInputType.visiblePassword,
-                          decoration: InputDecoration(
-                            labelText: "Password",
-                            labelStyle: TextStyle(
-                              fontWeight: FontWeight.w400,
-                              fontSize: 20,
+                        Container(
+                          child: TextFormField(
+                            key: Key('pass_field_verify'),
+                            obscureText: true,
+                            keyboardType: TextInputType.visiblePassword,
+                            decoration: InputDecoration(
+                              labelText: "Password",
+                              labelStyle: TextStyle(
+                                fontWeight: FontWeight.w400,
+                                fontSize: 20,
+                              ),
                             ),
+                            style: TextStyle(fontSize: 20),
+                            controller: confirmpassword,
                           ),
-                          style: TextStyle(fontSize: 20),
-                          controller: confirmpassword,
                         ),
                         SizedBox(
                           height: 150,
@@ -86,6 +89,7 @@ class VerifyPasswordPageEmail extends StatelessWidget {
                             child: Align(
                               alignment: Alignment.bottomRight,
                               child: TextButton(
+                                  key: Key('next_verify'),
                                   child: Text(
                                     "Next",
                                     style: TextStyle(
@@ -117,6 +121,7 @@ class VerifyPasswordPageEmail extends StatelessWidget {
                                               "Please enter a correct password"),
                                           actions: <Widget>[
                                             TextButton(
+                                              key: Key('ok_ver'),
                                               onPressed: () =>
                                                   Navigator.pop(context, ''),
                                               child: const Text("Ok"),

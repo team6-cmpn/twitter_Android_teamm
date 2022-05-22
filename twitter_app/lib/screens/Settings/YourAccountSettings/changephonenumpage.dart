@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:twitter_app/screens/Settings/YourAccountSettings/accountinfopage.dart';
 import 'package:twitter_app/screens/Settings/YourAccountSettings/youraccountpage.dart';
 import '../../../components/rounded_button.dart';
 import '../../forgot_password/FogotPassword.dart';
@@ -45,8 +46,14 @@ Future<String> ChangePhoneNumApi(
   return message;
 }
 
-class ChangePhoneNumPage extends StatelessWidget {
+class ChangePhoneNumPage extends StatefulWidget {
+  @override
+  State<ChangePhoneNumPage> createState() => _ChangePhoneNumPageState();
+}
+
+class _ChangePhoneNumPageState extends State<ChangePhoneNumPage> {
   final phoneNum = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -87,7 +94,7 @@ class ChangePhoneNumPage extends StatelessWidget {
                         ),
                         Align(
                           alignment: Alignment.centerLeft,
-                          child: Text("Change email",
+                          child: Text("Change Phone ",
                               style: TextStyle(
                                   fontSize: 30, fontWeight: FontWeight.w900)),
                         ),
@@ -95,22 +102,25 @@ class ChangePhoneNumPage extends StatelessWidget {
                           height: 20,
                         ),
                         Text(
-                            "Your current email is" +
-                                userdata.email +
-                                " What would uou like to update it to? Your email is not displayed in your public profile on Mockingjay.",
+                            "Your current phone number is" +
+                                userdata.phonenum +
+                                " What would uou like to update it to? ",
                             style: TextStyle(fontWeight: FontWeight.w300)),
-                        TextFormField(
-                          obscureText: false,
-                          keyboardType: TextInputType.visiblePassword,
-                          decoration: InputDecoration(
-                            labelText: "Email address",
-                            labelStyle: TextStyle(
-                              fontWeight: FontWeight.w400,
-                              fontSize: 20,
+                        Container(
+                          child: TextFormField(
+                            key: Key('phonenum_field'),
+                            obscureText: false,
+                            keyboardType: TextInputType.visiblePassword,
+                            decoration: InputDecoration(
+                              labelText: "+20 Egypt",
+                              labelStyle: TextStyle(
+                                fontWeight: FontWeight.w400,
+                                fontSize: 20,
+                              ),
                             ),
+                            style: TextStyle(fontSize: 20),
+                            controller: phoneNum,
                           ),
-                          style: TextStyle(fontSize: 20),
-                          controller: phoneNum,
                         ),
                         SizedBox(
                           height: 150,
@@ -128,6 +138,7 @@ class ChangePhoneNumPage extends StatelessWidget {
                             child: Align(
                               alignment: Alignment.bottomRight,
                               child: TextButton(
+                                  key: Key('next_phonenum'),
                                   child: Text(
                                     "Next",
                                     style: TextStyle(
@@ -139,8 +150,8 @@ class ChangePhoneNumPage extends StatelessWidget {
                                   ),
                                   onPressed: () async {
                                     print(phoneNum.text);
-                                    print(userdata.email);
-                                    if (userdata.email == phoneNum.text) {
+                                    print(userdata.phonenum);
+                                    if (userdata.phonenum == phoneNum.text) {
                                       String message = await ChangePhoneNumApi(
                                           phoneNum.text, userdata.token);
 
@@ -150,9 +161,11 @@ class ChangePhoneNumPage extends StatelessWidget {
                                         builder: (BuildContext context) =>
                                             AlertDialog(
                                           title: const Text(''),
-                                          content: Text(message),
+                                          content: Text(
+                                              "You entered the same phone number registered"),
                                           actions: <Widget>[
                                             TextButton(
+                                              key: Key('ok_but_pnum'),
                                               onPressed: () =>
                                                   Navigator.pop(context, ''),
                                               child: const Text("Ok"),
@@ -163,8 +176,11 @@ class ChangePhoneNumPage extends StatelessWidget {
                                     } else {
                                       String message = await ChangePhoneNumApi(
                                           phoneNum.text, userdata.token);
-                                      userdata.email = phoneNum.text;
-                                      print("Successful" + message);
+                                      setState(() {
+                                        userdata.phonenum = phoneNum.text;
+                                      });
+
+                                      print("Successful " + message);
                                       showDialog<String>(
                                         context: context,
                                         builder: (BuildContext context) =>
@@ -174,7 +190,7 @@ class ChangePhoneNumPage extends StatelessWidget {
                                           actions: <Widget>[
                                             TextButton(
                                               onPressed: () =>
-                                                  Navigator.of(context).pop(),
+                                                  Navigator.pop(context, ''),
                                               child: const Text("Ok"),
                                             ),
                                           ],

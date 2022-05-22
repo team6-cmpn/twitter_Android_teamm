@@ -24,6 +24,7 @@ class _SettingsPageState extends State<SettingsPage> {
         appBar: AppBar(
           toolbarHeight: 50,
           leading: IconButton(
+            key: Key('back_settings'),
             icon: Icon(
               Icons.arrow_back,
             ),

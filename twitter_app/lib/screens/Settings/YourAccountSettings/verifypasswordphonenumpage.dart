@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:twitter_app/API/userdata.dart';
 import 'package:twitter_app/screens/Settings/YourAccountSettings/changeemailpage.dart';
+import 'package:twitter_app/screens/Settings/YourAccountSettings/changephonenumpage.dart';
 import '../../../components/rounded_button.dart';
 import '../../forgot_password/FogotPassword.dart';
 import '../../welcome/welcome_screen.dart';
@@ -57,18 +58,21 @@ class VerifyPasswordPagePhoneNum extends StatelessWidget {
                         ),
                         Text("Re-enter your Twitter password to continue",
                             style: TextStyle(fontWeight: FontWeight.w300)),
-                        TextFormField(
-                          obscureText: true,
-                          keyboardType: TextInputType.visiblePassword,
-                          decoration: InputDecoration(
-                            labelText: "Password",
-                            labelStyle: TextStyle(
-                              fontWeight: FontWeight.w400,
-                              fontSize: 20,
+                        Container(
+                          child: TextFormField(
+                            key: Key('pass_ver'),
+                            obscureText: true,
+                            keyboardType: TextInputType.visiblePassword,
+                            decoration: InputDecoration(
+                              labelText: "Password",
+                              labelStyle: TextStyle(
+                                fontWeight: FontWeight.w400,
+                                fontSize: 20,
+                              ),
                             ),
+                            style: TextStyle(fontSize: 20),
+                            controller: confirmpassword,
                           ),
-                          style: TextStyle(fontSize: 20),
-                          controller: confirmpassword,
                         ),
                         SizedBox(
                           height: 150,
@@ -86,6 +90,7 @@ class VerifyPasswordPagePhoneNum extends StatelessWidget {
                             child: Align(
                               alignment: Alignment.bottomRight,
                               child: TextButton(
+                                  key: Key('next_ver'),
                                   child: Text(
                                     "Next",
                                     style: TextStyle(
@@ -104,7 +109,7 @@ class VerifyPasswordPagePhoneNum extends StatelessWidget {
                                         context,
                                         MaterialPageRoute(
                                           builder: (context) =>
-                                              ChangeEmailPage(),
+                                              ChangePhoneNumPage(),
                                         ),
                                       );
                                     } else
@@ -117,6 +122,7 @@ class VerifyPasswordPagePhoneNum extends StatelessWidget {
                                               "Please enter a correct password"),
                                           actions: <Widget>[
                                             TextButton(
+                                              key: Key('ver_ok'),
                                               onPressed: () =>
                                                   Navigator.pop(context, ''),
                                               child: const Text("Ok"),

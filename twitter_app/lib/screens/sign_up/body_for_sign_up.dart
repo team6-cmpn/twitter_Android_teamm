@@ -55,6 +55,7 @@ class _BodyForSignUpScreenState extends State<BodyForSignUpScreen> {
               child: Column(
                 children: [
                   TextFieldContainer(
+                    key: Key('name_field_signup'),
                     obs: false,
                     validator: (value) => nameValidator.validate(value),
                     size: size,
@@ -63,6 +64,7 @@ class _BodyForSignUpScreenState extends State<BodyForSignUpScreen> {
                     nameController: nameController,
                   ),
                   TextFieldContainer(
+                    key: Key('username_field_signup'),
                     obs: false,
                     //validator: (value) => emailValidator.validate(value),
                     size: size,
@@ -71,6 +73,7 @@ class _BodyForSignUpScreenState extends State<BodyForSignUpScreen> {
                     nameController: userController,
                   ),
                   TextFieldContainer(
+                    key: Key('Email_field_signup'),
                     obs: false,
                     validator: (value) => emailValidator.validate(value),
                     size: size,
@@ -79,6 +82,7 @@ class _BodyForSignUpScreenState extends State<BodyForSignUpScreen> {
                     nameController: emailController,
                   ),
                   TextFieldContainer(
+                    key: Key('phone_field_singup'),
                     obs: false,
                     //validator: (value) => emailValidator.validate(value),
                     size: size,
@@ -87,7 +91,8 @@ class _BodyForSignUpScreenState extends State<BodyForSignUpScreen> {
                     nameController: phoneController,
                   ),
                   TextFieldContainer(
-                    obs: false,
+                    key: Key('pass_field_signup'),
+                    obs: true,
                     //validator: (value) => emailValidator.validate(value),
                     size: size,
                     titleText: '  Password',
@@ -139,6 +144,7 @@ class _BodyForSignUpScreenState extends State<BodyForSignUpScreen> {
               height: 10,
             ),
             TextFieldContainer(
+              key: Key('date'),
               obs: false,
               size: size,
               titleText: '  Date of birth',
@@ -155,6 +161,7 @@ class _BodyForSignUpScreenState extends State<BodyForSignUpScreen> {
               height: size.height * 0.07,
             ),
             RoundedButton(
+              key: Key('next_signup'),
               passedText: 'Next',
               textColor: Colors.white,
               pressed: () {
@@ -176,6 +183,12 @@ class _BodyForSignUpScreenState extends State<BodyForSignUpScreen> {
                     token,
                     messagebody,
                   );
+                  setState(() {
+                    userdata.name = nameController.text;
+                    userdata.username = userController.text;
+                    userdata.email = emailController.text;
+                    userdata.phonenum = phoneController.text;
+                  });
                 }
               }, //addTransaction //() {},
               colorPassed: Colors.grey[700],

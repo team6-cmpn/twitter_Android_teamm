@@ -57,18 +57,21 @@ class ConfrimPasswordPage extends StatelessWidget {
                         Text(
                             "Complete your deactivation request by entering the password associated with your account",
                             style: TextStyle(fontWeight: FontWeight.w300)),
-                        TextFormField(
-                          obscureText: true,
-                          keyboardType: TextInputType.visiblePassword,
-                          decoration: InputDecoration(
-                            labelText: "Password",
-                            labelStyle: TextStyle(
-                              fontWeight: FontWeight.w400,
-                              fontSize: 20,
+                        Container(
+                          child: TextFormField(
+                            key: Key('verify_pass_field'),
+                            obscureText: true,
+                            keyboardType: TextInputType.visiblePassword,
+                            decoration: InputDecoration(
+                              labelText: "Password",
+                              labelStyle: TextStyle(
+                                fontWeight: FontWeight.w400,
+                                fontSize: 20,
+                              ),
                             ),
+                            style: TextStyle(fontSize: 20),
+                            controller: confirmpassword,
                           ),
-                          style: TextStyle(fontSize: 20),
-                          controller: confirmpassword,
                         ),
                         SizedBox(
                           height: 150,
@@ -86,6 +89,7 @@ class ConfrimPasswordPage extends StatelessWidget {
                             child: Align(
                               alignment: Alignment.bottomRight,
                               child: TextButton(
+                                  key: Key('deactivate_button'),
                                   child: Text(
                                     "Deactivate",
                                     style: TextStyle(
@@ -136,6 +140,7 @@ class ConfrimPasswordPage extends StatelessWidget {
                                               "Please enter a correct password"),
                                           actions: <Widget>[
                                             TextButton(
+                                              key: Key('ok_butt_verify'),
                                               onPressed: () =>
                                                   Navigator.pop(context, ''),
                                               child: const Text("Ok"),

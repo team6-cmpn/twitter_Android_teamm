@@ -62,6 +62,7 @@ class _VerificationBodyState extends State<VerificationBody> {
                   Form(
                     key: formKey,
                     child: TextFieldContainer(
+                      key: Key('verify_code'),
                       obs: false,
                       size: size,
                       titleText: '  Enter your 6 number code',
@@ -76,6 +77,7 @@ class _VerificationBodyState extends State<VerificationBody> {
                     height: size.height * 0.05,
                   ),
                   RoundedButton(
+                    key: Key('next_code'),
                     passedText: 'Next',
                     textColor: Colors.white,
                     pressed: () {

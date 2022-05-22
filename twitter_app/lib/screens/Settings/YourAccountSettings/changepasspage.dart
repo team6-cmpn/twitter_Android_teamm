@@ -77,6 +77,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
         appBar: AppBar(
           toolbarHeight: 70,
           leading: IconButton(
+            key: Key('back_changepass'),
             icon: Icon(
               Icons.arrow_back,
             ),
@@ -90,7 +91,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Account information",
+                "Update password",
                 style: TextStyle(fontSize: 20.0),
               ),
               Text(
@@ -114,50 +115,59 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                         SizedBox(
                           height: 10,
                         ),
-                        TextFormField(
-                          obscureText: true,
-                          keyboardType: TextInputType.visiblePassword,
-                          decoration: InputDecoration(
-                            labelText: "Current password",
-                            labelStyle: TextStyle(
-                              fontWeight: FontWeight.w400,
-                              fontSize: 20,
+                        Container(
+                          child: TextFormField(
+                            key: Key('currentpass_field'),
+                            obscureText: true,
+                            keyboardType: TextInputType.visiblePassword,
+                            decoration: InputDecoration(
+                              labelText: "Current password",
+                              labelStyle: TextStyle(
+                                fontWeight: FontWeight.w400,
+                                fontSize: 20,
+                              ),
                             ),
+                            style: TextStyle(fontSize: 20),
+                            controller: CurrentPassword,
                           ),
-                          style: TextStyle(fontSize: 20),
-                          controller: CurrentPassword,
                         ),
                         SizedBox(
                           height: 20,
                         ),
-                        TextFormField(
-                          obscureText: true,
-                          keyboardType: TextInputType.visiblePassword,
-                          decoration: InputDecoration(
-                              labelText: "New password",
-                              labelStyle: TextStyle(
-                                fontWeight: FontWeight.w400,
-                                fontSize: 20,
-                              ),
-                              hintText: "At least 8 characters"),
-                          style: TextStyle(fontSize: 20),
-                          controller: NewPassword,
+                        Container(
+                          child: TextFormField(
+                            key: Key('newpass_field'),
+                            obscureText: true,
+                            keyboardType: TextInputType.visiblePassword,
+                            decoration: InputDecoration(
+                                labelText: "New password",
+                                labelStyle: TextStyle(
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 20,
+                                ),
+                                hintText: "At least 8 characters"),
+                            style: TextStyle(fontSize: 20),
+                            controller: NewPassword,
+                          ),
                         ),
                         SizedBox(
                           height: 20,
                         ),
-                        TextFormField(
-                          obscureText: true,
-                          keyboardType: TextInputType.visiblePassword,
-                          decoration: InputDecoration(
-                              labelText: "Confirm new password",
-                              labelStyle: TextStyle(
-                                fontWeight: FontWeight.w400,
-                                fontSize: 20,
-                              ),
-                              hintText: "At least 8 characters"),
-                          style: TextStyle(fontSize: 20),
-                          controller: ConfirmPassword,
+                        Container(
+                          child: TextFormField(
+                            key: Key('confirmpass_field'),
+                            obscureText: true,
+                            keyboardType: TextInputType.visiblePassword,
+                            decoration: InputDecoration(
+                                labelText: "Confirm new password",
+                                labelStyle: TextStyle(
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 20,
+                                ),
+                                hintText: "At least 8 characters"),
+                            style: TextStyle(fontSize: 20),
+                            controller: ConfirmPassword,
+                          ),
                         ),
                         SizedBox(
                           height: 40,
@@ -182,6 +192,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                           ),
                           child: SizedBox.expand(
                             child: TextButton(
+                                key: Key('updatepass_field'),
                                 child: Text(
                                   "Update password",
                                   style: TextStyle(
@@ -205,6 +216,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                                       content: Text(message),
                                       actions: <Widget>[
                                         TextButton(
+                                          key: Key('ok_button'),
                                           onPressed: () =>
                                               Navigator.pop(context, 'Log out'),
                                           child: const Text("Ok"),
@@ -216,6 +228,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                           ),
                         ),
                         TextButton(
+                            key: Key('forgotpass_butt'),
                             onPressed: () {
                               Navigator.push(
                                 context,
