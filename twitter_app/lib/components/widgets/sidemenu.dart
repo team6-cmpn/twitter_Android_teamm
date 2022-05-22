@@ -4,6 +4,7 @@ import 'package:twitter_app/screens/Settings/bookmarkspage.dart';
 //import 'package:twitter_app/screens/admin_page/admin_page.dart';
 
 import '../../screens/Settings/settingspage.dart';
+import '../../screens/admin_page/admin_page.dart';
 import '../../screens/welcome/welcome_screen.dart';
 import 'CustomNavBar2.0.dart';
 import '../../API/userdata.dart';
@@ -19,6 +20,7 @@ class SideMenu extends StatefulWidget {
 }
 
 class _SideMenuState extends State<SideMenu> {
+  key: Key('Side_menu'),
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -43,7 +45,8 @@ class _SideMenuState extends State<SideMenu> {
                           height: 70,
                           child: CircleAvatar(
                             key: Key('Side_menu'),
-                            backgroundImage: NetworkImage(false
+                            backgroundImage: NetworkImage(userdata
+                                        .profileImage !=null
                                 ? userdata.profileImage
                                 : 'https://i.pinimg.com/custom_covers/222x/85498161615209203_1636332751.jpg'),
                             radius: 20,
@@ -150,15 +153,15 @@ class _SideMenuState extends State<SideMenu> {
                   onTap: () => {
                     if (userdata.isAdmin == true)
                       {
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //     builder: (context) => AdminPage(
-                        //       token: userdata.token,
-                        //       adminToken: '',
-                        //     ),
-                        //   ),
-                        // )
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => AdminPage(
+                              token: userdata.token,
+                              adminToken: '',
+                            ),
+                          ),
+                        )
                       }
                     else
                       {

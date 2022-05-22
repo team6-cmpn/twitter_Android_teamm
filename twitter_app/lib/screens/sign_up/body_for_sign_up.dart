@@ -172,7 +172,7 @@ class _BodyForSignUpScreenState extends State<BodyForSignUpScreen> {
                       builder: (context) => CustomNavBar(),
                     ),
                   ); */
-                  print('here ?');
+                  //print('here ?');
                   SignUp(
                     nameController.text,
                     userController.text,
