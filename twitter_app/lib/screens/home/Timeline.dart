@@ -472,7 +472,7 @@ class _TimelinePageState extends State<TimelinePage> {
   Widget tweetBoxWidgety(item) {
     var name = item['user']['name'];
     var userName = item['user']['username'];
-    var userProfilePic = item['url'];
+    var userProfilePic = item['user']['profile_image_url'];
     var tweetMessg = item['tweet']['text'];
     var date = item['tweet']['created_at'];
     var isLoved = item['tweet']['hasImage'];
@@ -515,7 +515,7 @@ class _TimelinePageState extends State<TimelinePage> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 CircleAvatar(
-                  backgroundImage: NetworkImage(false
+                  backgroundImage: NetworkImage(userProfilePic != null
                       ? userProfilePic.toString()
                       : 'https://i.pinimg.com/custom_covers/222x/85498161615209203_1636332751.jpg'),
                   radius: 20,
@@ -553,18 +553,33 @@ class _TimelinePageState extends State<TimelinePage> {
               ),
             ],
           ),
-          /* Container(
-              child: hasImageTweet
-                  ? Image.network(imageOfTweet[0].toString())
-                  : SizedBox()), */
-
-          Container(
+          /*  Container(
+            height: 170,
+            child: hasImageTweet
+                ? Image.network(
+                    !(imageOfTweet == null)
+                        ? imageOfTweet[0].toString()
+                        : 'https://www.whatsappprofiledpimages.com/wp-content/uploads/2021/11/free-Whatsapp-Dp-Boys-Stylish-Girls-Cute-Images-pics.jpg',
+                  )
+                : SizedBox(
+                    height: 1,
+                  ),
+          ), */
+          /* Text(
+            !hasImageTweet
+                ? "no image , no array "
+                : !(imageOfTweet == null)
+                    ? "${imageOfTweet[0].toString()} "
+                    : "should be error here ",
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 8),
+          ), */
+          /*  Container(
             child: !hasImageTweet
                 ? SizedBox()
                 : (imageOfTweet[0].toString() == 'any')
                     ? SizedBox()
                     : Image.network(imageOfTweet[0].toString()),
-          ),
+          ), */
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -709,7 +724,7 @@ class _TimelinePageState extends State<TimelinePage> {
             child: Padding(
               padding: const EdgeInsets.all(10.0),
               child: CircleAvatar(
-                backgroundImage: NetworkImage(false
+                backgroundImage: NetworkImage(userdata.profileImage != null
                     ? userdata.profileImage
                     : 'https://i.pinimg.com/custom_covers/222x/85498161615209203_1636332751.jpg'),
                 radius: 20,
