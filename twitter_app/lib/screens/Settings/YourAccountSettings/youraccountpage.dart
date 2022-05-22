@@ -18,6 +18,7 @@ class _YourAccountPageState extends State<YourAccountPage> {
       appBar: AppBar(
         toolbarHeight: 70,
         leading: IconButton(
+           key: Key('arrow_back'),
           icon: Icon(
             Icons.arrow_back,
           ),

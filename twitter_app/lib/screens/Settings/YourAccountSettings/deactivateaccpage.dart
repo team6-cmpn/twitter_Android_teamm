@@ -196,6 +196,7 @@ class DeactivateAccountPage extends StatelessWidget {
                             child: Align(
                               alignment: Alignment.bottomCenter,
                               child: TextButton(
+                                  key: Key('deactivate_button_2'),
                                   child: Text(
                                     "Deactivate",
                                     style: TextStyle(

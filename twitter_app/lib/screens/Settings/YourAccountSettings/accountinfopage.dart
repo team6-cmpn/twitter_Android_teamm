@@ -18,11 +18,17 @@ class AccountInfoPage extends StatefulWidget {
 class AccountInfoPageState extends State<AccountInfoPage> {
   @override
   Widget build(BuildContext context) {
+    setState(() {
+      userdata.username;
+      userdata.email;
+      userdata.phonenum;
+    });
     return SafeArea(
         child: Scaffold(
       appBar: AppBar(
         toolbarHeight: 70,
         leading: IconButton(
+          key: Key('Back_key_accinfo'),
           icon: Icon(
             Icons.arrow_back,
           ),
@@ -55,6 +61,7 @@ class AccountInfoPageState extends State<AccountInfoPage> {
                 padding: EdgeInsets.zero,
                 children: <Widget>[
                   ListTile(
+                    key: Key('Username_tile'),
                     title: Text('Username'),
                     subtitle: Text(userdata.username),
                     onTap: () => {
@@ -67,6 +74,7 @@ class AccountInfoPageState extends State<AccountInfoPage> {
                     },
                   ),
                   ListTile(
+                    key: Key('Email_tile'),
                     title: Text('Email'),
                     subtitle: Text(userdata.email),
                     onTap: () => {
@@ -79,6 +87,7 @@ class AccountInfoPageState extends State<AccountInfoPage> {
                     },
                   ),
                   ListTile(
+                    key: Key('Phonenum_tile'),
                     title: Text('Phone number'),
                     subtitle: userdata.phonenum == ""
                         ? Text("No phone number registered")
@@ -106,6 +115,7 @@ class AccountInfoPageState extends State<AccountInfoPage> {
                                   ),
                                 ),
                                 TextButton(
+                                  key: Key('update_phonenum'),
                                   onPressed: () {
                                     Navigator.push(
                                       context,
@@ -118,6 +128,7 @@ class AccountInfoPageState extends State<AccountInfoPage> {
                                   child: const Text('Update'),
                                 ),
                                 TextButton(
+                                    key: Key('delete_phonenum'),
                                     onPressed: () {
                                       print("clicked");
                                       setState(() {
@@ -128,6 +139,7 @@ class AccountInfoPageState extends State<AccountInfoPage> {
                                     },
                                     child: Text("Delete")),
                                 TextButton(
+                                    key: Key('cance_phonenum_menu'),
                                     onPressed: () {
                                       print("clicked");
                                       Navigator.pop(context, 'Cancel');
@@ -141,6 +153,7 @@ class AccountInfoPageState extends State<AccountInfoPage> {
                     },
                   ),
                   ListTile(
+                    key: Key('logout_tile'),
                     minVerticalPadding: 20,
                     title: Text(
                       'Log out',
@@ -154,10 +167,12 @@ class AccountInfoPageState extends State<AccountInfoPage> {
                             'Logging out will remove all Twitter data from this device'),
                         actions: <Widget>[
                           TextButton(
+                            key: Key('cancel_logout'),
                             onPressed: () => Navigator.pop(context, 'Cancel'),
                             child: const Text('Cancel'),
                           ),
                           TextButton(
+                              key: Key('logout_button'),
                               onPressed: () {
                                 userdata.token = null;
 

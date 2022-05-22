@@ -42,6 +42,7 @@ class _SideMenuState extends State<SideMenu> {
                           width: 70,
                           height: 70,
                           child: CircleAvatar(
+                            key: Key('Side_menu'),
                             backgroundImage: NetworkImage(false
                                 ? userdata.profileImage
                                 : 'https://i.pinimg.com/custom_covers/222x/85498161615209203_1636332751.jpg'),

@@ -137,6 +137,7 @@ class BodyStartUpPage extends StatelessWidget {
               ),
             ), */
             RoundedButton(
+              key: Key('signup_button'),
               passedText: 'Sign Up with Email',
               textColor: Colors.white,
               pressed: () => {
@@ -173,6 +174,7 @@ class BodyStartUpPage extends StatelessWidget {
               ),
             ),
             RoundedButton(
+              key: Key('sign_in_button'),
               passedText: 'Sign in',
               textColor: Colors.lightBlue,
               marginValue: 3,

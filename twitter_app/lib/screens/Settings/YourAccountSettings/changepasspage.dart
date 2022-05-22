@@ -77,6 +77,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
         appBar: AppBar(
           toolbarHeight: 70,
           leading: IconButton(
+            key: Key('back_changepass'),
             icon: Icon(
               Icons.arrow_back,
             ),
@@ -90,7 +91,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Account information",
+                "Update password",
                 style: TextStyle(fontSize: 20.0),
               ),
               Text(
@@ -116,6 +117,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                         ),
                         Container(
                           child: TextFormField(
+                            key: Key('currentpass_field'),
                             obscureText: true,
                             keyboardType: TextInputType.visiblePassword,
                             decoration: InputDecoration(
@@ -134,6 +136,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                         ),
                         Container(
                           child: TextFormField(
+                            key: Key('newpass_field'),
                             obscureText: true,
                             keyboardType: TextInputType.visiblePassword,
                             decoration: InputDecoration(
@@ -152,6 +155,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                         ),
                         Container(
                           child: TextFormField(
+                            key: Key('confirmpass_field'),
                             obscureText: true,
                             keyboardType: TextInputType.visiblePassword,
                             decoration: InputDecoration(
@@ -188,6 +192,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                           ),
                           child: SizedBox.expand(
                             child: TextButton(
+                                key: Key('updatepass_field'),
                                 child: Text(
                                   "Update password",
                                   style: TextStyle(
@@ -211,6 +216,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                                       content: Text(message),
                                       actions: <Widget>[
                                         TextButton(
+                                          key: Key('ok_button'),
                                           onPressed: () =>
                                               Navigator.pop(context, 'Log out'),
                                           child: const Text("Ok"),
@@ -222,6 +228,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                           ),
                         ),
                         TextButton(
+                            key: Key('forgotpass_butt'),
                             onPressed: () {
                               Navigator.push(
                                 context,

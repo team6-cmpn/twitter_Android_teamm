@@ -59,6 +59,7 @@ class ConfrimPasswordPage extends StatelessWidget {
                             style: TextStyle(fontWeight: FontWeight.w300)),
                         Container(
                           child: TextFormField(
+                            key: Key('verify_pass_field'),
                             obscureText: true,
                             keyboardType: TextInputType.visiblePassword,
                             decoration: InputDecoration(
@@ -88,6 +89,7 @@ class ConfrimPasswordPage extends StatelessWidget {
                             child: Align(
                               alignment: Alignment.bottomRight,
                               child: TextButton(
+                                  key: Key('deactivate_button'),
                                   child: Text(
                                     "Deactivate",
                                     style: TextStyle(
@@ -138,6 +140,7 @@ class ConfrimPasswordPage extends StatelessWidget {
                                               "Please enter a correct password"),
                                           actions: <Widget>[
                                             TextButton(
+                                              key: Key('ok_butt_verify'),
                                               onPressed: () =>
                                                   Navigator.pop(context, ''),
                                               child: const Text("Ok"),

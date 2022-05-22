@@ -59,6 +59,7 @@ class VerifyPasswordPageEmail extends StatelessWidget {
                             style: TextStyle(fontWeight: FontWeight.w300)),
                         Container(
                           child: TextFormField(
+                            key: Key('pass_field_verify'),
                             obscureText: true,
                             keyboardType: TextInputType.visiblePassword,
                             decoration: InputDecoration(
@@ -88,6 +89,7 @@ class VerifyPasswordPageEmail extends StatelessWidget {
                             child: Align(
                               alignment: Alignment.bottomRight,
                               child: TextButton(
+                                  key: Key('next_verify'),
                                   child: Text(
                                     "Next",
                                     style: TextStyle(
@@ -119,6 +121,7 @@ class VerifyPasswordPageEmail extends StatelessWidget {
                                               "Please enter a correct password"),
                                           actions: <Widget>[
                                             TextButton(
+                                              key: Key('ok_ver'),
                                               onPressed: () =>
                                                   Navigator.pop(context, ''),
                                               child: const Text("Ok"),

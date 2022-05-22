@@ -105,6 +105,7 @@ class _ChangeUsernamePageState extends State<ChangeUsernamePage> {
                         ),
                         Container(
                           child: TextFormField(
+                            key: Key('new_username_field'),
                             obscureText: false,
                             keyboardType: TextInputType.visiblePassword,
                             decoration: InputDecoration(
@@ -144,6 +145,7 @@ class _ChangeUsernamePageState extends State<ChangeUsernamePage> {
                           ),
                           child: SizedBox.expand(
                             child: TextButton(
+                                key: Key('done_butt'),
                                 child: Text(
                                   "Done",
                                   style: TextStyle(
@@ -156,7 +158,9 @@ class _ChangeUsernamePageState extends State<ChangeUsernamePage> {
                                 onPressed: () async {
                                   String message = await ChangeUsernameAPI(
                                       newUsername.text, userdata.token);
-
+                                  setState(() {
+                                    userdata.username = newUsername.text;
+                                  });
                                   showDialog<String>(
                                     context: context,
                                     builder: (BuildContext context) =>
@@ -165,6 +169,7 @@ class _ChangeUsernamePageState extends State<ChangeUsernamePage> {
                                       content: Text(message),
                                       actions: <Widget>[
                                         TextButton(
+                                          key: Key('ok_butt_user'),
                                           onPressed: () =>
                                               Navigator.pop(context, ''),
                                           child: const Text("Ok"),

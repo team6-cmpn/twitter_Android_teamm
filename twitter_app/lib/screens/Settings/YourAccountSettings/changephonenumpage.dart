@@ -108,6 +108,7 @@ class _ChangePhoneNumPageState extends State<ChangePhoneNumPage> {
                             style: TextStyle(fontWeight: FontWeight.w300)),
                         Container(
                           child: TextFormField(
+                            key: Key('phonenum_field'),
                             obscureText: false,
                             keyboardType: TextInputType.visiblePassword,
                             decoration: InputDecoration(
@@ -137,6 +138,7 @@ class _ChangePhoneNumPageState extends State<ChangePhoneNumPage> {
                             child: Align(
                               alignment: Alignment.bottomRight,
                               child: TextButton(
+                                  key: Key('next_phonenum'),
                                   child: Text(
                                     "Next",
                                     style: TextStyle(
@@ -163,6 +165,7 @@ class _ChangePhoneNumPageState extends State<ChangePhoneNumPage> {
                                               "You entered the same phone number registered"),
                                           actions: <Widget>[
                                             TextButton(
+                                              key: Key('ok_but_pnum'),
                                               onPressed: () =>
                                                   Navigator.pop(context, ''),
                                               child: const Text("Ok"),

@@ -45,8 +45,14 @@ Future<String> ChangeEmailApi(
   return message;
 }
 
-class ChangeEmailPage extends StatelessWidget {
+class ChangeEmailPage extends StatefulWidget {
+  @override
+  State<ChangeEmailPage> createState() => _ChangeEmailPageState();
+}
+
+class _ChangeEmailPageState extends State<ChangeEmailPage> {
   final newEmail = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -101,6 +107,7 @@ class ChangeEmailPage extends StatelessWidget {
                             style: TextStyle(fontWeight: FontWeight.w300)),
                         Container(
                           child: TextFormField(
+                            key: Key('change_Email_field'),
                             obscureText: false,
                             keyboardType: TextInputType.visiblePassword,
                             decoration: InputDecoration(
@@ -130,6 +137,7 @@ class ChangeEmailPage extends StatelessWidget {
                             child: Align(
                               alignment: Alignment.bottomRight,
                               child: TextButton(
+                                  key: Key('Next_button_changeemail'),
                                   child: Text(
                                     "Next",
                                     style: TextStyle(
@@ -165,7 +173,10 @@ class ChangeEmailPage extends StatelessWidget {
                                     } else {
                                       String message = await ChangeEmailApi(
                                           newEmail.text, userdata.token);
-                                      userdata.email = newEmail.text;
+                                      setState(() {
+                                        userdata.email = newEmail.text;
+                                      });
+
                                       print("Successful" + message);
                                       showDialog<String>(
                                         context: context,

@@ -390,6 +390,7 @@ class _TimelinePageState extends State<TimelinePage> {
               },
             ),
             TextButton(
+              key: Key('Add_post'),
               onPressed: () {
                 addPostt(
                   messgController.text,
