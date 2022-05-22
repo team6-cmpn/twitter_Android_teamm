@@ -1,7 +1,12 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:twitter_app/screens/Login/body_for_login_screen.dart';
 import 'package:twitter_app/screens/Login/login.dart';
+
+import 'package:twitter_app/unused/backendtest.dart';
+
 import 'dart:convert';
 
 import '../../components/rounded_button.dart';
@@ -156,11 +161,12 @@ class _VerificationBodyState extends State<VerificationBody> {
         () {
           //dataResponse = mapResponse["data"];
           //dataResponse["role"].toString() == 'Admin'
-          print('zuuuuuuuperrrrrrrr');
+          // print('zuuuuuuuperrrrrrrr');
           print(token);
           Navigator.of(context).pushAndRemoveUntil(
               MaterialPageRoute(
-                  builder: (BuildContext context) => LoginScreen()),
+                builder: (BuildContext context) => LoginScreen(),
+              ),
               (Route<dynamic> route) => false);
           dataResponse = mapResponse;
         },
