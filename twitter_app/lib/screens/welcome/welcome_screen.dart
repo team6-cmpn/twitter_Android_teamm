@@ -9,8 +9,10 @@ import 'body_startup_page.dart';
 class WelcomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: BodyStartUpPage(),
+    return SafeArea(
+      child: Scaffold(
+        body: BodyStartUpPage(),
+      ),
     );
   }
 }

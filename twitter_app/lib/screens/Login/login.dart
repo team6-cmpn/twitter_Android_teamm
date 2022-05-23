@@ -12,8 +12,10 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // ignore: prefer_const_constructors
-    return Scaffold(
-      body: BodyForLoginScreen(),
+    return SafeArea(
+      child: Scaffold(
+        body: BodyForLoginScreen(),
+      ),
     );
   }
 }

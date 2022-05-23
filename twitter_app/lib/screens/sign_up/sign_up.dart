@@ -14,17 +14,19 @@ class SignUpScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // ignore: prefer_const_constructors
-    return Scaffold(
-      body: BodyForSignUpScreen(),
+    return SafeArea(
+      child: Scaffold(
+        body: BodyForSignUpScreen(),
 
-      /* ValueListenableBuilder<Box<Transaction>>(
-        valueListenable: Boxes.getTransactions().listenable(),
-        builder: (context, box, _) {
-          final transactions = box.values.toList().cast<Transaction>();
-
-          return BodyForSignUpScreen();
-        },
-      ), */
+        /* ValueListenableBuilder<Box<Transaction>>(
+          valueListenable: Boxes.getTransactions().listenable(),
+          builder: (context, box, _) {
+            final transactions = box.values.toList().cast<Transaction>();
+    
+            return BodyForSignUpScreen();
+          },
+        ), */
+      ),
     );
   }
 }
