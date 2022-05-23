@@ -8,8 +8,10 @@ class ForgotPasswordScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // ignore: prefer_const_constructors
-    return Scaffold(
-      body: BodyForForgotPassword(),
+    return SafeArea(
+      child: Scaffold(
+        body: BodyForForgotPassword(),
+      ),
     );
   }
 }

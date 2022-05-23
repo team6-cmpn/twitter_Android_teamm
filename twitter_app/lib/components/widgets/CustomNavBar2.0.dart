@@ -18,7 +18,6 @@ class _CustomNavBarState extends State<CustomNavBar> {
       token: userdata.token,
     ),
     NotificationsPage(),
-    SettingsPage(),
     Text("Profile"),
   ];
 
@@ -45,13 +44,6 @@ class _CustomNavBarState extends State<CustomNavBar> {
             SalomonBottomBarItem(
               icon: Icon(Icons.notifications),
               title: Text("Notifications"),
-              selectedColor: Colors.blueAccent,
-            ),
-
-            /// Search
-            SalomonBottomBarItem(
-              icon: Icon(Icons.settings),
-              title: Text("Settings"),
               selectedColor: Colors.blueAccent,
             ),
 
