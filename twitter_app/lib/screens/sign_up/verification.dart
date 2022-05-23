@@ -12,6 +12,8 @@ import 'dart:convert';
 import '../../components/rounded_button.dart';
 import '../../components/text_field_container.dart';
 import '../../components/widgets/CustomNavBar2.0.dart';
+import '../../API/userdata.dart';
+import '../Login/body_for_login_screen.dart';
 
 // ignore: use_key_in_widget_constructors
 class VerificationBody extends StatefulWidget {
@@ -163,15 +165,54 @@ class _VerificationBodyState extends State<VerificationBody> {
           //dataResponse["role"].toString() == 'Admin'
           // print('zuuuuuuuperrrrrrrr');
           print(token);
-          Navigator.of(context).pushAndRemoveUntil(
-              MaterialPageRoute(
-                builder: (BuildContext context) => LoginScreen(),
-              ),
-              (Route<dynamic> route) => false);
+          SignIn(userdata.username, userdata.password);
+
           dataResponse = mapResponse;
         },
       );
     } else if (response.statusCode == 400) {
+      print('bad request');
+    } else if (response.statusCode == 401) {
+      print('Unauthorized');
+    } else if (response.statusCode == 404) {
+      print('Not Found');
+    } else if (response.statusCode == 500) {
+      print('Internal Server Error');
+    }
+  }
+
+  SignIn(String email, String password) async {
+    Map data = {"data": email, "password": password};
+    //var jsonData = null;
+
+    const String BaseURL = "http://twi-jay.me:8080";
+    final response =
+        await http.post(Uri.parse("$BaseURL/auth/signin"), body: data);
+    Map dataResponse = json.decode(response.body);
+
+    if (response.statusCode == 200) {
+      // SharedPreferences prefs = await SharedPreferences.getInstance();
+      // prefs.setString(userdata.token, token);
+      userdata.token = dataResponse["accessToken"];
+      userdata.name = dataResponse["user"]["name"];
+      userdata.username = dataResponse["user"]["username"];
+      userdata.idUser = dataResponse['user']['_id'];
+      userdata.email = dataResponse["user"]["email"];
+      userdata.phonenum = dataResponse["user"]["phoneNumber"];
+      userdata.password = password;
+      userdata.isdeactivated = dataResponse["user"]["isDeactivated"];
+      userdata.isAdmin = dataResponse['user']['isAdmin'];
+      userdata.profileImage = dataResponse['user']['profile_image_url'];
+      print(userdata.activationmessage);
+      print('ha?');
+      print(userdata.token);
+      Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(builder: (BuildContext context) => CustomNavBar()),
+          (Route<dynamic> route) => false);
+    } else if (response.statusCode == 400) {
+      userdata.activationmessage = dataResponse["message"];
+      userdata.token = dataResponse["accessToken"];
+
       print('bad request');
     } else if (response.statusCode == 401) {
       print('Unauthorized');

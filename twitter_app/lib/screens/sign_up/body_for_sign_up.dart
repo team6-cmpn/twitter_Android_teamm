@@ -222,17 +222,19 @@ class _BodyForSignUpScreenState extends State<BodyForSignUpScreen> {
       mapResponse = json.decode(response.body);
       dataResponse = mapResponse;
       userdata.token = dataResponse["emailtoken"];
+      userdata.username = userName;
+      userdata.password = password;
       messgbody = dataResponse["message"];
-
+      Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(
+              builder: (BuildContext context) =>
+                  VerificationBody(token: token)),
+          (Route<dynamic> route) => false);
       setState(
         () {
           print('yayyyyyyyyy');
           print(token);
-          Navigator.of(context).pushAndRemoveUntil(
-              MaterialPageRoute(
-                  builder: (BuildContext context) =>
-                      VerificationBody(token: token)),
-              (Route<dynamic> route) => false);
+
           //dataResponse = mapResponse;
         },
       );

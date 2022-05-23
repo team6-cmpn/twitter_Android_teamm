@@ -59,17 +59,17 @@ class _BodyForLoginScreenState extends State<BodyForLoginScreen> {
 
             pressed: () {
               //final provider = Provider.of<GoogleSignInProvider>(context, listen: false);
-              final provider =
-                  Provider.of<GoogleSignInProvider>(context, listen: false);
-              provider.googleLogin();
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) {
-                    return TwitterHomePage();
-                  },
-                ),
-              );
+              // final provider =
+              //     Provider.of<GoogleSignInProvider>(context, listen: false);
+              // provider.googleLogin();
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(
+              //     builder: (context) {
+              //       return TwitterHomePage();
+              //     },
+              //   ),
+              // );
             },
             //colorPassed: Colors.white,
             marginValue: 7,
@@ -289,10 +289,7 @@ class _BodyForLoginScreenState extends State<BodyForLoginScreen> {
   }
 
   SignIn(String email, String password) async {
-    Map data = {
-      'data': email,
-      'password': password,
-    };
+    Map data = {"data": email, "password": password};
     //var jsonData = null;
 
     const String BaseURL = "http://twi-jay.me:8080";
@@ -316,16 +313,9 @@ class _BodyForLoginScreenState extends State<BodyForLoginScreen> {
       print(userdata.activationmessage);
       print('ha?');
       print(userdata.token);
-      setState(
-        () {
-          //dataResponse = mapResponse["data"];
-          //dataResponse["role"].toString() == 'Admin'
-          Navigator.of(context).pushAndRemoveUntil(
-              MaterialPageRoute(
-                  builder: (BuildContext context) => CustomNavBar()),
-              (Route<dynamic> route) => false);
-        },
-      );
+      Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(builder: (BuildContext context) => CustomNavBar()),
+          (Route<dynamic> route) => false);
     } else if (response.statusCode == 400) {
       userdata.activationmessage = dataResponse["message"];
       userdata.token = dataResponse["accessToken"];
