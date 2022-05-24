@@ -2,12 +2,11 @@
 
 //import 'dart:ffi';
 import 'dart:io';
-
+import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
+
 import 'package:intl/intl.dart';
 import 'package:twitter_app/API/userdata.dart';
 import 'package:http/http.dart' as http;
@@ -45,6 +44,13 @@ class _TimelinePageState extends State<TimelinePage> {
   final scrollController = ScrollController();
   var scaffoldkey = GlobalKey<ScaffoldState>();
   final messgController = TextEditingController();
+  void dispose() {
+    // Clean up the controller when the widget is disposed.
+    messgController.dispose();
+
+    super.dispose();
+  }
+
   bool scaffoldKey = false;
   //final Function addNewPosting;
 
@@ -397,10 +403,9 @@ class _TimelinePageState extends State<TimelinePage> {
                   messgController.text,
                   addedimage.toString(),
                 );
-                //addedimage.delete();
+                Navigator.pop(context);
                 messgController.clear();
-                //navigator.pop(context);
-                print(addedimage);
+                addedimage.delete();
               },
               child: Text(
                 'Tweet',
@@ -409,7 +414,7 @@ class _TimelinePageState extends State<TimelinePage> {
                   //fontWeight: FontWeight.bold,
                 ),
               ),
-            ),
+            )
           ],
         ),
       );
