@@ -52,6 +52,12 @@ class ChangeEmailPage extends StatefulWidget {
 
 class _ChangeEmailPageState extends State<ChangeEmailPage> {
   final newEmail = TextEditingController();
+  void dispose() {
+    // Clean up the controller when the widget is disposed.
+    newEmail.dispose();
+
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -186,8 +192,10 @@ class _ChangeEmailPageState extends State<ChangeEmailPage> {
                                           content: Text(message),
                                           actions: <Widget>[
                                             TextButton(
-                                              onPressed: () =>
-                                                  Navigator.of(context).pop(),
+                                              onPressed: () {
+                                                Navigator.pop(context);
+                                                newEmail.clear();
+                                              },
                                               child: const Text("Ok"),
                                             ),
                                           ],

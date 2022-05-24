@@ -189,8 +189,10 @@ class _ChangePhoneNumPageState extends State<ChangePhoneNumPage> {
                                           content: Text(message),
                                           actions: <Widget>[
                                             TextButton(
-                                              onPressed: () =>
-                                                  Navigator.pop(context, ''),
+                                              onPressed: () {
+                                                Navigator.pop(context);
+                                                phoneNum.clear();
+                                              },
                                               child: const Text("Ok"),
                                             ),
                                           ],

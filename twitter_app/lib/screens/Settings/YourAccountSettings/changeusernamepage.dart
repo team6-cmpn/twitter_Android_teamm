@@ -107,6 +107,22 @@ class _ChangeUsernamePageState extends State<ChangeUsernamePage> {
                           child: TextFormField(
                             key: Key('new_username_field'),
                             obscureText: false,
+                            initialValue: userdata.username,
+                            readOnly: true,
+                            decoration: InputDecoration(
+                              labelText: "Current",
+                              labelStyle: TextStyle(
+                                fontWeight: FontWeight.w400,
+                                fontSize: 20,
+                              ),
+                            ),
+                            style: TextStyle(color: Colors.grey, fontSize: 20),
+                          ),
+                        ),
+                        Container(
+                          child: TextFormField(
+                            key: Key('new_username_field'),
+                            obscureText: false,
                             keyboardType: TextInputType.visiblePassword,
                             decoration: InputDecoration(
                               labelText: "New",
@@ -170,8 +186,10 @@ class _ChangeUsernamePageState extends State<ChangeUsernamePage> {
                                       actions: <Widget>[
                                         TextButton(
                                           key: Key('ok_butt_user'),
-                                          onPressed: () =>
-                                              Navigator.pop(context, ''),
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                            newUsername.clear();
+                                          },
                                           child: const Text("Ok"),
                                         ),
                                       ],

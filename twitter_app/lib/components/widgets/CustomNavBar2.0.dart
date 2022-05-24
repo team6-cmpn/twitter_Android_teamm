@@ -18,7 +18,6 @@ class _CustomNavBarState extends State<CustomNavBar> {
       token: userdata.token,
     ),
     NotificationsPage(),
-    Text("Profile"),
   ];
 
   @override
@@ -48,11 +47,6 @@ class _CustomNavBarState extends State<CustomNavBar> {
             ),
 
             /// Profile
-            SalomonBottomBarItem(
-              icon: Icon(Icons.person),
-              title: Text("Profile"),
-              selectedColor: Colors.blueAccent,
-            ),
           ],
         ),
       ),

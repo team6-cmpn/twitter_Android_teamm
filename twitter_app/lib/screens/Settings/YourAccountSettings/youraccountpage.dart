@@ -18,7 +18,7 @@ class _YourAccountPageState extends State<YourAccountPage> {
       appBar: AppBar(
         toolbarHeight: 70,
         leading: IconButton(
-           key: Key('arrow_back'),
+          key: Key('arrow_back'),
           icon: Icon(
             Icons.arrow_back,
           ),
@@ -61,7 +61,7 @@ class _YourAccountPageState extends State<YourAccountPage> {
               ),
             ),
             SizedBox(
-              height: 20,
+              height: 10,
             ),
             Expanded(
               child: ListView(

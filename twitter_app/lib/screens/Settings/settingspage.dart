@@ -99,20 +99,20 @@ class _SettingsPageState extends State<SettingsPage> {
                         MaterialPageRoute(
                             builder: (context) => YourAccountPage())),
                   ),
-                  ListTile(
-                    leading: Icon(
-                      Icons.notifications,
-                      size: 30,
-                    ),
-                    title: Text('Notifications'),
-                    subtitle: Text(
-                        'Select the kinds of notifications you get about your activities,interests and recommendations'),
-                    minVerticalPadding: 15,
-                    onTap: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => NotificationSettingsPage())),
-                  ),
+                  // ListTile(
+                  //   leading: Icon(
+                  //     Icons.notifications,
+                  //     size: 30,
+                  //   ),
+                  //   title: Text('Notifications'),
+                  //   subtitle: Text(
+                  //       'Select the kinds of notifications you get about your activities,interests and recommendations'),
+                  //   minVerticalPadding: 15,
+                  //   onTap: () => Navigator.push(
+                  //       context,
+                  //       MaterialPageRoute(
+                  //           builder: (context) => NotificationSettingsPage())),
+                  // ),
                   ListTile(
                     leading: Icon(
                       Icons.brush,

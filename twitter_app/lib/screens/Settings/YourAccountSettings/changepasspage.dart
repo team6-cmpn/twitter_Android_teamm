@@ -217,8 +217,12 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                                       actions: <Widget>[
                                         TextButton(
                                           key: Key('ok_button'),
-                                          onPressed: () =>
-                                              Navigator.pop(context, 'Log out'),
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                            CurrentPassword.clear();
+                                            NewPassword.clear();
+                                            ConfirmPassword.clear();
+                                          },
                                           child: const Text("Ok"),
                                         ),
                                       ],

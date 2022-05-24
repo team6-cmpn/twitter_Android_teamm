@@ -105,9 +105,10 @@ class DeactivateAccountPage extends StatelessWidget {
                   Row(
                     children: [
                       CircleAvatar(
-                        backgroundImage: NetworkImage(false
-                            ? userdata.profileImage
-                            : 'https://i.pinimg.com/custom_covers/222x/85498161615209203_1636332751.jpg'),
+                        backgroundImage: NetworkImage(userdata.profileImage ==
+                                null
+                            ? 'https://i.pinimg.com/custom_covers/222x/85498161615209203_1636332751.jpg'
+                            : userdata.profileImage),
                         radius: 45,
                       ),
                       Text(

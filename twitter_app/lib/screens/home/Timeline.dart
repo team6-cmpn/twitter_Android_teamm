@@ -44,6 +44,13 @@ class _TimelinePageState extends State<TimelinePage> {
   final scrollController = ScrollController();
   var scaffoldkey = GlobalKey<ScaffoldState>();
   final messgController = TextEditingController();
+  void dispose() {
+    // Clean up the controller when the widget is disposed.
+    messgController.dispose();
+
+    super.dispose();
+  }
+
   bool scaffoldKey = false;
   //final Function addNewPosting;
 
@@ -396,6 +403,9 @@ class _TimelinePageState extends State<TimelinePage> {
                   messgController.text,
                   addedimage.toString(),
                 );
+                Navigator.pop(context);
+                messgController.clear();
+                addedimage.delete();
               },
               child: Text(
                 'Tweet',
