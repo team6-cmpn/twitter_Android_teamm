@@ -15,25 +15,125 @@ class LikesNotificationsPage extends StatefulWidget {
 class _LikesNotificationsPageState extends State<LikesNotificationsPage> {
   var scaffoldkey = GlobalKey<ScaffoldState>();
   var listofLikeNotifications = [];
+  void initState() {
+    super.initState();
+    countFuture = getTweetId(userdata.token);
+  }
+
+  Future<String> getTweetId(token) async {
+    var response = await http.get(
+      Uri.parse(
+        ('http://twi-jay.me:8080/tweets/lookup/1/50'),
+      ),
+      headers: {
+        'x-access-token': token,
+      },
+    );
+
+    // //print('md5l444444444');
+    ////print(response.statusCode);
+    if (response.statusCode == 200) {
+      var posts = json.decode(response.body)[0];
+      var infoOfPosts = json.decode(response.body)[0]['tweet'];
+      var infoOfUser = json.decode(response.body)[0]['user'];
+      idOfPost = infoOfPosts['_id'];
+    } else if (response.statusCode == 400) {
+      //print('bad request');
+    } else if (response.statusCode == 401) {
+      //print('Unauthorized');
+    } else if (response.statusCode == 404) {
+      //print('Not Found');
+    } else if (response.statusCode == 500) {
+      //print('Internal Server Error');
+    }
+    return idOfPost;
+  }
+
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: FutureBuilder<String>(
-            future: countFuture,
-            builder: ((context, snapshot) {
-              // if (snapshot.hasData) {
-              //   idOfPost = snapshot.data;
-              LikeNotifications(userdata.token);
+    LikeNotifications(userdata.token);
+    if (listofLikeNotifications.isEmpty) {
+      return SafeArea(
+        child: Scaffold(
+          body: Container(
+            padding: EdgeInsets.only(top: 10, left: 20, right: 40),
+            child: ListView(
+              children: <Widget>[
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Container(
+                      width: double.infinity,
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Column(
+                          children: <Widget>[
+                            SizedBox(
+                              height: 90,
+                            ),
+                            Image.asset(
+                              "assests/images/FinalLogo.png",
+                              scale: 3,
+                            ),
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: Text("No Notifications",
+                                  style: TextStyle(
+                                      fontSize: 30,
+                                      fontWeight: FontWeight.w900)),
+                            ),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            SizedBox(
+                              height: 150,
+                            ),
+                            Container(
+                              height: 40,
+                              width: 350,
+                              alignment: Alignment.centerLeft,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(45),
+                                ),
+                              ),
+                              child: SizedBox.expand(
+                                child: Align(
+                                  alignment: Alignment.bottomRight,
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 40,
+                            ),
+                          ],
+                        ),
+                      ),
+                    )
+                  ],
+                )
+              ],
+            ),
+          ),
+        ),
+      );
+    } else {
+      return SafeArea(
+        child: Scaffold(
+          body: FutureBuilder<String>(
+              future: countFuture,
+              builder: ((context, snapshot) {
+                if (snapshot.hasData) {
+                  idOfPost = snapshot.data;
 
-              return getNotificationbody();
-            }
-                // else {
-                //   return const Center(child: CircularProgressIndicator());
-                // }
-                )),
-      ),
-    );
+                  return getNotificationbody();
+                } else {
+                  return const Center(child: CircularProgressIndicator());
+                }
+              })),
+        ),
+      );
+    }
   }
 
   LikeNotifications(tokenpassed) async {
@@ -76,11 +176,6 @@ class _LikesNotificationsPageState extends State<LikesNotificationsPage> {
   Future<String> countFuture;
 
   Duration constantSuperDuration;
-
-  @override
-  void initState() {
-    super.initState();
-  }
 
   // Future<String> getTweetId(token) async {
   //   var response = await http.get(

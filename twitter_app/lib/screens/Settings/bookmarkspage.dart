@@ -43,81 +43,234 @@ class _BookmarksPageState extends State<BookmarksPage> {
   var listofBookmarks = [];
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          actions: <Widget>[
-            PopupMenuButton(
-              onSelected: (value) {
-                if (value == "Remove") {
-                  showDialog<String>(
-                    context: context,
-                    builder: (BuildContext context) => AlertDialog(
-                      title: const Text('Clear all Bookmarks?'),
-                      content: const Text(
-                          'This can"t be undone and you"ll remove all Tweets you"ve added to your Bookmarks'),
-                      actions: <Widget>[
-                        TextButton(
-                          onPressed: () => Navigator.pop(context, 'Cancel'),
-                          child: const Text('Cancel'),
-                        ),
-                        TextButton(
-                            onPressed: () {
-                              RemoveAllBookmarks(userdata.token);
-                              //print("clicked");
-                              Navigator.pop(context, 'Clear');
-                            },
-                            child: Text("Clear")),
-                      ],
-                    ),
-                  );
-                }
-              },
-              itemBuilder: (conetxt) => [
-                PopupMenuItem(
-                  key: Key('Clear_all'),
-                  value: "Remove",
-                  child: Text('Clear all bookmarks'),
+    getBookmarks(userdata.token);
+
+    if (listofBookmarks.isEmpty) {
+      return SafeArea(
+        child: Scaffold(
+          appBar: AppBar(
+            actions: <Widget>[
+              PopupMenuButton(
+                onSelected: (value) {
+                  if (value == "Remove") {
+                    showDialog<String>(
+                      context: context,
+                      builder: (BuildContext context) => AlertDialog(
+                        title: const Text('Clear all Bookmarks?'),
+                        content: const Text(
+                            'This can"t be undone and you"ll remove all Tweets you"ve added to your Bookmarks'),
+                        actions: <Widget>[
+                          TextButton(
+                            onPressed: () => Navigator.pop(context, 'Cancel'),
+                            child: const Text('Cancel'),
+                          ),
+                          TextButton(
+                              onPressed: () {
+                                if (listofBookmarks.isEmpty) {
+                                  showDialog<String>(
+                                      context: context,
+                                      builder: (BuildContext context) =>
+                                          AlertDialog(
+                                              title: const Text(
+                                                  'Clear all Bookmarks failed'),
+                                              content: const Text(
+                                                  "You can't clear what's already empty."),
+                                              actions: <Widget>[
+                                                TextButton(
+                                                  onPressed: () {
+                                                    Navigator.pop(
+                                                        context, 'Cancel');
+                                                    Navigator.pop(
+                                                        context, 'Clear');
+                                                  },
+                                                  child: const Text('OK'),
+                                                ),
+                                              ]));
+                                } else {
+                                  RemoveAllBookmarks(userdata.token);
+                                  //print("clicked");
+                                  Navigator.pop(context, 'Clear');
+                                }
+                              },
+                              child: Text("Clear")),
+                        ],
+                      ),
+                    );
+                  }
+                },
+                itemBuilder: (conetxt) => [
+                  PopupMenuItem(
+                    key: Key('Clear_all'),
+                    value: "Remove",
+                    child: Text('Clear all bookmarks'),
+                  ),
+                ],
+              ),
+            ],
+            toolbarHeight: 50,
+            leading: IconButton(
+              key: Key('arrow_back2'),
+              icon: Icon(
+                Icons.arrow_back,
+              ),
+              onPressed: () => Navigator.of(context).pop(),
+            ),
+            backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
+            elevation: 1,
+            centerTitle: false,
+            title: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Bookmarks",
+                  style: TextStyle(fontSize: 20.0),
                 ),
               ],
             ),
-          ],
-          toolbarHeight: 50,
-          leading: IconButton(
-            key: Key('arrow_back2'),
-            icon: Icon(
-              Icons.arrow_back,
-            ),
-            onPressed: () => Navigator.of(context).pop(),
           ),
-          backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
-          elevation: 1,
-          centerTitle: false,
-          title: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "Bookmarks",
-                style: TextStyle(fontSize: 20.0),
-              ),
-            ],
+          body: Container(
+            padding: EdgeInsets.only(top: 10, left: 20, right: 40),
+            child: ListView(
+              children: <Widget>[
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Container(
+                      width: double.infinity,
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Column(
+                          children: <Widget>[
+                            SizedBox(
+                              height: 90,
+                            ),
+                            Image.asset(
+                              "assests/images/FinalLogo.png",
+                              scale: 3,
+                            ),
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: Text("Save Tweets for later",
+                                  style: TextStyle(
+                                      fontSize: 30,
+                                      fontWeight: FontWeight.w900)),
+                            ),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            Text(
+                                "Re-Don't let the good ones fly away! Bookmark Tweets to easily find them again in the future.",
+                                style: TextStyle(fontWeight: FontWeight.w300)),
+                            SizedBox(
+                              height: 150,
+                            ),
+                            Container(
+                              height: 40,
+                              width: 350,
+                              alignment: Alignment.centerLeft,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(45),
+                                ),
+                              ),
+                              child: SizedBox.expand(
+                                child: Align(
+                                  alignment: Alignment.bottomRight,
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 40,
+                            ),
+                          ],
+                        ),
+                      ),
+                    )
+                  ],
+                )
+              ],
+            ),
           ),
         ),
-        body: FutureBuilder<String>(
-            future: countFuture,
-            builder: ((context, snapshot) {
-              if (snapshot.hasData) {
-                idOfPost = snapshot.data;
-                getBookmarks(userdata.token);
-                //return SingleChildScrollView(child: TweetBoxWidgety());
-                return getTweetBody();
-              } else {
-                return const Center(child: CircularProgressIndicator());
-              }
-            })),
-      ),
-    );
+      );
+    } else {
+      return SafeArea(
+        child: Scaffold(
+          appBar: AppBar(
+            actions: <Widget>[
+              PopupMenuButton(
+                onSelected: (value) {
+                  if (value == "Remove") {
+                    showDialog<String>(
+                      context: context,
+                      builder: (BuildContext context) => AlertDialog(
+                        title: const Text('Clear all Bookmarks?'),
+                        content: const Text(
+                            'This can"t be undone and you"ll remove all Tweets you"ve added to your Bookmarks'),
+                        actions: <Widget>[
+                          TextButton(
+                            onPressed: () => Navigator.pop(context, 'Cancel'),
+                            child: const Text('Cancel'),
+                          ),
+                          TextButton(
+                              onPressed: () {
+                                RemoveAllBookmarks(userdata.token);
+                                //print("clicked");
+                                Navigator.pop(context, 'Clear');
+                              },
+                              child: Text("Clear")),
+                        ],
+                      ),
+                    );
+                  }
+                },
+                itemBuilder: (conetxt) => [
+                  PopupMenuItem(
+                    key: Key('Clear_all'),
+                    value: "Remove",
+                    child: Text('Clear all bookmarks'),
+                  ),
+                ],
+              ),
+            ],
+            toolbarHeight: 50,
+            leading: IconButton(
+              key: Key('arrow_back2'),
+              icon: Icon(
+                Icons.arrow_back,
+              ),
+              onPressed: () => Navigator.of(context).pop(),
+            ),
+            backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
+            elevation: 1,
+            centerTitle: false,
+            title: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Bookmarks",
+                  style: TextStyle(fontSize: 20.0),
+                ),
+              ],
+            ),
+          ),
+          body: FutureBuilder<String>(
+              future: countFuture,
+              builder: ((context, snapshot) {
+                if (snapshot.hasData) {
+                  idOfPost = snapshot.data;
+
+                  //return SingleChildScrollView(child: TweetBoxWidgety());
+                  return getTweetBody();
+                } else {
+                  return const Center(child: CircularProgressIndicator());
+                }
+              })),
+        ),
+      );
+    }
   }
 
   Future RemoveAllBookmarks(String token) async {
@@ -308,19 +461,7 @@ class _BookmarksPageState extends State<BookmarksPage> {
     var timeParsed = DateTime.parse(date).toLocal();
     var dateFormated = DateFormat.jm().format(timeParsed);
 
-    // //List URLss = item['URLs'];
-    // /* if (URLss.isEmpty) {
-    //   URLs = 'URLss';
-    // } else {
-    //   URLs = URLss[0];
-    // }
-
-    /* //print('here is the pictures');
-    //print(userdata.profileImage);
-    //print(userdata.profileImage.toString()); */
-    //print("here");
     return Container(
-      //decoration: BoxDecoration(border: Border.all(color: Color.fromARGB(255, 0, 0, 0),width: 0)),
       padding: EdgeInsets.all(7),
       child: Column(
         children: [
