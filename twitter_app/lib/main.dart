@@ -1,16 +1,12 @@
 // ignore_for_file: use_key_in_widget_constructors
 
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
-import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
 import 'package:twitter_app/components/widgets/CustomNavBar2.0.dart';
-import 'package:twitter_app/screens/Login/checklogin.dart';
+
 //import 'package:flutter/services.dart';
 
-import './unused/constants.dart';
-import './components/google_sign_in.dart';
 import './screens/welcome/welcome_screen.dart';
 import 'components/widgets/DarkMode/themeclass.dart';
 import '../../API/userdata.dart';
@@ -44,6 +40,15 @@ class MyApp extends StatelessWidget {
       theme: ThemeClass.lightTheme,
       darkTheme: ThemeClass.darkTheme,
       home: userdata.token == null ? WelcomeScreen() : CustomNavBar(),
+      localizationsDelegates: [
+        GlobalCupertinoLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
+      supportedLocales: [
+        Locale("en"),
+        Locale("ar"),
+      ],
     );
     // ChangeNotifierProvider(
     //   create: (context) => GoogleSignInProvider(),

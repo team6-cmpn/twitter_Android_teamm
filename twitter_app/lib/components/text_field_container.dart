@@ -1,6 +1,7 @@
 // ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors, deprecated_member_use
 
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class TextFieldContainer extends StatelessWidget {
   final String titleText;
@@ -12,20 +13,20 @@ class TextFieldContainer extends StatelessWidget {
   final Function TapeddFunction, doneButton;
 
   bool obs;
-  TextFieldContainer(
-      {Key key,
-      this.titleText,
-      this.passedOnChanged,
-      this.TapeddFunction,
-      this.sizePassed,
-      this.size,
-      this.validator,
-      this.obs,
-      this.nameController,
-      this.doneButton
-      //this.emailController
-      })
-      : super(key: key);
+  TextFieldContainer({
+    Key key,
+    this.titleText,
+    this.passedOnChanged,
+    this.TapeddFunction,
+    this.sizePassed,
+    this.size,
+    this.validator,
+    this.obs,
+    this.nameController,
+    this.doneButton,
+
+    //this.emailController
+  }) : super(key: key);
 
   final Size size;
 
@@ -48,6 +49,7 @@ class TextFieldContainer extends StatelessWidget {
 
           controller: nameController,
           onChanged: passedOnChanged,
+          //textDirection: passedTextDirection,
           decoration: InputDecoration(
             labelText: titleText
 

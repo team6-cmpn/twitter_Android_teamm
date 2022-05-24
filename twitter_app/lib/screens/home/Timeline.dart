@@ -6,6 +6,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:twitter_app/API/userdata.dart';
@@ -44,13 +45,6 @@ class _TimelinePageState extends State<TimelinePage> {
   final scrollController = ScrollController();
   var scaffoldkey = GlobalKey<ScaffoldState>();
   final messgController = TextEditingController();
-  void dispose() {
-    // Clean up the controller when the widget is disposed.
-    messgController.dispose();
-
-    super.dispose();
-  }
-
   bool scaffoldKey = false;
   //final Function addNewPosting;
 
@@ -403,9 +397,10 @@ class _TimelinePageState extends State<TimelinePage> {
                   messgController.text,
                   addedimage.toString(),
                 );
-                Navigator.pop(context);
+                //addedimage.delete();
                 messgController.clear();
-                addedimage.delete();
+                //navigator.pop(context);
+                print(addedimage);
               },
               child: Text(
                 'Tweet',
@@ -497,7 +492,7 @@ class _TimelinePageState extends State<TimelinePage> {
     var idOfTweet = item['tweet']['_id'];
     var listOfLove = item['tweet']['favorites'];
     var listOfRetweet = item['tweet']['retweetUsers'];
-
+    var lovvvve = [];
     constantSuperDuration =
         Duration(seconds: 00, hours: 0, microseconds: 0, days: 1);
     Duration myDuration1 = Duration(seconds: 15, days: 0);
@@ -511,7 +506,12 @@ class _TimelinePageState extends State<TimelinePage> {
     // } else {
     //   URLs = URLss[0];
     // }
-
+    /* print(name);
+    for (var i in listOfLove) {
+      lovvvve.add(i == userdata.token);
+    }
+    print(lovvvve);
+    print(lovvvve); */
     /* print('here is the pictures');
     print(userdata.profileImage);
     print(userdata.profileImage.toString()); */
@@ -564,11 +564,11 @@ class _TimelinePageState extends State<TimelinePage> {
               ),
             ],
           ),
-          /*  Container(
+          /* Container(
             height: 170,
             child: hasImageTweet
                 ? Image.network(
-                    !(imageOfTweet == null)
+                    (imageOfTweet.length != 0)
                         ? imageOfTweet[0].toString()
                         : 'https://www.whatsappprofiledpimages.com/wp-content/uploads/2021/11/free-Whatsapp-Dp-Boys-Stylish-Girls-Cute-Images-pics.jpg',
                   )
@@ -591,7 +591,6 @@ class _TimelinePageState extends State<TimelinePage> {
                     ? SizedBox()
                     : Image.network(imageOfTweet[0].toString()),
           ), */
-
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -623,17 +622,22 @@ class _TimelinePageState extends State<TimelinePage> {
                     TextSpan(
                       children: [
                         WidgetSpan(
-                          child: isRetweeted
+                          child: listOfRetweet.length == 0
                               ? FaIcon(
                                   FontAwesomeIcons.retweet,
                                   size: 17,
-                                  color: Colors.green,
                                 )
-                              : FaIcon(
-                                  FontAwesomeIcons.retweet,
-                                  size: 17,
-                                  //color: Colors.green,
-                                ),
+                              : listOfRetweet[listOfRetweet.length - 1] ==
+                                      userdata.idUser
+                                  ? FaIcon(
+                                      FontAwesomeIcons.retweet,
+                                      size: 17,
+                                      color: Colors.green,
+                                    )
+                                  : FaIcon(
+                                      FontAwesomeIcons.retweet,
+                                      size: 17,
+                                    ),
                         ),
                         TextSpan(text: '  ${countOfReteweeted}'),
                       ],
@@ -649,7 +653,6 @@ class _TimelinePageState extends State<TimelinePage> {
                       if (userdata.idUser == listOfRetweet[i]) {
                         isRetweeted = true;
                         removeReTweetIntegeration(idOfTweet, userdata.token);
-
                         break;
                       }
                     }
@@ -668,22 +671,28 @@ class _TimelinePageState extends State<TimelinePage> {
                   });
                 },
               ),
+              //showLoveIntegeration(idOfTweet, userdata.token, isLoved),
               InkWell(
                 child: Text.rich(
                   TextSpan(
                     children: [
                       WidgetSpan(
-                        child: isLoved
-                            ? FaIcon(
-                                FontAwesomeIcons.solidHeart,
-                                size: 17,
-                                color: Colors.redAccent,
-                              )
-                            : FaIcon(
-                                FontAwesomeIcons.heart,
-                                size: 17,
-                              ),
-                      ),
+                          child: countOfLoves == 0
+                              ? FaIcon(
+                                  FontAwesomeIcons.heart,
+                                  size: 17,
+                                )
+                              : listOfLove[listOfLove.length - 1] ==
+                                      userdata.idUser
+                                  ? FaIcon(
+                                      FontAwesomeIcons.solidHeart,
+                                      size: 17,
+                                      color: Colors.redAccent,
+                                    )
+                                  : FaIcon(
+                                      FontAwesomeIcons.heart,
+                                      size: 17,
+                                    )),
                       TextSpan(text: '  ${countOfLoves}')
                     ],
                   ),
@@ -854,12 +863,25 @@ class _TimelinePageState extends State<TimelinePage> {
   }
 
   addTweetIntegeration(String message, String token, String imageGif) async {
-    Map data = {
-      "text": message,
-      "source": '',
-      "mention": " ",
-      "imageUrl": imageGif,
-    };
+    Map data;
+    print(imageGif);
+    if (imageGif == null) {
+      print('we r in if');
+      Map data = {
+        "text": message,
+        "source": '',
+        "mention": " ",
+        "imageUrl": "",
+      };
+    } else {
+      print('we r in else');
+      Map data = {
+        "text": message,
+        "source": '',
+        "mention": " ",
+        "imageUrl": imageGif,
+      };
+    }
 
     //const String BaseURL = "http://twi-jay.me:8080";
     final response = await http.post(
@@ -870,6 +892,8 @@ class _TimelinePageState extends State<TimelinePage> {
       },
     );
     //Map dataResponse = json.decode(response.body);
+    print('response code');
+    print(response.statusCode);
 
     if (response.statusCode == 200) {
       // SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -962,9 +986,8 @@ class _TimelinePageState extends State<TimelinePage> {
     );
 
     //Map dataResponse = json.decode(response.body);
-    print('did I enter here');
+
     if (response.statusCode == 200) {
-      print('horray');
       /*  setState(
         () {
           //dataResponse = mapResponse["data"];
@@ -1023,11 +1046,12 @@ class _TimelinePageState extends State<TimelinePage> {
 
   showLoveIntegeration(
       String idOfTweetpassed, String token, bool isLikedPassed) async {
+    print('we r in show love');
     Map data = {
-      'isLiked': isLikedPassed,
+      'isLiked': isLikedPassed = true,
     };
     final response = await http.post(
-      Uri.parse("$BaseURL/user/show/${idOfTweetpassed}"),
+      Uri.parse("$BaseURL/tweets/show/${idOfTweetpassed}"),
       body: data,
       headers: {
         'x-access-token': token,
@@ -1060,7 +1084,6 @@ class _TimelinePageState extends State<TimelinePage> {
 
   showReetweetedIntegeration(
       String idOfTweetpassed, String token, bool isRetweetedPassed) async {
-    //const String BaseURL = "http://twi-jay.me:8080";
     Map data = {
       'isRetweeted': isRetweetedPassed,
     };
@@ -1123,4 +1146,5 @@ class _TimelinePageState extends State<TimelinePage> {
   /* Future pickImageSelfi() async {
     await ImagePicker().pickImage(source: ImageSource.camera);
   } */
+
 }
