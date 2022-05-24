@@ -78,7 +78,7 @@ class _AllNotificationsPageState extends State<AllNotificationsPage> {
                             ),
                             Align(
                               alignment: Alignment.centerLeft,
-                              child: Text("No notifications",
+                              child: Text("       No notifications",
                                   style: TextStyle(
                                       fontSize: 30,
                                       fontWeight: FontWeight.w900)),

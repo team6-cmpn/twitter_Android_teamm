@@ -600,27 +600,57 @@ class _TimelinePageState extends State<TimelinePage> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               InkWell(
-                child: Container(
-                  margin: EdgeInsets.all(8),
-                  child: Text.rich(
-                    TextSpan(
-                      children: [
-                        WidgetSpan(
-                          child: FaIcon(
-                            FontAwesomeIcons.bookmark,
-                            size: 17,
-                          ),
-                        ),
-                        TextSpan(text: '  ${countOfComments}'),
-                      ],
-                    ),
+                child: Text.rich(
+                  TextSpan(
+                    children: [
+                      WidgetSpan(
+                          child: countOfLoves == 0
+                              ? FaIcon(
+                                  FontAwesomeIcons.heart,
+                                  size: 17,
+                                )
+                              : listOfLove[listOfLove.length - 1] ==
+                                      userdata.idUser
+                                  ? FaIcon(
+                                      FontAwesomeIcons.solidHeart,
+                                      size: 17,
+                                      color: Colors.redAccent,
+                                    )
+                                  : FaIcon(
+                                      FontAwesomeIcons.heart,
+                                      size: 17,
+                                    )),
+                      TextSpan(text: '  ${countOfLoves}')
+                    ],
                   ),
                 ),
                 onTap: () {
-                  BookmarksPage.addBookmark(userdata.token, idOfTweet);
-                  //addComment();
-                },
+                  isLoved = false;
+                  for (int i = 0; i < listOfLove.length; i++) {
+                    if (userdata.idUser == listOfLove[i]) {
+                      isLoved = true;
+                      removeLikeIntegeration(idOfTweet, userdata.token);
+                      break;
+                    }
+                  }
+
+                  if (isLoved == false) {
+                    addLikeIntegeration(idOfTweet, userdata.token);
+                    //isLoved = true;
+                  }
+
+                  /* setState(() {
+                    if (isLoved == false) {
+                      isLoved = true;
+                      countOfLoves += 1;
+                    } else {
+                      isLoved = false;
+                      countOfLoves -= 1;
+                    }
+                  }); */
+                }, //function,
               ),
+
               InkWell(
                 child: Container(
                   child: Text.rich(
@@ -677,57 +707,45 @@ class _TimelinePageState extends State<TimelinePage> {
                 },
               ),
               //showLoveIntegeration(idOfTweet, userdata.token, isLoved),
+
               InkWell(
                 child: Text.rich(
                   TextSpan(
                     children: [
                       WidgetSpan(
-                          child: countOfLoves == 0
+                          child: tweetData.isBookmarked == false
                               ? FaIcon(
-                                  FontAwesomeIcons.heart,
+                                  FontAwesomeIcons.bookmark,
                                   size: 17,
                                 )
-                              : listOfLove[listOfLove.length - 1] ==
-                                      userdata.idUser
-                                  ? FaIcon(
-                                      FontAwesomeIcons.solidHeart,
-                                      size: 17,
-                                      color: Colors.redAccent,
-                                    )
-                                  : FaIcon(
-                                      FontAwesomeIcons.heart,
-                                      size: 17,
-                                    )),
-                      TextSpan(text: '  ${countOfLoves}')
+                              : FaIcon(
+                                  FontAwesomeIcons.solidBookmark,
+                                  size: 17,
+                                  color: Colors.green,
+                                )),
                     ],
                   ),
                 ),
-                onTap: () {
-                  isLoved = false;
-                  for (int i = 0; i < listOfLove.length; i++) {
-                    if (userdata.idUser == listOfLove[i]) {
-                      isLoved = true;
-                      removeLikeIntegeration(idOfTweet, userdata.token);
-                      break;
-                    }
+                onTap: () async {
+                  print(tweetData.isBookmarked);
+                  if (tweetData.isBookmarked == false) {
+                    print("added");
+                    await BookmarksPage.addBookmark(userdata.token, idOfTweet);
+                    setState(() {
+                      tweetData.isBookmarked = true;
+                    });
+                  } else {
+                    print("removed");
+                    await BookmarksPage.RemoveBookmark(
+                        userdata.token, idOfTweet);
+                    setState(() {
+                      tweetData.isBookmarked = false;
+                    });
                   }
 
-                  if (isLoved == false) {
-                    addLikeIntegeration(idOfTweet, userdata.token);
-                    //isLoved = true;
-                  }
-
-                  /* setState(() {
-                    if (isLoved == false) {
-                      isLoved = true;
-                      countOfLoves += 1;
-                    } else {
-                      isLoved = false;
-                      countOfLoves -= 1;
-                    }
-                  }); */
-                }, //function,
-              )
+                  //addComment();
+                },
+              ),
             ],
           ),
           GreyLineSeperator(),

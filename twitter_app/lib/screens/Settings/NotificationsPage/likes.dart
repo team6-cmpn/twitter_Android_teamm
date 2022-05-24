@@ -77,7 +77,7 @@ class _LikesNotificationsPageState extends State<LikesNotificationsPage> {
                             ),
                             Align(
                               alignment: Alignment.centerLeft,
-                              child: Text("No Notifications",
+                              child: Text("        No Notifications",
                                   style: TextStyle(
                                       fontSize: 30,
                                       fontWeight: FontWeight.w900)),

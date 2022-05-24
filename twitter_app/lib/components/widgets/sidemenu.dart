@@ -85,7 +85,7 @@ class _SideMenuState extends State<SideMenu> {
                                   fontWeight: FontWeight.bold),
                             ),
                             Text(
-                              'Following',
+                              ' Following',
                               style: TextStyle(color: Colors.grey),
                             ),
                             SizedBox(
