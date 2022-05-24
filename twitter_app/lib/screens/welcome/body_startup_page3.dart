@@ -2,11 +2,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
-import 'package:provider/provider.dart';
+
 import 'package:twitter_app/screens/login/login.dart';
 
 import '../../components/google_rounded_button.dart';
-import '../../components/google_sign_in.dart';
 
 import '../sign_up/sign_up.dart';
 import 'background.dart';
@@ -60,9 +59,9 @@ class _BodyStartUpPage3State extends State<BodyStartUpPage3> {
             roundedPassedColor: Colors.grey,
             textColor: Colors.black,
             pressed: () {
-              final provider =
+              /* final provider =
                   Provider.of<GoogleSignInProvider>(context, listen: false);
-              provider.googleLogin();
+              provider.googleLogin(); */
             },
             //colorPassed: Colors.grey,
             marginValue: 5,

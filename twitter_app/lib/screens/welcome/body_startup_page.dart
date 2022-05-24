@@ -1,29 +1,22 @@
 // ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors, deprecated_member_use
 
 import 'package:flutter/material.dart';
-import 'package:google_sign_in/google_sign_in.dart';
-import 'package:provider/provider.dart';
-import 'package:twitter_app/screens/Login/Login2.dart';
+
 import 'package:twitter_app/screens/Login/login.dart';
 
 import '../../components/google_rounded_button.dart';
-import '../../components/google_sign_in.dart';
-import '../../components/widgets/CustomNavBar2.0.dart';
-import '../Settings/displaysettingspage.dart';
+
 import '../sign_up/sign_up.dart';
 import 'background.dart';
 import '../../components/rounded_button.dart';
-import '../../API/userdata.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 
 //import 'package:sign_button/sign_button.dart';
 //import 'package:twitter_app/API/google_signIn_api.dart';
 
-class GoogleSignInApi {
+/* class GoogleSignInApi {
   static final _googleSignIn = GoogleSignIn();
   static Future<GoogleSignInAccount> login() => _googleSignIn.signIn();
-}
+} */
 
 class BodyStartUpPage extends StatefulWidget {
   @override

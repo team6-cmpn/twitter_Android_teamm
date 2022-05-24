@@ -1,6 +1,5 @@
 // ignore_for_file: file_names, avoid_unnecessary_containers, non_constant_identifier_names, unnecessary_new, avoid_print, avoid_init_to_null, unused_local_variable, duplicate_import, prefer_typing_uninitialized_variables, camel_case_types, unused_element, unnecessary_brace_in_string_interps, prefer_is_empty, must_be_immutable
 
-// import 'dart:io';
 
 import 'package:flutter/material.dart';
 
@@ -24,25 +23,33 @@ class AdminPage extends StatefulWidget {
 class _AdminPage extends State<AdminPage> {
   final blockDurationController = TextEditingController();
   List users = [];
-  var countOfUsers = '';
+
+  var countOfUsers = 5;
+
   Future<int> noUserFuture;
+
   Future<int> getUserCountFuture;
+
   static const String BaseURL = "http://twi-jay.me:8080";
+
   @override
   void initState() {
     super.initState();
-    getUserCountFuture = getNumberOfUsers(widget.token) as Future<int>;
+    getUserCountFuture = getNumberOfUsers(widget.token);
   }
 
+
   Future blockUserIntegeration(token, user_id, duration) async {
-    Map dataDuration = {'end_date': duration, 'userid': user_id};
+    Map dataDuration = {
+      'duration': duration,
+    };
     var response = await http.post(
       Uri.parse(
-        '${BaseURL}/adminBlock/create',
+        '${BaseURL}/adminBlock/create?userid=${user_id}',
       ),
       body: dataDuration,
       headers: {
-        'x-access-token': token, /* 'userid': user_id */
+        'x-access-token': token,
       },
     );
     setState(() {
@@ -54,25 +61,27 @@ class _AdminPage extends State<AdminPage> {
     });
   }
 
-  Future unBlockUserIntegeration(token, adminToken, user_id) async {
-    var response = await http.delete(
+  Future unBlockUserIntegeration(token, user_id) async {
+    Map dataDuration = {};
+    var response = await http.post(
       Uri.parse(
-        'http://10.0.2.2:8080/admins/${adminToken}/banning/${user_id}/',
+        '${BaseURL}/adminBlock/destroy?userid=${user_id}',
       ),
+      body: dataDuration,
       headers: {
-        'x-auth-token': token,
+        'x-access-token': token,
       },
     );
     setState(() {
       if (response.statusCode == 200) {
-        print('block was clicked');
+        print('Unblock was clicked');
       } else {
-        print('block not working');
+        print('Unblock not working');
       }
     });
   }
 
-  Future<String> getNumberOfUsers(token) async {
+  Future<int> getNumberOfUsers(token) async {
     var response = await http.get(
       Uri.parse(
         ('$BaseURL/admin/showUsers'),
@@ -102,6 +111,7 @@ class _AdminPage extends State<AdminPage> {
       print('i am in user integeration');
       var items = json.decode(response.body);
       List info = items;
+
       setState(() {
         users = info;
       });
@@ -112,17 +122,15 @@ class _AdminPage extends State<AdminPage> {
     }
   }
 
+
   @override
   Widget build(BuildContext context) {
-    //print(widget.token);
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      //backgroundColor: Colors.white,
       body: DefaultTabController(
         length: 3,
         child: Scaffold(
           appBar: AppBar(
-            //backgroundColor: Colors.white,
             primary: true,
             titleTextStyle: TextStyle(
               color: Colors.pink,
@@ -195,7 +203,7 @@ class _AdminPage extends State<AdminPage> {
                   future: getUserCountFuture,
                   builder: (context, snapshot) {
                     if (snapshot.hasData) {
-                      countOfUsers = snapshot.data as String;
+                      countOfUsers = snapshot.data;
                       getUsersIntegeration(widget.token);
                       return getBodyOfUsers();
                     } else {
@@ -231,6 +239,7 @@ class _AdminPage extends State<AdminPage> {
     var userName = item['username'];
     var profilePic = item['profile_image_url'];
     var user_id = item['_id'];
+    var isBlocked = item['admin_block']['blocked_by_admin'];
     return Container(
       height: 90,
       child: Card(
@@ -274,71 +283,94 @@ class _AdminPage extends State<AdminPage> {
                 ),
               ),
               const SizedBox(
-                //height: 22,
-                width: 87,
+                width: 60,
               ),
-              MaterialButton(
-                minWidth: 30,
-                height: 30,
-                onPressed: () {
-                  showDialog(
-                    context: context,
-                    builder: (context) => AlertDialog(
-                      title: Text(
-                        'Duration',
-                      ),
-                      content: SingleChildScrollView(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            TextField(
-                              onSubmitted: (value) => blockUserIntegeration(
-                                  widget.token,
-                                  user_id,
-                                  blockDurationController.toString()),
-                              controller: blockDurationController,
-                              decoration: InputDecoration(
-                                hintText: "block duration in days",
+              !isBlocked
+                  ? MaterialButton(
+                      minWidth: 30,
+                      height: 30,
+                      onPressed: () {
+                        showDialog(
+                          context: context,
+                          builder: (context) => AlertDialog(
+                            title: Text(
+                              'Duration',
+                            ),
+                            content: SingleChildScrollView(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  TextField(
+                                    controller: blockDurationController,
+                                    onSubmitted: (value) =>
+                                        blockUserIntegeration(
+                                            widget.token,
+                                            user_id,
+                                            blockDurationController.text),
+                                    decoration: InputDecoration(
+                                      hintText: "block duration in days",
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
-                          ],
+                            actions: [
+                              TextButton(
+                                onPressed: () {
+                                  blockUserIntegeration(widget.token, user_id,
+                                      blockDurationController.text);
+                                },
+                                child: Text(
+                                  'Block',
+                                  style: TextStyle(
+                                    color: Colors.redAccent,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                      color: Color.fromARGB(146, 206, 8, 2),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: const Text(
+                        "  Ban  ",
+                        style: TextStyle(
+                          fontSize: 18,
+                          color: Color.fromARGB(255, 255, 255, 255),
                         ),
                       ),
-                      actions: [
-                        TextButton(
-                          onPressed: () {
-                            blockUserIntegeration(widget.token, user_id,
-                                blockDurationController.toString());
-                          },
-                          child: Text(
-                            'Block',
-                            style: TextStyle(
-                              color: Colors.redAccent,
-                              //fontWeight: FontWeight.bold,
-                            ),
-                          ),
+                    )
+                  : MaterialButton(
+                      minWidth: 30,
+                      height: 30,
+                      onPressed: () {
+                        unBlockUserIntegeration(
+                          widget.token,
+                          user_id,
+                        );
+                      },
+                      color: Color.fromARGB(146, 2, 223, 2),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: const Text(
+                        "unBan",
+                        style: TextStyle(
+                          fontSize: 18,
+                          color: Color.fromARGB(255, 255, 255, 255),
                         ),
-                      ],
-                    ),
-                  );
-                },
-                color: Color.fromARGB(146, 206, 8, 2),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: const Text(
-                  "Ban",
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: Color.fromARGB(255, 255, 255, 255),
-                  ),
-                ),
-              )
+                      ),
+                    )
             ],
           ),
         ),
       ),
     );
   }
+
+
 }
