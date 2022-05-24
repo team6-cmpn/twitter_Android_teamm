@@ -7,6 +7,7 @@ class ThemeClass {
     appBarTheme: AppBarTheme(
       backgroundColor: Colors.white,
       titleTextStyle: TextStyle(color: Colors.black),
+      // ignore: deprecated_member_use
       textTheme: TextTheme(
         headline2: TextStyle(color: Colors.black),
       ),

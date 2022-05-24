@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:intl/intl.dart';
+
 import 'dart:convert';
 import '../../../API/userdata.dart';
 import '../../../components/greyLine_seperator.dart';
@@ -33,9 +33,8 @@ class _LikesNotificationsPageState extends State<LikesNotificationsPage> {
     // //print('md5l444444444');
     ////print(response.statusCode);
     if (response.statusCode == 200) {
-      var posts = json.decode(response.body)[0];
       var infoOfPosts = json.decode(response.body)[0]['tweet'];
-      var infoOfUser = json.decode(response.body)[0]['user'];
+
       idOfPost = infoOfPosts['_id'];
     } else if (response.statusCode == 400) {
       //print('bad request');
@@ -77,7 +76,7 @@ class _LikesNotificationsPageState extends State<LikesNotificationsPage> {
                             ),
                             Align(
                               alignment: Alignment.centerLeft,
-                              child: Text("No Notifications",
+                              child: Text("        No Notifications",
                                   style: TextStyle(
                                       fontSize: 30,
                                       fontWeight: FontWeight.w900)),
@@ -227,7 +226,7 @@ class _LikesNotificationsPageState extends State<LikesNotificationsPage> {
       ][0];
     }
     ////print(imageofuser);
-    var date = NotificationItem['created_at'];
+
     //var type = NotificationItem['notificationType'];
     var content;
 
@@ -244,10 +243,6 @@ class _LikesNotificationsPageState extends State<LikesNotificationsPage> {
 
     constantSuperDuration =
         Duration(seconds: 00, hours: 0, microseconds: 0, days: 1);
-    Duration myDuration1 = Duration(seconds: 15, days: 0);
-
-    var timeParsed = DateTime.parse(date).toLocal();
-    var dateFormated = DateFormat.jm().format(timeParsed);
 
     // //List URLss = item['URLs'];
     // /* if (URLss.isEmpty) {

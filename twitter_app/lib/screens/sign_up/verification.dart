@@ -1,11 +1,5 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:twitter_app/screens/Login/body_for_login_screen.dart';
-import 'package:twitter_app/screens/Login/login.dart';
-
-import 'package:twitter_app/unused/backendtest.dart';
 
 import 'dart:convert';
 
@@ -13,7 +7,6 @@ import '../../components/rounded_button.dart';
 import '../../components/text_field_container.dart';
 import '../../components/widgets/CustomNavBar2.0.dart';
 import '../../API/userdata.dart';
-import '../Login/body_for_login_screen.dart';
 
 // ignore: use_key_in_widget_constructors
 class VerificationBody extends StatefulWidget {

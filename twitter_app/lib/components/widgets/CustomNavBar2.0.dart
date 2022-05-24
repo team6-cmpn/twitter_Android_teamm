@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
 import '../../screens/Settings/notificationspage.dart';
-import '../../screens/Settings/settingspage.dart';
 import '../../screens/home/Timeline.dart';
 import '../../API/userdata.dart';
 

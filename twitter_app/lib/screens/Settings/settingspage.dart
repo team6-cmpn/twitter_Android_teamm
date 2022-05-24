@@ -1,13 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:sizer/sizer.dart';
-import 'package:twitter_app/components/widgets/SearchBar/SearchBar.dart';
-
-import '../home/Timeline.dart';
 import 'displaysettingspage.dart';
-import 'notificationsettings.dart';
-import 'searchsettingspage.dart';
-import 'testpage.dart';
 import 'YourAccountSettings/youraccountpage.dart';
 import '../../API/userdata.dart';
 

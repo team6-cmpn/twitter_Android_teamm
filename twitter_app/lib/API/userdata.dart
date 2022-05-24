@@ -24,6 +24,7 @@ class tweetData {
   static String idOfTweet;
   static String messgOfTweet;
   static String timeOfTweet;
+  static bool isBookmarked = false;
 }
 
 /* List <tweetData> Tweetss {

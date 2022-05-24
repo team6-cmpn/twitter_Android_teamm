@@ -26,6 +26,7 @@ class BookmarksPage extends StatefulWidget {
     ////print(response.statusCode);
     if (response.statusCode == 200) {
       //print("added");
+      tweetData.isBookmarked == true;
     } else if (response.statusCode == 400) {
       //print('bad request');
     } else if (response.statusCode == 401) {
@@ -36,14 +37,38 @@ class BookmarksPage extends StatefulWidget {
       //print('Internal Server Error');
     }
   }
+
+  static RemoveBookmark(token, idOfTweetpassed) async {
+    var response = await http.delete(
+      Uri.parse("http://twi-jay.me:8080/bookmarks/remove/${idOfTweetpassed}"),
+      headers: {
+        'x-access-token': token,
+      },
+    );
+    if (response.statusCode == 200) {
+      tweetData.isBookmarked == false;
+      //print('love will increase by +++++2');
+    } else if (response.statusCode == 400) {
+      //print('bad request');
+    } else if (response.statusCode == 401) {
+      //print('Unauthorized');
+    } else if (response.statusCode == 404) {
+      //print('Not Found');
+    } else if (response.statusCode == 500) {
+      //print('Internal Server Error');
+    }
+    print(response.statusCode);
+  }
 }
 
 class _BookmarksPageState extends State<BookmarksPage> {
   var scaffoldkey = GlobalKey<ScaffoldState>();
   var listofBookmarks = [];
+  var listOfTweets = [];
   @override
   Widget build(BuildContext context) {
     getBookmarks(userdata.token);
+    //ShowBookmarkData(idOfTweet);
 
     if (listofBookmarks.isEmpty) {
       return SafeArea(
@@ -273,6 +298,31 @@ class _BookmarksPageState extends State<BookmarksPage> {
     }
   }
 
+  ShowBookmarkData(idOfTweetpassed) async {
+    var response = await http.get(
+      Uri.parse("http://twi-jay.me:8080/tweets/show/${idOfTweetpassed}"),
+      headers: {
+        'x-access-token': token,
+      },
+    );
+    if (response.statusCode == 200) {
+      var items = json.decode(response.body);
+      List info = items;
+      setState(
+        () {
+          listOfTweets = info;
+        },
+      );
+    } else {
+      setState(
+        () {
+          //print('take care cause the list of Tweets is empty');
+          listOfTweets = [];
+        },
+      );
+    }
+  }
+
   Future RemoveAllBookmarks(String token) async {
     final response = await http.delete(
       Uri.parse(userdata.BaseURL + "/bookmarks/removeAll"),
@@ -293,54 +343,34 @@ class _BookmarksPageState extends State<BookmarksPage> {
     }
   }
 
-  RemoveBookmark(String idOfTweetpassed, String token) async {
-    final response = await http.delete(
-      Uri.parse(userdata.BaseURL + "/bookmarks/remove/${idOfTweetpassed}"),
-      headers: {
-        'x-access-token': token,
-      },
-    );
-    if (response.statusCode == 200) {
-      //print('love will increase by +++++2');
-    } else if (response.statusCode == 400) {
-      //print('bad request');
-    } else if (response.statusCode == 401) {
-      //print('Unauthorized');
-    } else if (response.statusCode == 404) {
-      //print('Not Found');
-    } else if (response.statusCode == 500) {
-      //print('Internal Server Error');
-    }
-  }
+  // getTweet(tokenpassed) async {
+  //   //await Future.delayed(const Duration(seconds: 2));
+  //   var response = await http.get(
+  //     Uri.parse(
+  //       ('http://twi-jay.me:8080/tweets/lookup/1/50'),
+  //     ),
+  //     headers: {
+  //       'x-access-token': tokenpassed,
+  //     },
+  //   );
+  //   if (response.statusCode == 200) {
+  //     var items = json.decode(response.body);
+  //     List info = items;
 
-  getTweet(tokenpassed) async {
-    //await Future.delayed(const Duration(seconds: 2));
-    var response = await http.get(
-      Uri.parse(
-        ('http://twi-jay.me:8080/tweets/lookup/1/50'),
-      ),
-      headers: {
-        'x-access-token': tokenpassed,
-      },
-    );
-    if (response.statusCode == 200) {
-      var items = json.decode(response.body);
-      List info = items;
-
-      setState(
-        () {
-          listOfTweets = info;
-        },
-      );
-    } else {
-      setState(
-        () {
-          //print('take care cause the list of Tweets is empty');
-          listOfTweets = [];
-        },
-      );
-    }
-  }
+  //     setState(
+  //       () {
+  //         listOfTweets = info;
+  //       },
+  //     );
+  //   } else {
+  //     setState(
+  //       () {
+  //         //print('take care cause the list of Tweets is empty');
+  //         listOfTweets = [];
+  //       },
+  //     );
+  //   }
+  // }
 
   getBookmarks(tokenpassed) async {
     //await Future.delayed(const Duration(seconds: 2));
@@ -379,7 +409,6 @@ class _BookmarksPageState extends State<BookmarksPage> {
 
   var idOfPost = '';
   var token = '';
-  List listOfTweets = [];
 
   //List infoOfPosts = [];
   // List URLss = [];
@@ -409,9 +438,7 @@ class _BookmarksPageState extends State<BookmarksPage> {
     // //print('md5l444444444');
     ////print(response.statusCode);
     if (response.statusCode == 200) {
-      var posts = json.decode(response.body)[0];
       var infoOfPosts = json.decode(response.body)[0]['tweet'];
-      var infoOfUser = json.decode(response.body)[0]['user'];
       idOfPost = infoOfPosts['_id'];
     } else if (response.statusCode == 400) {
       //print('bad request');
@@ -429,34 +456,37 @@ class _BookmarksPageState extends State<BookmarksPage> {
     return ListView.builder(
       itemCount: listofBookmarks.length,
       itemBuilder: (context, index) {
-        return tweetBoxWidgety(listofBookmarks[index]); //Text('index $index');
+        return tweetBoxWidgety(
+          listofBookmarks[index],
+        ); //Text('index $index');
       },
     );
   }
 
-  Widget tweetBoxWidgety(tweetitem) {
+  Widget tweetBoxWidgety(
+    tweetitem,
+  ) {
     //var name = useritem['user']['name'];
     //var userName = useritem['user']['username'];
     //var userProfilePic = useritem['url'];
     //print("hereeee");
+    // var name = bookmarkdata['user']['name'];
+    // var userName = bookmarkdata['user']['username'];
     var tweetMessg = tweetitem['text'];
 
     var date = tweetitem['created_at'];
     var isLoved = tweetitem['hasImage'];
     //var isRetweeted = useritem['user']['isAdmin'];
     // var isCommented = item['tweet']['date'];
-    var imageOfTweet = tweetitem['imageUrl'];
-    var hasImageTweet = tweetitem['hasImage'];
+
     var countOfLoves = tweetitem['favorites'].length;
-    var countOfReteweeted = tweetitem['retweetUsers'].length;
+
     //var countOfComments = useritem['user']['__v'];
     var idOfTweet = tweetitem['_id'];
     var listOfLove = tweetitem['favorites'];
-    var listOfRetweet = tweetitem['retweetUsers'];
 
     constantSuperDuration =
         Duration(seconds: 00, hours: 0, microseconds: 0, days: 1);
-    Duration myDuration1 = Duration(seconds: 15, days: 0);
 
     var timeParsed = DateTime.parse(date).toLocal();
     var dateFormated = DateFormat.jm().format(timeParsed);
@@ -471,9 +501,8 @@ class _BookmarksPageState extends State<BookmarksPage> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 CircleAvatar(
-                  backgroundImage: NetworkImage(false
-                      ? toString()
-                      : 'https://i.pinimg.com/custom_covers/222x/85498161615209203_1636332751.jpg'),
+                  backgroundImage: NetworkImage(
+                      'https://i.pinimg.com/custom_covers/222x/85498161615209203_1636332751.jpg'),
                   radius: 20,
                 ),
                 SizedBox(
@@ -525,93 +554,26 @@ class _BookmarksPageState extends State<BookmarksPage> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               InkWell(
-                child: Container(
-                  margin: EdgeInsets.all(8),
-                  child: Text.rich(
-                    TextSpan(
-                      children: [
-                        WidgetSpan(
-                          child: FaIcon(
-                            FontAwesomeIcons.bookmark,
-                            size: 17,
-                          ),
-                        ),
-                        TextSpan(text: '  {countOfComments}'),
-                      ],
-                    ),
-                  ),
-                ),
-                onTap: () {
-                  //addComment();
-                },
-              ),
-              InkWell(
-                child: Container(
-                  child: Text.rich(
-                    TextSpan(
-                      children: [
-                        WidgetSpan(
-                          child: false
-                              ? FaIcon(
-                                  FontAwesomeIcons.retweet,
-                                  size: 17,
-                                  color: Colors.green,
-                                )
-                              : FaIcon(
-                                  FontAwesomeIcons.retweet,
-                                  size: 17,
-                                  //color: Colors.green,
-                                ),
-                        ),
-                        TextSpan(text: '  ${countOfReteweeted}'),
-                      ],
-                    ),
-                  ),
-                ),
-                onTap: () {
-                  setState(() {
-                    //  isRetweeted = false;
-                    //print('this is length of retweets');
-                    //print(listOfRetweet.length);
-                    for (int i = 0; i < listOfRetweet.length; i++) {
-                      if (userdata.idUser == listOfRetweet[i]) {
-                        // isRetweeted = true;
-                        removeReTweetIntegeration(idOfTweet, userdata.token);
-
-                        break;
-                      }
-                    }
-
-                    // if (isRetweeted == false) {
-                    //   addReTweetIntegeration(idOfTweet, userdata.token);
-                    //   //isLoved = true;
-                    // }
-                    /* if (isRetweeted == false) {
-                      isRetweeted = true;
-                      countOfReteweeted += 1;
-                    } else {
-                      isRetweeted = false;
-                      countOfReteweeted -= 1;
-                    } */
-                  });
-                },
-              ),
-              InkWell(
                 child: Text.rich(
                   TextSpan(
                     children: [
                       WidgetSpan(
-                        child: isLoved
-                            ? FaIcon(
-                                FontAwesomeIcons.solidHeart,
-                                size: 17,
-                                color: Colors.redAccent,
-                              )
-                            : FaIcon(
-                                FontAwesomeIcons.heart,
-                                size: 17,
-                              ),
-                      ),
+                          child: countOfLoves == 0
+                              ? FaIcon(
+                                  FontAwesomeIcons.heart,
+                                  size: 17,
+                                )
+                              : listOfLove[listOfLove.length - 1] ==
+                                      userdata.idUser
+                                  ? FaIcon(
+                                      FontAwesomeIcons.solidHeart,
+                                      size: 17,
+                                      color: Colors.redAccent,
+                                    )
+                                  : FaIcon(
+                                      FontAwesomeIcons.heart,
+                                      size: 17,
+                                    )),
                       TextSpan(text: '  ${countOfLoves}')
                     ],
                   ),
@@ -641,13 +603,149 @@ class _BookmarksPageState extends State<BookmarksPage> {
                     }
                   }); */
                 }, //function,
-              )
+              ),
+
+              //showLoveIntegeration(idOfTweet, userdata.token, isLoved),
+
+              InkWell(
+                child: Text.rich(
+                  TextSpan(
+                    children: [
+                      WidgetSpan(
+                          child: tweetData.isBookmarked == false
+                              ? FaIcon(
+                                  FontAwesomeIcons.bookmark,
+                                  size: 17,
+                                )
+                              : FaIcon(
+                                  FontAwesomeIcons.solidBookmark,
+                                  size: 17,
+                                  color: Colors.green,
+                                )),
+                    ],
+                  ),
+                ),
+                onTap: () async {
+                  print(tweetData.isBookmarked);
+                  if (tweetData.isBookmarked == false) {
+                    print("added");
+                    await BookmarksPage.addBookmark(userdata.token, idOfTweet);
+                    setState(() {
+                      tweetData.isBookmarked = true;
+                    });
+                  } else {
+                    print("removed");
+                    await BookmarksPage.RemoveBookmark(
+                        userdata.token, idOfTweet);
+                    setState(() {
+                      tweetData.isBookmarked = false;
+                    });
+                  }
+
+                  //addComment();
+                },
+              ),
             ],
           ),
           GreyLineSeperator(),
         ],
       ),
     );
+  }
+
+  Future addComment() => showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: Text(
+            'Your comment',
+          ),
+          content: TextField(
+            decoration: InputDecoration(
+              hintText: "Enter your comment",
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {},
+              child: Text('submit'),
+            ),
+          ],
+        ),
+      );
+
+  void addPostt(String post, String imageGif) {
+    /* final newPost = TweetModel(
+      tweetmessg: post,
+      comments: 0,
+      isCommented: false,
+      isLiked: false,
+      isReTweet: false,
+      loves: txamount,
+      retweets: 0,
+      name: userdata.name,
+      date: DateTime.now(),
+      twitterHandle: userdata.username,
+      time: '1min',
+    ); */
+    addTweetIntegeration(post, userdata.token, imageGif);
+    setState(() {
+      //Tweets.add(newPost);
+    });
+  }
+
+  addTweetIntegeration(String message, String token, String imageGif) async {
+    print(imageGif);
+    Map data;
+    (imageGif == null)
+        ? data = {
+            "text": message,
+            "source": '',
+            "mention": " ",
+            "imageUrl": "",
+          }
+        : data = {
+            "text": message,
+            "source": '',
+            "mention": " ",
+            "imageUrl": imageGif,
+          };
+
+    //const String BaseURL = "http://twi-jay.me:8080";
+    final response = await http.post(
+      Uri.parse("$BaseURL/tweets/update"),
+      body: data,
+      headers: {
+        'x-access-token': token,
+      },
+    );
+    //Map dataResponse = json.decode(response.body);
+    print('response code');
+    print(response.statusCode);
+
+    if (response.statusCode == 200) {
+      // SharedPreferences prefs = await SharedPreferences.getInstance();
+      // prefs.setString(userdata.token, token);
+
+      /*  setState(
+        () {
+          //dataResponse = mapResponse["data"];
+          //dataResponse["role"].toString() == 'Admin'
+          Navigator.of(context).pushAndRemoveUntil(
+              MaterialPageRoute(
+                  builder: (BuildContext context) => TimelinePage()),
+              (Route<dynamic> route) => false);
+        },
+      ); */
+
+    } else if (response.statusCode == 400) {
+      print('bad request');
+    } else if (response.statusCode == 401) {
+      print('Unauthorized');
+    } else if (response.statusCode == 404) {
+      print('Not Found');
+    } else if (response.statusCode == 500) {
+      print('Internal Server Error');
+    }
   }
 
   addLikeIntegeration(String idOfTweetpassed, String token) async {
@@ -658,15 +756,15 @@ class _BookmarksPageState extends State<BookmarksPage> {
       },
     );
     if (response.statusCode == 200) {
-      //print('love will increase by +++++1');
+      print('love will increase by +++++1');
     } else if (response.statusCode == 400) {
-      //print('bad request');
+      print('bad request');
     } else if (response.statusCode == 401) {
-      //print('Unauthorized');
+      print('Unauthorized');
     } else if (response.statusCode == 404) {
-      //print('Not Found');
+      print('Not Found');
     } else if (response.statusCode == 500) {
-      //print('Internal Server Error');
+      print('Internal Server Error');
     }
   }
 
@@ -681,7 +779,7 @@ class _BookmarksPageState extends State<BookmarksPage> {
     );
 
     if (response.statusCode == 200) {
-      //print('love will decrease by ------1');
+      print('love will decrease by ------1');
       /*  setState(
         () {
           //dataResponse = mapResponse["data"];
@@ -694,13 +792,13 @@ class _BookmarksPageState extends State<BookmarksPage> {
       ); */
 
     } else if (response.statusCode == 400) {
-      //print('bad request');
+      print('bad request');
     } else if (response.statusCode == 401) {
-      //print('Unauthorized');
+      print('Unauthorized');
     } else if (response.statusCode == 404) {
-      //print('Not Found');
+      print('Not Found');
     } else if (response.statusCode == 500) {
-      //print('Internal Server Error');
+      print('Internal Server Error');
     }
   }
 
@@ -715,9 +813,8 @@ class _BookmarksPageState extends State<BookmarksPage> {
     );
 
     //Map dataResponse = json.decode(response.body);
-    //print('did I enter here');
+
     if (response.statusCode == 200) {
-      //print('horray');
       /*  setState(
         () {
           //dataResponse = mapResponse["data"];
@@ -730,13 +827,13 @@ class _BookmarksPageState extends State<BookmarksPage> {
       ); */
 
     } else if (response.statusCode == 400) {
-      //print('bad request');
+      print('bad request');
     } else if (response.statusCode == 401) {
-      //print('Unauthorized');
+      print('Unauthorized');
     } else if (response.statusCode == 404) {
-      //print('Not Found');
+      print('Not Found');
     } else if (response.statusCode == 500) {
-      //print('Internal Server Error');
+      print('Internal Server Error');
     }
   }
 
@@ -751,7 +848,7 @@ class _BookmarksPageState extends State<BookmarksPage> {
     );
 
     if (response.statusCode == 200) {
-      //print('horray by reverse');
+      print('horray by reverse');
       /*  setState(
         () {
           //dataResponse = mapResponse["data"];
@@ -764,23 +861,24 @@ class _BookmarksPageState extends State<BookmarksPage> {
       ); */
 
     } else if (response.statusCode == 400) {
-      //print('bad request');
+      print('bad request');
     } else if (response.statusCode == 401) {
-      //print('Unauthorized');
+      print('Unauthorized');
     } else if (response.statusCode == 404) {
-      //print('Not Found');
+      print('Not Found');
     } else if (response.statusCode == 500) {
-      //print('Internal Server Error');
+      print('Internal Server Error');
     }
   }
 
   showLoveIntegeration(
       String idOfTweetpassed, String token, bool isLikedPassed) async {
+    print('we r in show love');
     Map data = {
-      'isLiked': isLikedPassed,
+      'isLiked': isLikedPassed = true,
     };
     final response = await http.post(
-      Uri.parse("$BaseURL/user/show/${idOfTweetpassed}"),
+      Uri.parse("$BaseURL/tweets/show/${idOfTweetpassed}"),
       body: data,
       headers: {
         'x-access-token': token,
@@ -788,7 +886,7 @@ class _BookmarksPageState extends State<BookmarksPage> {
     );
 
     if (response.statusCode == 200) {
-      //print('love toggle');
+      print('love toggle');
       /*  setState(
         () {
           //dataResponse = mapResponse["data"];
@@ -801,19 +899,18 @@ class _BookmarksPageState extends State<BookmarksPage> {
       ); */
 
     } else if (response.statusCode == 400) {
-      //print('bad request');
+      print('bad request');
     } else if (response.statusCode == 401) {
-      //print('Unauthorized');
+      print('Unauthorized');
     } else if (response.statusCode == 404) {
-      //print('Not Found');
+      print('Not Found');
     } else if (response.statusCode == 500) {
-      //print('Internal Server Error');
+      print('Internal Server Error');
     }
   }
 
   showReetweetedIntegeration(
       String idOfTweetpassed, String token, bool isRetweetedPassed) async {
-    //const String BaseURL = "http://twi-jay.me:8080";
     Map data = {
       'isRetweeted': isRetweetedPassed,
     };
@@ -826,7 +923,7 @@ class _BookmarksPageState extends State<BookmarksPage> {
     );
 
     if (response.statusCode == 200) {
-      //print('retweet toggle');
+      print('retweet toggle');
       /*  setState(
         () {
           //dataResponse = mapResponse["data"];
@@ -839,13 +936,13 @@ class _BookmarksPageState extends State<BookmarksPage> {
       ); */
 
     } else if (response.statusCode == 400) {
-      //print('bad request');
+      print('bad request');
     } else if (response.statusCode == 401) {
-      //print('Unauthorized');
+      print('Unauthorized');
     } else if (response.statusCode == 404) {
-      //print('Not Found');
+      print('Not Found');
     } else if (response.statusCode == 500) {
-      //print('Internal Server Error');
+      print('Internal Server Error');
     }
   }
 }

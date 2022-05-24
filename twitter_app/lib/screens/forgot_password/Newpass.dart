@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:twitter_app/screens/Login/login.dart';
+
 import 'package:twitter_app/screens/welcome/welcome_screen.dart';
-import '../../../components/rounded_button.dart';
 
 import 'package:http/http.dart' as http;
 
 import 'dart:convert';
 import 'dart:async';
 import '../../../API/userdata.dart';
-import 'FogotPassword.dart';
 
 Future<String> NewPasswordApi(
   String password,
