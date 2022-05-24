@@ -532,7 +532,7 @@ class _TimelinePageState extends State<TimelinePage> {
               children: [
                 CircleAvatar(
                   backgroundImage: NetworkImage(userProfilePic != null
-                      ? userProfilePic.toString()
+                      ? BaseURL + '/' + userProfilePic.toString()
                       : 'https://i.pinimg.com/custom_covers/222x/85498161615209203_1636332751.jpg'),
                   radius: 20,
                 ),
