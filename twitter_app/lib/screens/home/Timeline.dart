@@ -868,25 +868,21 @@ class _TimelinePageState extends State<TimelinePage> {
   }
 
   addTweetIntegeration(String message, String token, String imageGif) async {
-    Map data;
     print(imageGif);
-    if (imageGif == null) {
-      print('we r in if');
-      Map data = {
-        "text": message,
-        "source": '',
-        "mention": " ",
-        "imageUrl": "",
-      };
-    } else {
-      print('we r in else');
-      Map data = {
-        "text": message,
-        "source": '',
-        "mention": " ",
-        "imageUrl": imageGif,
-      };
-    }
+    Map data;
+    (imageGif == null)
+        ? data = {
+            "text": message,
+            "source": '',
+            "mention": " ",
+            "imageUrl": "",
+          }
+        : data = {
+            "text": message,
+            "source": '',
+            "mention": " ",
+            "imageUrl": imageGif,
+          };
 
     //const String BaseURL = "http://twi-jay.me:8080";
     final response = await http.post(

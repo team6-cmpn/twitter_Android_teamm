@@ -44,6 +44,7 @@ class _NotificationsPageState extends State<NotificationsPage> {
             centerTitle: false,
             title: Text(
               "Notifications",
+              style: TextStyle(fontSize: 20),
             ),
             leading: InkWell(
               child: Padding(
