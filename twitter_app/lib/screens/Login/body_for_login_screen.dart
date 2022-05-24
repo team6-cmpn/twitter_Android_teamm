@@ -310,9 +310,9 @@ class _BodyForLoginScreenState extends State<BodyForLoginScreen> {
       userdata.isdeactivated = dataResponse["user"]["isDeactivated"];
       userdata.isAdmin = dataResponse['user']['isAdmin'];
       userdata.profileImage = dataResponse['user']['profile_image_url'];
-      print(userdata.activationmessage);
-      print('ha?');
-      print(userdata.token);
+      //print(userdata.activationmessage);
+      //print('ha?');
+      //print(userdata.token);
       Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(builder: (BuildContext context) => CustomNavBar()),
           (Route<dynamic> route) => false);
@@ -320,13 +320,13 @@ class _BodyForLoginScreenState extends State<BodyForLoginScreen> {
       userdata.activationmessage = dataResponse["message"];
       userdata.token = dataResponse["accessToken"];
 
-      print('bad request');
+      //print('bad request');
     } else if (response.statusCode == 401) {
-      print('Unauthorized');
+      //print('Unauthorized');
     } else if (response.statusCode == 404) {
-      print('Not Found');
+      //print('Not Found');
     } else if (response.statusCode == 500) {
-      print('Internal Server Error');
+      //print('Internal Server Error');
     }
   }
 /* class TextFieldContainer extends StatelessWidget {

@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
                     Container(
                       child: FlatButton(
                         onPressed: () => {
-                          print('Set Light Theme'),
+                          //print('Set Light Theme'),
                           theme.setLightMode(),
                         },
                         child: Text('Set Light Theme'),
@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
                     Container(
                       child: FlatButton(
                         onPressed: () => {
-                          print('Set Dark theme'),
+                          //print('Set Dark theme'),
                           theme.setDarkMode(),
                         },
                         child: Text('Set Dark theme'),

@@ -50,9 +50,9 @@ class _BodyStartUpPageState extends State<BodyStartUpPage> {
   //     userdata.isdeactivated = dataResponse["user"]["isDeactivated"];
   //     userdata.isAdmin = dataResponse['user']['isAdmin'];
   //     userdata.profileImage = dataResponse['user']['profile_image_url'];
-  //     print(userdata.activationmessage);
-  //     print('ha?');
-  //     print(userdata.token);
+  //     //print(userdata.activationmessage);
+  //     //print('ha?');
+  //     //print(userdata.token);
   //     setState(
   //       () {
   //         //dataResponse = mapResponse["data"];
@@ -67,13 +67,13 @@ class _BodyStartUpPageState extends State<BodyStartUpPage> {
   //     userdata.activationmessage = dataResponse["message"];
   //     userdata.token = dataResponse["accessToken"];
 
-  //     print('bad request');
+  //     //print('bad request');
   //   } else if (response.statusCode == 401) {
-  //     print('Unauthorized');
+  //     //print('Unauthorized');
   //   } else if (response.statusCode == 404) {
-  //     print('Not Found');
+  //     //print('Not Found');
   //   } else if (response.statusCode == 500) {
-  //     print('Internal Server Error');
+  //     //print('Internal Server Error');
   //   }
   // }
 
@@ -109,7 +109,7 @@ class _BodyStartUpPageState extends State<BodyStartUpPage> {
               roundedPassedColor: Colors.grey,
 
               pressed: () {
-                print("pressed");
+                //print("pressed");
                 //googleLogin("any");
               },
               //colorPassed: Colors.grey,

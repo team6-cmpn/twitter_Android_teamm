@@ -46,7 +46,7 @@ class _AllNotificationsPageState extends State<AllNotificationsPage> {
         'x-access-token': tokenpassed,
       },
     );
-    //print(response.statusCode);
+    ////print(response.statusCode);
     if (response.statusCode == 200) {
       var items = json.decode(response.body);
 
@@ -57,16 +57,16 @@ class _AllNotificationsPageState extends State<AllNotificationsPage> {
           listofNotifications = info;
         },
       );
-      //print(listofNotifications);
+      ////print(listofNotifications);
     } else {
       setState(
         () {
-          print('take care cause the list of Tweets is empty');
+          //print('take care cause the list of Tweets is empty');
           listofNotifications = [];
         },
       );
     }
-    //print(listofNotifications);
+    ////print(listofNotifications);
   }
 
   var idOfPost = '';
@@ -92,21 +92,21 @@ class _AllNotificationsPageState extends State<AllNotificationsPage> {
   //     },
   //   );
 
-  //   // print('md5l444444444');
-  //   //print(response.statusCode);
+  //   // //print('md5l444444444');
+  //   ////print(response.statusCode);
   //   if (response.statusCode == 200) {
   //     var posts = json.decode(response.body)[0];
   //     var infoOfPosts = json.decode(response.body)[0]['tweet'];
   //     var infoOfUser = json.decode(response.body)[0]['user'];
   //     idOfPost = infoOfPosts['_id'];
   //   } else if (response.statusCode == 400) {
-  //     print('bad request');
+  //     //print('bad request');
   //   } else if (response.statusCode == 401) {
-  //     print('Unauthorized');
+  //     //print('Unauthorized');
   //   } else if (response.statusCode == 404) {
-  //     print('Not Found');
+  //     //print('Not Found');
   //   } else if (response.statusCode == 500) {
-  //     print('Internal Server Error');
+  //     //print('Internal Server Error');
   //   }
   //   return idOfPost;
   // }
@@ -131,20 +131,20 @@ class _AllNotificationsPageState extends State<AllNotificationsPage> {
         'https://i.pinimg.com/custom_covers/222x/85498161615209203_1636332751.jpg'
       ][0];
     }
-    // print(imageofuser);
-    //print(imageofuser);
+    // //print(imageofuser);
+    ////print(imageofuser);
     var date = NotificationItem['created_at'];
     var type = NotificationItem['notificationType'];
     var content;
     if (type == 'favourite') {
-      //print("favs");
+      ////print("favs");
       content = NotificationItem["notificationContent"]['text'];
-      //print(content);
+      ////print(content);
     } else {
-      //print("content");
+      ////print("content");
       content = "";
     }
-    //print(NotificationMessage);
+    ////print(NotificationMessage);
 
     //var isRetweeted = useritem['user']['isAdmin'];
     // var isCommented = item['tweet']['date'];
@@ -165,9 +165,9 @@ class _AllNotificationsPageState extends State<AllNotificationsPage> {
     //   URLs = URLss[0];
     // }
 
-    /* print('here is the pictures');
-    print(userdata.profileImage);
-    print(userdata.profileImage.toString()); */
+    /* //print('here is the pictures');
+    //print(userdata.profileImage);
+    //print(userdata.profileImage.toString()); */
 
     return Container(
       //decoration: BoxDecoration(border: Border.all(color: Color.fromARGB(255, 0, 0, 0),width: 0)),

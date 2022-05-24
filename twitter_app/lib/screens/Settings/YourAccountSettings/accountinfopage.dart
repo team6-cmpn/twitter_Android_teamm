@@ -133,7 +133,7 @@ class AccountInfoPageState extends State<AccountInfoPage> {
                                 TextButton(
                                     key: Key('delete_phonenum'),
                                     onPressed: () {
-                                      print("clicked");
+                                      //print("clicked");
                                       setState(() {
                                         ChangePhoneNumApi("", userdata.token);
                                         userdata.phonenum = "";
@@ -144,7 +144,7 @@ class AccountInfoPageState extends State<AccountInfoPage> {
                                 TextButton(
                                     key: Key('cance_phonenum_menu'),
                                     onPressed: () {
-                                      print("clicked");
+                                      //print("clicked");
                                       Navigator.pop(context, 'Cancel');
                                     },
                                     child: Text("Cancel")),
@@ -216,23 +216,23 @@ Future<String> ChangePhoneNumApi(
 
   final response = await http.post(Uri.parse("$BaseURL/user/changePhoneNumber"),
       headers: {"x-access-token": token}, body: bodydata);
-  print(bodydata);
+  //print(bodydata);
   responsedata = (jsonDecode(response.body));
   String message = responsedata["message"];
-  print(message);
+  //print(message);
 
   if (response.statusCode == 200) {
     return message;
   } else if (response.statusCode == 400) {
-    print('bad request');
+    //print('bad request');
   } else if (response.statusCode == 401) {
-    print('Unauthorized');
+    //print('Unauthorized');
   } else if (response.statusCode == 404) {
-    print('Not Found');
+    //print('Not Found');
   } else if (response.statusCode == 500) {
-    print('Internal Server Error');
+    //print('Internal Server Error');
   } else
-    print("fail");
-  //return ('${responsedata}');
-  return message;
+    //print("fail");
+    //return ('${responsedata}');
+    return message;
 }

@@ -20,7 +20,7 @@ class _AuthContainerState extends State<AuthContainer> {
         setState(() {
           initial = false;
           token = sharedPrefValue.getString(userdata.token);
-          print(token);
+          //print(token);
         });
       });
       return CircularProgressIndicator();

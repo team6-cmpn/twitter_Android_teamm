@@ -25,7 +25,7 @@ Future main() async {
   /* try {
     runApp(MyApp());
   } on PlatformException catch (e) {
-    print('failed to pick image: $e');
+    //print('failed to pick image: $e');
   } */
 }
 

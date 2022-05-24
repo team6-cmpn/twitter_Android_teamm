@@ -22,18 +22,18 @@ class BookmarksPage extends StatefulWidget {
       },
     );
 
-    // print('md5l444444444');
-    //print(response.statusCode);
+    // //print('md5l444444444');
+    ////print(response.statusCode);
     if (response.statusCode == 200) {
-      print("added");
+      //print("added");
     } else if (response.statusCode == 400) {
-      print('bad request');
+      //print('bad request');
     } else if (response.statusCode == 401) {
-      print('Unauthorized');
+      //print('Unauthorized');
     } else if (response.statusCode == 404) {
-      print('Not Found');
+      //print('Not Found');
     } else if (response.statusCode == 500) {
-      print('Internal Server Error');
+      //print('Internal Server Error');
     }
   }
 }
@@ -64,7 +64,7 @@ class _BookmarksPageState extends State<BookmarksPage> {
                         TextButton(
                             onPressed: () {
                               RemoveAllBookmarks(userdata.token);
-                              print("clicked");
+                              //print("clicked");
                               Navigator.pop(context, 'Clear');
                             },
                             child: Text("Clear")),
@@ -128,15 +128,15 @@ class _BookmarksPageState extends State<BookmarksPage> {
       },
     );
     if (response.statusCode == 200) {
-      print('love will increase by +++++1');
+      //print('love will increase by +++++1');
     } else if (response.statusCode == 400) {
-      print('bad request');
+      //print('bad request');
     } else if (response.statusCode == 401) {
-      print('Unauthorized');
+      //print('Unauthorized');
     } else if (response.statusCode == 404) {
-      print('Not Found');
+      //print('Not Found');
     } else if (response.statusCode == 500) {
-      print('Internal Server Error');
+      //print('Internal Server Error');
     }
   }
 
@@ -148,15 +148,15 @@ class _BookmarksPageState extends State<BookmarksPage> {
       },
     );
     if (response.statusCode == 200) {
-      print('love will increase by +++++2');
+      //print('love will increase by +++++2');
     } else if (response.statusCode == 400) {
-      print('bad request');
+      //print('bad request');
     } else if (response.statusCode == 401) {
-      print('Unauthorized');
+      //print('Unauthorized');
     } else if (response.statusCode == 404) {
-      print('Not Found');
+      //print('Not Found');
     } else if (response.statusCode == 500) {
-      print('Internal Server Error');
+      //print('Internal Server Error');
     }
   }
 
@@ -182,7 +182,7 @@ class _BookmarksPageState extends State<BookmarksPage> {
     } else {
       setState(
         () {
-          print('take care cause the list of Tweets is empty');
+          //print('take care cause the list of Tweets is empty');
           listOfTweets = [];
         },
       );
@@ -199,16 +199,16 @@ class _BookmarksPageState extends State<BookmarksPage> {
         'x-access-token': tokenpassed,
       },
     );
-    print(response.statusCode);
+    //print(response.statusCode);
     if (response.statusCode == 200) {
       var items = json.decode(response.body);
-      //print(items);
+      ////print(items);
       //List info = items["bookmarks"];
       List info = items["bookmarks"];
-      //print(info);
+      ////print(info);
       // var bookmarkitems = info[0];
-      // print(bookmarkitems);
-      print(info);
+      // //print(bookmarkitems);
+      //print(info);
       setState(
         () {
           listofBookmarks = info;
@@ -217,7 +217,7 @@ class _BookmarksPageState extends State<BookmarksPage> {
     } else {
       setState(
         () {
-          print('take care cause the list of Tweets is empty');
+          //print('take care cause the list of Tweets is empty');
           listofBookmarks = [];
         },
       );
@@ -253,21 +253,21 @@ class _BookmarksPageState extends State<BookmarksPage> {
       },
     );
 
-    // print('md5l444444444');
-    //print(response.statusCode);
+    // //print('md5l444444444');
+    ////print(response.statusCode);
     if (response.statusCode == 200) {
       var posts = json.decode(response.body)[0];
       var infoOfPosts = json.decode(response.body)[0]['tweet'];
       var infoOfUser = json.decode(response.body)[0]['user'];
       idOfPost = infoOfPosts['_id'];
     } else if (response.statusCode == 400) {
-      print('bad request');
+      //print('bad request');
     } else if (response.statusCode == 401) {
-      print('Unauthorized');
+      //print('Unauthorized');
     } else if (response.statusCode == 404) {
-      print('Not Found');
+      //print('Not Found');
     } else if (response.statusCode == 500) {
-      print('Internal Server Error');
+      //print('Internal Server Error');
     }
     return idOfPost;
   }
@@ -285,7 +285,7 @@ class _BookmarksPageState extends State<BookmarksPage> {
     //var name = useritem['user']['name'];
     //var userName = useritem['user']['username'];
     //var userProfilePic = useritem['url'];
-    print("hereeee");
+    //print("hereeee");
     var tweetMessg = tweetitem['text'];
 
     var date = tweetitem['created_at'];
@@ -315,10 +315,10 @@ class _BookmarksPageState extends State<BookmarksPage> {
     //   URLs = URLss[0];
     // }
 
-    /* print('here is the pictures');
-    print(userdata.profileImage);
-    print(userdata.profileImage.toString()); */
-    print("here");
+    /* //print('here is the pictures');
+    //print(userdata.profileImage);
+    //print(userdata.profileImage.toString()); */
+    //print("here");
     return Container(
       //decoration: BoxDecoration(border: Border.all(color: Color.fromARGB(255, 0, 0, 0),width: 0)),
       padding: EdgeInsets.all(7),
@@ -430,8 +430,8 @@ class _BookmarksPageState extends State<BookmarksPage> {
                 onTap: () {
                   setState(() {
                     //  isRetweeted = false;
-                    print('this is length of retweets');
-                    print(listOfRetweet.length);
+                    //print('this is length of retweets');
+                    //print(listOfRetweet.length);
                     for (int i = 0; i < listOfRetweet.length; i++) {
                       if (userdata.idUser == listOfRetweet[i]) {
                         // isRetweeted = true;
@@ -517,15 +517,15 @@ class _BookmarksPageState extends State<BookmarksPage> {
       },
     );
     if (response.statusCode == 200) {
-      print('love will increase by +++++1');
+      //print('love will increase by +++++1');
     } else if (response.statusCode == 400) {
-      print('bad request');
+      //print('bad request');
     } else if (response.statusCode == 401) {
-      print('Unauthorized');
+      //print('Unauthorized');
     } else if (response.statusCode == 404) {
-      print('Not Found');
+      //print('Not Found');
     } else if (response.statusCode == 500) {
-      print('Internal Server Error');
+      //print('Internal Server Error');
     }
   }
 
@@ -540,7 +540,7 @@ class _BookmarksPageState extends State<BookmarksPage> {
     );
 
     if (response.statusCode == 200) {
-      print('love will decrease by ------1');
+      //print('love will decrease by ------1');
       /*  setState(
         () {
           //dataResponse = mapResponse["data"];
@@ -553,13 +553,13 @@ class _BookmarksPageState extends State<BookmarksPage> {
       ); */
 
     } else if (response.statusCode == 400) {
-      print('bad request');
+      //print('bad request');
     } else if (response.statusCode == 401) {
-      print('Unauthorized');
+      //print('Unauthorized');
     } else if (response.statusCode == 404) {
-      print('Not Found');
+      //print('Not Found');
     } else if (response.statusCode == 500) {
-      print('Internal Server Error');
+      //print('Internal Server Error');
     }
   }
 
@@ -574,9 +574,9 @@ class _BookmarksPageState extends State<BookmarksPage> {
     );
 
     //Map dataResponse = json.decode(response.body);
-    print('did I enter here');
+    //print('did I enter here');
     if (response.statusCode == 200) {
-      print('horray');
+      //print('horray');
       /*  setState(
         () {
           //dataResponse = mapResponse["data"];
@@ -589,13 +589,13 @@ class _BookmarksPageState extends State<BookmarksPage> {
       ); */
 
     } else if (response.statusCode == 400) {
-      print('bad request');
+      //print('bad request');
     } else if (response.statusCode == 401) {
-      print('Unauthorized');
+      //print('Unauthorized');
     } else if (response.statusCode == 404) {
-      print('Not Found');
+      //print('Not Found');
     } else if (response.statusCode == 500) {
-      print('Internal Server Error');
+      //print('Internal Server Error');
     }
   }
 
@@ -610,7 +610,7 @@ class _BookmarksPageState extends State<BookmarksPage> {
     );
 
     if (response.statusCode == 200) {
-      print('horray by reverse');
+      //print('horray by reverse');
       /*  setState(
         () {
           //dataResponse = mapResponse["data"];
@@ -623,13 +623,13 @@ class _BookmarksPageState extends State<BookmarksPage> {
       ); */
 
     } else if (response.statusCode == 400) {
-      print('bad request');
+      //print('bad request');
     } else if (response.statusCode == 401) {
-      print('Unauthorized');
+      //print('Unauthorized');
     } else if (response.statusCode == 404) {
-      print('Not Found');
+      //print('Not Found');
     } else if (response.statusCode == 500) {
-      print('Internal Server Error');
+      //print('Internal Server Error');
     }
   }
 
@@ -647,7 +647,7 @@ class _BookmarksPageState extends State<BookmarksPage> {
     );
 
     if (response.statusCode == 200) {
-      print('love toggle');
+      //print('love toggle');
       /*  setState(
         () {
           //dataResponse = mapResponse["data"];
@@ -660,13 +660,13 @@ class _BookmarksPageState extends State<BookmarksPage> {
       ); */
 
     } else if (response.statusCode == 400) {
-      print('bad request');
+      //print('bad request');
     } else if (response.statusCode == 401) {
-      print('Unauthorized');
+      //print('Unauthorized');
     } else if (response.statusCode == 404) {
-      print('Not Found');
+      //print('Not Found');
     } else if (response.statusCode == 500) {
-      print('Internal Server Error');
+      //print('Internal Server Error');
     }
   }
 
@@ -685,7 +685,7 @@ class _BookmarksPageState extends State<BookmarksPage> {
     );
 
     if (response.statusCode == 200) {
-      print('retweet toggle');
+      //print('retweet toggle');
       /*  setState(
         () {
           //dataResponse = mapResponse["data"];
@@ -698,13 +698,13 @@ class _BookmarksPageState extends State<BookmarksPage> {
       ); */
 
     } else if (response.statusCode == 400) {
-      print('bad request');
+      //print('bad request');
     } else if (response.statusCode == 401) {
-      print('Unauthorized');
+      //print('Unauthorized');
     } else if (response.statusCode == 404) {
-      print('Not Found');
+      //print('Not Found');
     } else if (response.statusCode == 500) {
-      print('Internal Server Error');
+      //print('Internal Server Error');
     }
   }
 }
