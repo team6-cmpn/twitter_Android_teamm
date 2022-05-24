@@ -438,9 +438,7 @@ class _BookmarksPageState extends State<BookmarksPage> {
     // //print('md5l444444444');
     ////print(response.statusCode);
     if (response.statusCode == 200) {
-      var posts = json.decode(response.body)[0];
       var infoOfPosts = json.decode(response.body)[0]['tweet'];
-      var infoOfUser = json.decode(response.body)[0]['user'];
       idOfPost = infoOfPosts['_id'];
     } else if (response.statusCode == 400) {
       //print('bad request');
@@ -480,18 +478,15 @@ class _BookmarksPageState extends State<BookmarksPage> {
     var isLoved = tweetitem['hasImage'];
     //var isRetweeted = useritem['user']['isAdmin'];
     // var isCommented = item['tweet']['date'];
-    var imageOfTweet = tweetitem['imageUrl'];
-    var hasImageTweet = tweetitem['hasImage'];
+
     var countOfLoves = tweetitem['favorites'].length;
-    var countOfReteweeted = tweetitem['retweetUsers'].length;
+
     //var countOfComments = useritem['user']['__v'];
     var idOfTweet = tweetitem['_id'];
     var listOfLove = tweetitem['favorites'];
-    var listOfRetweet = tweetitem['retweetUsers'];
 
     constantSuperDuration =
         Duration(seconds: 00, hours: 0, microseconds: 0, days: 1);
-    Duration myDuration1 = Duration(seconds: 15, days: 0);
 
     var timeParsed = DateTime.parse(date).toLocal();
     var dateFormated = DateFormat.jm().format(timeParsed);
@@ -506,9 +501,8 @@ class _BookmarksPageState extends State<BookmarksPage> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 CircleAvatar(
-                  backgroundImage: NetworkImage(false
-                      ? toString()
-                      : 'https://i.pinimg.com/custom_covers/222x/85498161615209203_1636332751.jpg'),
+                  backgroundImage: NetworkImage(
+                      'https://i.pinimg.com/custom_covers/222x/85498161615209203_1636332751.jpg'),
                   radius: 20,
                 ),
                 SizedBox(

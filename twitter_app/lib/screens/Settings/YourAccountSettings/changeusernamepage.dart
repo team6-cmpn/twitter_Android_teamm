@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../../components/rounded_button.dart';
-import '../../forgot_password/FogotPassword.dart';
 
 import 'package:http/http.dart' as http;
 

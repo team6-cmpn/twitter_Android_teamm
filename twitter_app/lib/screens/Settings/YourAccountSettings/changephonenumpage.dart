@@ -1,8 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:twitter_app/screens/Settings/YourAccountSettings/accountinfopage.dart';
-import 'package:twitter_app/screens/Settings/YourAccountSettings/youraccountpage.dart';
-import '../../../components/rounded_button.dart';
-import '../../forgot_password/FogotPassword.dart';
 
 import 'package:http/http.dart' as http;
 

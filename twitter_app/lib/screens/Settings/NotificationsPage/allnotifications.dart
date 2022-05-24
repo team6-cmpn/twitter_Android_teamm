@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:intl/intl.dart';
+
 import 'dart:convert';
 import '../../../API/userdata.dart';
 import '../../../components/greyLine_seperator.dart';
@@ -33,9 +33,8 @@ class _AllNotificationsPageState extends State<AllNotificationsPage> {
     // //print('md5l444444444');
     ////print(response.statusCode);
     if (response.statusCode == 200) {
-      var posts = json.decode(response.body)[0];
       var infoOfPosts = json.decode(response.body)[0]['tweet'];
-      var infoOfUser = json.decode(response.body)[0]['user'];
+
       idOfPost = infoOfPosts['_id'];
     } else if (response.statusCode == 400) {
       //print('bad request');
@@ -229,7 +228,7 @@ class _AllNotificationsPageState extends State<AllNotificationsPage> {
     }
     // //print(imageofuser);
     ////print(imageofuser);
-    var date = NotificationItem['created_at'];
+
     var type = NotificationItem['notificationType'];
     var content;
     if (type == 'favourite') {
@@ -249,10 +248,6 @@ class _AllNotificationsPageState extends State<AllNotificationsPage> {
 
     constantSuperDuration =
         Duration(seconds: 00, hours: 0, microseconds: 0, days: 1);
-    Duration myDuration1 = Duration(seconds: 15, days: 0);
-
-    var timeParsed = DateTime.parse(date).toLocal();
-    var dateFormated = DateFormat.jm().format(timeParsed);
 
     // //List URLss = item['URLs'];
     // /* if (URLss.isEmpty) {

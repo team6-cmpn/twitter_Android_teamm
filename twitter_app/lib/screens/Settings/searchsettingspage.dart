@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:sizer/sizer.dart';
-
 class SearchSettingsPage extends StatefulWidget {
   @override
   State<SearchSettingsPage> createState() => _SearchSettingsPageState();

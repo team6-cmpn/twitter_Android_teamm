@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:twitter_app/API/userdata.dart';
-import '../../../components/rounded_button.dart';
-import '../../forgot_password/FogotPassword.dart';
 import '../../welcome/welcome_screen.dart';
 import 'deactivateaccpage.dart';
 

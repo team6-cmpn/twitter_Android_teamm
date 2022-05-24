@@ -1,16 +1,11 @@
 // ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors, deprecated_member_use
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
-import 'package:twitter_app/screens/home/Timeline.dart';
 import 'dart:convert';
 //import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../components/google_rounded_button.dart';
-import '../../components/google_sign_in.dart';
 import '../../components/or_divider_line.dart';
 import '../../components/rounded_button.dart';
 import '../../components/widgets/CustomNavBar2.0.dart';
@@ -18,7 +13,6 @@ import '../../model/text_field_validation.dart';
 import '../Settings/YourAccountSettings/deactivateaccpage.dart';
 import '../forgot_password/FogotPassword.dart';
 import '../../components/text_field_container.dart';
-import '../home/twitter_home_page.dart';
 import '../welcome/welcome_screen.dart';
 import 'background_for_login_screen.dart';
 import '../../API/userdata.dart';

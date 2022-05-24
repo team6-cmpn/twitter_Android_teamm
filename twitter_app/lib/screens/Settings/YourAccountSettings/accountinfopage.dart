@@ -7,7 +7,6 @@ import 'changeusernamepage.dart';
 import 'package:http/http.dart' as http;
 
 import 'dart:convert';
-import 'dart:async';
 
 class AccountInfoPage extends StatefulWidget {
   @override
@@ -201,7 +200,7 @@ class AccountInfoPageState extends State<AccountInfoPage> {
   }
 }
 
-Future<String> ChangePhoneNumApi(
+ChangePhoneNumApi(
   String phoneNum,
   String token,
 ) async {
