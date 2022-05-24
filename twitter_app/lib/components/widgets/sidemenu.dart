@@ -114,35 +114,10 @@ class _SideMenuState extends State<SideMenu> {
                       MaterialPageRoute(builder: (context) => CustomNavBar())),
                 ),
                 ListTile(
-                  leading: Icon(Icons.person),
-                  title: Text('Profile'),
-                  onTap: () => null,
-                ),
-                ListTile(
-                  leading: Icon(Icons.list_alt),
-                  title: Text('Lists'),
-                  onTap: () => null,
-                ),
-                ListTile(
-                  leading: Icon(Icons.message),
-                  title: Text('Topics'),
-                  onTap: () => null,
-                ),
-                ListTile(
                   leading: Icon(Icons.bookmark_border),
                   title: Text('Bookmarks'),
                   onTap: () => Navigator.push(context,
                       MaterialPageRoute(builder: (context) => BookmarksPage())),
-                ),
-                ListTile(
-                  leading: Icon(Icons.bolt),
-                  title: Text('Moments'),
-                  onTap: () => null,
-                ),
-                ListTile(
-                  leading: Icon(Icons.money_outlined),
-                  title: Text('Monetization'),
-                  onTap: () => null,
                 ),
                 Divider(
                   height: 2,
@@ -200,11 +175,6 @@ class _SideMenuState extends State<SideMenu> {
                   title: Text('Settings and Pirvacy'),
                   onTap: () => Navigator.push(context,
                       MaterialPageRoute(builder: (context) => SettingsPage())),
-                ),
-                ListTile(
-                  leading: Icon(Icons.help_outline_outlined),
-                  title: Text('Help Center'),
-                  onTap: () => null,
                 ),
                 Divider(
                   height: 2,
