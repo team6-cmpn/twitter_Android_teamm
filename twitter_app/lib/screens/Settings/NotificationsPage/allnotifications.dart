@@ -73,11 +73,11 @@ class _AllNotificationsPageState extends State<AllNotificationsPage> {
                             ),
                             Image.asset(
                               "assests/images/FinalLogo.png",
-                              scale: 3,
+                              scale: 2,
                             ),
                             Align(
                               alignment: Alignment.centerLeft,
-                              child: Text("       No notifications",
+                              child: Text("          No notifications",
                                   style: TextStyle(
                                       fontSize: 30,
                                       fontWeight: FontWeight.w900)),

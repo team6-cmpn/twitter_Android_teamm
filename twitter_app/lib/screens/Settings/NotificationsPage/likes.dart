@@ -72,11 +72,11 @@ class _LikesNotificationsPageState extends State<LikesNotificationsPage> {
                             ),
                             Image.asset(
                               "assests/images/FinalLogo.png",
-                              scale: 3,
+                              scale: 2,
                             ),
                             Align(
                               alignment: Alignment.centerLeft,
-                              child: Text("        No Notifications",
+                              child: Text("          No notifications",
                                   style: TextStyle(
                                       fontSize: 30,
                                       fontWeight: FontWeight.w900)),
