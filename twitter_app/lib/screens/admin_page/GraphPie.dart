@@ -14,16 +14,17 @@ class GraphPie extends StatefulWidget {
 
 class _GraphPie extends State<GraphPie> {
   static const String BaseURL = "http://twi-jay.me:8080";
+
   Future<List> returnedDataGraphPieFuture;
   var returnedGraphPieData = [];
   List<charts.Series<PieCircle, String>> _seriesPieData;
 
   Future<List> pieGraphIntegeration(token) async {
     final allDataPieReturned = [];
-    int count1 = 0;
-    String name1 = '';
-    int count2 = 0;
-    String name2 = '';
+    int age1 = 0;
+    String text1 = '';
+    int age2 = 0;
+    String text2 = '';
     var response = await http.get(
       Uri.parse(
         '$BaseURL/admin/dashBoard',
@@ -33,15 +34,15 @@ class _GraphPie extends State<GraphPie> {
     setState(() {
       Map pieResponse0 = json.decode(response.body)[8];
       var pieResponse = pieResponse0['users_Ages'];
-      count1 = pieResponse[0]['persons'];
-      name1 = pieResponse[0]['age'];
-      count2 = pieResponse[1]['persons'];
-      name2 = pieResponse[1]['age'];
+      text1 = pieResponse[0]['persons'];
+      age1 = pieResponse[0]['age'];
+      age2 = pieResponse[1]['persons'];
+      text2 = pieResponse[1]['age'];
       allDataPieReturned.addAll([
-        name1,
-        count1,
-        name2,
-        count2,
+        text1,
+        age1,
+        text2,
+        age2,
       ]);
     });
     return allDataPieReturned;

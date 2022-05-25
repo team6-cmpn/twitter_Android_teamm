@@ -481,7 +481,8 @@ class _TimelinePageState extends State<TimelinePage> {
     var isLoved = item['tweet']['hasImage'];
     var isRetweeted = item['user']['isAdmin'];
     // var isCommented = item['tweet']['date'];
-
+    var hasImageTweet = item['tweet']['hasImage'];
+    var imageOfTweet = item['tweet']['imageUrl'];
     var countOfLoves = item['tweet']['favorites'].length;
     var countOfReteweeted = item['tweet']['retweetUsers'].length;
 
@@ -522,7 +523,7 @@ class _TimelinePageState extends State<TimelinePage> {
               children: [
                 CircleAvatar(
                   backgroundImage: NetworkImage(userProfilePic != null
-                      ? BaseURL + '/' + userProfilePic.toString()
+                      ? userProfilePic.toString()
                       : 'https://i.pinimg.com/custom_covers/222x/85498161615209203_1636332751.jpg'),
                   radius: 20,
                 ),
@@ -559,7 +560,7 @@ class _TimelinePageState extends State<TimelinePage> {
               ),
             ],
           ),
-          /* Container(
+          Container(
             height: 170,
             child: hasImageTweet
                 ? Image.network(
@@ -570,7 +571,7 @@ class _TimelinePageState extends State<TimelinePage> {
                 : SizedBox(
                     height: 1,
                   ),
-          ), */
+          ),
           /* Text(
             !hasImageTweet
                 ? "no image , no array "
