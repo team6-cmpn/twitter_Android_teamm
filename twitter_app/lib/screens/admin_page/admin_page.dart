@@ -217,20 +217,45 @@ class _AdminPage extends State<AdminPage> {
                       ),
                     ),
                     Container(
-                        child: Column(
-                      children: <Widget>[
-                        Text(
-                          "Most Followed Users",
-                          style: TextStyle(
-                            fontSize: 25,
-                            color: Colors.grey[700],
-                            fontWeight: FontWeight.bold,
+                      child: FutureBuilder<List>(
+                        future: returnedDataFuture,
+                        builder: (context, snapshot) {
+                          if (snapshot.hasData) {
+                            returnedData = snapshot.data;
+                            return _AdminCard(
+                              context: context,
+                              count: returnedData[3],
+                              //icon: Icons.star,
+                              name: " Tweets per day",
+                            );
+                          } else {
+                            return _AdminCard(
+                              context: context,
+                              count: countOfUsers,
+                              //icon: Icons.nat_outlined,
+                              name: " Tweets per day",
+                            ); /* const Center(
+                                child: CircularProgressIndicator()); */
+                          }
+                        },
+                      ),
+                    ),
+                    /* Container(
+                      child: Column(
+                        children: <Widget>[
+                          Text(
+                            " Tweets per day",
+                            style: TextStyle(
+                              fontSize: 25,
+                              color: Colors.grey[700],
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
-                        ),
-                        const SizedBox(height: 25),
-                        //Expanded(child: GraphBar(token: userdata.token))
-                      ],
-                    )),
+                          const SizedBox(height: 25),
+                          //Expanded(child: GraphBar(token: userdata.token))
+                        ],
+                      ),
+                    ), */
                   ],
                 ),
               ),
@@ -254,27 +279,44 @@ class _AdminPage extends State<AdminPage> {
                 ),
               ),
               Container(
-                  child: Column(
-                children: <Widget>[
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Text(
-                    " Age's Chart",
-                    style: TextStyle(
-                      fontSize: 25,
-                      color: Colors.green,
-                      fontWeight: FontWeight.bold,
+                child: Column(
+                  children: <Widget>[
+                    SizedBox(
+                      height: 15,
                     ),
-                  ),
-                  const SizedBox(height: 10),
-                  Container(
-                    height: 300,
-                    width: 300,
-                    child: GraphPie(token: widget.token),
-                  )
-                ],
-              )),
+                    Text(
+                      " Age's Chart",
+                      style: TextStyle(
+                        fontSize: 25,
+                        color: Colors.green,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    Container(
+                      height: 300,
+                      width: 300,
+                      child: GraphPie(token: widget.token),
+                    ),
+                    Container(
+                      child: Column(
+                        children: <Widget>[
+                          Text(
+                            " Tweets per day",
+                            style: TextStyle(
+                              fontSize: 25,
+                              color: Colors.grey[700],
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          const SizedBox(height: 25),
+                          //Expanded(child: GraphBar(token: userdata.token))
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ],
           ),
         ),
@@ -359,7 +401,7 @@ class _AdminPage extends State<AdminPage> {
                     fit: BoxFit.cover,
                     image: NetworkImage(
                       profilePic != null
-                          ? BaseURL + '/' + profilePic.toString()
+                          ? profilePic.toString()
                           : 'https://i.pinimg.com/custom_covers/222x/85498161615209203_1636332751.jpg',
                     ),
                   ),
@@ -488,10 +530,15 @@ class _AdminPage extends State<AdminPage> {
   Future<List> adminInformationIntegeration(token) async {
     final allDataReturned = [];
     int tweetCount;
+
     Map mostFollowersResponse;
     var theMostFollowedPerson;
     var theMostFollowedPersonName;
     var theMostFollowedPersonUserName;
+
+    var tweetsperday1;
+    var tweetsperday2;
+    var tweetsperday3;
 
     Map dataResponse;
     var response = await http.get(
@@ -507,9 +554,15 @@ class _AdminPage extends State<AdminPage> {
       Map theMostFollowedPersondata = mostFollowersResponse[0];
       theMostFollowedPersonUserName = theMostFollowedPersondata['name'];
       theMostFollowedPersonUserName = theMostFollowedPersondata['username'];
-      print('mapResponse0');
-      print(theMostFollowedPersonName);
-      print(theMostFollowedPersonUserName);
+      //print('mapResponse0');
+      //print(theMostFollowedPersonName);
+      //print(theMostFollowedPersonUserName);
+      Map mapResponse11 = json.decode(response.body)[11];
+
+      tweetsperday1 = mapResponse11['tweets_Per_Day'][0];
+      tweetsperday2 = tweetsperday1['count'];
+      print('tweetsperday1');
+      print(tweetsperday2);
 
       Map mapResponse1 = json.decode(response.body)[1];
       tweetCount = mapResponse1['all_Tweets_Count'];
@@ -521,6 +574,7 @@ class _AdminPage extends State<AdminPage> {
         tweetCount,
         theMostFollowedPersonName,
         theMostFollowedPersonUserName,
+        tweetsperday2
       ]);
       // print('the list');
       // print(allDataReturned[0]);
